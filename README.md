@@ -80,7 +80,7 @@ function commandBar.Register(Properties: CommandProperties): CommandProperties
 
 ### Updating properties
 
-You can update properties by simply assigning them a new key. They will dynamically update.
+You can update properties by simply assigning them a new value. They will dynamically update.
 
 ```lua
 commandBar.Theme = vanta.Themes.Sapphire
