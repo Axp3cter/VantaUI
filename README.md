@@ -1,8 +1,11 @@
 <!-- markdownlint-disable MD010 -->
+<!-- markdownlint-disable MD033 -->
 
 # VantaUI
 
 The offical repository for Vanta's user interface.
+
+<img src="assets/interface.png" alt="Vanta Interface" width="50%"/>
 
 ## Documentation
 

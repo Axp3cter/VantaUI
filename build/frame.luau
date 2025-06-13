@@ -2,7 +2,7 @@
 --!nolint
 
 --[[
-    @author Proton-Utilities
+    @author biggaboy212
     @name VantaUI
 
     This file was automatically generated with darklua, it is not intended for manual editing.

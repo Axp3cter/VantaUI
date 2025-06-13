@@ -116,7 +116,7 @@ if configOptions.promptDeploy and config.deployment.enabled then
 					["Authorization"] = "Bearer " .. ghCfg.apiKey,
 					["Content-Type"] = "application/json",
 				},
-				body = net.jsonEncode({
+				body = serde.encode("json", {
 					tag_name = buildVers,
 					name = `{buildConfig} {buildVers}`,
 					body = fs.isFile(RELEASE_BODY) and fs.readFile(RELEASE_BODY) or "",
