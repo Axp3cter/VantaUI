@@ -5,7 +5,7 @@
 
 The offical repository for Vanta's user interface.
 
-<img src="assets/interface.png" alt="Vanta Interface" width="50%"/>
+<img src="assets/interface.png" alt="Vanta Interface" width="70%"/>
 
 ## Documentation
 
