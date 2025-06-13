@@ -2,7 +2,7 @@
 
 # VantaUI
 
-The user interface for Vanta.
+The offical repository for Vanta's user interface.
 
 ## Documentation
 
