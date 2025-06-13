@@ -3,7 +3,7 @@ local creator = {}
 local themeInstances = {}
 local currentTheme = {}
 
-local function applyThemeToInstance(instance, themeMap, theme)
+local function applyTheme(instance, themeMap, theme)
 	for instanceProp, themeKey in pairs(themeMap) do
 		local value = theme
 		for segment in string.gmatch(themeKey, "[^%.]+") do
@@ -46,7 +46,7 @@ function creator.create(className)
 
 		if themeKeys then
 			themeInstances[instance] = themeKeys
-			applyThemeToInstance(instance, themeKeys, currentTheme)
+			applyTheme(instance, themeKeys, currentTheme)
 		end
 
 		applyProps(instance, props)
@@ -83,7 +83,7 @@ function creator.setTheme(theme: {})
 	currentTheme = theme
 
 	for instance, themeMap in pairs(themeInstances) do
-		applyThemeToInstance(instance, themeMap, currentTheme)
+		applyTheme(instance, themeMap, currentTheme)
 	end
 end
 
