@@ -274,6 +274,7 @@ vanta.Initialize = function(properties: types.CommandBarProperties?): types.comm
 						for _, alias in ipairs(cmd.properties.Aliases) do
 							if alias:lower() == enteredText then
 								exactMatchFound = cmd
+
 								break
 							end
 						end
@@ -305,6 +306,7 @@ vanta.Initialize = function(properties: types.CommandBarProperties?): types.comm
 	vanta.container.commandBar:GetPropertyChangedSignal("Text"):Connect(function()
         if searchAutocomplete then
             searchAutocomplete = false
+
             return
         end
 
@@ -319,6 +321,7 @@ vanta.Initialize = function(properties: types.CommandBarProperties?): types.comm
                 for _, alias in ipairs(cmd.properties.Aliases) do
                     if alias:lower():find(query, 1, true) == 1 then
                         aliasMatch = true
+
                         break
                     end
                 end
@@ -333,7 +336,7 @@ vanta.Initialize = function(properties: types.CommandBarProperties?): types.comm
             end
         end
 
-        -- Only sort if there is a query
+        -- Only sort if there is a query (or index's get reordered)
         if query ~= "" then
             local scoredCommands = {}
             local queryLower = query:lower()
@@ -384,6 +387,7 @@ vanta.Initialize = function(properties: types.CommandBarProperties?): types.comm
 			if not complete and keysDown == len then
 				complete = true
 				vanta.container.container.Enabled = not vanta.container.container.Enabled
+				
 				if vanta.container.container.Enabled then
 					vanta.container.commandBar:CaptureFocus()
 				else
