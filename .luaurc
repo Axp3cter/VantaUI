@@ -1,0 +1,9 @@
+{
+    "aliases": {
+        "types": "./src/types/types",
+        "structures": "./src/structures",
+        "modules": "./src/modules",
+        "creator": "./src/modules/creator",
+        "themes": "./src/themes"
+    }
+}

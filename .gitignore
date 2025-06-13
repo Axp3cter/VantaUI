@@ -1,0 +1,5 @@
+# Compiler config, has sensitive information
+build/.pcmp.json
+
+# Distribution files, use github releases instead.
+dist
