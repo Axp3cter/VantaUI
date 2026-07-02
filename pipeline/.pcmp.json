@@ -1,0 +1,30 @@
+{
+    "deployment": {
+        "github": {
+            "owner": "vantaui",
+            "repo": "VantaUI"
+        }
+    },
+
+    "buildConfigs": [
+        {
+            "name": "Library",
+            "promptVersion": false,
+            "promptDeploy": false,
+            "frame": "pipeline/frames/stable.luau",
+            "darkluaConfig": "pipeline/darklua/stable.json",
+            "input": "src/init.luau",
+            "output": "dist/vanta.luau"
+        },
+
+        {
+            "name": "Example",
+            "promptVersion": false,
+            "promptDeploy": false,
+            "frame": "pipeline/frames/stable.luau",
+            "darkluaConfig": "pipeline/darklua/stable.json",
+            "input": "src/example.luau",
+            "output": "dist/example.luau"
+        }
+    ]
+}

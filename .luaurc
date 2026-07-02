@@ -1,9 +1,12 @@
 {
+    "languageMode": "strict",
     "aliases": {
-        "types": "./src/types/types",
-        "structures": "./src/structures",
-        "modules": "./src/modules",
-        "creator": "./src/modules/creator",
-        "themes": "./src/themes"
+        "vanta": "./src",
+        "core": "./src/core",
+        "runtime": "./src/runtime",
+        "design": "./src/design",
+        "palette": "./src/palette",
+        "ui": "./src/ui",
+        "packages": "./packages"
     }
 }

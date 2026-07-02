@@ -1,0 +1,12 @@
+[package]
+name = "vanta/vanta-ui"
+version = "4.0.0"
+description = "A Spotlight-style command palette for Roblox executors, built on Fusion."
+license = "MIT"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+# Fusion is also vendored under packages/ so the project builds without a wally
+# install; run `wally install` only if you prefer to manage it through Wally.
+[dependencies]
+Fusion = "elttob/fusion@0.3.0"

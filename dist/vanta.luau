@@ -1,0 +1,7454 @@
+--!nolint
+--!nocheck
+--!optimize 2
+
+--[[
+    @author VantaUI
+    @name VantaUI
+    @description A macOS-Spotlight-style command palette for Roblox, built on Fusion.
+    @license MIT License
+
+    @buildDate "2026-07-02T11:28:01.273681700+00:00"
+    @buildCfg "Library"
+    @buildVers "0.0.0"
+
+    This file was automatically generated with darklua, it is not intended for manual editing.
+--]]
+
+__SH = { COMPINDEXES = {} }
+
+local a={cache={}}do do local b=function()return nil end function a.a()local c=a
+.cache.a if not c then c={c=b()}a.cache.a=c end return c.c end end do local b=
+function()return{callbackError='Error in callback:\nERROR_MESSAGE',
+cannotAssignProperty="The class type '%s' has no assignable property '%s'.",
+cannotConnectChange="The %s class doesn't have a property called '%s'.",
+cannotConnectEvent="The %s class doesn't have an event called '%s'.",
+cannotCreateClass="Can't create a new instance of class '%s'.",cannotDepend=
+"%s can't depend on %s.",cleanupWasRenamed=
+[[`Fusion.cleanup` was renamed to `Fusion.doCleanup`. This will be an error in future versions of Fusion.]]
+,destroyedTwice=
+[[`doCleanup()` was given something that it is already cleaning up. Unclear how to proceed.]]
+,destructorRedundant=
+[[%s destructors no longer do anything. If you wish to run code on destroy, `table.insert` a function into the `scope` argument. See discussion #292 on GitHub for advice.]]
+,forKeyCollision=
+[[The key '%s' was returned multiple times simultaneously, which is not allowed in `For` objects.]]
+,infiniteLoop=
+[[Detected an infinite loop. Consider adding an explicit breakpoint to your code to prevent a cyclic dependency.]]
+,invalidAttributeChangeHandler=
+[[The change handler for the '%s' attribute must be a function.]],
+invalidAttributeOutType='[AttributeOut] properties must be given Value objects.'
+,invalidChangeHandler=
+[[The change handler for the '%s' property must be a function.]],
+invalidEventHandler="The handler for the '%s' event must be a function.",
+invalidOutProperty="The %s class doesn't have a property called '%s'.",
+invalidOutType='[Out] properties must be given Value objects.',
+invalidPropertyType="'%s.%s' expected a '%s' type, but got a '%s' type.",
+invalidRefType='Instance refs must be Value objects.',invalidSpringDamping=
+[[The damping ratio for a spring must be >= 0. (damping was %.2f)]],
+invalidSpringSpeed='The speed of a spring must be >= 0. (speed was %.2f)',
+mergeConflict="Multiple definitions for '%s' found while merging.",
+mistypedSpringDamping=
+'The damping ratio for a spring must be a number. (got a %s)',
+mistypedSpringSpeed='The speed of a spring must be a number. (got a %s)',
+mistypedTweenInfo='The tween info of a tween must be a TweenInfo. (got a %s)',
+noTaskScheduler='Fusion is not connected to an external task scheduler.',
+poisonedScope="Attempted to use a scope after it's been destroyed; %s",
+possiblyOutlives=
+[[%s will be destroyed before %s; %s. To fix this, review the order they're created in, and what scopes they belong to. See discussion #292 on GitHub for advice.]]
+,propertySetError='Error setting property:\nERROR_MESSAGE',scopeMissing=
+[[To create %s, provide a scope. (e.g. `%s`). See discussion #292 on GitHub for advice.]]
+,springNanGoal=
+[[A spring was given a NaN goal, so some simulation has been skipped. Ensure no springs have NaN goals.]]
+,springNanMotion=
+[[A spring encountered NaN during motion, so has snapped to the goal position. Ensure no springs have NaN positions or velocities.]]
+,springTypeMismatch="The type '%s' doesn't match the spring's type '%s'.",
+stateGetWasRemoved=
+[[`StateObject:get()` has been replaced by `use()` and `peek()` - see discussion #217 on GitHub.]]
+,tweenNanGoal=
+[[A tween was given a NaN goal, so some animation has been skipped. Ensure no tweens have NaN goals.]]
+,tweenNanMotion=
+[[A tween encountered NaN during motion, so has snapped to the goal. Ensure no tweens have NaN in their tween infos.]]
+,unknownMessage='Unknown error:\nERROR_MESSAGE',unrecognisedChildType=
+"'%s' type children aren't accepted by `[Children]`.",unrecognisedPropertyKey=
+"'%s' keys aren't accepted in property tables.",unrecognisedPropertyStage=
+[['%s' isn't a valid stage for a special key to be applied at.]],useAfterDestroy
+=
+[[%s is no longer valid - it was destroyed before %s. See discussion #292 on GitHub for advice.]]
+}end function a.b()local c=a.cache.b if not c then c={c=b()}a.cache.b=c end
+return c.c end end do local b=function()local b,c,d=a.a(),a.b(),
+'https://elttob.uk/Fusion/0.3/api-reference/general/errors/#'local e=function(e,
+f,g,...)local h,i,j,k=f,(typeof(g)=='table'and{g}or{nil})[1],(typeof(g)=='table'
+and{g.trace}or{g})[1],c[f]if k==nil then f='unknownMessage'k=c[f]end k=k:format(
+...)if i~=nil then k=k:gsub('ERROR_MESSAGE',i.message)if i.context~=nil then k
+..=` ({i.context})`end else k=k:gsub('ERROR_MESSAGE',h)end k=`[Fusion] {k} \nID: {
+f}`if e~=nil and e.policies.allowWebLinks then k..=`\nLearn more: {d}{f:lower()}`
+end if j~=nil then k..=` \n---- Stack trace ----\n{j}`end return k:gsub('\n',
+'\n    ')end return e end function a.c()local c=a.cache.c if not c then c={c=b()
+}a.cache.c=c end return c.c end end do local b=function()local b,c,d,e=a.c(),a.
+a(),{},false d.safetyTimerMultiplier=1 local f,g,h={},0 function d.
+setExternalProvider(i)local j=h if j~=nil then j.stopScheduler()end h=i if i~=
+nil then i.startScheduler()end return j end function d.isTimeCritical()return e
+end function d.doTaskImmediate(i)if h==nil then d.logError'noTaskScheduler'else
+h.doTaskImmediate(i)end end function d.doTaskDeferred(i)if h==nil then d.
+logError'noTaskScheduler'else h.doTaskDeferred(i)end end function d.logError(i,j
+,...)error(b(h,i,j,...),0)end function d.logErrorNonFatal(i,j,...)local k=b(h,i,
+j,...)if h~=nil then h.logErrorNonFatal(k)else print(k)end end function d.
+logWarn(i,...)local j=b(h,i,debug.traceback(nil,2),...)if h~=nil then h.logWarn(
+j)else print(j)end end function d.bindToUpdateStep(i)local j={}f[j]=i return
+function()f[j]=nil end end function d.performUpdateStep(i)g=i for j,k in f do k(
+i)end end function d.lastUpdateStep()return g end return d end function a.d()
+local c=a.cache.d if not c then c={c=b()}a.cache.d=c end return c.c end end do
+local b=function()local b,c,d,e=game:GetService'RunService',game:GetService
+'HttpService',a.d(),{}e.policies={allowWebLinks=b:IsStudio()}function e.
+doTaskImmediate(f)task.spawn(f)end function e.doTaskDeferred(f)task.defer(f)end
+function e.logErrorNonFatal(f)task.spawn(error,f,0)end e.logWarn=warn local f,g=
+function()d.performUpdateStep(os.clock())end,nil function e.startScheduler()if g
+~=nil then return end if b:IsClient()then local h='FusionUpdateStep_'..c:
+GenerateGUID()b:BindToRenderStep(h,Enum.RenderPriority.First.Value,f)g=function(
+)b:UnbindFromRenderStep(h)end else local h=b.Heartbeat:Connect(f)g=function()h:
+Disconnect()end end end function e.stopScheduler()if g~=nil then g()g=nil end
+end return e end function a.e()local c=a.cache.e if not c then c={c=b()}a.cache.
+e=c end return c.c end end do local b=function()local b,c=a.a(),function(b)
+return{type='Error',raw=b,message=b:gsub('^.+:%d+:%s*',''),trace=debug.
+traceback(nil,2)}end return c end function a.f()local c=a.cache.f if not c then
+c={c=b()}a.cache.f=c end return c.c end end do local b=function()local b,c,d,e=a
+.a(),a.d(),a.f(),{}e.type='Contextual'local f,g=table.freeze{__index=e},table.
+freeze{__mode='k'}local h=function(h)local i=(setmetatable({_valuesNow=
+setmetatable({},g),_defaultValue=h},f))return i end function e.now(i)local j=
+coroutine.running()local k=i._valuesNow[j]if typeof(k)~='table'then return i.
+_defaultValue else return k.value end end function e.is(i,j)local k={}function k
+.during(l,m,...)local n=coroutine.running()local o=i._valuesNow[n]i._valuesNow[n
+]={value=j}local p,q=xpcall(m,d,...)i._valuesNow[n]=o if not p then c.logError(
+'callbackError',q)end return q end return k end table.freeze(e)return h end
+function a.g()local c=a.cache.g if not c then c={c=b()}a.cache.g=c end return c.
+c end end do local b=function()local b=function(b)local c,d=xpcall(b.try,b.
+fallback)return d end return b end function a.h()local c=a.cache.h if not c then
+c={c=b()}a.cache.h=c end return c.c end end do local b=function()local b,c=a.a()
+,(a.d())local d=function(d,e)local f=getmetatable(d)if typeof(f)=='table'and f.
+_FUSION_POISONED then return end table.clear(d)setmetatable(d,{_FUSION_POISONED=
+true,__index=function()c.logError('poisonedScope',nil,e)end,__newindex=function(
+)c.logError('poisonedScope',nil,e)end})end return d end function a.i()local c=a.
+cache.i if not c then c={c=b()}a.cache.i=c end return c.c end end do local b=
+function()local b,c,d=nil,a.a(),{}function d.setDebugger(e)local f=b if f~=nil
+then f.stopDebugging()end b=e if e~=nil then e.startDebugging()end return f end
+function d.trackScope(e)if b==nil then return end b.trackScope(e)end function d.
+untrackScope(e)if b==nil then return end b.trackScope(e)end return d end
+function a.j()local c=a.cache.j if not c then c={c=b()}a.cache.j=c end return c.
+c end end do local b=function()local b,c,d,e,f,g,h=a.a(),a.i(),a.j(),false,16,{}
+,0 return{giveIfEmpty=function(i)if next(i)==nil then d.untrackScope(i)if e and
+h<f then h+=1 g[h]=i else c(i,
+[[previously passed to the internal scope pool, which indicates a Fusion bug.]])
+end return nil else return i end end,clearAndGive=function(i)d.untrackScope(i)
+table.clear(i)if e and h<f then h+=1 g[h]=i else c(i,
+[[previously passed to the internal scope pool, which indicates a Fusion bug.]])
+end end,reuseAny=function()if h==0 then return nil else local i=g[h]h-=1 return
+i end end}end function a.k()local c=a.cache.k if not c then c={c=b()}a.cache.k=c
+end return c.c end end do local b=function()local b,c,d,e,f=a.a(),a.d(),a.k(),a.
+i(),{}local function g(h)if f[h]then return c.logError'destroyedTwice'end f[h]=
+true if typeof(h)=='Instance'then h:Destroy()elseif typeof(h)==
+'RBXScriptConnection'then h:Disconnect()elseif typeof(h)=='function'then h()
+elseif typeof(h)=='table'then local i=(h)if typeof(i.destroy)=='function'then
+local j=(i)j:destroy()elseif typeof(i.Destroy)=='function'then local j=(i)j:
+Destroy()elseif i[1]~=nil then local j=i for k=#j,1,-1 do g(j[k])j[k]=nil end if
+c.isTimeCritical()then d.giveIfEmpty(j)else e(j,
+[[`doCleanup()` was previously called on this scope. Ensure you are not reusing scopes after cleanup.]]
+)end end end f[h]=nil end return g end function a.l()local c=a.cache.l if not c
+then c={c=b()}a.cache.l=c end return c.c end end do local b=function()local b,c,
+d=a.a(),a.d(),(a.l())local e=function(e)c.logWarn'cleanupWasRenamed'return d(e)
+end return e end function a.m()local c=a.cache.m if not c then c={c=b()}a.cache.
+m=c end return c.c end end do local b=function()local b=(a.d())local c=function(
+c,d,...)local e={...}if#e<1 then return d else for f,g in e do for h,i in g do
+if d[h]==nil then d[h]=i elseif not c then b.logError('mergeConflict',nil,
+tostring(h))end end end return d end end return c end function a.n()local c=a.
+cache.n if not c then c={c=b()}a.cache.n=c end return c.c end end do local b=
+function()local b,c,d=a.a(),a.n(),(a.k())local e=function(e,f,...)local g=
+getmetatable(e)if f~=nil then g=table.clone(g)g.__index=c(true,{},g.__index,c(
+false,{},f,...))end local h=setmetatable((d.reuseAny())or{},g)return h end
+return(e)end function a.o()local c=a.cache.o if not c then c={c=b()}a.cache.o=c
+end return c.c end end do local b=function()local b,c,d=a.a(),a.j(),(a.o())local
+e=function(...)local e=d(...)c.trackScope(e)return e end return e end function a
+.p()local c=a.cache.p if not c then c={c=b()}a.cache.p=c end return c.c end end
+do local b=function()local b,c,d=a.a(),a.j(),(a.o())local e=function(e,...)local
+f=d(e,...)table.insert(e,f)table.insert(f,function()local g=table.find(e,f)if g
+~=nil then table.remove(e,g)end end)c.trackScope(f)return f end return(e)end
+function a.q()local c=a.cache.q if not c then c={c=b()}a.cache.q=c end return c.
+c end end do local b=function()local b,c,d,e=a.a(),a.j(),a.n(),(a.k())local f=
+function(...)local f=(setmetatable((e.reuseAny())or{},{__index=d(false,{},...)})
+)c.trackScope(f)return f end return(f)end function a.r()local c=a.cache.r if not
+c then c={c=b()}a.cache.r=c end return c.c end end do local b=function()local b,
+c,d=a.a(),a.d(),function(b,c)local d,e,f,g,h={b,c},{},2,0,{}while f>0 do for i,j
+in d do h[j]=true for k,l in ipairs(j)do if l==b then return'definitely-b'elseif
+l==c then return'definitely-a'elseif typeof(l)=='table'then local m=l if m[1]~=
+nil and h[j]==nil then g+=1 e[g]=m end end end end table.clear(d)d,e=e,d f,g=g,0
+end return'unsure'end local e=function(e,f,g,h)if c.isTimeCritical()then return
+'unsure'elseif e==g then local i=e for j=#i,1,-1 do local k=i[j]if k==f then
+return'definitely-b'elseif k==h then return'definitely-a'end end return'unsure'
+else return d(e,g)end end return e end function a.s()local c=a.cache.s if not c
+then c={c=b()}a.cache.s=c end return c.c end end do local b=function()return
+setmetatable({},{__mode='k'})end function a.t()local c=a.cache.t if not c then c
+={c=b()}a.cache.t=c end return c.c end end do local b=function()local b=(a.t())
+local c=function(c,d)local e=b[c]if typeof(e)=='string'then return e end if
+typeof(c)=='table'then local f=c if typeof(f.name)=='string'then return f.name
+elseif typeof(f.kind)=='string'then return f.kind elseif typeof(f.type)==
+'string'then return f.type end end return d end return c end function a.u()local
+c=a.cache.u if not c then c={c=b()}a.cache.u=c end return c.c end end do local b
+=function()local b,c,d,e,f=a.a(),a.d(),a.s(),a.u(),{}f.formatters={}function f.
+formatters.useFunction(g,h)local i,j=e(g,'object'),e(h,'object')return`The use()-d {
+j}`,`the {i}`end function f.formatters.boundProperty(g,h,i)local j,k=g.Name,e(h,
+'value')return`The {k} (bound to the {i} property)`,`the {j} instance`end
+function f.formatters.boundAttribute(g,h,i)local j,k=g.Name,e(h,'value')return`The {
+k} (bound to the {i} attribute)`,`the {j} instance`end function f.formatters.
+propertyOutputsTo(g,h,i)local j,k=g.Name,e(h,'object')return`The {k} (which the {
+i} property outputs to)`,`the {j} instance`end function f.formatters.
+attributeOutputsTo(g,h,i)local j,k=g.Name,e(h,'object')return`The {k} (which the {
+i} attribute outputs to)`,`the {j} instance`end function f.formatters.
+refOutputsTo(g,h)local i,j=g.Name,e(h,'object')return`The {j} (which the Ref key outputs to)`
+,`the {i} instance`end function f.formatters.animationGoal(g,h)local i,j=e(g,
+'object'),e(h,'object')return`The goal {j}`,`the {i} that is following it`end
+function f.formatters.parameter(g,h,i)local j,k=e(g,'object'),e(h,'object')if i
+==false then return`The {k} parameter`,`the {j} that it was used for`else return
+`The {k} representing the {i} parameter`,`the {j} that it was used for`end end
+function f.formatters.observer(g,h)local i,j=e(g,'object'),e(h,'object')return`The watched {
+j}`,`the {i} that's observing it for changes`end function f.bOutlivesA(g,h,i,j,k
+,...)if i==nil then c.logError('useAfterDestroy',nil,k(h,j,...))elseif d(g,h,i,j
+)=='definitely-a'then local l,m=k(h,j,...)c.logWarn('possiblyOutlives',l,m,g==i
+and[[they're in the same scope, but the latter is destroyed too quickly]]or
+[[the latter is in a different scope that gets destroyed too quickly]])end end
+return f end function a.v()local c=a.cache.v if not c then c={c=b()}a.cache.v=c
+end return c.c end end do local b=function()local b,c=a.a(),function(b)if
+typeof(b)=='table'and typeof(b.validity)=='string'and typeof(b.timeliness)==
+'string'and typeof(b.dependencySet)=='table'and typeof(b.dependentSet)=='table'
+then return b else return nil end end return c end function a.w()local c=a.cache
+.w if not c then c={c=b()}a.cache.w=c end return c.c end end do local b=function
+()local b,c=a.a(),(a.d())local function d(e,f)if e.validity=='busy'then return c
+.logError'infiniteLoop'end local g,h=e.lastChange==nil,e.validity=='invalid'if g
+or h or f then local i=g or f if not i then for j in e.dependencySet do d(j,
+false)if j.lastChange>e.lastChange then i=true break end end end local j=false
+if i then for k in e.dependencySet do k.dependentSet[e]=nil e.dependencySet[k]=
+nil end e.validity='busy'j=e:_evaluate()or g end if j then e.lastChange=os.
+clock()end e.validity='valid'return j else return false end end return d end
+function a.x()local c=a.cache.x if not c then c={c=b()}a.cache.x=c end return c.
+c end end do local b=function()local b,c,d,e=a.a(),a.d(),a.x(),(a.u())local f=
+function(f,g)d(g,false)if table.isfrozen(f.dependencySet)or table.isfrozen(g.
+dependentSet)then c.logError('cannotDepend',nil,e(f,'Dependent'),e(g,
+'dependency'))end g.dependentSet[f]=true f.dependencySet[g]=true end return f
+end function a.y()local c=a.cache.y if not c then c={c=b()}a.cache.y=c end
+return c.c end end do local b=function()local b,c,d,e,f,g,h,i=a.a(),a.d(),a.v(),
+a.w(),a.y(),a.x(),a.t(),{}i.type='Observer'i.timeliness='eager'i.dependentSet=
+table.freeze{}local j=table.freeze{__index=i}local k=function(k,l)local m=os.
+clock()if l==nil then c.logError('scopeMissing',nil,'Observers',
+'myScope:Observer(watching)')end local n=(setmetatable({scope=k,createdAt=m,
+dependencySet={},lastChange=nil,validity='invalid',_watchingGraph=e(l),
+_changeListeners={}},j))local o=function()n.scope=nil for o in pairs(n.
+dependencySet)do o.dependentSet[n]=nil end end n.oldestTask=o h[n.oldestTask]=
+'Observer'table.insert(k,o)if n._watchingGraph~=nil then d.bOutlivesA(k,n.
+oldestTask,n._watchingGraph.scope,n._watchingGraph.oldestTask,d.formatters.
+observer)end g(n,true)return n end function i.onBind(l,m)c.doTaskImmediate(m)
+return l:onChange(m)end function i.onChange(l,m)local n=table.freeze{}l.
+_changeListeners[n]=m return function()l._changeListeners[n]=nil end end
+function i._evaluate(l)if l._watchingGraph~=nil then f(l,l._watchingGraph)end
+for m,n in l._changeListeners do c.doTaskImmediate(n)end return true end table.
+freeze(i)return k end function a.z()local c=a.cache.z if not c then c={c=b()}a.
+cache.z=c end return c.c end end do local b=function()local b=function(b,c)local
+d=typeof(b)local e,f=d=='table',d=='userdata'return(not(e or f)and{b==c or b~=b
+and c~=c}or{(d==typeof(c)and(f or table.isfrozen(b)or getmetatable(b)~=nil)and{(
+b==c)}or{false})[1]})[1]end return b end function a.A()local c=a.cache.A if not
+c then c={c=b()}a.cache.A=c end return c.c end end do local b=function()local b=
+function()error'This codepath should not be reachable'end return b end function
+a.B()local c=a.cache.B if not c then c={c=b()}a.cache.B=c end return c.c end end
+do local b=function()local b,c=a.a(),function(b)if typeof(b)=='table'and b.type
+=='State'then return b else return nil end end return c end function a.C()local
+c=a.cache.C if not c then c={c=b()}a.cache.C=c end return c.c end end do local b
+=function()local b,c,d=a.a(),a.C(),(a.x())local e=function(e)local f=c(e)if f~=
+nil then d(f,false)return f._EXTREMELY_DANGEROUS_usedAsValue else return e end
+end return e end function a.D()local c=a.cache.D if not c then c={c=b()}a.cache.
+D=c end return c.c end end do local b=function()local b,c,d,e,f,g,h,i,j,k,l,m,n,
+o=a.a(),a.d(),a.f(),a.A(),a.B(),a.y(),a.C(),a.D(),a.l(),a.p(),a.v(),a.k(),a.t(),
+{}o.type='State'o.kind='Computed'o.timeliness='lazy'local p=table.freeze{__index
+=o}local q=function(q,r,s)local t=os.clock()if typeof(q)=='function'then c.
+logError('scopeMissing',nil,'Computeds',
+'myScope:Computed(function(use, scope) ... end)')elseif s~=nil then c.logWarn(
+'destructorRedundant','Computed')end local u=(setmetatable({createdAt=t,
+dependencySet={},dependentSet={},lastChange=nil,scope=q,validity='invalid',
+_EXTREMELY_DANGEROUS_usedAsValue=nil,_innerScope=nil,_processor=r},p))local v=
+function()u.scope=nil for v in pairs(u.dependencySet)do v.dependentSet[u]=nil
+end if u._innerScope~=nil then j(u._innerScope)end end u.oldestTask=v n[u.
+oldestTask]='Computed'table.insert(q,v)return u end function o.get(r)c.logError
+'stateGetWasRemoved'return f()end function o._evaluate(r)if r.scope==nil then
+return false end local s=r.scope local t,u=k(s),function(t)local u=h(t)if u~=nil
+then l.bOutlivesA(s,r.oldestTask,u.scope,u.oldestTask,l.formatters.useFunction)
+g(r,u)end return i(t)end local v,w=xpcall(r._processor,d,u,t)local x=m.
+giveIfEmpty(t)if v then local y=e(r._EXTREMELY_DANGEROUS_usedAsValue,w)if r.
+_innerScope~=nil then j(r._innerScope)end r._innerScope=x r.
+_EXTREMELY_DANGEROUS_usedAsValue=w return not y else local y=(w)if x~=nil then
+j(x)end x=nil c.logErrorNonFatal('callbackError',y)return false end end table.
+freeze(o)return q end function a.E()local c=a.cache.E if not c then c={c=b()}a.
+cache.E=c end return c.c end end do local b=function()a.a()return nil end
+function a.F()local c=a.cache.F if not c then c={c=b()}a.cache.F=c end return c.
+c end end do local b=function()local b,c,d,e,f,g,h,i,j,k,l,m=a.a(),a.d(),a.y(),a
+.D(),a.C(),a.F(),a.l(),a.p(),a.k(),a.u(),a.t(),{}m.type='Graph'm.kind=
+'For.Disassembly'm.timeliness='lazy'local n=table.freeze{__index=m}local o=
+function(o,p,q)local r=os.clock()local s=(setmetatable({createdAt=r,
+dependencySet={},dependentSet={},scope=o,validity='invalid',_inputTable=p,
+_constructor=q,_subObjects={}},n))local u=function()s.scope=nil for u in pairs(s
+.dependencySet)do u.dependentSet[s]=nil end for u in s._subObjects do if u.
+maybeScope~=nil then h(u.maybeScope)u.maybeScope=nil end end end s.oldestTask=u
+l[s.oldestTask]='For (internal disassembler)'table.insert(o,u)return s end
+function m.populate(p,q,r)local s,u,v=math.huge,-math.huge,false for w in p.
+_subObjects do local x,y=w:useOutputPair(q)if x==nil or y==nil then v=true
+continue elseif r[x]~=nil then c.logErrorNonFatal('forKeyCollision',nil,
+tostring(x))continue end r[x]=y if typeof(x)=='number'then s=math.min(s,x)u=math
+.max(u,x)end end if v and u>s then local w,x=r,s for y=s,u do local z=w[y]if z==
+nil then continue end w[y]=nil w[x]=z x+=1 end end end function m._evaluate(p)
+local q,r=p.scope,f(p._inputTable)if r~=nil then if r.scope==nil then c.
+logError('useAfterDestroy',nil,`The input {k(r,'table')}`,`the For object that is watching it`
+)end d(p,r)end local s={}for u,v in e(p._inputTable)do s[u]=v end local u={}for
+v in p._subObjects do local w,x,y,z=false,v.inputKey,v.inputValue if not v.
+roamKeys and s[x]~=nil then w=true z=x else for A,B in s do w=true z=A if v.
+roamValues then break end if B==y then break end end end if w then local A=s[z]u
+[v]=true if z~=x then v.inputKey=z v:invalidateInputKey()end if A~=y then v.
+inputValue=A v:invalidateInputValue()end s[z]=nil else if v.maybeScope~=nil then
+h(v.maybeScope)v.maybeScope=nil end end end for v,w in s do local x=p.
+_constructor(i(q),v,w)if x.maybeScope~=nil then x.maybeScope=j.giveIfEmpty(x.
+maybeScope)end u[x]=true end p._subObjects=u return true end table.freeze(m)
+return o end function a.G()local c=a.cache.G if not c then c={c=b()}a.cache.G=c
+end return c.c end end do local b=function()local b,c,d,e,f,g,h,i,j,k=a.a(),a.d(
+),a.y(),a.D(),a.C(),a.F(),a.B(),a.t(),a.G(),{}k.type='State'k.kind='For'k.
+timeliness='lazy'local l=table.freeze{__index=k}local m=function(m,n,o)local p=
+os.clock()local q=(setmetatable({createdAt=p,dependencySet={},dependentSet={},
+scope=m,validity='invalid',_EXTREMELY_DANGEROUS_usedAsValue={},_disassembly=j(m,
+n,o)},l))local r=function()q.scope=nil for r in pairs(q.dependencySet)do r.
+dependentSet[q]=nil end end q.oldestTask=r i[q.oldestTask]='For'table.insert(m,r
+)return q end function k.get(n)c.logError'stateGetWasRemoved'return h()end
+function k._evaluate(n)if n.scope==nil then return false end local o=n.scope d(n
+,n._disassembly)table.clear(n._EXTREMELY_DANGEROUS_usedAsValue)n._disassembly:
+populate(function(p)local q=f(p)if q~=nil then d(n,q)end return e(p)end,n.
+_EXTREMELY_DANGEROUS_usedAsValue)return true end table.freeze(k)return m end
+function a.H()local c=a.cache.H if not c then c={c=b()}a.cache.H=c end return c.
+c end end do local b=function()local b,c,d,e=a.a(),a.d(),a.x(),1 local f=
+function(f)if f.validity=='busy'then return c.logError'infiniteLoop'end local g=
+d(f,true)if not g then return end local h,i,j={},{},{}h[1]=f local k=os.clock()+
+e*c.safetyTimerMultiplier repeat if os.clock()>k then return c.logError
+'infiniteLoop'end local l=true for m,n in h do for o in n.dependentSet do if o.
+validity=='valid'then l=false table.insert(j,o)table.insert(i,o)elseif o.
+validity=='busy'then return c.logError'infiniteLoop'end end end h,i=i,h table.
+clear(i)until l local l={}for m,n in j do n.validity='invalid'if n.timeliness==
+'eager'then table.insert(l,n)end end table.sort(l,function(m,n)return m.
+createdAt<n.createdAt end)for m,n in l do d(n,false)end end return f end
+function a.I()local c=a.cache.I if not c then c={c=b()}a.cache.I=c end return c.
+c end end do local b=function()local b,c,d,e,f,g,h=a.a(),a.d(),a.I(),a.A(),a.B()
+,a.t(),{}h.type='State'h.kind='Value'h.timeliness='lazy'h.dependencySet=table.
+freeze{}local i=table.freeze{__index=h}local j=function(j,k)local l=os.clock()if
+k==nil and(typeof(j)~='table'or(j[1]==nil and next(j)~=nil))then c.logError(
+'scopeMissing',nil,'Value','myScope:Value(initialValue)')end local m=(
+setmetatable({createdAt=l,dependentSet={},lastChange=os.clock(),scope=j,validity
+='valid',_EXTREMELY_DANGEROUS_usedAsValue=k},i))local n=function()m.scope=nil
+end m.oldestTask=n g[m.oldestTask]='Value'table.insert(j,n)return m end function
+h:get(k)c.logError'stateGetWasRemoved'return f()end function h.set(k,l)local m=k
+._EXTREMELY_DANGEROUS_usedAsValue if not e(m,l)then k.
+_EXTREMELY_DANGEROUS_usedAsValue=l d(k)end return l end function h._evaluate(k)
+return true end table.freeze(h)return j end function a.J()local c=a.cache.J if
+not c then c={c=b()}a.cache.J=c end return c.c end end do local b=function()
+local b,c,d,e,f,g,h,i,j=a.a(),a.d(),a.l(),a.H(),a.J(),a.E(),a.F(),a.f(),{__index
+={roamKeys=false,roamValues=true,invalidateInputKey=function(b)b._inputKeyState:
+set(b.inputKey)end,invalidateInputValue=function(b)end,useOutputPair=function(b,
+c)return c(b._outputKeyState),b.inputValue end}}local k=function(k,l,m,n)local o
+={}o.maybeScope=k o.inputKey=l o.inputValue=m o._inputKeyState=f(k,l)o.
+_processor=n o._outputKeyState=g(k,function(p,q)local r=p(o._inputKeyState)local
+s,u=xpcall(o._processor,i,p,q,r)if s then return u else local v=u v.context=`while processing key {
+tostring(r)}`c.logErrorNonFatal('callbackError',v)d(q)table.clear(q)return nil
+end end)return(setmetatable(o,j))end local l=function(l,m,n,o)if typeof(m)==
+'function'then c.logError('scopeMissing',nil,'ForKeys',
+[[myScope:ForKeys(inputTable, function(scope, use, key) ... end)]])elseif o~=nil
+then c.logWarn('destructorRedundant','ForKeys')end return e(l,m,function(p,q,r)
+return k(p,q,r,n)end)end return l end function a.K()local c=a.cache.K if not c
+then c={c=b()}a.cache.K=c end return c.c end end do local b=function()local b,c,
+d,e,f,g,h,i,j=a.a(),a.d(),a.H(),a.J(),a.E(),a.F(),a.f(),a.l(),{__index={roamKeys
+=false,roamValues=false,invalidateInputKey=function(b)b._inputKeyState:set(b.
+inputKey)end,invalidateInputValue=function(b)b._inputValueState:set(b.inputValue
+)end,useOutputPair=function(b,c)local d=c(b._outputPairState)return d.key,d.
+value end}}local k=function(k,l,m,n)local o={}o.maybeScope=k o.inputKey=l o.
+inputValue=m o._inputKeyState=e(k,l)o._inputValueState=e(k,m)o._processor=n o.
+_outputPairState=f(k,function(p,q)local r,s=p(o._inputKeyState),p(o.
+_inputValueState)local u,v,w=xpcall(o._processor,h,p,q,r,s)if u then return{key=
+v,value=w}else local x=v x.context=`while processing key {tostring(s)} and value {
+tostring(s)}`c.logErrorNonFatal('callbackError',x)i(q)table.clear(q)return{key=
+nil,value=nil}end end)return(setmetatable(o,j))end local l=function(l,m,n,o)if
+typeof(m)=='function'then c.logError('scopeMissing',nil,'ForPairs',
+[[myScope:ForPairs(inputTable, function(scope, use, key, value) ... end)]])
+elseif o~=nil then c.logWarn('destructorRedundant','ForPairs')end return d(l,m,
+function(p,q,r)return k(p,q,r,n)end)end return l end function a.L()local c=a.
+cache.L if not c then c={c=b()}a.cache.L=c end return c.c end end do local b=
+function()local b,c,d,e,f,g,h,i,j=a.a(),a.d(),a.H(),a.J(),a.E(),a.F(),a.f(),a.l(
+),{__index={roamKeys=true,roamValues=false,invalidateInputKey=function(b)end,
+invalidateInputValue=function(b)b._inputValueState:set(b.inputValue)end,
+useOutputPair=function(b,c)return b.inputKey,c(b._outputValueState)end}}local k=
+function(k,l,m,n)local o={}o.maybeScope=k o.inputKey=l o.inputValue=m o.
+_inputValueState=e(k,m)o._processor=n o._outputValueState=f(k,function(p,q)local
+r=p(o._inputValueState)local s,u=xpcall(o._processor,h,p,q,r)if s then return u
+else local v=u v.context=`while processing value {tostring(r)}`c.
+logErrorNonFatal('callbackError',v)i(q)table.clear(q)return nil end end)return(
+setmetatable(o,j))end local l=function(l,m,n,o)if typeof(m)=='function'then c.
+logError('scopeMissing',nil,'ForValues',
+[[myScope:ForValues(inputTable, function(scope, use, value) ... end)]])elseif o
+~=nil then c.logWarn('destructorRedundant','ForValues')end return d(l,m,function
+(p,q,r)return k(p,q,r,n)end)end return l end function a.M()local c=a.cache.M if
+not c then c={c=b()}a.cache.M=c end return c.c end end do local b=function()
+local b,c,d,e,f,g=a.a(),a.v(),a.z(),a.C(),a.D(),{}local h=function(h)local i=g[h
+]if i==nil then i={type='SpecialKey',kind='Attribute',stage='self',apply=
+function(j,k,l,m)if e(l)then local n=l c.bOutlivesA(k,m,n.scope,n.oldestTask,c.
+formatters.boundAttribute,h)d(k,n):onBind(function()m:SetAttribute(h,f(n))end)
+else m:SetAttribute(h,l)end end}g[h]=i end return i end return h end function a.
+N()local c=a.cache.N if not c then c={c=b()}a.cache.N=c end return c.c end end
+do local b=function()local b,c,d=a.a(),a.d(),{}local e=function(e)local f=d[e]if
+f==nil then f={type='SpecialKey',kind='AttributeChange',stage='observer',apply=
+function(g,h,i,j)if typeof(i)~='function'then c.logError(
+'invalidAttributeChangeHandler',nil,e)end local k,l=i,j:
+GetAttributeChangedSignal(e)table.insert(h,l:Connect(function()k((j):
+GetAttribute(e))end))end}d[e]=f end return f end return e end function a.O()
+local c=a.cache.O if not c then c={c=b()}a.cache.O=c end return c.c end end do
+local b=function()local b,c,d,e,f=a.a(),a.d(),a.v(),a.C(),{}local g=function(g)
+local h=f[g]if h==nil then h={type='SpecialKey',kind='AttributeOut',stage=
+'observer',apply=function(i,j,k,l)local m=l:GetAttributeChangedSignal(g)if not
+e(k)then c.logError'invalidAttributeOutType'end local n=k if n.kind~='Value'then
+c.logError'invalidAttributeOutType'end local o=n d.bOutlivesA(j,l,o.scope,o.
+oldestTask,d.formatters.attributeOutputsTo,g)o:set((l):GetAttribute(g))table.
+insert(j,m:Connect(function()o:set((l):GetAttribute(g))end))end}f[g]=h end
+return h end return g end function a.P()local c=a.cache.P if not c then c={c=b()
+}a.cache.P=c end return c.c end end do local b=function()local b,c=a.a(),
+function(b)return b end return c end function a.Q()local c=a.cache.Q if not c
+then c={c=b()}a.cache.Q=c end return c.c end end do local b=function()local b,c,
+d,e,f,g,h=a.a(),a.d(),a.z(),a.D(),a.C(),a.l(),false return{type='SpecialKey',
+kind='Children',stage='descendants',apply=function(i,j,k,l)local m,o,p,q={},{},{
+},{}local function r()o,m=m,o q,p=p,q local function s(u,v)local w=typeof(u)if w
+=='Instance'then local x=u m[x]=true if o[x]==nil then x.Parent=l else o[x]=nil
+end if h and v~=nil then x.Name=v end elseif f(u)then local x=u local y=e(x)if y
+~=nil then s(y,v)end local z=q[x]if z==nil then z={}d(z,x):onChange(r)else q[x]=
+nil end p[x]=z elseif w=='table'then local x=u for y,z in pairs(x)do local A,B=(
+typeof(y))if A=='string'then local C=y B=C elseif A=='number'and v~=nil then
+local C=y B=v..'_'..C end s(z,B)end else c.logWarn('unrecognisedChildType',w)end
+end if k~=nil then s(k)end for u in pairs(o)do u.Parent=nil end table.clear(o)
+for u,v in pairs(q)do g(v)end table.clear(q)end table.insert(j,function()k=nil
+r()end)r()end}end function a.R()local c=a.cache.R if not c then c={c=b()}a.cache
+.R=c end return c.c end end do local b=function()local b=function(b)local c=
+typeof(b)if c=='table'then local d=b if typeof(d.type)=='string'then return d.
+type end end return c end return b end function a.S()local c=a.cache.S if not c
+then c={c=b()}a.cache.S=c end return c.c end end do local b=function()local b,c,
+d,e,f,g,h,i,j,k=a.a(),a.d(),a.f(),a.v(),a.z(),a.C(),a.D(),a.S(),function(b,c,d)(
+b)[c]=d end,function(b,c)(b)[c]=(b)[c]end local l=function(l,m,o)local p,q=
+xpcall(j,d,l,m,o)if not p then if not pcall(k,l,m)then c.logErrorNonFatal(
+'cannotAssignProperty',nil,l.ClassName,m)else local r,s=typeof(o),typeof((l)[m])
+if r==s then c.logErrorNonFatal('propertySetError',q)else c.logErrorNonFatal(
+'invalidPropertyType',nil,l.ClassName,m,s,r)end end end end local m=function(m,o
+,p,q)if g(q)then local r=q e.bOutlivesA(m,o,r.scope,r.oldestTask,e.formatters.
+boundProperty,p)f(m,r):onBind(function()l(o,p,h(r))end)else l(o,p,q)end end
+local o=function(o,p,q)local r={self={},descendants={},ancestor={},observer={}}
+for s,u in pairs(p)do local v=i(s)if v=='string'then if s~='Parent'then m(o,q,s,
+u)end elseif v=='SpecialKey'then local w=(s).stage local x=r[w]if x==nil then c.
+logError('unrecognisedPropertyStage',nil,w)else x[s]=u end else c.logError(
+'unrecognisedPropertyKey',nil,v)end end for s,u in pairs(r.self)do s:apply(o,u,q
+)end for s,u in pairs(r.descendants)do s:apply(o,u,q)end if p.Parent~=nil then
+m(o,q,'Parent',p.Parent)end for s,u in pairs(r.ancestor)do s:apply(o,u,q)end for
+s,u in pairs(r.observer)do s:apply(o,u,q)end end return o end function a.T()
+local c=a.cache.T if not c then c={c=b()}a.cache.T=c end return c.c end end do
+local b=function()local b,c,d=a.a(),a.d(),(a.T())local e=function(e,f)if f==nil
+then c.logError('scopeMissing',nil,'instances using Hydrate',
+'myScope:Hydrate (instance) { ... }')end return function(g)table.insert(e,f)d(e,
+g,f)return f end end return e end function a.U()local c=a.cache.U if not c then
+c={c=b()}a.cache.U=c end return c.c end end do local b=function()return{
+ScreenGui={ResetOnSpawn=false,ZIndexBehavior=Enum.ZIndexBehavior.Sibling},
+BillboardGui={ResetOnSpawn=false,ZIndexBehavior=Enum.ZIndexBehavior.Sibling,
+Active=true},SurfaceGui={ResetOnSpawn=false,ZIndexBehavior=Enum.ZIndexBehavior.
+Sibling,SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud,PixelsPerStud=50},
+Frame={BackgroundColor3=Color3.new(1,1,1),BorderColor3=Color3.new(0,0,0),
+BorderSizePixel=0},ScrollingFrame={BackgroundColor3=Color3.new(1,1,1),
+BorderColor3=Color3.new(0,0,0),BorderSizePixel=0,ScrollBarImageColor3=Color3.
+new(0,0,0)},TextLabel={BackgroundColor3=Color3.new(1,1,1),BorderColor3=Color3.
+new(0,0,0),BorderSizePixel=0,Font=Enum.Font.SourceSans,Text='',TextColor3=Color3
+.new(0,0,0),TextSize=14},TextButton={BackgroundColor3=Color3.new(1,1,1),
+BorderColor3=Color3.new(0,0,0),BorderSizePixel=0,AutoButtonColor=false,Font=Enum
+.Font.SourceSans,Text='',TextColor3=Color3.new(0,0,0),TextSize=14},TextBox={
+BackgroundColor3=Color3.new(1,1,1),BorderColor3=Color3.new(0,0,0),
+BorderSizePixel=0,ClearTextOnFocus=false,Font=Enum.Font.SourceSans,Text='',
+TextColor3=Color3.new(0,0,0),TextSize=14},ImageLabel={BackgroundColor3=Color3.
+new(1,1,1),BorderColor3=Color3.new(0,0,0),BorderSizePixel=0},ImageButton={
+BackgroundColor3=Color3.new(1,1,1),BorderColor3=Color3.new(0,0,0),
+BorderSizePixel=0,AutoButtonColor=false},ViewportFrame={BackgroundColor3=Color3.
+new(1,1,1),BorderColor3=Color3.new(0,0,0),BorderSizePixel=0},VideoFrame={
+BackgroundColor3=Color3.new(1,1,1),BorderColor3=Color3.new(0,0,0),
+BorderSizePixel=0},CanvasGroup={BackgroundColor3=Color3.new(1,1,1),BorderColor3=
+Color3.new(0,0,0),BorderSizePixel=0},SpawnLocation={Duration=0},
+BoxHandleAdornment={ZIndex=0},ConeHandleAdornment={ZIndex=0},
+CylinderHandleAdornment={ZIndex=0},ImageHandleAdornment={ZIndex=0},
+LineHandleAdornment={ZIndex=0},SphereHandleAdornment={ZIndex=0},
+WireframeHandleAdornment={ZIndex=0},Part={Anchored=true,Size=Vector3.one,
+FrontSurface=Enum.SurfaceType.Smooth,BackSurface=Enum.SurfaceType.Smooth,
+LeftSurface=Enum.SurfaceType.Smooth,RightSurface=Enum.SurfaceType.Smooth,
+TopSurface=Enum.SurfaceType.Smooth,BottomSurface=Enum.SurfaceType.Smooth},
+TrussPart={Anchored=true,Size=Vector3.one*2,FrontSurface=Enum.SurfaceType.Smooth
+,BackSurface=Enum.SurfaceType.Smooth,LeftSurface=Enum.SurfaceType.Smooth,
+RightSurface=Enum.SurfaceType.Smooth,TopSurface=Enum.SurfaceType.Smooth,
+BottomSurface=Enum.SurfaceType.Smooth},MeshPart={Anchored=true,Size=Vector3.one,
+FrontSurface=Enum.SurfaceType.Smooth,BackSurface=Enum.SurfaceType.Smooth,
+LeftSurface=Enum.SurfaceType.Smooth,RightSurface=Enum.SurfaceType.Smooth,
+TopSurface=Enum.SurfaceType.Smooth,BottomSurface=Enum.SurfaceType.Smooth},
+CornerWedgePart={Anchored=true,Size=Vector3.one,FrontSurface=Enum.SurfaceType.
+Smooth,BackSurface=Enum.SurfaceType.Smooth,LeftSurface=Enum.SurfaceType.Smooth,
+RightSurface=Enum.SurfaceType.Smooth,TopSurface=Enum.SurfaceType.Smooth,
+BottomSurface=Enum.SurfaceType.Smooth},VehicleSeat={Anchored=true,Size=Vector3.
+one,FrontSurface=Enum.SurfaceType.Smooth,BackSurface=Enum.SurfaceType.Smooth,
+LeftSurface=Enum.SurfaceType.Smooth,RightSurface=Enum.SurfaceType.Smooth,
+TopSurface=Enum.SurfaceType.Smooth,BottomSurface=Enum.SurfaceType.Smooth}}end
+function a.V()local c=a.cache.V if not c then c={c=b()}a.cache.V=c end return c.
+c end end do local b=function()local b,c,d,e=a.a(),a.d(),a.V(),(a.T())local f=
+function(f,g)if(g)==nil then local h=(f)c.logError('scopeMissing',nil,
+'instances using New','myScope:New "'..h..'" { ... }')end return function(h)
+local i,j=pcall(Instance.new,g)if not i then c.logError('cannotCreateClass',nil,
+g)end local k=d[g]if k~=nil then for l,m in pairs(k)do(j)[l]=m end end table.
+insert(f,j)e(f,h,j)return j end end return f end function a.W()local c=a.cache.W
+if not c then c={c=b()}a.cache.W=c end return c.c end end do local b=function()
+local b,c,d=a.a(),a.d(),{}local e=function(e)local f=d[e]if f==nil then f={type=
+'SpecialKey',kind='OnChange',stage='observer',apply=function(g,h,i,j)local k,l=
+pcall(j.GetPropertyChangedSignal,j,e)if not k then c.logError(
+'cannotConnectChange',nil,j.ClassName,e)elseif typeof(i)~='function'then c.
+logError('invalidChangeHandler',nil,e)else local m=i table.insert(h,l:Connect(
+function()m((j)[e])end))end end}d[e]=f end return f end return e end function a.
+X()local c=a.cache.X if not c then c={c=b()}a.cache.X=c end return c.c end end
+do local b=function()local b,c,d,e=a.a(),a.d(),{},function(b,c)return(b)[c]end
+local f=function(f)local g=d[f]if g==nil then g={type='SpecialKey',kind=
+'OnEvent',stage='observer',apply=function(h,i,j,k)local l,m=pcall(e,k,f)if not l
+or typeof(m)~='RBXScriptSignal'then c.logError('cannotConnectEvent',nil,k.
+ClassName,f)elseif typeof(j)~='function'then c.logError('invalidEventHandler',
+nil,f)else table.insert(i,m:Connect(j))end end}d[f]=g end return g end return f
+end function a.Y()local c=a.cache.Y if not c then c={c=b()}a.cache.Y=c end
+return c.c end end do local b=function()local b,c,d,e,f=a.a(),a.d(),a.v(),a.C(),
+{}local g=function(g)local h=f[g]if h==nil then h={type='SpecialKey',kind='Out',
+stage='observer',apply=function(i,j,k,l)local m,o=pcall(l.
+GetPropertyChangedSignal,l,g)if not m then c.logError('invalidOutProperty',nil,l
+.ClassName,g)end if not e(k)then c.logError'invalidOutType'end local p=k if p.
+kind~='Value'then c.logError'invalidOutType'end local q=p d.bOutlivesA(j,l,q.
+scope,q.oldestTask,d.formatters.propertyOutputsTo,g)q:set((l)[g])table.insert(j,
+o:Connect(function()q:set((l)[g])end))end}f[g]=h end return h end return g end
+function a.Z()local c=a.cache.Z if not c then c={c=b()}a.cache.Z=c end return c.
+c end end do local b=function()local b,c,d,e,f=a.a(),a.d(),a.I(),a.t(),{}f.type=
+'State'f.kind='ExternalTime'f.timeliness='lazy'f.dependencySet=table.freeze{}f.
+_EXTREMELY_DANGEROUS_usedAsValue=c.lastUpdateStep()local g,h=table.freeze{
+__index=f},{}local i=function(i)local j=os.clock()local k=(setmetatable({
+createdAt=j,dependentSet={},lastChange=nil,scope=i,validity='invalid'},g))local
+l=function()k.scope=nil local l=table.find(h,k)if l~=nil then table.remove(h,l)
+end end k.oldestTask=l e[k.oldestTask]='ExternalTime'table.insert(i,l)table.
+insert(h,k)return k end function f._evaluate(j)return true end c.
+bindToUpdateStep(function(j)f._EXTREMELY_DANGEROUS_usedAsValue=c.lastUpdateStep(
+)for k,l in h do d(l)end end)return i end function a._()local c=a.cache._ if not
+c then c={c=b()}a.cache._=c end return c.c end end do local b=function()local b,
+c,d,e,f,g,h=a.a(),a.v(),a.y(),a.I(),a.D(),a.t(),{}h.type='State'h.kind=
+'Stopwatch'h.timeliness='lazy'local i=table.freeze{__index=h}local j=function(j,
+k)local l=os.clock()local m=(setmetatable({awake=true,createdAt=l,dependencySet=
+{},dependentSet={},lastChange=nil,scope=j,validity='invalid',
+_EXTREMELY_DANGEROUS_usedAsValue=0,_measureTimeSince=0,_playing=false,_timer=k},
+i))local o=function()m.scope=nil end m.oldestTask=o g[m.oldestTask]='Stopwatch'
+table.insert(j,o)c.bOutlivesA(j,m.oldestTask,k.scope,k.oldestTask,c.formatters.
+parameter,'timer')d(m,k)return m end function h.zero(k)local l=f(k._timer)if l~=
+k._measureTimeSince then k._measureTimeSince=l k.
+_EXTREMELY_DANGEROUS_usedAsValue=0 e(k)end end function h.pause(k)if k._playing
+==true then k._playing=false e(k)end end function h.unpause(k)if k._playing==
+false then k._playing=true k._measureTimeSince=f(k._timer)-k.
+_EXTREMELY_DANGEROUS_usedAsValue e(k)end end function h._evaluate(k)if k.
+_playing then d(k,k._timer)local l,m=f(k._timer),k.
+_EXTREMELY_DANGEROUS_usedAsValue local o=l-k._measureTimeSince k.
+_EXTREMELY_DANGEROUS_usedAsValue=o return m~=o else return false end end table.
+freeze(h)return j end function a.aa()local c=a.cache.aa if not c then c={c=b()}a
+.cache.aa=c end return c.c end end do local b=function()local b,c,d={},function(
+b)if b>=0.04045 then return((b+0.055)/(1.055))^2.4 else return b/12.92 end end,
+function(b)if b>=0.0031308 then return(1.055)*b^(0.4166666666666667)-0.055 else
+return 12.92*b end end function b.fromLinear(e)return Color3.new(c(e.R),c(e.G),
+c(e.B))end function b.toLinear(e)return Color3.new(d(e.R),d(e.G),d(e.B))end
+return b end function a.ab()local c=a.cache.ab if not c then c={c=b()}a.cache.ab
+=c end return c.c end end do local b=function()local b,c=a.ab(),{}function c.
+fromLinear(d)local e,f,g=d.R*0.4122214708+d.G*0.5363325363+d.B*0.0514459929,d.R*
+0.2119034982+d.G*0.6806995451+d.B*0.1073969566,d.R*0.0883024619+d.G*0.2817188376
++d.B*0.6299787005 local h,i,j=e^(0.3333333333333333),f^(0.3333333333333333),g^(
+0.3333333333333333)return Vector3.new(h*0.2104542553+i*0.793617785-j*
+0.0040720468,h*1.9779984951-i*2.428592205+j*0.4505937099,h*0.0259040371+i*
+0.7827717662-j*0.808675766)end function c.fromSRGB(d)return c.fromLinear(b.
+toLinear(d))end function c.toLinear(d,e)local f,g,h=d.X+d.Y*0.3963377774+d.Z*
+0.2158037573,d.X-d.Y*0.1055613458-d.Z*0.0638541728,d.X-d.Y*0.0894841775-d.Z*
+1.291485548 local i,j,k=f^3,g^3,h^3 local l,m,o=i*4.0767416621-j*3.3077115913+k*
+0.2309699292,i*-1.2684380046+j*2.6097574011-k*0.3413193965,i*-4.1960863E-3-j*
+0.7034186147+k*1.707614701 if not e then l=math.clamp(l,0,1)m=math.clamp(m,0,1)o
+=math.clamp(o,0,1)end return Color3.new(l,m,o)end function c.toSRGB(d,e)return b
+.fromLinear(c.toLinear(d,e))end return c end function a.ac()local c=a.cache.ac
+if not c then c={c=b()}a.cache.ac=c end return c.c end end do local b=function()
+local b=(a.ac())local c=function(c,d,e)local f=typeof(c)if typeof(d)==f then if
+f=='number'then local g,h=d,c return(g-h)*e+h elseif f=='CFrame'then local g,h=d
+,c return h:Lerp(g,e)elseif f=='Color3'then local g,h=d,c local i,j=b.fromSRGB(h
+),b.fromSRGB(g)return b.toSRGB(i:Lerp(j,e),false)elseif f==
+'ColorSequenceKeypoint'then local g,h=d,c local i,j=b.fromSRGB(h.Value),b.
+fromSRGB(g.Value)return ColorSequenceKeypoint.new((g.Time-h.Time)*e+h.Time,b.
+toSRGB(i:Lerp(j,e),false))elseif f=='DateTime'then local g,h=d,c return DateTime
+.fromUnixTimestampMillis((g.UnixTimestampMillis-h.UnixTimestampMillis)*e+h.
+UnixTimestampMillis)elseif f=='NumberRange'then local g,h=d,c return NumberRange
+.new((g.Min-h.Min)*e+h.Min,(g.Max-h.Max)*e+h.Max)elseif f==
+'NumberSequenceKeypoint'then local g,h=d,c return NumberSequenceKeypoint.new((g.
+Time-h.Time)*e+h.Time,(g.Value-h.Value)*e+h.Value,(g.Envelope-h.Envelope)*e+h.
+Envelope)elseif f=='PhysicalProperties'then local g,h=d,c return
+PhysicalProperties.new((g.Density-h.Density)*e+h.Density,(g.Friction-h.Friction)
+*e+h.Friction,(g.Elasticity-h.Elasticity)*e+h.Elasticity,(g.FrictionWeight-h.
+FrictionWeight)*e+h.FrictionWeight,(g.ElasticityWeight-h.ElasticityWeight)*e+h.
+ElasticityWeight)elseif f=='Ray'then local g,h=d,c return Ray.new(h.Origin:Lerp(
+g.Origin,e),h.Direction:Lerp(g.Direction,e))elseif f=='Rect'then local g,h=d,c
+return Rect.new(h.Min:Lerp(g.Min,e),h.Max:Lerp(g.Max,e))elseif f=='Region3'then
+local g,h=d,c local i,j=h.CFrame.Position:Lerp(g.CFrame.Position,e),h.Size:Lerp(
+g.Size,e)/2 return Region3.new(i-j,i+j)elseif f=='Region3int16'then local g,h=d,
+c return Region3int16.new(Vector3int16.new((g.Min.X-h.Min.X)*e+h.Min.X,(g.Min.Y-
+h.Min.Y)*e+h.Min.Y,(g.Min.Z-h.Min.Z)*e+h.Min.Z),Vector3int16.new((g.Max.X-h.Max.
+X)*e+h.Max.X,(g.Max.Y-h.Max.Y)*e+h.Max.Y,(g.Max.Z-h.Max.Z)*e+h.Max.Z))elseif f==
+'UDim'then local g,h=d,c return UDim.new((g.Scale-h.Scale)*e+h.Scale,(g.Offset-h
+.Offset)*e+h.Offset)elseif f=='UDim2'then local g,h=d,c return h:Lerp(g,e)elseif
+f=='Vector2'then local g,h=d,c return h:Lerp(g,e)elseif f=='Vector2int16'then
+local g,h=d,c return Vector2int16.new((g.X-h.X)*e+h.X,(g.Y-h.Y)*e+h.Y)elseif f==
+'Vector3'then local g,h=d,c return h:Lerp(g,e)elseif f=='Vector3int16'then local
+g,h=d,c return Vector3int16.new((g.X-h.X)*e+h.X,(g.Y-h.Y)*e+h.Y,(g.Z-h.Z)*e+h.Z)
+end end if e<0.5 then return c else return d end end return c end function a.ad(
+)local c=a.cache.ad if not c then c={c=b()}a.cache.ad=c end return c.c end end
+do local b=function()local b=(game:GetService'TweenService')local c=function(c,d
+)local e,f,g,h,i,j=c.DelayTime,c.Time,c.Reverses,1+c.RepeatCount,c.EasingStyle,c
+.EasingDirection local k=e+f if g then k+=f end if d==math.huge then return 1
+end if d>=k*h and c.RepeatCount>-1 then return 1 end local l=d%k if l<=e then
+return 0 end local m=(l-e)/f if m>1 then m=2-m end local o=b:GetValue(m,i,j)
+return o end return c end function a.ae()local c=a.cache.ae if not c then c={c=
+b()}a.cache.ae=c end return c.c end end do local b=function()local b,c=game:
+GetService'TweenService',function(b)if b.RepeatCount<=-1 then return math.huge
+end local c=b.DelayTime+b.Time if b.Reverses then c+=b.Time end c*=b.RepeatCount
++1 return c end return c end function a.af()local c=a.cache.af if not c then c={
+c=b()}a.cache.af=c end return c.c end end do local b=function()local b,c,d,e,f,g
+,h,i,j,k,l,m,o,q=a.a(),a.d(),a.v(),a.y(),a.x(),a.C(),a.D(),a._(),a.aa(),a.ad(),a
+.ae(),a.af(),a.t(),{}q.type='State'q.kind='Tween'q.timeliness='eager'local r=
+table.freeze{__index=q}local s=function(s,u,v)local w=os.clock()if g(s)then c.
+logError('scopeMissing',nil,'Tweens','myScope:Tween(goalState, tweenInfo)')end
+local x,y=(g(u))if x~=nil then y=j(s,i(s))end local z=(setmetatable({createdAt=w
+,dependencySet={},dependentSet={},lastChange=nil,scope=s,validity='invalid',
+_activeDuration=nil,_activeElapsed=nil,_activeFrom=nil,_activeTo=nil,
+_activeTweenInfo=nil,_EXTREMELY_DANGEROUS_usedAsValue=h(u),_goal=u,_stopwatch=y,
+_tweenInfo=v or TweenInfo.new()},r))local A=function()z.scope=nil for A in
+pairs(z.dependencySet)do A.dependentSet[z]=nil end end z.oldestTask=A o[z.
+oldestTask]='Tween'table.insert(s,A)if x~=nil then d.bOutlivesA(s,z.oldestTask,x
+.scope,x.oldestTask,d.formatters.animationGoal)end local B=g(v)if B~=nil then d.
+bOutlivesA(s,z.oldestTask,B.scope,B.oldestTask,d.formatters.parameter,
+'tween info')end f(z,true)return z end function q.get(u)return c.logError
+'stateGetWasRemoved'end function q._evaluate(u)local v=g(u._goal)if v==nil then
+u._EXTREMELY_DANGEROUS_usedAsValue=u._goal return false end e(u,v)local w=h(v)if
+w~=w then c.logWarn'tweenNanGoal'return false end local x,y=u._stopwatch,(h(u.
+_tweenInfo))if u._activeTo~=w or(u._activeElapsed<u._activeDuration and u.
+_activeTweenInfo~=y)then u._activeDuration=m(y)u._activeFrom=u.
+_EXTREMELY_DANGEROUS_usedAsValue u._activeTo=w u._activeTweenInfo=y x:zero()x:
+unpause()end e(u,x)u._activeElapsed=h(x)if u._activeFrom==u._activeTo or u.
+_activeElapsed>=u._activeDuration or typeof(u._activeTo)~=typeof(u._activeFrom)
+then u._activeFrom=u._activeTo u._activeElapsed=u._activeDuration x:pause()end
+local z,A=l(y,u._activeElapsed),u._EXTREMELY_DANGEROUS_usedAsValue local B=(k(u.
+_activeFrom,u._activeTo,z))if B~=B then c.logWarn'tweenNanMotion'B=u._activeTo
+end u._EXTREMELY_DANGEROUS_usedAsValue=B return A~=B end table.freeze(q)return s
+end function a.ag()local c=a.cache.ag if not c then c={c=b()}a.cache.ag=c end
+return c.c end end do local b=function()local b,c=a.a(),(a.ac())local d=function
+(d,e)if e=='number'then return d[1]elseif e=='CFrame'then return CFrame.new(d[1]
+,d[2],d[3])*CFrame.fromAxisAngle(Vector3.new(d[4],d[5],d[6]).Unit,d[7])elseif e
+=='Color3'then return c.toSRGB(Vector3.new(d[1],d[2],d[3]),false)elseif e==
+'ColorSequenceKeypoint'then return ColorSequenceKeypoint.new(d[4],c.toSRGB(
+Vector3.new(d[1],d[2],d[3]),false))elseif e=='DateTime'then return DateTime.
+fromUnixTimestampMillis(d[1])elseif e=='NumberRange'then return NumberRange.new(
+d[1],d[2])elseif e=='NumberSequenceKeypoint'then return NumberSequenceKeypoint.
+new(d[2],d[1],d[3])elseif e=='PhysicalProperties'then return PhysicalProperties.
+new(d[1],d[2],d[3],d[4],d[5])elseif e=='Ray'then return Ray.new(Vector3.new(d[1]
+,d[2],d[3]),Vector3.new(d[4],d[5],d[6]))elseif e=='Rect'then return Rect.new(d[1
+],d[2],d[3],d[4])elseif e=='Region3'then local f,g=Vector3.new(d[1],d[2],d[3]),
+Vector3.new(d[4]/2,d[5]/2,d[6]/2)return Region3.new(f-g,f+g)elseif e==
+'Region3int16'then return Region3int16.new(Vector3int16.new(d[1],d[2],d[3]),
+Vector3int16.new(d[4],d[5],d[6]))elseif e=='UDim'then return UDim.new(d[1],d[2])
+elseif e=='UDim2'then return UDim2.new(d[1],d[2],d[3],d[4])elseif e=='Vector2'
+then return Vector2.new(d[1],d[2])elseif e=='Vector2int16'then return
+Vector2int16.new(d[1],d[2])elseif e=='Vector3'then return Vector3.new(d[1],d[2],
+d[3])elseif e=='Vector3int16'then return Vector3int16.new(d[1],d[2],d[3])else
+return nil end end return d end function a.ah()local c=a.cache.ah if not c then
+c={c=b()}a.cache.ah=c end return c.c end end do local b=function()local b=(a.ac(
+))local c=function(c,d)if d=='number'then local e=c return{e}elseif d=='CFrame'
+then local e=c local f,g=e:ToAxisAngle()return{e.X,e.Y,e.Z,f.X,f.Y,f.Z,g}elseif
+d=='Color3'then local e=c local f=b.fromSRGB(e)return{f.X,f.Y,f.Z}elseif d==
+'ColorSequenceKeypoint'then local e=c local f=b.fromSRGB(e.Value)return{f.X,f.Y,
+f.Z,e.Time}elseif d=='DateTime'then local e=c return{e.UnixTimestampMillis}
+elseif d=='NumberRange'then local e=c return{e.Min,e.Max}elseif d==
+'NumberSequenceKeypoint'then local e=c return{e.Value,e.Time,e.Envelope}elseif d
+=='PhysicalProperties'then local e=c return{e.Density,e.Friction,e.Elasticity,e.
+FrictionWeight,e.ElasticityWeight}elseif d=='Ray'then local e=c return{e.Origin.
+X,e.Origin.Y,e.Origin.Z,e.Direction.X,e.Direction.Y,e.Direction.Z}elseif d==
+'Rect'then local e=c return{e.Min.X,e.Min.Y,e.Max.X,e.Max.Y}elseif d=='Region3'
+then local e=c return{e.CFrame.X,e.CFrame.Y,e.CFrame.Z,e.Size.X,e.Size.Y,e.Size.
+Z}elseif d=='Region3int16'then local e=c return{e.Min.X,e.Min.Y,e.Min.Z,e.Max.X,
+e.Max.Y,e.Max.Z}elseif d=='UDim'then local e=c return{e.Scale,e.Offset}elseif d
+=='UDim2'then local e=c return{e.X.Scale,e.X.Offset,e.Y.Scale,e.Y.Offset}elseif
+d=='Vector2'then local e=c return{e.X,e.Y}elseif d=='Vector2int16'then local e=c
+return{e.X,e.Y}elseif d=='Vector3'then local e=c return{e.X,e.Y,e.Z}elseif d==
+'Vector3int16'then local e=c return{e.X,e.Y,e.Z}else return{}end end return c
+end function a.ai()local c=a.cache.ai if not c then c={c=b()}a.cache.ai=c end
+return c.c end end do local b=function()local b=function(b,c,d)if b==0 or d==0
+then return 1,0,0,1 end local e,f,g,h if c>1 then local i=math.sqrt(c^2-1)local
+j,k,l=-0.5/(i*d),d*(i+c)*-1,d*(i-c)local m,o=math.exp(b*k),math.exp(b*l)e=(o*k-m
+*l)*j f=(m-o)*j/d g=(o-m)*j*d h=(m*k-o*l)*j elseif c==1 then local i=b*d local j
+=i*-1 local k=math.exp(j)e=k*(i+1)f=k*b g=k*(j*d)h=k*(j+1)else local i=d*math.
+sqrt(1-c^2)local j,k,l,m=1/i,math.exp(-1*b*d*c),math.sin(i*b),math.cos(i*b)local
+o,q=k*l,k*m local r=o*d*c*j e=r+q f=o*j g=-1*(o*i+d*c*r)h=q-r end return e,f,g,h
+end return b end function a.aj()local c=a.cache.aj if not c then c={c=b()}a.
+cache.aj=c end return c.c end end do local b=function()local b,c,d,e,f,g,h,i,j,k
+,l,m,o,q,r,s=a.a(),a.d(),a.v(),a.y(),a.I(),a.x(),a.C(),a.D(),a._(),a.aa(),a.ah()
+,a.ai(),a.aj(),a.t(),0.00001,{}s.type='State's.kind='Spring's.timeliness='eager'
+local u=table.freeze{__index=s}local v=function(v,w,x,y)local z=os.clock()if
+typeof(v)~='table'or h(v)~=nil then c.logError('scopeMissing',nil,'Springs',
+'myScope:Spring(goalState, speed, damping)')end local A,B=(h(w))if A~=nil then B
+=k(v,j(v))B:unpause()end local C,D=x or 10,y or 1 local E=(setmetatable({
+createdAt=z,dependencySet={},dependentSet={},lastChange=nil,scope=v,validity=
+'invalid',_activeDamping=-1,_activeGoal=nil,_activeLatestP={},_activeLatestV={},
+_activeNumSprings=0,_activeSpeed=-1,_activeStartP={},_activeStartV={},
+_activeTargetP={},_activeType='',_damping=D,_EXTREMELY_DANGEROUS_usedAsValue=i(w
+),_goal=w,_speed=C,_stopwatch=B},u))local F=function()E.scope=nil for F in
+pairs(E.dependencySet)do F.dependentSet[E]=nil end end E.oldestTask=F q[E.
+oldestTask]='Spring'table.insert(v,F)if A~=nil then d.bOutlivesA(v,E.oldestTask,
+A.scope,A.oldestTask,d.formatters.animationGoal)end local G=h(C)if G~=nil then d
+.bOutlivesA(v,E.oldestTask,G.scope,G.oldestTask,d.formatters.parameter,'speed')
+end local H=h(D)if H~=nil then d.bOutlivesA(v,E.oldestTask,H.scope,H.oldestTask,
+d.formatters.parameter,'damping')end g(E,true)return E end function s.
+addVelocity(w,x)g(w,false)local y=typeof(x)if y~=w._activeType then c.logError(
+'springTypeMismatch',nil,y,w._activeType)end local z=m(x,y)for A,B in w.
+_activeLatestV do z[A]+=B end w._activeStartP=table.clone(w._activeLatestP)w.
+_activeStartV=z w._stopwatch:zero()w._stopwatch:unpause()f(w)end function s.get(
+w)return c.logError'stateGetWasRemoved'end function s.setPosition(w,x)g(w,false)
+local y=typeof(x)if y~=w._activeType then c.logError('springTypeMismatch',nil,y,
+w._activeType)end w._activeStartP=m(x,y)w._activeStartV=table.clone(w.
+_activeLatestV)w._stopwatch:zero()w._stopwatch:unpause()f(w)end function s.
+setVelocity(w,x)g(w,false)local y=typeof(x)if y~=w._activeType then c.logError(
+'springTypeMismatch',nil,y,w._activeType)end w._activeStartP=table.clone(w.
+_activeLatestP)w._activeStartV=m(x,y)w._stopwatch:zero()w._stopwatch:unpause()f(
+w)end function s._evaluate(w)local x=h(w._goal)if x==nil then w.
+_EXTREMELY_DANGEROUS_usedAsValue=w._goal return false end local y=i(x)if y~=y
+then c.logWarn'springNanGoal'return false end local z=typeof(y)local A,B=z~=w.
+_activeType,w._stopwatch local C=i(B)e(w,B)local D,E=w.
+_EXTREMELY_DANGEROUS_usedAsValue if A then E=y elseif C<=0 then E=D else local F
+,G,H,I=o(C,w._activeDamping,w._activeSpeed)local J=false for K=1,w.
+_activeNumSprings do local L,M,N=w._activeStartP[K],w._activeTargetP[K],w.
+_activeStartV[K]local O=L-M local P,Q=O*F+N*G,O*H+N*I if P~=P or Q~=Q then c.
+logWarn'springNanMotion'P,Q=0,0 end if math.abs(P)>r or math.abs(Q)>r then J=
+true end local R=P+M w._activeLatestP[K]=R w._activeLatestV[K]=Q end if not J
+then for K=1,w._activeNumSprings do w._activeLatestP[K]=w._activeTargetP[K]end
+end E=(l(w._activeLatestP,w._activeType))end local F,G=(i(w._speed)),(i(w.
+_damping))if A or y~=w._activeGoal or F~=w._activeSpeed or G~=w._activeDamping
+then w._activeTargetP=m(y,z)w._activeNumSprings=#w._activeTargetP if A then w.
+_activeStartP=table.clone(w._activeTargetP)w._activeLatestP=table.clone(w.
+_activeTargetP)w._activeStartV=table.create(w._activeNumSprings,0)w.
+_activeLatestV=table.create(w._activeNumSprings,0)else w._activeStartP=table.
+clone(w._activeLatestP)w._activeStartV=table.clone(w._activeLatestV)end w.
+_activeType=z w._activeGoal=y w._activeDamping=G w._activeSpeed=F B:zero()B:
+unpause()end w._EXTREMELY_DANGEROUS_usedAsValue=E return D~=E end table.freeze(s
+)return v end function a.ak()local c=a.cache.ak if not c then c={c=b()}a.cache.
+ak=c end return c.c end end do local b=function()local b,c=a.a(),(a.d())do local
+d=a.e()c.setExternalProvider(d)end local d=(table.freeze{version={major=0,minor=
+3,isRelease=true},Contextual=a.g(),Safe=a.h(),cleanup=a.m(),deriveScope=a.p(),
+doCleanup=a.l(),innerScope=a.q(),scoped=a.r(),Observer=a.z(),Computed=a.E(),
+ForKeys=(a.K()),ForPairs=(a.L()),ForValues=(a.M()),peek=a.D(),Value=a.J(),
+Attribute=a.N(),AttributeChange=a.O(),AttributeOut=a.P(),Child=a.Q(),Children=a.
+R(),Hydrate=a.U(),New=a.W(),OnChange=a.X(),OnEvent=a.Y(),Out=a.Z(),Tween=a.ag(),
+Spring=a.ak()})return d end function a.al()local c=a.cache.al if not c then c={c
+=b()}a.cache.al=c end return c.c end end do local b=function()local b=a.al()
+local c={Children=b.Children,OnEvent=b.OnEvent,OnChange=b.OnChange,Out=b.Out,
+Contextual=b.Contextual,Safe=b.Safe,peek=b.peek,doCleanup=b.doCleanup,
+constructors=b,scoped=b.scoped,innerScope=b.innerScope}return table.freeze(c)end
+function a.am()local c=a.cache.am if not c then c={c=b()}a.cache.am=c end return
+c.c end end do local b=function()local b={}function b.new(c,d)local e=
+setmetatable({},{__index=function(e,f)local g=d[f]return(g and{(g.get())}or{nil}
+)[1]end,__newindex=function(e,f,g)local h=d[f]if h==nil or h.set==nil then
+error(`{c}: "{f}" is not a writable property`,3)end h.set(g)end})return(e)end
+return table.freeze(b)end function a.an()local c=a.cache.an if not c then c={c=
+b()}a.cache.an=c end return c.c end end do local b=function()local b,c,d=table.
+freeze{Small=6,Medium=12,Large=16},table.freeze{XS=4,SM=8,MD=12,LG=16,XL=20,XXL=
+24},60 local e,f,g=c.XS,c.SM,7 local h=d+e local i,j=g*h-e+f*2,table.freeze{
+Shortcut={Enum.KeyCode.LeftControl,Enum.KeyCode.K},Placeholder=
+'Search commands\u{2026}',Position=UDim2.fromScale(0.5,0.4),AnchorPoint=Vector2.
+new(0.5,0.5),DisplayOrder=1000000,Blur=false,CommandName='Command',
+CommandDescription='',CommandIcon='command',CommandCallback=function()end}return
+table.freeze{Radius=b,Spacing=c,Defaults=j,PanelMinWidth=420,PanelMaxWidth=620,
+PanelWidthScale=0.42,PanelHeightScale=0.6,PanelCorner=b.Large,StrokeThickness=1,
+BlurSize=24,FieldHeight=d,FieldPadding=c.XL,SeparatorHeight=1,RowHeight=d,RowGap
+=e,RowPitch=h,RowCorner=b.Medium,RowPadding=c.MD,RowTitleHeight=20,
+RowDescriptionHeight=18,RowTextGap=c.XS,SelectionPadX=c.XS,SelectionPadY=c.XS,
+IconSize=26,IconGap=c.LG,SwatchRingRest=0.75,SwatchRingActive=0.35,
+SurfaceHoverLift=0.08,IconTileSize=40,IconTileCorner=b.Medium,ClearSize=16,
+MaxVisibleRows=g,ListPadding=f,ListInset=c.SM,ListMaxHeight=i,EmptyHeight=64,
+SectionBandHeight=28,FooterHeight=48,FooterPadding=c.XL,KeyCapHeight=24,
+KeyCapMinWidth=24,KeyCapPadding=c.SM,KeyCapCorner=b.Small,KeyCapGap=c.SM,
+KeyCapIconSize=14,FooterCountReserve=120,ScrollIndicatorThickness=2,
+ScrollIndicatorInset=c.XS,ScrollIndicatorMinHeight=16,EntryHeaderHeight=44}end
+function a.ao()local c=a.cache.ao if not c then c={c=b()}a.cache.ao=c end return
+c.c end end do local b=function()return table.freeze{}end function a.ap()local c
+=a.cache.ap if not c then c={c=b()}a.cache.ap=c end return c.c end end do local
+b=function()local b,c,d,e,f=a.am(),a.an(),a.ao(),a.ap(),{}f.__index=f function f
+.new(g,h)return setmetatable({name=g:Value(h.Name or d.Defaults.CommandName),
+description=g:Value(h.Description or d.Defaults.CommandDescription),icon=g:
+Value((h.Icon or d.Defaults.CommandIcon)),group=h.Group,aliases=h.Aliases or{},
+arguments=h.Arguments or{},callback=h.Callback or d.Defaults.CommandCallback,
+closeAfter=h.CloseAfter==true},f)end function f.handle(g,h)return c.new(
+'VantaUI command',{Name={get=function()return b.peek(g.name)end,set=function(i)g
+.name:set(i)end},Description={get=function()return b.peek(g.description)end,set=
+function(i)g.description:set(i)end},Icon={get=function()return b.peek(g.icon)end
+,set=function(i)g.icon:set(i)end},Remove={get=function()return h end}})end local
+g={}g.__index=g function g.new(h)return setmetatable({records=h:Value({}),_scope
+=h,_scopes={}},g)end function g.register(h,i)local j=b.innerScope(h._scope)local
+k=f.new(j,i)h._scopes[k]=j local l,m=k:handle(function()h:remove(k)end),table.
+clone(b.peek(h.records))table.insert(m,k)h.records:set(m)return l end function g
+.remove(h,i)local j=b.peek(h.records)local k=table.find(j,i)if k==nil then
+return end local l=table.clone(j)table.remove(l,k)h.records:set(l)local m=h.
+_scopes[i]h._scopes[i]=nil if m~=nil then task.defer(function()b.doCleanup(m)end
+)end end return table.freeze(g)end function a.aq()local c=a.cache.aq if not c
+then c={c=b()}a.cache.aq=c end return c.c end end do local b=function()local b={
+}function b.ok(c)return table.freeze{ok=true,value=c}end function b.err(c)return
+table.freeze{ok=false,error=c}end return table.freeze(b)end function a.ar()local
+c=a.cache.ar if not c then c={c=b()}a.cache.ar=c end return c.c end end do local
+b=function()local b,c,d=a.ar(),a.ap(),{['true']=true,['1']=true,yes=true,y=true,
+on=true,['false']=false,['0']=false,no=false,n=false,off=false}local e,f={number
+={coerce=function(e)local f=tonumber(e)if f==nil then return b.err
+'Enter a number'end return b.ok(f)end,constrain=function(e,f)local g=e if f.Step
+then local h=f.Min or 0 g=h+math.round((g-h)/f.Step)*f.Step end if f.Clamp then
+if f.Min then g=math.max(g,f.Min)end if f.Max then g=math.min(g,f.Max)end else
+if f.Min and g<f.Min then return b.err(`Must be at least {f.Min}`)end if f.Max
+and g>f.Max then return b.err(`Must be at most {f.Max}`)end end return b.ok(g)
+end,hint=function(e)if e.Min and e.Max then return`Between {e.Min} and {e.Max}`
+elseif e.Min then return`At least {e.Min}`elseif e.Max then return`At most {e.
+Max}`end return''end},string={coerce=function(e)return b.ok(e)end,constrain=
+function(e,f)local g=e if f.MaxLength and#g>f.MaxLength then return b.err(`Up to {
+f.MaxLength} characters`)end if f.Pattern and not string.match(g,f.Pattern)then
+return b.err'Invalid format'end return b.ok(g)end,hint=function(e)if e.MaxLength
+then return`Up to {e.MaxLength} characters`end return''end},boolean={coerce=
+function(e)local f=d[e:lower()]if f==nil then return b.err'Enter yes or no'end
+return b.ok(f)end,constrain=function(e)return b.ok(e)end,hint=function()return
+'yes or no'end},enum={coerce=function(e,f)local g,h=f.Options or{},e:lower()for
+i,j in g do if j.Label:lower()==h then return b.ok(j.Value)end end return b.err
+'Pick one of the options'end,constrain=function(e)return b.ok(e)end,hint=
+function()return''end}},{}function f.validate(g,h)if h==''and g.Optional then
+return b.ok(g.Default)end local i=e[g.Type]local j=i.coerce(h,g)if not j.ok then
+return j end local k=i.constrain(j.value,g)if not k.ok then return k end if g.
+Validate then local l,m,o=pcall(g.Validate,k.value)if not l then return b.err
+'Invalid value'end if not m then return b.err(o or`Invalid {g.Name}`)end end
+return k end function f.hint(g)return e[g.Type].hint(g)end function f.
+displayName(g)return`{g:sub(1,1):upper()}{g:sub(2)}`end function f.tokenize(g)
+local h,i={},0 for j in g:gmatch'%S+'do i+=1 h[i]=j end return h end return
+table.freeze(f)end function a.as()local c=a.cache.as if not c then c={c=b()}a.
+cache.as=c end return c.c end end do local b=function()local b,c,d,e=a.as(),a.
+ar(),a.ap(),{}e.__index=e function e.new(f)return setmetatable({_args=f,_values=
+{},_displays={},_count=0,_index=1},e)end function e.current(f)return f._args[f.
+_index]end function e.index(f)return f._index end function e.total(f)return#f.
+_args end function e.isComplete(f)return f._index>#f._args end function e.submit
+(f,g)local h=f:current()if h==nil then return c.ok(true)end local i=b.validate(h
+,g)if not i.ok then return c.err(i.error)end f._count+=1 f._values[f._count]=i.
+value f._displays[f._count]=g f._index+=1 return c.ok(f:isComplete())end
+function e.back(f)if f._index<=1 then return false end f._index-=1 if f._count>=
+f._index then f._values[f._count]=nil f._displays[f._count]=nil f._count-=1 end
+return true end function e.collected(f)local g=table.create(f._count)for h=1,f.
+_count do g[h]=table.freeze{name=f._args[h].Name,value=f._displays[h]}end return
+g end function e.values(f)return f._values,f._count end return table.freeze(e)
+end function a.at()local c=a.cache.at if not c then c={c=b()}a.cache.at=c end
+return c.c end end do local b=function()local b,c,d,e,f,g,h,i,j,k,l=12,10,8,4,1,
+0.05,1,0.9,0.4,'[%s%-_/%.]',-math.huge local m,o=function(m,o,q,r)local s=#q if
+s==0 then return 0,nil end local u=#m if u<s then return nil,nil end do local v,
+w=1,string.byte(q,1)for x=1,u do if string.byte(o,x)==w then v+=1 if v>s then
+break end w=string.byte(q,v)end end if v<=s then return nil,nil end end local v=
+(table.create(u,0))for w=2,u do local x,y=m:sub(w-1,w-1),m:sub(w,w)if x:match(k)
+~=nil then v[w]=c elseif x:match'%l'~=nil and y:match'%u'~=nil then v[w]=d end
+end v[1]=b local w,x,y,z=table.create(s),table.create(s),table.create(u,l),table
+.create(u,0)for A=1,s do local B,C,D=(table.create(u,l)),(table.create(u,l)),
+string.byte(q,A)for E=1,u do local F=l if string.byte(o,E)==D then local G,H=(E>
+1 and{z[E-1]}or{A==1 and 0 or l})[1],(E>1 and y[E-1]>l and{(y[E-1]+e)}or{l})[1]F
+=math.max(G,H)+1+v[E]end B[E]=F C[E]=math.max(F,(E>1 and{(C[E-1]-f)}or{l})[1])
+end w[A]=B x[A]=C y=B z=C end local A,B,C=w[s],l,0 for D=1,u do if A[D]>B then B
+=A[D]C=D end end local D if r then local E,F,G=(table.create(s)),s,C while F>=1
+do E[F]=G if F==1 then break end local H,I,J=w[F][G]-1-v[G],w[F-1],x[F-1]if G>1
+and I[G-1]>l and I[G-1]+e==H then G-=1 else G-=1 while J[G]~=I[G]do G-=1 end end
+F-=1 end D=table.freeze(E)end return B-u*g,D end,function(m,o)if o==nil then
+return m end if m==nil or o>m then return o end return m end local q,r=function(
+q,r,s)local u,v=m(q.name,r,s,true)local w=(u~=nil and{(u*h)}or{nil})[1]for x,y
+in q.aliases do local z=m(y,y:lower(),s,false)if z~=nil then w=o(w,z*i)end end
+local x=m(q.description,q.description:lower(),s,false)if x~=nil then w=o(w,x*j)
+end return w,v end,{}function r.rank(s,u)local v=u:match'^%s*(.-)%s*$'or''local
+w,x=v:lower(),{}for y,z in s do local A=z.name:lower()if w==''then table.insert(
+x,{index=y,score=0,name=A,positions=nil})continue end local B,C=q(z,A,w)if B~=
+nil then table.insert(x,{index=y,score=B,name=A,positions=C})end end table.sort(
+x,function(y,z)if y.score==z.score then return y.name<z.name end return y.score>
+z.score end)local y=(table.create(#x))for z,A in x do y[z]=table.freeze{index=A.
+index,positions=A.positions}end return y end return table.freeze(r)end function
+a.au()local c=a.cache.au if not c then c={c=b()}a.cache.au=c end return c.c end
+end do local b=function()return table.freeze{OpenSpeed=44,SlideOffset=12,
+EntranceScale=0.985,FadeSpeed=44,FadeDamping=1,HeightSpeed=50,SelectionSpeed=44,
+SelectionSlideSpeed=50,SelectionSlideDamping=1,ScrollTweenTime=0.1,
+IndicatorLinger=0.2,RepeatDelay=0.35,RepeatInterval=0.05,PressScale=0.97,
+PressSpeed=50,PressDamping=1,EntryHeaderSpeed=42,ResetDelay=0.18,FlashDuration=
+1.4}end function a.av()local c=a.cache.av if not c then c={c=b()}a.cache.av=c
+end return c.c end end do local b=function()return table.freeze{Players=(game:
+GetService'Players'),UserInputService=(game:GetService'UserInputService'),
+TweenService=(game:GetService'TweenService'),RunService=(game:GetService
+'RunService'),Workspace=(game:GetService'Workspace'),Lighting=(game:GetService
+'Lighting')}end function a.aw()local c=a.cache.aw if not c then c={c=b()}a.cache
+.aw=c end return c.c end end do local aa=function()local b,c,d,e,f,g,h,i,j,k,l,m
+,o=a.aq(),a.at(),a.as(),a.am(),a.au(),a.av(),a.aw(),a.ao(),a.ap(),5,table.freeze
+{},table.freeze({table.freeze{Value=true,Label='Yes',Aliases={'true','on','1'}},
+table.freeze{Value=false,Label='No',Aliases={'false','off','0'}}}),table.freeze{
+}local q,r,s,u=table.freeze{rows={},order={},positions={},headers=o},function(q,
+r,s,u)local v=table.create(#q)for w,x in q do v[w]=s(x)end local w=f.rank(v,r)
+local x,y,z=table.create(#w),{},{}for A,B in w do local C=u(q[B.index])x[A]=C y[
+C]=A if B.positions~=nil then z[C]=B.positions end end return{rows=x,order=y,
+positions=z,headers=o}end,function(q)local r=table.create(#q.rows)for s,u in q.
+rows do if u.checked then table.insert(r,u)end end if#r==0 then return q end for
+s,u in q.rows do if not u.checked then table.insert(r,u)end end local s={}for u,
+v in r do s[v]=u end return{rows=r,order=s,positions=q.positions,headers=q.
+headers}end,{}u.__index=u function u.new(v,w,x)local y,z,A,B,C,D,E,F,G,H,I,J,K=v
+:Value'',v:Value(1),v:Value(false),v:Value'',v:Value(true),v:Value(false),v:
+Value(false),v:Value(x.Blur==true),v:Value(Vector2.new(1280,720)),v:Value(nil),(
+v:Value({}))local L=function()if K then K:Disconnect()end local L=h.Workspace.
+CurrentCamera if L==nil then return end G:set(L.ViewportSize)K=L:
+GetPropertyChangedSignal'ViewportSize':Connect(function()G:set((L).ViewportSize)
+end)end L()table.insert(v,h.Workspace:GetPropertyChangedSignal'CurrentCamera':
+Connect(L))table.insert(v,function()if K then K:Disconnect()end end)local M,N={}
+,{}local O,P=function(O)local P=M[O]if P then return P end local Q={key=O,icon=O
+.icon,title=O.name,description=O.description,drillIn=#O.arguments>0,swatch=nil,
+activate=function()J:activate(O)end}M[O]=Q return Q end,function(O,P)local Q=N[O
+]if Q then return Q end local R=false if P.Current~=nil then local S,T=pcall(P.
+Current)R=S and T==O.Value end local S={key=O,icon=O.Icon or'circleFill',title=O
+.Label,description='',drillIn=false,swatch=O.Color,checked=R,bullet=O.Icon==nil
+and O.Color==nil,activate=function()J:_flowRef():pickOption(O)end}N[O]=S return
+S end local aa=function(Q)local R,S,T,U,V=Q(w.records),Q(I),{},{},{}local W,X=
+function(W)local X=O(W)table.insert(T,X)U[X]=#T end,{}if#S>0 then V[1]='Recent'
+for Y,Z in S do X[Z]=true W(Z)end end local Y,Z,_,aa={},{},{},{}for ab,ac in R
+do if X[ac]then continue end Y[ac]=Q(ac.name):lower()local ad=ac.group if ad==
+nil then table.insert(aa,ac)elseif _[ad]==nil then _[ad]={ac}table.insert(Z,ad)
+else table.insert(_[ad],ac)end end local ab=function(ab,ac)return Y[ab]<Y[ac]end
+table.sort(Z)for ac,ad in Z do local ae=_[ad]table.sort(ae,ab)V[#T+1]=ad for af,
+ag in ae do W(ag)end end table.sort(aa,ab)if#aa>0 then if#Z>0 then V[#T+1]=
+'Commands'end for ac,ad in aa do W(ad)end end return{rows=T,order=U,positions={}
+,headers=V}end local ab,ac,ad=v:Computed(function(ab)local ac=ab(y)if ac:match
+'^%s*$'~=nil then return aa(ab)end return r(ab(w.records),ac,function(ad)return{
+name=ab(ad.name),description=ab(ad.description),aliases=ad.aliases}end,O)end),v:
+Computed(function(ab)local ac=ab(H)if ac==nil then return q end local ad if ac.
+arg.Type=='enum'then ad=ac.arg.Options elseif ac.arg.Type=='boolean'then ad=m
+end if ad==nil then return q end local ae=ab(y)local af=ae:match'^%s*$'~=nil if
+af and ac.arg.Type=='boolean'then local ag,Q={},{}for R,S in ad do local T=P(S,
+ac.arg)table.insert(ag,T)Q[T]=#ag end return s{rows=ag,order=Q,positions={},
+headers=o}end local ag=r(ad,ae,function(ag)return{name=ag.Label,description='',
+aliases=ag.Aliases or{}}end,function(ag)return P(ag,ac.arg)end)if af then return
+s(ag)end return ag end),v:Computed(function(ab)local ac=ab(H)return ac~=nil and(
+ac.arg.Type=='enum'or ac.arg.Type=='boolean')end)local ae,af=v:Computed(function
+(ae)return(ae(ad)and{(ae(ac))}or{(ae(ab))})[1]end),v:Computed(function(ae)return
+ae(H)~=nil end)local ag=v:Computed(function(ag)return ag(af)and 1 or 0 end)local
+Q,R,S,T,U,V=v:Spring(ag,g.EntryHeaderSpeed),v:Computed(function(Q)local R,S=Q(af
+)and'options'or'commands',Q(y):match'^%s*(.-)%s*$'or''if S==''then return`No matching {
+R}`end if#S>24 then S=`{S:sub(1,24)}\226\128\166`end return`No {R} for "{S}"`end
+),v:Computed(function(Q)local R=Q(H)if R==nil then return true end return R.arg.
+Type=='enum'or R.arg.Type=='boolean'end),v:Computed(function(Q)local R=Q(H)
+return R~=nil and R.arg.Type~='enum'and R.arg.Type~='boolean'end),v:Computed(
+function(Q)local R=Q(H)if R==nil then return'search'end local S=(R.arg.Type==
+'enum'or R.arg.Type=='boolean')and'pick'or'scalar'return`{S}:{R.index}`end),v:
+Computed(function(Q)if Q(af)then return''end local R=Q(ae).headers if next(R)==
+nil then return''end local S=''for T=1,Q(z)do local U=R[T]if U~=nil then S=U end
+end return S end)local W=v:Computed(function(W)return W(V)~=''and 1 or 0 end)
+local ah,ai,X,Y,Z,_,aj,ak,al=v:Spring(W,g.EntryHeaderSpeed),v:Computed(function(
+X)return X(af)and'next'or'run'end),v:Computed(function(X)return X(af)and'cancel'
+or'close'end),v:Computed(function(X)if X(T)then local Y=(X(H))return(Y.total>1
+and{`{Y.index} of {Y.total} parameters`}or{''})[1]end local Y=#X(ae).rows if Y==
+0 then return''end local Z=X(af)and'options'or'commands'return`{X(z)} of {Y} {Z}`
+end),v:Computed(function(X)return X(S)and X(D)end),v:Computed(function(X)return
+X(S)and X(E)end),v:Computed(function(X)local Y,Z=X(H),X(y)if Y==nil or Z==''then
+return{valid=false,message=''}end if Y.arg.Type=='enum'or Y.arg.Type=='boolean'
+then return{valid=false,message=''}end local _=d.validate(Y.arg,Z)if _.ok then
+local ah,ai=tostring(_.value),Z:match'^%s*(.-)%s*$'or Z return{valid=true,
+message='',resolved=(ah~=ai and{ah}or{nil})[1]}end return{valid=false,message=_.
+error}end),v:Computed(function(ah)return math.clamp(ah(G).X*i.PanelWidthScale,i.
+PanelMinWidth,i.PanelMaxWidth)end),v:Computed(function(ah)local ai=ah(G).Y*i.
+PanelHeightScale-i.FieldHeight-i.SeparatorHeight-i.FooterHeight ai=math.clamp(ai
+,i.EmptyHeight,i.ListMaxHeight)local X=math.max(1,math.floor((ai-i.ListPadding*2
++i.RowGap)/i.RowPitch))return X*i.RowPitch-i.RowGap+i.ListPadding*2 end)local am
+=v:Computed(function(am)if am(T)then return i.RowHeight+i.ListPadding*2 end if
+not am(S)then return 0 end local an=am(ae)if#an.rows==0 then return i.
+EmptyHeight end local ao=am(al)-i.ListPadding*2 local ap=math.max(1,math.floor((
+ao+i.RowGap)/i.RowPitch))return math.min(#an.rows,ap)*i.RowPitch-i.RowGap+i.
+ListPadding*2 end)local an=v:Spring(am,g.HeightSpeed)v:Observer(U):onChange(
+function()local ao=e.peek(am)an:setPosition(ao)an:setVelocity(0)local ap=e.peek(
+ag)Q:setPosition(ap)Q:setVelocity(0)local aq=e.peek(W)ah:setPosition(aq)ah:
+setVelocity(0)end)local ao=v:Computed(function(ao)local ap=ao(ah)return ap*i.
+SectionBandHeight+ao(an)+i.FooterHeight end)local ap,aq,ar,as,at=v:Computed(
+function(ap)return ap(Q)*i.EntryHeaderHeight+i.FieldHeight+i.SeparatorHeight+ap(
+ao)end),v:Spring(v:Computed(function(ap)return ap(A)and 0 or 1 end),g.OpenSpeed)
+,v:Spring(v:Computed(function(ap)return ap(A)and 0 or g.SlideOffset end),g.
+OpenSpeed),v:Spring(v:Computed(function(ap)return ap(A)and 1 or g.EntranceScale
+end),g.OpenSpeed),v:Spring(v:Computed(function(ap)return(ap(A)and ap(F)and{i.
+BlurSize}or{0})[1]end),g.OpenSpeed)J=(setmetatable({query=y,selectedIndex=z,
+shown=A,flash=B,flashValid=C,canScrollUp=D,canScrollDown=E,blurEnabled=F,
+viewport=G,entry=H,recents=I,panelWidth=ak,commandEvaluation=ab,optionEvaluation
+=ac,evaluation=ae,isPickMode=ad,inArguments=af,headerReveal=Q,emptyText=R,
+showList=S,showParameter=T,viewKey=U,sectionLabel=V,bandReveal=ah,footerRun=ai,
+footerClose=X,footerCount=Y,footerScrollUp=Z,footerScrollDown=_,validity=aj,
+listCap=al,listHeight=an,contentHeight=ao,panelHeight=ap,transparency=aq,offsetY
+=ar,scale=as,blurSize=at,_flow=nil,_textBox=nil,_follower=nil,_flashToken=0,
+_destroyed=false,_previewArg=nil,_previewRestore=nil,_previewLast=l,
+_previewCommitted=false},u))table.insert(v,function()J._destroyed=true if not J.
+_previewCommitted and J._previewRestore~=nil then J._previewRestore()end end)v:
+Observer(y):onChange(function()z:set(1)end)v:Observer(ae):onChange(function()
+local au=#e.peek(ae).rows if e.peek(z)>au then z:set(math.max(1,au))end end)v:
+Observer(w.records):onChange(function()local au={}for av,aw in e.peek(w.records)
+do au[aw]=true end for av in M do if not au[av]then M[av]=nil end end local av={
+}for aw,ax in e.peek(I)do if au[ax]then table.insert(av,ax)end end I:set(av)end)
+v:Observer(H):onChange(function()table.clear(N)J:_syncPreview()end)local au=
+function()local au=J._previewArg if au==nil or au.Preview==nil then return end
+if not e.peek(ad)then return end local av=e.peek(ae).rows[e.peek(z)]if av==nil
+then return end local aw=av.key if aw.Value==J._previewLast then return end J.
+_previewLast=aw.Value pcall(au.Preview,aw.Value)end local av=function()task.
+defer(function()if J._destroyed then return end au()end)end v:Observer(z):
+onChange(av)v:Observer(ae):onChange(av)return J end function u.attachFlow(aa,ab)
+aa._flow=ab end function u.bindFollower(aa,ab)aa._follower=ab end function u.
+_requestFollow(aa)local ab=aa._follower if ab~=nil then ab()end end function u.
+_flowRef(aa)return assert(aa._flow,'Store used before attachFlow')end function u
+._syncPreview(aa)local ab=e.peek(aa.entry)local ac=(ab~=nil and{ab.arg}or{nil})[
+1]if aa._previewArg~=nil and aa._previewArg~=ac then if not aa._previewCommitted
+and aa._previewRestore~=nil then aa._previewRestore()end aa._previewArg=nil aa.
+_previewRestore=nil end if ac~=nil and ac.Preview~=nil and aa._previewArg==nil
+then aa._previewArg=ac aa._previewCommitted=false aa._previewLast=l local ad,ae=
+ac.Current,ac.Preview if ad~=nil and ae~=nil then local af,ag=pcall(ad)if af
+then aa._previewLast=ag aa._previewRestore=function()pcall(ae,ag)end end end end
+end function u.notePickCommitted(aa)aa._previewCommitted=true end function u.
+bindField(aa,ab)aa._textBox=ab end function u.clearField(aa)aa.query:set''if aa.
+_textBox then aa._textBox.Text=''end end function u.releaseFocus(aa)if aa.
+_textBox then aa._textBox:ReleaseFocus()end end function u.refocus(aa,ab)local
+ac=function()local ac=aa._textBox if e.peek(aa.shown)and ac then ac:
+CaptureFocus()if ab==true and ac.Text~=''then ac.SelectionStart=1 ac.
+CursorPosition=#ac.Text+1 end end end if aa._textBox~=nil and e.peek(aa.shown)
+then ac()return end task.defer(function()if aa._destroyed then return end ac()
+end)end function u.run(aa,ab,ac,ad)local ae=e.peek(ab.name)task.defer(function()
+local af=xpcall(function()ab.callback(table.unpack(ac,1,ad))end,function(af)
+warn(`[VantaUI] command "{ae}" errored: {af}`)end)if aa._destroyed or ab.
+closeAfter then return end aa.flash:set(ae)aa.flashValid:set(af)aa._flashToken+=
+1 local ag=aa._flashToken task.delay(g.FlashDuration,function()if aa._destroyed
+then return end if ag==aa._flashToken then aa.flash:set''end end)end)aa:
+_recordRecent(ab)if ab.closeAfter then aa:hide()return end aa:clearField()aa.
+selectedIndex:set(1)aa:refocus()end function u._recordRecent(aa,ab)local ac=
+table.clone(e.peek(aa.recents))local ad=table.find(ac,ab)if ad then table.
+remove(ac,ad)end table.insert(ac,1,ab)while#ac>k do table.remove(ac)end aa.
+recents:set(ac)end function u.activate(aa,ab)if#ab.arguments==0 then aa:run(ab,{
+},0)else aa:_flowRef():begin(ab)end end function u.moveSelection(aa,ab)if e.
+peek(aa.showParameter)then return end local ac=#e.peek(aa.evaluation).rows if ac
+==0 then return end local ad=(e.peek(aa.selectedIndex)-1+ab)%ac+1 aa.
+selectedIndex:set(ad)aa:_requestFollow()end function u.jumpSelection(aa,ab)if e.
+peek(aa.showParameter)then return end local ac=#e.peek(aa.evaluation).rows if ac
+==0 then return end local ad=e.peek(aa.listCap)local ae,af=(math.max(1,math.
+floor((ad-i.ListPadding*2+i.RowGap)/i.RowPitch)))if ab=='first'then af=1 elseif
+ab=='last'then af=ac elseif ab=='pageUp'then af=math.max(1,e.peek(aa.
+selectedIndex)-ae)else af=math.min(ac,e.peek(aa.selectedIndex)+ae)end aa.
+selectedIndex:set(af)aa:_requestFollow()end function u.onConfirm(aa)local ab=e.
+peek(aa.entry)if ab~=nil and ab.arg.Type~='enum'and ab.arg.Type~='boolean'then
+aa:_flowRef():submit(e.peek(aa.query))return end local ac=e.peek(aa.evaluation).
+rows[e.peek(aa.selectedIndex)]if ac~=nil then ac.activate()end end function u.
+stepBack(aa)local ab=aa:_flowRef()if ab:isActive()then ab:back()end end function
+u.onDismiss(aa)if e.peek(aa.query)~=''then aa:clearField()aa:refocus()return end
+local ab=aa:_flowRef()if ab:isActive()then ab:exit()aa:refocus()else aa:hide()
+end end function u.show(aa)if e.peek(aa.shown)then return end aa.shown:set(true)
+aa:refocus()end function u.hide(aa)if not e.peek(aa.shown)then return end aa.
+shown:set(false)aa.flash:set''aa:releaseFocus()task.delay(g.ResetDelay,function(
+)if aa._destroyed then return end if not e.peek(aa.shown)then aa:_flowRef():
+exit()aa.selectedIndex:set(1)aa:clearField()end end)end function u.toggle(aa)if
+e.peek(aa.shown)then aa:hide()else aa:show()end end return table.freeze(u)end
+function a.ax()local ab=a.cache.ax if not ab then ab={c=aa()}a.cache.ax=ab end
+return ab.c end end do local aa=function()local aa,ab,ac,ad,ae,af=a.aq(),a.at(),
+a.ax(),a.as(),a.am(),a.ap()local ag,ah=function(ag,ah)local ai=ah:lower()for aj,
+ak in ag.aliases do if ak:lower()==ai then return true end end return ae.peek(ag
+.name):lower():sub(1,#ai)==ai end,{}ah.__index=ah function ah.new(ai)return
+setmetatable({_store=ai,_session=nil,_command=nil},ah)end function ah.isActive(
+ai)return ai._session~=nil end function ah._sync(ai)local aj,ak=ai._session,ai.
+_command local al=(aj and{(aj:current())}or{nil})[1]if aj==nil or ak==nil or al
+==nil then ai._store.entry:set(nil)return end ai._store.entry:set{command=ae.
+peek(ak.name),icon=ae.peek(ak.icon),arg=al,index=aj:index(),total=aj:total(),
+collected=aj:collected()}end function ah.exit(ai)ai._session=nil ai._command=nil
+ai._store.entry:set(nil)ai._store.selectedIndex:set(1)end function ah._finish(ai
+)local aj,ak=ai._session,ai._command if aj==nil or ak==nil then return end local
+al,am=aj:values()ai:exit()ai._store:run(ak,al,am)end function ah.begin(ai,aj)
+local ak=ab.new(aj.arguments)ai._session=ak ai._command=aj local al=ai._store
+local am=ad.tokenize(ae.peek(al.query))if#am>=2 and ag(aj,am[1])then local an=2
+while an<=#am do local ao,ap=(ak:current())if ao~=nil and ao.Type=='string'and
+ak:index()==ak:total()then ap=table.concat(am,' ',an)an=#am+1 else ap=am[an]an+=
+1 end local aq=ak:submit(ap)if not aq.ok then break end if aq.value then ai:
+_finish()return end end end al:clearField()al.selectedIndex:set(1)al:refocus()ai
+:_sync()end function ah.submit(ai,aj)local ak=ai._session if ak==nil then return
+end local al=ak:submit(aj)if not al.ok then ai._store:refocus(true)return end ai
+._store:clearField()if al.value then ai:_finish()else ai._store.selectedIndex:
+set(1)ai:_sync()ai._store:refocus()end end function ah.pickOption(ai,aj)ai.
+_store:notePickCommitted()ai:submit(aj.Label)end function ah.back(ai)local aj=ai
+._session if aj==nil then return false end if aj:back()then ai._store:
+clearField()ai._store.selectedIndex:set(1)ai:_sync()ai._store:refocus()return
+true end ai:exit()ai._store:refocus()return false end return table.freeze(ah)end
+function a.ay()local ab=a.cache.ay if not ab then ab={c=aa()}a.cache.ay=ab end
+return ab.c end end do local aa=function()local aa,ab,ac,ad,ae=a.am(),a.ap(),
+function(aa)return typeof(aa)=='table'and typeof((aa).Hex)=='string'and typeof((
+aa).Alpha)=='number'end,function(aa)return Color3.fromHex(aa.Hex)end,function(aa
+)return 1-aa.Alpha/100 end local function af(ag,ah,ai)for aj,ak in ag do if aj==
+'_id'then ah[aj]=ak elseif ac(ak)then ai(ah,aj,ak)elseif typeof(ak)=='table'then
+local al=(ah[aj]or{})ah[aj]=al af(ak,al,ai)end end end local ag={}ag.__index=ag
+function ag.new(ah,ai,aj)local ak={}af((ai),ak,function(al,am,an)al[am]=table.
+freeze{Color=ah:Value(ad(an)),Alpha=ah:Value(ae(an))}end)local al=setmetatable({
+tree=(ak),_palette=ai,_accent=aj},ag)al:_applyAccent()return al end function ag.
+_applyAccent(ah)local ai=(ah.tree._id=='Light'and{ah._accent.Light}or{ah._accent
+.Dark})[1]ah.tree.Selection.Color:set(ai.Selection)if ai.SelectionText then ah.
+tree.SelectionText.Color:set(ai.SelectionText)end end function ag.setPalette(ah,
+ai)ah._palette=ai af((ai),(ah.tree),function(aj,ak,al)local am=aj[ak]am.Color:
+set(ad(al))am.Alpha:set(ae(al))end)ah:_applyAccent()end function ag.setAccent(ah
+,ai)ah._accent=ai ah:_applyAccent()end function ag.palette(ah)return ah._palette
+end function ag.accent(ah)return ah._accent end return table.freeze(ag)end
+function a.az()local ab=a.cache.az if not ab then ab={c=aa()}a.cache.az=ab end
+return ab.c end end do local aa=function()local aa,ab,ac,ad=a.av(),a.aw(),{[Enum
+.KeyCode.Home]='first',[Enum.KeyCode.End]='last',[Enum.KeyCode.PageUp]='pageUp',
+[Enum.KeyCode.PageDown]='pageDown'},{}function ad.attach(ae,af)local ag,ah,ai,aj
+=ab.UserInputService,0,0 local ak=function()for ak,al in af.shortcut do if not
+ag:IsKeyDown(al)then return false end end return true end table.insert(ae,ag.
+InputBegan:Connect(function(al,am)local an=al.KeyCode if not am and an~=Enum.
+KeyCode.Unknown and table.find(af.shortcut,an)and ak()then af.onToggle()return
+end if not af.isOpen()then return end if an==Enum.KeyCode.Down or an==Enum.
+KeyCode.Up then local ao=an==Enum.KeyCode.Down and 1 or-1 af.onNavigate(ao)aj=ao
+ah=os.clock()ai=ah elseif ac[an]~=nil then af.onJump(ac[an])elseif an==Enum.
+KeyCode.Escape then af.onDismiss()elseif an==Enum.KeyCode.Return or an==Enum.
+KeyCode.KeypadEnter or an==Enum.KeyCode.Tab then af.onConfirm()end end))table.
+insert(ae,ag.InputEnded:Connect(function(al)local am=al.KeyCode if am==Enum.
+KeyCode.Down or am==Enum.KeyCode.Up then aj=nil end end))table.insert(ae,ab.
+RunService.Heartbeat:Connect(function()if aj==nil then return end if not af.
+isOpen()then aj=nil return end local al=os.clock()if al-ah<aa.RepeatDelay then
+return end if al-ai>=aa.RepeatInterval then ai=al af.onNavigate(aj)end end))end
+return table.freeze(ad)end function a.aA()local ab=a.cache.aA if not ab then ab=
+{c=aa()}a.cache.aA=ab end return ab.c end end do local aa=function()local aa,ab=
+a.az(),a.am()local ac=ab.Contextual(nil)local ad={context=ac}function ad.now()
+local ae=ac:now()return assert(ae,'kit theme used outside a theme context')end
+return table.freeze(ad)end function a.aB()local ab=a.cache.aB if not ab then ab=
+{c=aa()}a.cache.aB=ab end return ab.c end end do local aa=function()local aa,ab,
+ac=a.am(),a.aB(),a.ao()return function(ad,ae)local af=ab.now()return ad:New
+'Frame'{Name=ae.name or'Hairline',Visible=ae.visible==nil and true or ae.visible
+,LayoutOrder=ae.layoutOrder,AnchorPoint=ae.anchorPoint,Position=ae.position,Size
+=UDim2.new(1,0,0,ac.SeparatorHeight),BorderSizePixel=0,BackgroundColor3=af.
+Separator.Color,BackgroundTransparency=af.Separator.Alpha}end end function a.aC(
+)local ab=a.cache.aC if not ab then ab={c=aa()}a.cache.aC=ab end return ab.c end
+end do local aa=function()return(table.freeze{['00Circle']=
+'rbxassetid://83028270380365',['00CircleFill']='rbxassetid://86809068648199',[
+'00Square']='rbxassetid://122749670129495',['00SquareFill']=
+'rbxassetid://113994495859936',['01Circle']='rbxassetid://97226917439387',[
+'01CircleFill']='rbxassetid://84587253978749',['01Square']=
+'rbxassetid://107219376369036',['01SquareFill']='rbxassetid://107829808355635',[
+'02Circle']='rbxassetid://84345480243560',['02CircleFill']=
+'rbxassetid://138068434560383',['02Square']='rbxassetid://108430049934958',[
+'02SquareFill']='rbxassetid://85661875663721',['03Circle']=
+'rbxassetid://98956711188823',['03CircleFill']='rbxassetid://101131309093130',[
+'03Square']='rbxassetid://110182185893835',['03SquareFill']=
+'rbxassetid://82242680200461',['04Circle']='rbxassetid://132715041479836',[
+'04CircleFill']='rbxassetid://113282380257070',['04Square']=
+'rbxassetid://70514965693841',['04SquareFill']='rbxassetid://89262337216532',[
+'05Circle']='rbxassetid://125294166213948',['05CircleFill']=
+'rbxassetid://130265371531723',['05Square']='rbxassetid://107516239217699',[
+'05SquareFill']='rbxassetid://117323864732404',['06Circle']=
+'rbxassetid://137306965556122',['06CircleFill']='rbxassetid://94892211121096',[
+'06Square']='rbxassetid://104889857379096',['06SquareFill']=
+'rbxassetid://105314805711265',['07Circle']='rbxassetid://99787513377232',[
+'07CircleFill']='rbxassetid://132058802818154',['07Square']=
+'rbxassetid://82223513821897',['07SquareFill']='rbxassetid://137613755884312',[
+'08Circle']='rbxassetid://88618425851192',['08CircleFill']=
+'rbxassetid://105339976565490',['08Square']='rbxassetid://129990117272036',[
+'08SquareFill']='rbxassetid://125650076611446',['09Circle']=
+'rbxassetid://103471787905743',['09CircleFill']='rbxassetid://105841318829878',[
+'09Square']='rbxassetid://110493201929378',['09SquareFill']=
+'rbxassetid://107198536694769',['0Circle']='rbxassetid://137352523558390',[
+'0CircleFill']='rbxassetid://92718288126091',['0Square']=
+'rbxassetid://136892616930971',['0SquareFill']='rbxassetid://71376891799551',[
+'10ArrowTriangleheadClockwise']='rbxassetid://128762303542944',[
+'10ArrowTriangleheadCounterclockwise']='rbxassetid://76674527536932',[
+'10Calendar']='rbxassetid://99971987072382',['10Circle']=
+'rbxassetid://92515002741648',['10CircleFill']='rbxassetid://114340053449257',[
+'10Lane']='rbxassetid://118673566178183',['10Square']=
+'rbxassetid://70604007286548',['10SquareFill']='rbxassetid://110206837615888',[
+'11Calendar']='rbxassetid://84425977875050',['11Circle']=
+'rbxassetid://98647733126057',['11CircleFill']='rbxassetid://114595490819205',[
+'11Lane']='rbxassetid://134292941036759',['11Square']=
+'rbxassetid://95453375539358',['11SquareFill']='rbxassetid://132202039821354',[
+'12Calendar']='rbxassetid://114493786022821',['12Circle']=
+'rbxassetid://121672832794983',['12CircleFill']='rbxassetid://122946923969916',[
+'12Lane']='rbxassetid://132443115464407',['12Square']=
+'rbxassetid://135913931652877',['12SquareFill']='rbxassetid://70425571060983',[
+'13Calendar']='rbxassetid://125476355270691',['13Circle']=
+'rbxassetid://124979455738373',['13CircleFill']='rbxassetid://76676158822711',[
+'13Square']='rbxassetid://92207708556496',['13SquareFill']=
+'rbxassetid://123971106532801',['14Calendar']='rbxassetid://79389761405548',[
+'14Circle']='rbxassetid://116170541336582',['14CircleFill']=
+'rbxassetid://135867491119117',['14Square']='rbxassetid://136705500158279',[
+'14SquareFill']='rbxassetid://114499637922730',['15ArrowTriangleheadClockwise']=
+'rbxassetid://110732229815610',['15ArrowTriangleheadCounterclockwise']=
+'rbxassetid://127299415437175',['15Calendar']='rbxassetid://81636478363595',[
+'15Circle']='rbxassetid://78927448681525',['15CircleFill']=
+'rbxassetid://118327895426422',['15Square']='rbxassetid://90508797482214',[
+'15SquareFill']='rbxassetid://120440643138154',['16Calendar']=
+'rbxassetid://126220874727895',['16Circle']='rbxassetid://126567549131052',[
+'16CircleFill']='rbxassetid://126688524438218',['16Square']=
+'rbxassetid://84244666904565',['16SquareFill']='rbxassetid://105088240557538',[
+'17Calendar']='rbxassetid://77297968626397',['17Circle']=
+'rbxassetid://96369047073930',['17CircleFill']='rbxassetid://80691999562724',[
+'17Square']='rbxassetid://78926693972141',['17SquareFill']=
+'rbxassetid://85270565257338',['18Calendar']='rbxassetid://125707457639914',[
+'18Circle']='rbxassetid://103499330032468',['18CircleFill']=
+'rbxassetid://139400390011207',['18Square']='rbxassetid://96425450360158',[
+'18SquareFill']='rbxassetid://95747860980425',['19Calendar']=
+'rbxassetid://132759347346313',['19Circle']='rbxassetid://136880006821425',[
+'19CircleFill']='rbxassetid://132010253426021',['19Square']=
+'rbxassetid://86547351573625',['19SquareFill']='rbxassetid://113507822362885',[
+'1Brakesignal']='rbxassetid://102491003904804',['1Calendar']=
+'rbxassetid://98185546831379',['1Circle']='rbxassetid://130621158480059',[
+'1CircleFill']='rbxassetid://119914746762070',['1Lane']=
+'rbxassetid://108289649639933',['1Magnifyingglass']=
+'rbxassetid://79094731969211',['1Square']='rbxassetid://89938443056690',[
+'1SquareFill']='rbxassetid://91936609218444',['20Calendar']=
+'rbxassetid://128748725884252',['20Circle']='rbxassetid://74724597303762',[
+'20CircleFill']='rbxassetid://74025988368489',['20Square']=
+'rbxassetid://100301580149753',['20SquareFill']='rbxassetid://81847976697662',[
+'21Calendar']='rbxassetid://92479265735150',['21Circle']=
+'rbxassetid://107042620932339',['21CircleFill']='rbxassetid://86466285996936',[
+'21Square']='rbxassetid://118914310058881',['21SquareFill']=
+'rbxassetid://137245696391587',['22Calendar']='rbxassetid://76926833805322',[
+'22Circle']='rbxassetid://112949971675201',['22CircleFill']=
+'rbxassetid://136675480787222',['22Square']='rbxassetid://70382544382768',[
+'22SquareFill']='rbxassetid://136349772275086',['23Calendar']=
+'rbxassetid://72540972332711',['23Circle']='rbxassetid://122644356502405',[
+'23CircleFill']='rbxassetid://132927065976368',['23Square']=
+'rbxassetid://133241790954057',['23SquareFill']='rbxassetid://131940949142587',[
+'24Calendar']='rbxassetid://108261967636040',['24Circle']=
+'rbxassetid://82428286993981',['24CircleFill']='rbxassetid://91411670826506',[
+'24Square']='rbxassetid://139919867683269',['24SquareFill']=
+'rbxassetid://71799607296423',['25Calendar']='rbxassetid://100633222933029',[
+'25Circle']='rbxassetid://100704542539329',['25CircleFill']=
+'rbxassetid://86282617997408',['25Square']='rbxassetid://85711261321247',[
+'25SquareFill']='rbxassetid://92036217304787',['26Calendar']=
+'rbxassetid://88912330770844',['26Circle']='rbxassetid://115236591138732',[
+'26CircleFill']='rbxassetid://83556043270110',['26Square']=
+'rbxassetid://138273926712016',['26SquareFill']='rbxassetid://104321077565351',[
+'27Calendar']='rbxassetid://73201335235154',['27Circle']=
+'rbxassetid://121764559253612',['27CircleFill']='rbxassetid://100219016046799',[
+'27Square']='rbxassetid://83717779381903',['27SquareFill']=
+'rbxassetid://99650567921303',['28Calendar']='rbxassetid://105788634273895',[
+'28Circle']='rbxassetid://109395541199407',['28CircleFill']=
+'rbxassetid://129403579574600',['28Square']='rbxassetid://101847553369506',[
+'28SquareFill']='rbxassetid://125178103545775',['29Calendar']=
+'rbxassetid://128726400170465',['29Circle']='rbxassetid://87253975016702',[
+'29CircleFill']='rbxassetid://121458185459649',['29Square']=
+'rbxassetid://115063859229340',['29SquareFill']='rbxassetid://86136990319710',[
+'2Brakesignal']='rbxassetid://88382719031732',['2Calendar']=
+'rbxassetid://98050312641153',['2Circle']='rbxassetid://88686989179529',[
+'2CircleFill']='rbxassetid://117347647638182',['2Lane']=
+'rbxassetid://73043736430431',['2Square']='rbxassetid://81405613158962',[
+'2SquareFill']='rbxassetid://135108412068288',['2h']=
+'rbxassetid://120554166840614',['2hCircle']='rbxassetid://80587972141848',[
+'2hCircleFill']='rbxassetid://121984358372075',['30ArrowTriangleheadClockwise']=
+'rbxassetid://74624510136124',['30ArrowTriangleheadCounterclockwise']=
+'rbxassetid://135632602776767',['30Calendar']='rbxassetid://77714024284758',[
+'30Circle']='rbxassetid://125851565099112',['30CircleFill']=
+'rbxassetid://134873563219388',['30Square']='rbxassetid://98178040903351',[
+'30SquareFill']='rbxassetid://124000446507321',['31Calendar']=
+'rbxassetid://103712950051496',['31Circle']='rbxassetid://82832572967769',[
+'31CircleFill']='rbxassetid://84776901062406',['31Square']=
+'rbxassetid://100093966297675',['31SquareFill']='rbxassetid://109439143484113',[
+'32Circle']='rbxassetid://128828563808013',['32CircleFill']=
+'rbxassetid://106794836279809',['32Square']='rbxassetid://100529952897522',[
+'32SquareFill']='rbxassetid://135053972405086',['33Circle']=
+'rbxassetid://76834446462070',['33CircleFill']='rbxassetid://133471374143015',[
+'33Square']='rbxassetid://132109947433846',['33SquareFill']=
+'rbxassetid://92211719099524',['34Circle']='rbxassetid://78797665476071',[
+'34CircleFill']='rbxassetid://87668137780853',['34Square']=
+'rbxassetid://81598346353759',['34SquareFill']='rbxassetid://111975400463928',[
+'35Circle']='rbxassetid://72637078655736',['35CircleFill']=
+'rbxassetid://76736961743352',['35Square']='rbxassetid://119727141136934',[
+'35SquareFill']='rbxassetid://117373278288844',['36Circle']=
+'rbxassetid://98319312866253',['36CircleFill']='rbxassetid://77316378982918',[
+'36Square']='rbxassetid://101616504680112',['36SquareFill']=
+'rbxassetid://96022911959763',['37Circle']='rbxassetid://93687894376513',[
+'37CircleFill']='rbxassetid://86485501852806',['37Square']=
+'rbxassetid://139267911387901',['37SquareFill']='rbxassetid://91193382294091',[
+'38Circle']='rbxassetid://121521469341757',['38CircleFill']=
+'rbxassetid://105792148160711',['38Square']='rbxassetid://106051044850392',[
+'38SquareFill']='rbxassetid://138218593875239',['39Circle']=
+'rbxassetid://125288441586843',['39CircleFill']='rbxassetid://115892557058939',[
+'39Square']='rbxassetid://112598329033121',['39SquareFill']=
+'rbxassetid://98638503271042',['3Calendar']='rbxassetid://90795649820662',[
+'3Circle']='rbxassetid://85824504644997',['3CircleFill']=
+'rbxassetid://74910224380095',['3Lane']='rbxassetid://75686915457526',['3Square'
+]='rbxassetid://120223972887350',['3SquareFill']='rbxassetid://84686638879122',[
+'40Circle']='rbxassetid://83180478546770',['40CircleFill']=
+'rbxassetid://132728837830874',['40Square']='rbxassetid://112224567454433',[
+'40SquareFill']='rbxassetid://101941487357695',['41Circle']=
+'rbxassetid://75225134548534',['41CircleFill']='rbxassetid://136094650593344',[
+'41Square']='rbxassetid://125817109698445',['41SquareFill']=
+'rbxassetid://138876358254873',['42Circle']='rbxassetid://127374826103215',[
+'42CircleFill']='rbxassetid://122701075418215',['42Square']=
+'rbxassetid://138197946562353',['42SquareFill']='rbxassetid://107430077421870',[
+'43Circle']='rbxassetid://104838885962058',['43CircleFill']=
+'rbxassetid://133602186789762',['43Square']='rbxassetid://108869662941519',[
+'43SquareFill']='rbxassetid://101067151905278',['44Circle']=
+'rbxassetid://128426936704844',['44CircleFill']='rbxassetid://137168247083835',[
+'44Square']='rbxassetid://75545715410292',['44SquareFill']=
+'rbxassetid://111628503136844',['45ArrowTriangleheadClockwise']=
+'rbxassetid://120134525176078',['45ArrowTriangleheadCounterclockwise']=
+'rbxassetid://123087333385500',['45Circle']='rbxassetid://102436156063197',[
+'45CircleFill']='rbxassetid://132306924075130',['45Square']=
+'rbxassetid://125303441223733',['45SquareFill']='rbxassetid://80893347771788',[
+'46Circle']='rbxassetid://118709156698649',['46CircleFill']=
+'rbxassetid://88412402128165',['46Square']='rbxassetid://101875634976749',[
+'46SquareFill']='rbxassetid://123057980319615',['47Circle']=
+'rbxassetid://134558301013886',['47CircleFill']='rbxassetid://137987636103436',[
+'47Square']='rbxassetid://99547664530529',['47SquareFill']=
+'rbxassetid://82416495107377',['48Circle']='rbxassetid://116659923987327',[
+'48CircleFill']='rbxassetid://127585613163244',['48Square']=
+'rbxassetid://88269026511583',['48SquareFill']='rbxassetid://128550656233484',[
+'49Circle']='rbxassetid://116042725943528',['49CircleFill']=
+'rbxassetid://70466830951089',['49Square']='rbxassetid://108294144287133',[
+'49SquareFill']='rbxassetid://136824579664757',['4AltCircle']=
+'rbxassetid://96065443995675',['4AltCircleFill']='rbxassetid://114108784117364',
+['4AltSquare']='rbxassetid://92007544707653',['4AltSquareFill']=
+'rbxassetid://76782617943156',['4Calendar']='rbxassetid://117683067057146',[
+'4Circle']='rbxassetid://85410335884890',['4CircleFill']=
+'rbxassetid://117232689412009',['4Lane']='rbxassetid://90837743623016',[
+'4Square']='rbxassetid://93614529304671',['4SquareFill']=
+'rbxassetid://100548465120334',['4a']='rbxassetid://88536395160758',['4aCircle']
+='rbxassetid://121454839355516',['4aCircleFill']='rbxassetid://107149222480560',
+['4h']='rbxassetid://90250390247173',['4hCircle']='rbxassetid://128648031725106'
+,['4hCircleFill']='rbxassetid://107728946853252',['4kTv']=
+'rbxassetid://123674016506451',['4kTvFill']='rbxassetid://75999084684547',['4l']
+='rbxassetid://106811124514270',['4lCircle']='rbxassetid://135697353497465',[
+'4lCircleFill']='rbxassetid://80779362494066',['50Circle']=
+'rbxassetid://135049337228431',['50CircleFill']='rbxassetid://125135742443046',[
+'50Square']='rbxassetid://92307459965921',['50SquareFill']=
+'rbxassetid://129462028494317',['5ArrowTriangleheadClockwise']=
+'rbxassetid://107383111794341',['5ArrowTriangleheadCounterclockwise']=
+'rbxassetid://135478288864818',['5Calendar']='rbxassetid://139653164527127',[
+'5Circle']='rbxassetid://138643256382369',['5CircleFill']=
+'rbxassetid://81772533269342',['5Lane']='rbxassetid://110377621267035',[
+'5Square']='rbxassetid://91863717310443',['5SquareFill']=
+'rbxassetid://101252363013967',['60ArrowTriangleheadClockwise']=
+'rbxassetid://99108772093793',['60ArrowTriangleheadCounterclockwise']=
+'rbxassetid://139258134359335',['6AltCircle']='rbxassetid://120350071573739',[
+'6AltCircleFill']='rbxassetid://86316701823078',['6AltSquare']=
+'rbxassetid://137257337817731',['6AltSquareFill']='rbxassetid://80160043116436',
+['6Calendar']='rbxassetid://90102440243055',['6Circle']=
+'rbxassetid://72149384954065',['6CircleFill']='rbxassetid://78297067061715',[
+'6Lane']='rbxassetid://100354087243931',['6Square']=
+'rbxassetid://120439558590340',['6SquareFill']='rbxassetid://72841586020208',[
+'75ArrowTriangleheadClockwise']='rbxassetid://89560078813691',[
+'75ArrowTriangleheadCounterclockwise']='rbxassetid://72011197335579',[
+'7Calendar']='rbxassetid://86716901913977',['7Circle']=
+'rbxassetid://134362216731609',['7CircleFill']='rbxassetid://128766124434672',[
+'7Lane']='rbxassetid://87939210980451',['7Square']='rbxassetid://83019303763050'
+,['7SquareFill']='rbxassetid://73394265174480',['8Calendar']=
+'rbxassetid://123022135128239',['8Circle']='rbxassetid://121463881556470',[
+'8CircleFill']='rbxassetid://98677569612860',['8Lane']=
+'rbxassetid://73530448957022',['8Square']='rbxassetid://94534023907446',[
+'8SquareFill']='rbxassetid://85132457001862',['90ArrowTriangleheadClockwise']=
+'rbxassetid://75428859613511',['90ArrowTriangleheadCounterclockwise']=
+'rbxassetid://100354802037825',['9AltCircle']='rbxassetid://116943330734703',[
+'9AltCircleFill']='rbxassetid://74872216618128',['9AltSquare']=
+'rbxassetid://93297089978709',['9AltSquareFill']='rbxassetid://118501519632418',
+['9Calendar']='rbxassetid://134402469311043',['9Circle']=
+'rbxassetid://125766582985411',['9CircleFill']='rbxassetid://140040901574476',[
+'9Lane']='rbxassetid://114357239781363',['9Square']=
+'rbxassetid://99344731424187',['9SquareFill']='rbxassetid://82741160180392',
+aCircle='rbxassetid://91422740186540',aCircleFill='rbxassetid://80176355279906',
+aSquare='rbxassetid://110661926393175',aSquareFill=
+'rbxassetid://118925074578922',abc='rbxassetid://100440409146443',abs=
+'rbxassetid://104303148312310',absBrakesignal='rbxassetid://108288270804521',
+absBrakesignalSlash='rbxassetid://139900347181805',absCircle=
+'rbxassetid://127912426662073',absCircleFill='rbxassetid://90389741944345',ac=
+'rbxassetid://70584542126579',acSlash='rbxassetid://131379895015246',
+accessibility='rbxassetid://117778752008722',accessibilityBadgeArrowUpRight=
+'rbxassetid://88644725338334',accessibilityFill='rbxassetid://99814938584597',
+airCarSide='rbxassetid://98549379001911',airCarSideFill=
+'rbxassetid://74763317863435',airConditionerHorizontal=
+'rbxassetid://110142871235385',airConditionerHorizontalFill=
+'rbxassetid://103206558750136',airConditionerVertical=
+'rbxassetid://140704008468110',airConditionerVerticalFill=
+'rbxassetid://127386997506238',airConvertibleSide='rbxassetid://94382667709805',
+airConvertibleSideFill='rbxassetid://82469124247932',airPickupSide=
+'rbxassetid://118486435215683',airPickupSideFill='rbxassetid://117535325295275',
+airPurifier='rbxassetid://121219934750735',airPurifierFill=
+'rbxassetid://121283023382392',airSuvSide='rbxassetid://85264461833523',
+airSuvSideFill='rbxassetid://97290218602252',airplane=
+'rbxassetid://133302594398057',airplaneArrival='rbxassetid://83294282884497',
+airplaneCircle='rbxassetid://80486171410882',airplaneCircleFill=
+'rbxassetid://128766972660071',airplaneCloud='rbxassetid://106395273712591',
+airplaneDeparture='rbxassetid://110438799431401',airplaneLanded=
+'rbxassetid://73211840820224',airplanePathDotted='rbxassetid://77257428977392',
+airplaneTicket='rbxassetid://131221608879931',airplaneTicketFill=
+'rbxassetid://86885394248735',airplaneUpForward='rbxassetid://107258551084271',
+airplaneUpForwardApp='rbxassetid://79498952458569',airplaneUpForwardAppFill=
+'rbxassetid://107908472496037',airplaneUpRight='rbxassetid://106459716120779',
+airplaneUpRightApp='rbxassetid://110247582997305',airplaneUpRightAppFill=
+'rbxassetid://101889444884144',airplaneseat='rbxassetid://127474636630226',
+airplayAudio='rbxassetid://97872416468292',airplayAudioBadgeExclamationmark=
+'rbxassetid://82691022378697',airplayAudioCircle='rbxassetid://79355534338385',
+airplayAudioCircleFill='rbxassetid://99882830125971',airplayVideo=
+'rbxassetid://116428826763896',airplayVideoBadgeExclamationmark=
+'rbxassetid://109306301769770',airplayVideoCircle='rbxassetid://124272728652470'
+,airplayVideoCircleFill='rbxassetid://85432097318270',airplayaudio=
+'rbxassetid://132916942955864',airplayaudioBadgeExclamationmark=
+'rbxassetid://136447514823399',airplayaudioCircle='rbxassetid://88830131647623',
+airplayvideo='rbxassetid://84461284428154',airplayvideoBadgeExclamationmark=
+'rbxassetid://118815409444339',airplayvideoCircle='rbxassetid://76641158810884',
+airpodGen3Left='rbxassetid://82259989716387',airpodGen3Right=
+'rbxassetid://137315291748188',airpodLeft='rbxassetid://111640685320561',
+airpodRight='rbxassetid://92417752017903',airpodproLeft=
+'rbxassetid://95793086337265',airpodproRight='rbxassetid://74684142613428',
+airpods='rbxassetid://102934461761467',airpodsChargingcase=
+'rbxassetid://137188300011249',airpodsChargingcaseFill=
+'rbxassetid://121114519994300',airpodsChargingcaseWireless=
+'rbxassetid://82987264570808',airpodsChargingcaseWirelessFill=
+'rbxassetid://115642815762700',airpodsGen3='rbxassetid://77127013352192',
+airpodsGen3ChargingcaseWireless='rbxassetid://103252568691488',
+airpodsGen3ChargingcaseWirelessFill='rbxassetid://138720486088620',airpodsGen4=
+'rbxassetid://98813390596396',airpodsGen4ChargingcaseWireless=
+'rbxassetid://81680510405013',airpodsGen4ChargingcaseWirelessFill=
+'rbxassetid://103031303446000',airpodsGen4Left='rbxassetid://80342628187549',
+airpodsGen4Right='rbxassetid://116899672566620',airpodsMax=
+'rbxassetid://129315211901723',airpodsPro='rbxassetid://115908103846782',
+airpodsProChargingcaseWireless='rbxassetid://100805444479847',
+airpodsProChargingcaseWirelessFill='rbxassetid://136683531844341',
+airpodsProChargingcaseWirelessRadiowavesLeftAndRight=
+'rbxassetid://114165652099787',
+airpodsProChargingcaseWirelessRadiowavesLeftAndRightFill=
+'rbxassetid://101029375177334',airpodsProLeft='rbxassetid://76398589107645',
+airpodsProRight='rbxassetid://110293485717436',airpodsmax=
+'rbxassetid://102938893282204',airpodspro='rbxassetid://116114855183538',
+airpodsproChargingcaseWireless='rbxassetid://111093760650540',
+airpodsproChargingcaseWirelessRadiowavesLeftAndRight=
+'rbxassetid://137171665646568',airportExpress='rbxassetid://84914509690369',
+airportExtreme='rbxassetid://91752831773330',airportExtremeTower=
+'rbxassetid://84855334762457',airtag='rbxassetid://133510297942223',airtagFill=
+'rbxassetid://93526399862084',airtagRadiowavesForward=
+'rbxassetid://70835353797393',airtagRadiowavesForwardFill=
+'rbxassetid://86335759121702',alarm='rbxassetid://94592263823729',alarmFill=
+'rbxassetid://110854125435299',alarmWavesLeftAndRight=
+'rbxassetid://102548399209045',alarmWavesLeftAndRightFill=
+'rbxassetid://134148018537010',alignHorizontalCenter=
+'rbxassetid://105387534506369',alignHorizontalCenterFill=
+'rbxassetid://80228868536795',alignHorizontalLeft='rbxassetid://121417857557559'
+,alignHorizontalLeftFill='rbxassetid://100445284088857',alignHorizontalRight=
+'rbxassetid://78727045612818',alignHorizontalRightFill=
+'rbxassetid://117183604846016',alignVerticalBottom=
+'rbxassetid://126811262141729',alignVerticalBottomFill=
+'rbxassetid://82585565029168',alignVerticalCenter='rbxassetid://87497476785272',
+alignVerticalCenterFill='rbxassetid://117303443763648',alignVerticalTop=
+'rbxassetid://131829541174867',alignVerticalTopFill=
+'rbxassetid://101695426589183',allergens='rbxassetid://121178963871633',
+allergensFill='rbxassetid://120835453624168',alt='rbxassetid://109200502181897',
+alternatingcurrent='rbxassetid://139782924101096',americanFootball=
+'rbxassetid://131900707633129',americanFootballCircle=
+'rbxassetid://126285687669632',americanFootballCircleFill=
+'rbxassetid://120792391598468',americanFootballFill=
+'rbxassetid://79772090879526',americanFootballProfessional=
+'rbxassetid://79730291560074',americanFootballProfessionalCircle=
+'rbxassetid://81165175257890',americanFootballProfessionalCircleFill=
+'rbxassetid://85819536267258',americanFootballProfessionalFill=
+'rbxassetid://132612978101644',amplifier='rbxassetid://99850964394213',angle=
+'rbxassetid://97688144611384',ant='rbxassetid://108437719613458',antCircle=
+'rbxassetid://73241676267354',antCircleFill='rbxassetid://90861066249394',
+antFill='rbxassetid://96049362790915',antennaRadiowavesLeftAndRight=
+'rbxassetid://105783651610996',antennaRadiowavesLeftAndRightCircle=
+'rbxassetid://106918794715121',antennaRadiowavesLeftAndRightCircleFill=
+'rbxassetid://95673268616759',antennaRadiowavesLeftAndRightSlash=
+'rbxassetid://83746876033500',antennaRadiowavesLeftAndRightSlashCircle=
+'rbxassetid://72562971579727',antennaRadiowavesLeftAndRightSlashCircleFill=
+'rbxassetid://80891332949617',app='rbxassetid://94635193120828',
+appBackgroundDotted='rbxassetid://109494182446738',appBadge=
+'rbxassetid://139613945369115',appBadgeCheckmark='rbxassetid://81426112675395',
+appBadgeCheckmarkFill='rbxassetid://93503980447430',appBadgeClock=
+'rbxassetid://134458400266753',appBadgeClockFill='rbxassetid://91313378758113',
+appBadgeFill='rbxassetid://88296846458468',appConnectedToAppBelowFill=
+'rbxassetid://100342957440925',appDashed='rbxassetid://122696783855791',appFill=
+'rbxassetid://134138664054034',appGift='rbxassetid://88383425466655',appGiftFill
+='rbxassetid://88482932848630',appGrid='rbxassetid://112293112122644',appShadow=
+'rbxassetid://74201552367475',appSpecular='rbxassetid://88620890438453',
+appTranslucent='rbxassetid://93640553211023',appclip=
+'rbxassetid://76150191896193',appendPage='rbxassetid://132003569675874',
+appendPageFill='rbxassetid://114109887686405',appleBooksPages=
+'rbxassetid://83129377869855',appleBooksPagesFill='rbxassetid://79375977225236',
+appleClassicalPages='rbxassetid://109032335324915',appleClassicalPagesFill=
+'rbxassetid://73169137754796',appleHapticsAndExclamationmarkTriangle=
+'rbxassetid://84679413093806',appleHapticsAndMusicNote=
+'rbxassetid://94992791728394',appleHapticsAndMusicNoteSlash=
+'rbxassetid://120030098404409',appleHomekit='rbxassetid://138475901062724',
+appleImagePlayground='rbxassetid://109144440237311',appleImagePlaygroundFill=
+'rbxassetid://95169627623891',appleIntelligence='rbxassetid://92927940894079',
+appleIntelligenceBadgeXmark='rbxassetid://136847756879125',appleLogo=
+'rbxassetid://74231414416316',appleMeditate='rbxassetid://110884202603539',
+appleMeditateCircle='rbxassetid://96265715307080',appleMeditateCircleFill=
+'rbxassetid://112011124705717',appleMeditateSquareStack=
+'rbxassetid://94877406532991',appleMeditateSquareStackFill=
+'rbxassetid://89004763882356',applePodcastsPages='rbxassetid://81110736056917',
+applePodcastsPagesFill='rbxassetid://133340247658961',appleTerminal=
+'rbxassetid://88837948823350',appleTerminalCircle='rbxassetid://99041514023806',
+appleTerminalCircleFill='rbxassetid://100608272114701',appleTerminalFill=
+'rbxassetid://83023410889826',appleTerminalOnRectangle=
+'rbxassetid://82511073936391',appleTerminalOnRectangleFill=
+'rbxassetid://137027325971487',appleWritingTools='rbxassetid://74586880049933',
+applepencil='rbxassetid://90464036055920',applepencilAdapterUsbC=
+'rbxassetid://116737446576584',applepencilAdapterUsbCFill=
+'rbxassetid://139496379804400',applepencilAndScribble=
+'rbxassetid://106121855601154',applepencilDoubletap=
+'rbxassetid://135219023747373',applepencilGen1='rbxassetid://110959209071798',
+applepencilGen2='rbxassetid://136157715411470',applepencilHover=
+'rbxassetid://132499964823193',applepencilSqueeze='rbxassetid://130017747173569'
+,applepencilTip='rbxassetid://91593400796177',applescript=
+'rbxassetid://123810491451954',applescriptFill='rbxassetid://127519934422013',
+appletv='rbxassetid://102962906677124',appletvBadgeCheckmark=
+'rbxassetid://101652457992538',appletvBadgeCheckmarkFill=
+'rbxassetid://78422425043458',appletvBadgeExclamationmark=
+'rbxassetid://81489066245182',appletvBadgeExclamationmarkFill=
+'rbxassetid://114636492149768',appletvFill='rbxassetid://135903140150465',
+appletvremoteGen1='rbxassetid://135270967631693',appletvremoteGen1Fill=
+'rbxassetid://81889369734284',appletvremoteGen2='rbxassetid://113895435393863',
+appletvremoteGen2Fill='rbxassetid://70483371792990',appletvremoteGen3=
+'rbxassetid://105163273755884',appletvremoteGen3Fill=
+'rbxassetid://115418422308741',appletvremoteGen4='rbxassetid://100567117806558',
+appletvremoteGen4Fill='rbxassetid://113022815763894',applewatch=
+'rbxassetid://93138144347379',applewatchAndArrowForward=
+'rbxassetid://110039352060422',applewatchBadgeCheckmark=
+'rbxassetid://92778985550706',applewatchBadgeExclamationmark=
+'rbxassetid://129599825985183',applewatchCaseSizes=
+'rbxassetid://109653548205740',applewatchRadiowavesLeftAndRight=
+'rbxassetid://102293766705017',applewatchSideRight='rbxassetid://73482822688773'
+,applewatchSlash='rbxassetid://79088068041897',applewatchWatchface=
+'rbxassetid://83969866132522',appsIpad='rbxassetid://133433158213093',
+appsIpadBadgeCheckmark='rbxassetid://117680941737775',appsIpadBadgePlus=
+'rbxassetid://88752826248322',appsIpadLandscape='rbxassetid://86493684817099',
+appsIpadOnRectanglePortraitDashed='rbxassetid://114536357023471',appsIphone=
+'rbxassetid://129167692551812',appsIphoneBadgeCheckmark=
+'rbxassetid://103980567296855',appsIphoneBadgePlus='rbxassetid://71713357676686'
+,appsIphoneLandscape='rbxassetid://97618850718449',appwindowSwipeRectangle=
+'rbxassetid://86269047484283',aqiHigh='rbxassetid://124283236192520',aqiLow=
+'rbxassetid://125965149266356',aqiMedium='rbxassetid://121844299793985',
+aqiMediumGaugeOpen='rbxassetid://137218283152183',arcadeStick=
+'rbxassetid://136881673658280',arcadeStickAndArrowDown=
+'rbxassetid://106511231849553',arcadeStickAndArrowLeft=
+'rbxassetid://126374741762139',arcadeStickAndArrowLeftAndArrowRight=
+'rbxassetid://113538637882184',arcadeStickAndArrowLeftAndArrowRightOutward=
+'rbxassetid://138813689219871',arcadeStickAndArrowRight=
+'rbxassetid://118159594368933',arcadeStickAndArrowUp=
+'rbxassetid://86240487616233',arcadeStickAndArrowUpAndArrowDown=
+'rbxassetid://112293103027077',arcadeStickConsole='rbxassetid://100669752883004'
+,arcadeStickConsoleFill='rbxassetid://122547243212983',archivebox=
+'rbxassetid://121345229961059',archiveboxCircle='rbxassetid://98842142630967',
+archiveboxCircleFill='rbxassetid://118356120505684',archiveboxFill=
+'rbxassetid://93301170884322',arkit='rbxassetid://137506195249781',
+arkitBadgeXmark='rbxassetid://112860435555999',arrow2Squarepath=
+'rbxassetid://115537208650468',arrow3Trianglepath='rbxassetid://81605064455205',
+arrowBackward='rbxassetid://88649419574770',arrowBackwardCircle=
+'rbxassetid://136956454087601',arrowBackwardCircleDotted=
+'rbxassetid://102449299281450',arrowBackwardCircleFill=
+'rbxassetid://113290948178109',arrowBackwardSquare='rbxassetid://98664430133231'
+,arrowBackwardSquareFill='rbxassetid://118804167090498',arrowBackwardToLine=
+'rbxassetid://110504526302150',arrowBackwardToLineCircle=
+'rbxassetid://78052803011890',arrowBackwardToLineCircleFill=
+'rbxassetid://107890859844246',arrowBackwardToLineCompact=
+'rbxassetid://138459990868775',arrowBackwardToLineSquare=
+'rbxassetid://78531808011930',arrowBackwardToLineSquareFill=
+'rbxassetid://75065759600319',arrowCirclepath='rbxassetid://82375876675933',
+arrowClockwise='rbxassetid://135150629431078',arrowClockwiseCircle=
+'rbxassetid://74157022752988',arrowClockwiseCircleFill=
+'rbxassetid://116449962863671',arrowClockwiseHeart='rbxassetid://89932974116238'
+,arrowClockwiseIcloud='rbxassetid://119564317606359',arrowClockwiseSquare=
+'rbxassetid://119196146574286',arrowClockwiseSquareFill=
+'rbxassetid://134619956093951',arrowCounterclockwise=
+'rbxassetid://93269551188316',arrowCounterclockwiseCircle=
+'rbxassetid://100324999603105',arrowCounterclockwiseCircleFill=
+'rbxassetid://89831785654730',arrowCounterclockwiseIcloud=
+'rbxassetid://76284977441664',arrowCounterclockwiseSquare=
+'rbxassetid://120748383469686',arrowCounterclockwiseSquareFill=
+'rbxassetid://100952327039099',arrowDown='rbxassetid://104294868419018',
+arrowDownAndLineHorizontalAndArrowUp='rbxassetid://87886576322262',arrowDownApp=
+'rbxassetid://126624351763492',arrowDownAppDashed='rbxassetid://120863880942317'
+,arrowDownAppDashedTrianglebadgeExclamationmark='rbxassetid://102776085772699',
+arrowDownAppFill='rbxassetid://117366485860412',arrowDownApplewatch=
+'rbxassetid://90433452282294',arrowDownBackward='rbxassetid://118854524118128',
+arrowDownBackwardAndArrowUpForward='rbxassetid://129996365679960',
+arrowDownBackwardAndArrowUpForwardCircle='rbxassetid://106065835022812',
+arrowDownBackwardAndArrowUpForwardCircleFill='rbxassetid://119097194369411',
+arrowDownBackwardAndArrowUpForwardRectangle='rbxassetid://86325793969716',
+arrowDownBackwardAndArrowUpForwardRectangleFill='rbxassetid://106014356084217',
+arrowDownBackwardAndArrowUpForwardSquare='rbxassetid://95759279304249',
+arrowDownBackwardAndArrowUpForwardSquareFill='rbxassetid://101483128565522',
+arrowDownBackwardCircle='rbxassetid://101148976029987',
+arrowDownBackwardCircleDotted='rbxassetid://101994800462988',
+arrowDownBackwardCircleFill='rbxassetid://104416395931960',
+arrowDownBackwardSquare='rbxassetid://120139080263601',
+arrowDownBackwardSquareFill='rbxassetid://96397200712935',
+arrowDownBackwardToptrailingRectangle='rbxassetid://128098505832607',
+arrowDownBackwardToptrailingRectangleFill='rbxassetid://136959509151256',
+arrowDownCircle='rbxassetid://135587411885714',arrowDownCircleBadgePause=
+'rbxassetid://124364310110740',arrowDownCircleBadgePauseFill=
+'rbxassetid://126034849419398',arrowDownCircleBadgeXmark=
+'rbxassetid://132627732829179',arrowDownCircleBadgeXmarkFill=
+'rbxassetid://118370194181839',arrowDownCircleDotted=
+'rbxassetid://127920779547879',arrowDownCircleFill=
+'rbxassetid://126613187533372',arrowDownDoc='rbxassetid://126263364298576',
+arrowDownDocument='rbxassetid://90055782991587',arrowDownDocumentFill=
+'rbxassetid://79473920816292',arrowDownForward='rbxassetid://139974283617157',
+arrowDownForwardAndArrowUpBackward='rbxassetid://127715462923536',
+arrowDownForwardAndArrowUpBackwardCircle='rbxassetid://99167961428062',
+arrowDownForwardAndArrowUpBackwardCircleFill='rbxassetid://90718624284226',
+arrowDownForwardAndArrowUpBackwardRectangle='rbxassetid://109896428717818',
+arrowDownForwardAndArrowUpBackwardRectangleFill='rbxassetid://101296521578239',
+arrowDownForwardAndArrowUpBackwardSquare='rbxassetid://79718568224638',
+arrowDownForwardAndArrowUpBackwardSquareFill='rbxassetid://118653902474315',
+arrowDownForwardCircle='rbxassetid://91129944003312',
+arrowDownForwardCircleDotted='rbxassetid://79058882401591',
+arrowDownForwardCircleFill='rbxassetid://90616558170424',arrowDownForwardSquare=
+'rbxassetid://135965851538670',arrowDownForwardSquareFill=
+'rbxassetid://86743623269835',arrowDownForwardTopleadingRectangle=
+'rbxassetid://100959335820912',arrowDownForwardTopleadingRectangleFill=
+'rbxassetid://116322978531995',arrowDownHeart='rbxassetid://136960602456421',
+arrowDownHeartFill='rbxassetid://111091347386558',arrowDownLeft=
+'rbxassetid://122224910211071',arrowDownLeftAndArrowUpRight=
+'rbxassetid://104164888472588',arrowDownLeftAndArrowUpRightCircle=
+'rbxassetid://139958788849042',arrowDownLeftAndArrowUpRightCircleFill=
+'rbxassetid://77940274374626',arrowDownLeftAndArrowUpRightRectangle=
+'rbxassetid://130268567739782',arrowDownLeftAndArrowUpRightRectangleFill=
+'rbxassetid://136447163738546',arrowDownLeftAndArrowUpRightSquare=
+'rbxassetid://74329478808503',arrowDownLeftAndArrowUpRightSquareFill=
+'rbxassetid://112488682508039',arrowDownLeftArrowUpRight=
+'rbxassetid://110501884912653',arrowDownLeftArrowUpRightCircle=
+'rbxassetid://81099073033121',arrowDownLeftArrowUpRightCircleFill=
+'rbxassetid://101109754050167',arrowDownLeftArrowUpRightSquare=
+'rbxassetid://88334237843710',arrowDownLeftArrowUpRightSquareFill=
+'rbxassetid://118701870591849',arrowDownLeftCircle='rbxassetid://92547732629924'
+,arrowDownLeftCircleDotted='rbxassetid://95151928004771',arrowDownLeftCircleFill
+='rbxassetid://86643102687783',arrowDownLeftSquare='rbxassetid://83024806847192'
+,arrowDownLeftSquareFill='rbxassetid://112644786722286',
+arrowDownLeftToprightRectangle='rbxassetid://113141341051779',
+arrowDownLeftToprightRectangleFill='rbxassetid://130388914126671',
+arrowDownLeftVideo='rbxassetid://76350513151515',arrowDownLeftVideoFill=
+'rbxassetid://140633155175462',arrowDownMessage='rbxassetid://100621717832807',
+arrowDownMessageFill='rbxassetid://74100213634491',arrowDownRight=
+'rbxassetid://79448572967402',arrowDownRightAndArrowUpLeft=
+'rbxassetid://89225125347394',arrowDownRightAndArrowUpLeftCircle=
+'rbxassetid://80802938078543',arrowDownRightAndArrowUpLeftCircleFill=
+'rbxassetid://140259126181191',arrowDownRightAndArrowUpLeftRectangle=
+'rbxassetid://107575531690549',arrowDownRightAndArrowUpLeftRectangleFill=
+'rbxassetid://113365716944083',arrowDownRightAndArrowUpLeftSquare=
+'rbxassetid://120050363028423',arrowDownRightAndArrowUpLeftSquareFill=
+'rbxassetid://131765067257388',arrowDownRightCircle=
+'rbxassetid://134197654580585',arrowDownRightCircleDotted=
+'rbxassetid://90832353961844',arrowDownRightCircleFill=
+'rbxassetid://74812371090023',arrowDownRightSquare=
+'rbxassetid://140176759330522',arrowDownRightSquareFill=
+'rbxassetid://123563260022187',arrowDownRightTopleftRectangle=
+'rbxassetid://71596950769323',arrowDownRightTopleftRectangleFill=
+'rbxassetid://93249639234250',arrowDownSquare='rbxassetid://96495851984147',
+arrowDownSquareFill='rbxassetid://78941122620807',arrowDownToLine=
+'rbxassetid://81945854315577',arrowDownToLineCircle=
+'rbxassetid://104062291929801',arrowDownToLineCircleFill=
+'rbxassetid://90141383354318',arrowDownToLineCompact=
+'rbxassetid://75925803459799',arrowDownToLineSquare=
+'rbxassetid://105349654584160',arrowDownToLineSquareFill=
+'rbxassetid://79175779364203',arrowForward='rbxassetid://121760727871708',
+arrowForwardCircle='rbxassetid://122188146321824',arrowForwardCircleDotted=
+'rbxassetid://84632482795162',arrowForwardCircleFill=
+'rbxassetid://136358992052631',arrowForwardFolder='rbxassetid://110107371036130'
+,arrowForwardFolderFill='rbxassetid://132247910751681',arrowForwardSquare=
+'rbxassetid://72679546839781',arrowForwardSquareFill=
+'rbxassetid://90595336174638',arrowForwardToLine='rbxassetid://132984755317478',
+arrowForwardToLineCircle='rbxassetid://130410583070504',
+arrowForwardToLineCircleFill='rbxassetid://88891501791499',
+arrowForwardToLineCompact='rbxassetid://96760155810467',arrowForwardToLineSquare
+='rbxassetid://97107689023381',arrowForwardToLineSquareFill=
+'rbxassetid://140368370217658',arrowLeft='rbxassetid://139677317950411',
+arrowLeftAndLineVerticalAndArrowRight='rbxassetid://76582002086211',
+arrowLeftAndRight='rbxassetid://131255998904716',arrowLeftAndRightCircle=
+'rbxassetid://92018708920904',arrowLeftAndRightCircleFill=
+'rbxassetid://101260287153536',
+arrowLeftAndRightRighttriangleLeftRighttriangleRight=
+'rbxassetid://103119872066027',arrowLeftAndRightSquare=
+'rbxassetid://106696311729076',arrowLeftAndRightSquareFill=
+'rbxassetid://104053611756322',arrowLeftAndRightTextVertical=
+'rbxassetid://105731168987658',arrowLeftArrowRight=
+'rbxassetid://126907484829097',arrowLeftArrowRightCircle=
+'rbxassetid://108565375252584',arrowLeftArrowRightCircleFill=
+'rbxassetid://132777863386711',arrowLeftArrowRightSquare=
+'rbxassetid://76772045577087',arrowLeftArrowRightSquareFill=
+'rbxassetid://137418280059179',arrowLeftCircle='rbxassetid://128580341438564',
+arrowLeftCircleDotted='rbxassetid://80098770076714',arrowLeftCircleFill=
+'rbxassetid://129347210326426',arrowLeftSquare='rbxassetid://70731607187432',
+arrowLeftSquareFill='rbxassetid://77669000354279',arrowLeftToLine=
+'rbxassetid://84809777888169',arrowLeftToLineCircle=
+'rbxassetid://95667050287745',arrowLeftToLineCircleFill=
+'rbxassetid://133685867708333',arrowLeftToLineCompact=
+'rbxassetid://108095528571274',arrowLeftToLineSquare=
+'rbxassetid://101008265615734',arrowLeftToLineSquareFill=
+'rbxassetid://115024811356910',arrowRectanglepath='rbxassetid://122042553990804'
+,arrowRight='rbxassetid://105335022791801',arrowRightAndLineVerticalAndArrowLeft
+='rbxassetid://131068250358492',arrowRightCircle='rbxassetid://132800764212309',
+arrowRightCircleDotted='rbxassetid://103089050211240',arrowRightCircleFill=
+'rbxassetid://91030657053477',arrowRightDocOnClipboard=
+'rbxassetid://84583825314018',arrowRightFilledFilterArrowRight=
+'rbxassetid://137853508742382',arrowRightPageOnClipboard=
+'rbxassetid://73034395614819',arrowRightSquare='rbxassetid://87365895856110',
+arrowRightSquareFill='rbxassetid://118077314182831',arrowRightToLine=
+'rbxassetid://106599596369923',arrowRightToLineCircle=
+'rbxassetid://132392375458718',arrowRightToLineCircleFill=
+'rbxassetid://127030236541102',arrowRightToLineCompact=
+'rbxassetid://85675258932891',arrowRightToLineSquare=
+'rbxassetid://105804634316858',arrowRightToLineSquareFill=
+'rbxassetid://130284453934854',arrowTriangle2Circlepath=
+'rbxassetid://97876840821545',arrowTriangle2CirclepathCamera=
+'rbxassetid://110761440206205',arrowTriangle2CirclepathCircle=
+'rbxassetid://137167033413367',arrowTriangle2CirclepathDocOnClipboard=
+'rbxassetid://102874106989561',arrowTriangle2CirclepathIcloud=
+'rbxassetid://89703160887614',arrowTriangleBranch='rbxassetid://106848864851086'
+,arrowTriangleCapsulepath='rbxassetid://79935404561753',arrowTriangleMerge=
+'rbxassetid://135675192910274',arrowTrianglePull='rbxassetid://92844954623247',
+arrowTriangleSwap='rbxassetid://127274138579155',arrowTriangleTurnUpRightCircle=
+'rbxassetid://81052567291587',arrowTriangleTurnUpRightDiamond=
+'rbxassetid://88682763036554',arrowTrianglehead2Clockwise=
+'rbxassetid://120004886078638',arrowTrianglehead2ClockwiseRotate90=
+'rbxassetid://95004536158964',arrowTrianglehead2ClockwiseRotate90Camera=
+'rbxassetid://83773355445722',arrowTrianglehead2ClockwiseRotate90CameraFill=
+'rbxassetid://117069297266941',arrowTrianglehead2ClockwiseRotate90Circle=
+'rbxassetid://76837546635855',arrowTrianglehead2ClockwiseRotate90CircleFill=
+'rbxassetid://125646699018805',arrowTrianglehead2ClockwiseRotate90Icloud=
+'rbxassetid://110842292651436',arrowTrianglehead2ClockwiseRotate90IcloudFill=
+'rbxassetid://83156429648892',arrowTrianglehead2ClockwiseRotate90PageOnClipboard
+='rbxassetid://92313237753356',arrowTrianglehead2Counterclockwise=
+'rbxassetid://116637658638058',arrowTrianglehead2CounterclockwiseRotate90=
+'rbxassetid://93633635072507',arrowTriangleheadBottomleftCapsulepathClockwise=
+'rbxassetid://83435855503662',arrowTriangleheadBranch=
+'rbxassetid://119639706252113',arrowTriangleheadClockwise=
+'rbxassetid://113903120156035',arrowTriangleheadClockwiseHeart=
+'rbxassetid://76711158700076',arrowTriangleheadClockwiseHeartFill=
+'rbxassetid://111885492337179',arrowTriangleheadClockwiseIcloud=
+'rbxassetid://119325834106076',arrowTriangleheadClockwiseIcloudFill=
+'rbxassetid://130817770436829',arrowTriangleheadClockwiseRotate90=
+'rbxassetid://125916637513059',arrowTriangleheadCounterclockwise=
+'rbxassetid://81134858856836',arrowTriangleheadCounterclockwiseIcloud=
+'rbxassetid://97631605490623',arrowTriangleheadCounterclockwiseIcloudFill=
+'rbxassetid://124239436659602',arrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://103879478813346',
+arrowTriangleheadLeftAndRightRighttriangleLeftRighttriangleRight=
+'rbxassetid://95185575126651',
+arrowTriangleheadLeftAndRightRighttriangleLeftRighttriangleRightFill=
+'rbxassetid://113746416760123',arrowTriangleheadMerge=
+'rbxassetid://93660888122611',arrowTriangleheadPull=
+'rbxassetid://70848847762237',arrowTriangleheadRectanglepath=
+'rbxassetid://122075661819073',arrowTriangleheadSwap=
+'rbxassetid://122615966163021',arrowTriangleheadToprightCapsulepathClockwise=
+'rbxassetid://87561863258163',arrowTriangleheadTurnUpRight=
+'rbxassetid://112409191526627',arrowTriangleheadTurnUpRightCircle=
+'rbxassetid://125092376767446',arrowTriangleheadTurnUpRightCircleFill=
+'rbxassetid://126793442327731',arrowTriangleheadTurnUpRightDiamond=
+'rbxassetid://85736667530199',arrowTriangleheadTurnUpRightDiamondFill=
+'rbxassetid://106982346982974',
+arrowTriangleheadUpAndDownRighttriangleUpRighttriangleDown=
+'rbxassetid://85377495785588',
+arrowTriangleheadUpAndDownRighttriangleUpRighttriangleDownFill=
+'rbxassetid://123977430406222',arrowTurnDownLeft='rbxassetid://132895074468769',
+arrowTurnDownRight='rbxassetid://106816227955900',arrowTurnLeftDown=
+'rbxassetid://81993128525415',arrowTurnLeftUp='rbxassetid://72953914184632',
+arrowTurnRightDown='rbxassetid://93298093089829',arrowTurnRightUp=
+'rbxassetid://82753096109690',arrowTurnUpForwardIphone=
+'rbxassetid://126615799314276',arrowTurnUpForwardIphoneFill=
+'rbxassetid://94877893999375',arrowTurnUpLeft='rbxassetid://92961717180242',
+arrowTurnUpRight='rbxassetid://99344786740317',arrowUp=
+'rbxassetid://78648712658851',arrowUpAndDown='rbxassetid://86116303630216',
+arrowUpAndDownAndArrowLeftAndRight='rbxassetid://138985551455035',
+arrowUpAndDownAndSparkles='rbxassetid://81684341236209',arrowUpAndDownCircle=
+'rbxassetid://75916292096750',arrowUpAndDownCircleFill=
+'rbxassetid://75127469037390',arrowUpAndDownRighttriangleUpRighttriangleDown=
+'rbxassetid://89990169721189',arrowUpAndDownSquare=
+'rbxassetid://114110154035595',arrowUpAndDownSquareFill=
+'rbxassetid://75202394337547',arrowUpAndDownTextHorizontal=
+'rbxassetid://121347816102410',arrowUpAndLineHorizontalAndArrowDown=
+'rbxassetid://105622726329752',arrowUpAndPersonRectanglePortrait=
+'rbxassetid://130823180804285',arrowUpAndPersonRectangleTurnLeft=
+'rbxassetid://85243691603750',arrowUpAndPersonRectangleTurnRight=
+'rbxassetid://105085966547216',arrowUpArrowDown='rbxassetid://113515949560452',
+arrowUpArrowDownCircle='rbxassetid://121460592181765',arrowUpArrowDownCircleFill
+='rbxassetid://79203277607685',arrowUpArrowDownSquare=
+'rbxassetid://137035914755347',arrowUpArrowDownSquareFill=
+'rbxassetid://78686762407726',arrowUpBackward='rbxassetid://87724093939497',
+arrowUpBackwardAndArrowDownForward='rbxassetid://86635108527984',
+arrowUpBackwardAndArrowDownForwardCircle='rbxassetid://115317188393520',
+arrowUpBackwardAndArrowDownForwardCircleFill='rbxassetid://77043906356644',
+arrowUpBackwardAndArrowDownForwardRectangle='rbxassetid://89847106989116',
+arrowUpBackwardAndArrowDownForwardRectangleFill='rbxassetid://114674554996662',
+arrowUpBackwardAndArrowDownForwardSquare='rbxassetid://96097826426907',
+arrowUpBackwardAndArrowDownForwardSquareFill='rbxassetid://100908924982344',
+arrowUpBackwardBottomtrailingRectangle='rbxassetid://132306797856286',
+arrowUpBackwardBottomtrailingRectangleFill='rbxassetid://121132174005134',
+arrowUpBackwardCircle='rbxassetid://87697874759260',arrowUpBackwardCircleDotted=
+'rbxassetid://72881423591822',arrowUpBackwardCircleFill=
+'rbxassetid://120193357020420',arrowUpBackwardSquare=
+'rbxassetid://71077852083839',arrowUpBackwardSquareFill=
+'rbxassetid://93398569903581',arrowUpBin='rbxassetid://106712407901427',
+arrowUpBinFill='rbxassetid://124011006230787',arrowUpCircle=
+'rbxassetid://94911675961250',arrowUpCircleBadgeClock=
+'rbxassetid://125476968673977',arrowUpCircleDotted=
+'rbxassetid://111193851076319',arrowUpCircleFill='rbxassetid://111941746337748',
+arrowUpDoc='rbxassetid://130298316589925',arrowUpDocOnClipboard=
+'rbxassetid://99871373237994',arrowUpDocument='rbxassetid://117304311448174',
+arrowUpDocumentFill='rbxassetid://96587047161399',arrowUpFolder=
+'rbxassetid://119174018910178',arrowUpFolderFill='rbxassetid://127574661082745',
+arrowUpForward='rbxassetid://108134164414127',arrowUpForwardAndArrowDownBackward
+='rbxassetid://130767770587903',arrowUpForwardAndArrowDownBackwardCircle=
+'rbxassetid://107376465009384',arrowUpForwardAndArrowDownBackwardCircleFill=
+'rbxassetid://103317843905876',arrowUpForwardAndArrowDownBackwardRectangle=
+'rbxassetid://115453529068587',arrowUpForwardAndArrowDownBackwardRectangleFill=
+'rbxassetid://79439647053232',arrowUpForwardAndArrowDownBackwardSquare=
+'rbxassetid://92612164951517',arrowUpForwardAndArrowDownBackwardSquareFill=
+'rbxassetid://70813042781223',arrowUpForwardApp='rbxassetid://112829959970173',
+arrowUpForwardAppFill='rbxassetid://91761460498076',
+arrowUpForwardBottomleadingRectangle='rbxassetid://134640132914184',
+arrowUpForwardBottomleadingRectangleFill='rbxassetid://122314628337723',
+arrowUpForwardCircle='rbxassetid://109463155016717',arrowUpForwardCircleDotted=
+'rbxassetid://108263917514812',arrowUpForwardCircleFill=
+'rbxassetid://77346795770693',arrowUpForwardSquare='rbxassetid://74557125136657'
+,arrowUpForwardSquareFill='rbxassetid://119788530957673',arrowUpHeart=
+'rbxassetid://81211473277206',arrowUpHeartFill='rbxassetid://112776567008638',
+arrowUpLeft='rbxassetid://110082174383245',arrowUpLeftAndArrowDownRight=
+'rbxassetid://134847585698412',arrowUpLeftAndArrowDownRightCircle=
+'rbxassetid://130371359392714',arrowUpLeftAndArrowDownRightCircleFill=
+'rbxassetid://132427830878732',arrowUpLeftAndArrowDownRightRectangle=
+'rbxassetid://112294474196779',arrowUpLeftAndArrowDownRightRectangleFill=
+'rbxassetid://125360402793191',arrowUpLeftAndArrowDownRightSquare=
+'rbxassetid://83415006038142',arrowUpLeftAndArrowDownRightSquareFill=
+'rbxassetid://115887822292112',arrowUpLeftAndDownRightAndArrowUpRightAndDownLeft
+='rbxassetid://129739556524804',arrowUpLeftAndDownRightMagnifyingglass=
+'rbxassetid://137681018745874',arrowUpLeftArrowDownRight=
+'rbxassetid://75439123019508',arrowUpLeftArrowDownRightCircle=
+'rbxassetid://105643094155741',arrowUpLeftArrowDownRightCircleFill=
+'rbxassetid://131547709448660',arrowUpLeftArrowDownRightSquare=
+'rbxassetid://85909271280986',arrowUpLeftArrowDownRightSquareFill=
+'rbxassetid://99819888059672',arrowUpLeftBottomrightRectangle=
+'rbxassetid://91558034145888',arrowUpLeftBottomrightRectangleFill=
+'rbxassetid://100287102307407',arrowUpLeftCircle='rbxassetid://121309248454944',
+arrowUpLeftCircleDotted='rbxassetid://123064294982538',arrowUpLeftCircleFill=
+'rbxassetid://78043906697669',arrowUpLeftSquare='rbxassetid://73015943041948',
+arrowUpLeftSquareFill='rbxassetid://102556879413712',arrowUpMessage=
+'rbxassetid://94225019561009',arrowUpMessageFill='rbxassetid://82404908556915',
+arrowUpPageOnClipboard='rbxassetid://78980645203354',arrowUpRight=
+'rbxassetid://138844888875215',arrowUpRightAndArrowDownLeft=
+'rbxassetid://114866781443213',arrowUpRightAndArrowDownLeftCircle=
+'rbxassetid://132105309061719',arrowUpRightAndArrowDownLeftCircleFill=
+'rbxassetid://71412626619086',arrowUpRightAndArrowDownLeftRectangle=
+'rbxassetid://73363578686738',arrowUpRightAndArrowDownLeftRectangleFill=
+'rbxassetid://91445141227731',arrowUpRightAndArrowDownLeftSquare=
+'rbxassetid://86339485660754',arrowUpRightAndArrowDownLeftSquareFill=
+'rbxassetid://71919422941284',arrowUpRightBottomleftRectangle=
+'rbxassetid://130762630351301',arrowUpRightBottomleftRectangleFill=
+'rbxassetid://95630843701625',arrowUpRightCircle='rbxassetid://81069070166818',
+arrowUpRightCircleDotted='rbxassetid://97345855116158',arrowUpRightCircleFill=
+'rbxassetid://128938699095412',arrowUpRightSquare='rbxassetid://85191059189074',
+arrowUpRightSquareFill='rbxassetid://137785035586451',arrowUpRightVideo=
+'rbxassetid://90919665747630',arrowUpRightVideoFill=
+'rbxassetid://88874555643489',arrowUpSquare='rbxassetid://138634860884120',
+arrowUpSquareFill='rbxassetid://120264192976826',arrowUpToLine=
+'rbxassetid://88548334886822',arrowUpToLineCircle='rbxassetid://83360733774110',
+arrowUpToLineCircleFill='rbxassetid://108275997754139',arrowUpToLineCompact=
+'rbxassetid://74427170938065',arrowUpToLineSquare='rbxassetid://137278763514757'
+,arrowUpToLineSquareFill='rbxassetid://74700745163970',arrowUpTrash=
+'rbxassetid://108944881391784',arrowUpTrashFill='rbxassetid://82802068079538',
+arrowUturnBackward='rbxassetid://84932065764436',arrowUturnBackwardCircle=
+'rbxassetid://109075671313648',arrowUturnBackwardCircleBadgeEllipsis=
+'rbxassetid://102431303478130',arrowUturnBackwardCircleFill=
+'rbxassetid://82112623202198',arrowUturnBackwardSquare=
+'rbxassetid://91917148305042',arrowUturnBackwardSquareFill=
+'rbxassetid://99547665686894',arrowUturnDown='rbxassetid://91557237297615',
+arrowUturnDownCircle='rbxassetid://88762138487585',arrowUturnDownCircleFill=
+'rbxassetid://125070612634633',arrowUturnDownSquare=
+'rbxassetid://82491208720289',arrowUturnDownSquareFill=
+'rbxassetid://140476075043878',arrowUturnForward='rbxassetid://125471619268828',
+arrowUturnForwardCircle='rbxassetid://123731708760049',
+arrowUturnForwardCircleFill='rbxassetid://86954998472846',
+arrowUturnForwardSquare='rbxassetid://119862778570014',
+arrowUturnForwardSquareFill='rbxassetid://73557234553032',arrowUturnLeft=
+'rbxassetid://75706868554870',arrowUturnLeftCircle='rbxassetid://80299087209180'
+,arrowUturnLeftCircleBadgeEllipsis='rbxassetid://76418451999894',
+arrowUturnLeftCircleFill='rbxassetid://111850081065384',arrowUturnLeftSquare=
+'rbxassetid://101145741063035',arrowUturnLeftSquareFill=
+'rbxassetid://138477537092319',arrowUturnRight='rbxassetid://85195579204455',
+arrowUturnRightCircle='rbxassetid://137184521519714',arrowUturnRightCircleFill=
+'rbxassetid://96886515578405',arrowUturnRightSquare=
+'rbxassetid://84513404712444',arrowUturnRightSquareFill=
+'rbxassetid://87526577867039',arrowUturnUp='rbxassetid://130075543513615',
+arrowUturnUpCircle='rbxassetid://75243570930387',arrowUturnUpCircleFill=
+'rbxassetid://133907130193679',arrowUturnUpSquare='rbxassetid://124293795803561'
+,arrowUturnUpSquareFill='rbxassetid://114646903692155',arrowkeys=
+'rbxassetid://107093674674175',arrowkeysDownFilled=
+'rbxassetid://139314313798595',arrowkeysFill='rbxassetid://83701399567141',
+arrowkeysLeftFilled='rbxassetid://80905415438039',arrowkeysRightFilled=
+'rbxassetid://78361096026269',arrowkeysUpFilled='rbxassetid://76100553966528',
+arrowshapeBackward='rbxassetid://103946413747803',arrowshapeBackwardCircle=
+'rbxassetid://96473706444669',arrowshapeBackwardCircleFill=
+'rbxassetid://78185643268471',arrowshapeBackwardFill=
+'rbxassetid://137234108178990',arrowshapeBounceForward=
+'rbxassetid://104361688592034',arrowshapeBounceForwardFill=
+'rbxassetid://133551113789028',arrowshapeBounceRight=
+'rbxassetid://77629075456961',arrowshapeBounceRightFill=
+'rbxassetid://89650738004209',arrowshapeDown='rbxassetid://97389010768394',
+arrowshapeDownCircle='rbxassetid://77919837179930',arrowshapeDownCircleFill=
+'rbxassetid://111547932661301',arrowshapeDownFill='rbxassetid://99240071360620',
+arrowshapeForward='rbxassetid://88362661062616',arrowshapeForwardCircle=
+'rbxassetid://84389407203275',arrowshapeForwardCircleFill=
+'rbxassetid://78338063364751',arrowshapeForwardFill=
+'rbxassetid://95436585159679',arrowshapeLeft='rbxassetid://98701118720679',
+arrowshapeLeftArrowshapeRight='rbxassetid://121937636687253',
+arrowshapeLeftArrowshapeRightFill='rbxassetid://133886606502645',
+arrowshapeLeftCircle='rbxassetid://71393237208194',arrowshapeLeftCircleFill=
+'rbxassetid://136385477516373',arrowshapeLeftFill='rbxassetid://118305835198238'
+,arrowshapeRight='rbxassetid://120488785795747',arrowshapeRightCircle=
+'rbxassetid://121626085651476',arrowshapeRightCircleFill=
+'rbxassetid://76461671929970',arrowshapeRightFill='rbxassetid://70999924264432',
+arrowshapeTurnUpBackward='rbxassetid://78881537733143',arrowshapeTurnUpBackward2
+='rbxassetid://107092825956456',arrowshapeTurnUpBackward2Circle=
+'rbxassetid://137756561495871',arrowshapeTurnUpBackward2CircleFill=
+'rbxassetid://135826797352330',arrowshapeTurnUpBackward2Fill=
+'rbxassetid://131562286201667',arrowshapeTurnUpBackwardBadgeClock=
+'rbxassetid://135028155928594',arrowshapeTurnUpBackwardBadgeClockFill=
+'rbxassetid://73450872932149',arrowshapeTurnUpBackwardCircle=
+'rbxassetid://71825408205036',arrowshapeTurnUpBackwardCircleFill=
+'rbxassetid://111623422888025',arrowshapeTurnUpBackwardFill=
+'rbxassetid://109125772896311',arrowshapeTurnUpForward=
+'rbxassetid://76816503115863',arrowshapeTurnUpForwardCircle=
+'rbxassetid://98602961202921',arrowshapeTurnUpForwardCircleFill=
+'rbxassetid://70470114130488',arrowshapeTurnUpForwardFill=
+'rbxassetid://92381825435352',arrowshapeTurnUpLeft=
+'rbxassetid://108614332890595',arrowshapeTurnUpLeft2=
+'rbxassetid://78716969962631',arrowshapeTurnUpLeft2Circle=
+'rbxassetid://123519063994380',arrowshapeTurnUpLeft2CircleFill=
+'rbxassetid://113915966573413',arrowshapeTurnUpLeft2Fill=
+'rbxassetid://86951174248840',arrowshapeTurnUpLeftCircle=
+'rbxassetid://73601074472826',arrowshapeTurnUpLeftCircleFill=
+'rbxassetid://136740410564323',arrowshapeTurnUpLeftFill=
+'rbxassetid://94219456241500',arrowshapeTurnUpRight=
+'rbxassetid://106325504068133',arrowshapeTurnUpRightCircle=
+'rbxassetid://75919927711551',arrowshapeTurnUpRightCircleFill=
+'rbxassetid://106669100525653',arrowshapeTurnUpRightFill=
+'rbxassetid://134006299248390',arrowshapeUp='rbxassetid://101998758692791',
+arrowshapeUpCircle='rbxassetid://99257685761594',arrowshapeUpCircleFill=
+'rbxassetid://96806111160193',arrowshapeUpFill='rbxassetid://88008006362903',
+arrowshapeZigzagForward='rbxassetid://129549353799543',
+arrowshapeZigzagForwardFill='rbxassetid://106898814741078',arrowshapeZigzagRight
+='rbxassetid://103673619735369',arrowshapeZigzagRightFill=
+'rbxassetid://130759407110780',arrowtriangleBackward=
+'rbxassetid://133521659387505',arrowtriangleBackwardCircle=
+'rbxassetid://123787083134802',arrowtriangleBackwardCircleFill=
+'rbxassetid://126681849588441',arrowtriangleBackwardFill=
+'rbxassetid://111916009128209',arrowtriangleBackwardSquare=
+'rbxassetid://140338552398565',arrowtriangleBackwardSquareFill=
+'rbxassetid://74805844172505',arrowtriangleDown='rbxassetid://78561539908893',
+arrowtriangleDownCircle='rbxassetid://77571811725142',
+arrowtriangleDownCircleFill='rbxassetid://105503627251065',arrowtriangleDownFill
+='rbxassetid://83161926977947',arrowtriangleDownSquare=
+'rbxassetid://138420790717673',arrowtriangleDownSquareFill=
+'rbxassetid://91021138374724',arrowtriangleForward='rbxassetid://80300262330695'
+,arrowtriangleForwardCircle='rbxassetid://88365381729452',
+arrowtriangleForwardCircleFill='rbxassetid://136664536116197',
+arrowtriangleForwardFill='rbxassetid://131170560324771',
+arrowtriangleForwardSquare='rbxassetid://94267906643716',
+arrowtriangleForwardSquareFill='rbxassetid://115669972392572',arrowtriangleLeft=
+'rbxassetid://82742410867767',
+arrowtriangleLeftAndLineVerticalAndArrowtriangleRight=
+'rbxassetid://82250512181706',
+arrowtriangleLeftAndLineVerticalAndArrowtriangleRightFill=
+'rbxassetid://75120863415970',arrowtriangleLeftCircle=
+'rbxassetid://130940545964020',arrowtriangleLeftCircleFill=
+'rbxassetid://91597184747625',arrowtriangleLeftFill=
+'rbxassetid://100246673935435',arrowtriangleLeftSquare=
+'rbxassetid://138937088832435',arrowtriangleLeftSquareFill=
+'rbxassetid://78816347161577',arrowtriangleRight='rbxassetid://120603282360061',
+arrowtriangleRightAndLineVerticalAndArrowtriangleLeft=
+'rbxassetid://125551472926573',
+arrowtriangleRightAndLineVerticalAndArrowtriangleLeftFill=
+'rbxassetid://137442224732768',arrowtriangleRightCircle=
+'rbxassetid://137176667486761',arrowtriangleRightCircleFill=
+'rbxassetid://108534551246412',arrowtriangleRightFill=
+'rbxassetid://135662872907406',arrowtriangleRightSquare=
+'rbxassetid://136702219548567',arrowtriangleRightSquareFill=
+'rbxassetid://86559277753252',arrowtriangleUp='rbxassetid://111075032702135',
+arrowtriangleUpArrowtriangleDownWindowLeft='rbxassetid://111106358415702',
+arrowtriangleUpArrowtriangleDownWindowRight='rbxassetid://119754928116595',
+arrowtriangleUpCircle='rbxassetid://135791635467358',arrowtriangleUpCircleFill=
+'rbxassetid://77906388596939',arrowtriangleUpFill='rbxassetid://95395937128837',
+arrowtriangleUpSquare='rbxassetid://121847518853496',arrowtriangleUpSquareFill=
+'rbxassetid://90626000681247',aspectratio='rbxassetid://98517185380471',
+aspectratioFill='rbxassetid://102579851046592',asterisk=
+'rbxassetid://88871616629375',asteriskCircle='rbxassetid://133395747175893',
+asteriskCircleFill='rbxassetid://139028990558441',at=
+'rbxassetid://137471691924175',atBadgeMinus='rbxassetid://134623783886552',
+atBadgePlus='rbxassetid://135293868255291',atCircle=
+'rbxassetid://75936351641093',atCircleFill='rbxassetid://134377411625052',atom=
+'rbxassetid://108843899986154',audioJackMono='rbxassetid://122663599339745',
+audioJackStereo='rbxassetid://106388714289332',australianFootball=
+'rbxassetid://83717210268275',australianFootballCircle=
+'rbxassetid://91216938435305',australianFootballCircleFill=
+'rbxassetid://119703555005899',australianFootballFill=
+'rbxassetid://91615056179585',australiandollarsign=
+'rbxassetid://108383329795594',
+australiandollarsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://103619465363524',australiandollarsignBankBuilding=
+'rbxassetid://112691589231459',australiandollarsignBankBuildingFill=
+'rbxassetid://110933280500384',australiandollarsignCircle=
+'rbxassetid://138087916288699',australiandollarsignCircleFill=
+'rbxassetid://139132160908400',australiandollarsignGaugeChartLefthalfRighthalf=
+'rbxassetid://105231666559232',
+australiandollarsignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://82562990214305',australiandollarsignRing=
+'rbxassetid://107065817248382',australiandollarsignRingDashed=
+'rbxassetid://98956564238236',australiandollarsignSquare=
+'rbxassetid://105212688231309',australiandollarsignSquareFill=
+'rbxassetid://75954055268212',australsign='rbxassetid://137973006716083',
+australsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://130848259106826',australsignBankBuilding=
+'rbxassetid://94265426732688',australsignBankBuildingFill=
+'rbxassetid://123552301428619',australsignCircle='rbxassetid://108380187386176',
+australsignCircleFill='rbxassetid://127875262466300',
+australsignGaugeChartLefthalfRighthalf='rbxassetid://70536095598981',
+australsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://100233677044940',
+australsignRing='rbxassetid://88317124938109',australsignRingDashed=
+'rbxassetid://97213251184448',australsignSquare='rbxassetid://122311949572306',
+australsignSquareFill='rbxassetid://94187640679425',automaticBrakesignal=
+'rbxassetid://112399930314317',automaticHeadlightHighBeam=
+'rbxassetid://135968366756093',automaticHeadlightHighBeamFill=
+'rbxassetid://139626180694517',automaticHeadlightLowBeam=
+'rbxassetid://82654718912628',automaticHeadlightLowBeamFill=
+'rbxassetid://107178223306087',autostartstop='rbxassetid://77457912590274',
+autostartstopSlash='rbxassetid://114435810438487',
+autostartstopTrianglebadgeExclamationmark='rbxassetid://72480057980841',avRemote
+='rbxassetid://96333083759338',avRemoteFill='rbxassetid://103929453784307',axle2
+='rbxassetid://75705790851902',axle2DriveshaftDisengaged=
+'rbxassetid://85396555863957',axle2FrontAndRearEngaged=
+'rbxassetid://120452693782445',axle2FrontDisengaged=
+'rbxassetid://129154377234623',axle2FrontEngaged='rbxassetid://80501466407638',
+axle2RearDisengaged='rbxassetid://80324857349654',axle2RearEngaged=
+'rbxassetid://132431074188989',axle2RearLock='rbxassetid://75264943176879',
+bCircle='rbxassetid://109038084515649',bCircleFill='rbxassetid://75555363720266'
+,bSquare='rbxassetid://111811804858729',bSquareFill=
+'rbxassetid://128837014096906',backpack='rbxassetid://105195953579349',
+backpackCircle='rbxassetid://106407965386940',backpackCircleFill=
+'rbxassetid://85475403012001',backpackFill='rbxassetid://131750104401055',
+backpackSensorTagRadiowavesLeftAndRight='rbxassetid://128407574860682',
+backpackSensorTagRadiowavesLeftAndRightFill='rbxassetid://100870002764956',
+backward='rbxassetid://122427584897716',backwardCircle=
+'rbxassetid://130281893184037',backwardCircleFill='rbxassetid://95748082741134',
+backwardEnd='rbxassetid://73396673985237',backwardEndAlt=
+'rbxassetid://118305621946322',backwardEndAltFill='rbxassetid://127445169423377'
+,backwardEndCircle='rbxassetid://92798094076866',backwardEndCircleFill=
+'rbxassetid://140411571509914',backwardEndFill='rbxassetid://138630184521335',
+backwardFill='rbxassetid://81244210367969',backwardFrame=
+'rbxassetid://131044827344482',backwardFrameFill='rbxassetid://113681075822442',
+badgePlusRadiowavesForward='rbxassetid://80276313107018',
+badgePlusRadiowavesRight='rbxassetid://104524636862542',bag=
+'rbxassetid://83806619279503',bagBadgeMinus='rbxassetid://88414309827799',
+bagBadgePlus='rbxassetid://95221444956038',bagBadgeQuestionmark=
+'rbxassetid://98313201554730',bagCircle='rbxassetid://90936649788632',
+bagCircleFill='rbxassetid://132136901130565',bagFill=
+'rbxassetid://133362226558488',bagFillBadgeMinus='rbxassetid://96219013654249',
+bagFillBadgePlus='rbxassetid://101245370544483',bagFillBadgeQuestionmark=
+'rbxassetid://108878208237447',bahtsign='rbxassetid://74124698800888',
+bahtsignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://73848213936133',
+bahtsignBankBuilding='rbxassetid://104523668446152',bahtsignBankBuildingFill=
+'rbxassetid://128502368268696',bahtsignCircle='rbxassetid://121720395197210',
+bahtsignCircleFill='rbxassetid://128305148458106',
+bahtsignGaugeChartLefthalfRighthalf='rbxassetid://132156928740514',
+bahtsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://127536612463560',
+bahtsignRing='rbxassetid://86639737855130',bahtsignRingDashed=
+'rbxassetid://96197994846363',bahtsignSquare='rbxassetid://134719432492683',
+bahtsignSquareFill='rbxassetid://97050155065694',balloon=
+'rbxassetid://104440599584995',balloon2='rbxassetid://132502412439183',
+balloon2Fill='rbxassetid://119048138308879',balloonFill=
+'rbxassetid://124491712982295',bandage='rbxassetid://138446349462290',
+bandageFill='rbxassetid://80002522608083',banknote=
+'rbxassetid://136343080453229',banknoteFill='rbxassetid://116710375951738',
+barcode='rbxassetid://117287404870584',barcodeViewfinder=
+'rbxassetid://122128534490235',barometer='rbxassetid://72325164390494',baseUnit=
+'rbxassetid://100753773581760',baseball='rbxassetid://97571414419713',
+baseballCircle='rbxassetid://131671829844062',baseballCircleFill=
+'rbxassetid://117106713881204',baseballDiamondBases=
+'rbxassetid://111867050801343',baseballDiamondBasesOutsIndicator=
+'rbxassetid://93708945096775',baseballFill='rbxassetid://85157186852562',basket=
+'rbxassetid://106180348978806',basketFill='rbxassetid://136755744597949',
+basketball='rbxassetid://109068809121703',basketballCircle=
+'rbxassetid://91774708796019',basketballCircleFill='rbxassetid://72598040742035'
+,basketballFill='rbxassetid://72986631471097',bathtub=
+'rbxassetid://136389567560332',bathtubFill='rbxassetid://97822181240087',
+battery0percent='rbxassetid://109801745750538',battery100percent=
+'rbxassetid://92406047854421',battery100percentBolt=
+'rbxassetid://139235463865177',battery100percentCircle=
+'rbxassetid://100741582191314',battery100percentCircleFill=
+'rbxassetid://106944163430713',battery25percent='rbxassetid://72894607867936',
+battery50percent='rbxassetid://76241070440884',battery75percent=
+'rbxassetid://117533833119206',batteryblock='rbxassetid://121629553249088',
+batteryblockFill='rbxassetid://101347307883171',batteryblockSlash=
+'rbxassetid://121610081368628',batteryblockSlashFill=
+'rbxassetid://74028036721108',batteryblockStack='rbxassetid://115116517381557',
+batteryblockStackBadgeSnowflake='rbxassetid://78199827655256',
+batteryblockStackBadgeSnowflakeFill='rbxassetid://92623354556534',
+batteryblockStackFill='rbxassetid://125795512213710',
+batteryblockStackTrianglebadgeExclamationmark='rbxassetid://123811371527725',
+batteryblockStackTrianglebadgeExclamationmarkFill='rbxassetid://94880673974554',
+beachUmbrella='rbxassetid://72865469806459',beachUmbrellaFill=
+'rbxassetid://96407034761761',beatsEarphones='rbxassetid://73621409785573',
+beatsFitPro='rbxassetid://122083986744951',beatsFitProChargingcase=
+'rbxassetid://120936645934230',beatsFitProLeft='rbxassetid://116602459616537',
+beatsFitProRight='rbxassetid://119699746025879',beatsFitpro=
+'rbxassetid://117645606044444',beatsFitproChargingcase=
+'rbxassetid://117440666717597',beatsFitproChargingcaseFill=
+'rbxassetid://71759632509502',beatsFitproLeft='rbxassetid://88418709068625',
+beatsFitproRight='rbxassetid://115830286382559',beatsHeadphones=
+'rbxassetid://73380840337035',beatsPill='rbxassetid://93439483257162',
+beatsPillFill='rbxassetid://95478226585165',beatsPowerbeats=
+'rbxassetid://81774880364018',beatsPowerbeats3='rbxassetid://74951439393133',
+beatsPowerbeats3Left='rbxassetid://101932876942063',beatsPowerbeats3Right=
+'rbxassetid://135752504888114',beatsPowerbeatsLeft='rbxassetid://97445451933143'
+,beatsPowerbeatsPro='rbxassetid://127293771112234',beatsPowerbeatsPro2=
+'rbxassetid://136525865662552',beatsPowerbeatsPro2Chargingcase=
+'rbxassetid://112524730561658',beatsPowerbeatsPro2ChargingcaseFill=
+'rbxassetid://82844342134163',beatsPowerbeatsPro2Left=
+'rbxassetid://93989999644733',beatsPowerbeatsPro2Right=
+'rbxassetid://91812278494548',beatsPowerbeatsProChargingcase=
+'rbxassetid://133263655529236',beatsPowerbeatsProChargingcaseFill=
+'rbxassetid://99941850096551',beatsPowerbeatsProLeft=
+'rbxassetid://70990272965839',beatsPowerbeatsProRight=
+'rbxassetid://110928518837662',beatsPowerbeatsRight=
+'rbxassetid://106040814246712',beatsPowerbeatspro='rbxassetid://91388282815385',
+beatsPowerbeatsproChargingcase='rbxassetid://129174227736582',
+beatsPowerbeatsproLeft='rbxassetid://132454103156247',beatsPowerbeatsproRight=
+'rbxassetid://121014913156174',beatsSolobuds='rbxassetid://81232374366099',
+beatsSolobudsChargingcase='rbxassetid://71797823184677',
+beatsSolobudsChargingcaseFill='rbxassetid://101814016626767',beatsSolobudsLeft=
+'rbxassetid://71958672695604',beatsSolobudsRight='rbxassetid://96581298863151',
+beatsStudiobudLeft='rbxassetid://123610938062441',beatsStudiobudRight=
+'rbxassetid://92812822483138',beatsStudiobuds='rbxassetid://111451076752414',
+beatsStudiobudsChargingcase='rbxassetid://73000765400424',
+beatsStudiobudsChargingcaseFill='rbxassetid://109848496275498',
+beatsStudiobudsLeft='rbxassetid://137326830510510',beatsStudiobudsPlus=
+'rbxassetid://115554839561360',beatsStudiobudsPlusChargingcase=
+'rbxassetid://126239738972103',beatsStudiobudsPlusChargingcaseFill=
+'rbxassetid://80657113028988',beatsStudiobudsPlusLeft=
+'rbxassetid://75699522736651',beatsStudiobudsPlusRight=
+'rbxassetid://114336760507028',beatsStudiobudsRight=
+'rbxassetid://95674926492092',beatsStudiobudsplus='rbxassetid://71975225998517',
+beatsStudiobudsplusChargingcase='rbxassetid://125879752007426',
+beatsStudiobudsplusLeft='rbxassetid://111603577383991',beatsStudiobudsplusRight=
+'rbxassetid://118741913661751',bedDouble='rbxassetid://101701657145902',
+bedDoubleBadgeCheckmark='rbxassetid://109375568035932',
+bedDoubleBadgeCheckmarkFill='rbxassetid://120398540124030',bedDoubleCircle=
+'rbxassetid://71145319148752',bedDoubleCircleFill='rbxassetid://92627250811342',
+bedDoubleFill='rbxassetid://129538544854607',bell='rbxassetid://133308773796467'
+,bellAndWavesLeftAndRight='rbxassetid://121214018166023',
+bellAndWavesLeftAndRightFill='rbxassetid://88807057176486',bellBadge=
+'rbxassetid://102918378539260',bellBadgeCircle='rbxassetid://96523824553022',
+bellBadgeCircleFill='rbxassetid://103345485539554',bellBadgeFill=
+'rbxassetid://82918576077557',bellBadgeSlash='rbxassetid://102012144577464',
+bellBadgeSlashFill='rbxassetid://86863600694155',bellBadgeWaveform=
+'rbxassetid://137731188990608',bellBadgeWaveformFill=
+'rbxassetid://91685274004740',bellBadgeWaveformSlash=
+'rbxassetid://139347903627441',bellBadgeWaveformSlashFill=
+'rbxassetid://121644601155346',bellCircle='rbxassetid://119385063880385',
+bellCircleFill='rbxassetid://98518266376193',bellFill=
+'rbxassetid://120560073129118',bellSlash='rbxassetid://131140638570899',
+bellSlashCircle='rbxassetid://101842323179229',bellSlashCircleFill=
+'rbxassetid://115293256505054',bellSlashFill='rbxassetid://104881180476235',
+bellSquare='rbxassetid://96391651511460',bellSquareFill=
+'rbxassetid://114947742366600',beziercurve='rbxassetid://100185315689380',
+bicycle='rbxassetid://81287373353221',bicycleCircle=
+'rbxassetid://101135313427799',bicycleCircleFill='rbxassetid://123710817001547',
+bicycleSensorTagRadiowavesLeftAndRight='rbxassetid://85373873458550',
+bicycleSensorTagRadiowavesLeftAndRightFill='rbxassetid://92824033944913',
+binoculars='rbxassetid://82003982039983',binocularsCircle=
+'rbxassetid://74444046694959',binocularsCircleFill=
+'rbxassetid://105266215858774',binocularsFill='rbxassetid://80941766165614',bird
+='rbxassetid://130275772797284',birdCircle='rbxassetid://103178316855292',
+birdCircleFill='rbxassetid://117217024861213',birdFill=
+'rbxassetid://106346146659683',birthdayCake='rbxassetid://109061723759610',
+birthdayCakeFill='rbxassetid://126609361495378',bitcoinsign=
+'rbxassetid://85045716322963',
+bitcoinsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://139903362520300',bitcoinsignBankBuilding=
+'rbxassetid://100134569219475',bitcoinsignBankBuildingFill=
+'rbxassetid://130799347858075',bitcoinsignCircle='rbxassetid://129872062077257',
+bitcoinsignCircleFill='rbxassetid://125803775641316',
+bitcoinsignGaugeChartLefthalfRighthalf='rbxassetid://86873732275506',
+bitcoinsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://85495972134697',
+bitcoinsignRing='rbxassetid://128221652848711',bitcoinsignRingDashed=
+'rbxassetid://71179864949845',bitcoinsignSquare='rbxassetid://135576039906233',
+bitcoinsignSquareFill='rbxassetid://120728418357680',blindsHorizontalClosed=
+'rbxassetid://101420800756552',blindsHorizontalOpen=
+'rbxassetid://129804746319995',blindsVerticalClosed=
+'rbxassetid://107585669625798',blindsVerticalOpen='rbxassetid://133263406766885'
+,bloodPressureCuff='rbxassetid://121817772408929',
+bloodPressureCuffBadgeGaugeWithNeedle='rbxassetid://84032836703049',
+bloodPressureCuffBadgeGaugeWithNeedleFill='rbxassetid://124578156567435',
+bloodPressureCuffFill='rbxassetid://107378979484859',bold=
+'rbxassetid://103508086257150',boldItalicUnderline=
+'rbxassetid://125199208998114',boldUnderline='rbxassetid://77310772877118',bolt=
+'rbxassetid://112193227421813',boltBadgeAutomatic='rbxassetid://122112691291736'
+,boltBadgeAutomaticFill='rbxassetid://140324573909470',boltBadgeCheckmark=
+'rbxassetid://99899769150346',boltBadgeCheckmarkFill=
+'rbxassetid://127797181436416',boltBadgeClock='rbxassetid://99768130135511',
+boltBadgeClockFill='rbxassetid://91456545149386',boltBadgeXmark=
+'rbxassetid://94502185545264',boltBadgeXmarkFill='rbxassetid://91288260823755',
+boltBatteryblock='rbxassetid://91868076624899',boltBatteryblockFill=
+'rbxassetid://133692683566130',boltBrakesignal='rbxassetid://73920694387621',
+boltCar='rbxassetid://125466798838914',boltCarCircle=
+'rbxassetid://116306626599658',boltCarCircleFill='rbxassetid://101258013169069',
+boltCarFill='rbxassetid://114448131958206',boltCircle=
+'rbxassetid://87781552660597',boltCircleFill='rbxassetid://131576589857912',
+boltFill='rbxassetid://71909592017771',boltHeart='rbxassetid://110674472844382',
+boltHeartFill='rbxassetid://87457386765556',boltHorizontal=
+'rbxassetid://78421984366839',boltHorizontalCircle='rbxassetid://86052284804870'
+,boltHorizontalCircleFill='rbxassetid://82912063382135',boltHorizontalFill=
+'rbxassetid://89554007915579',boltHorizontalIcloud='rbxassetid://76349290026078'
+,boltHorizontalIcloudFill='rbxassetid://119816421830601',boltHouse=
+'rbxassetid://125087333698100',boltHouseFill='rbxassetid://97212832287617',
+boltRingClosed='rbxassetid://102748200499647',boltShield=
+'rbxassetid://106576035322524',boltShieldFill='rbxassetid://82704335162541',
+boltSlash='rbxassetid://115719946769678',boltSlashCircle=
+'rbxassetid://92077287655944',boltSlashCircleFill='rbxassetid://83130112629665',
+boltSlashFill='rbxassetid://107794328445914',boltSquare=
+'rbxassetid://74864226733346',boltSquareFill='rbxassetid://111594600812914',
+boltTrianglebadgeExclamationmark='rbxassetid://135701608670001',
+boltTrianglebadgeExclamationmarkFill='rbxassetid://80426096092615',bonjour=
+'rbxassetid://96862684647565',book='rbxassetid://99242168701957',bookAndWrench=
+'rbxassetid://105806071385897',bookAndWrenchFill='rbxassetid://127213912485879',
+bookBadgePlus='rbxassetid://139444923393735',bookBadgePlusFill=
+'rbxassetid://110708660617586',bookCircle='rbxassetid://72975429086279',
+bookCircleFill='rbxassetid://122835733327171',bookClosed=
+'rbxassetid://102863733968191',bookClosedCircle='rbxassetid://114853803855969',
+bookClosedCircleFill='rbxassetid://85473630292871',bookClosedFill=
+'rbxassetid://94972983718665',bookFill='rbxassetid://80798326864179',bookPages=
+'rbxassetid://118964813491987',bookPagesFill='rbxassetid://106380748151373',
+bookmark='rbxassetid://74160648747460',bookmarkCircle=
+'rbxassetid://88464339450728',bookmarkCircleFill='rbxassetid://116856497843645',
+bookmarkFill='rbxassetid://98979837416554',bookmarkSlash=
+'rbxassetid://130159878454862',bookmarkSlashFill='rbxassetid://108272977689020',
+bookmarkSquare='rbxassetid://111204770836057',bookmarkSquareFill=
+'rbxassetid://94388247283473',booksVertical='rbxassetid://131690780604844',
+booksVerticalCircle='rbxassetid://120107789999419',booksVerticalCircleFill=
+'rbxassetid://102387103871516',booksVerticalFill='rbxassetid://118674063613880',
+brain='rbxassetid://113890207183352',brainFill='rbxassetid://73855894967261',
+brainFilledHeadProfile='rbxassetid://116245786010931',brainHeadProfile=
+'rbxassetid://101188959120090',brainHeadProfileFill=
+'rbxassetid://82786960924872',brakesignal='rbxassetid://119179613669128',
+brakesignalDashed='rbxassetid://129497081013961',brazilianrealsign=
+'rbxassetid://126167651986830',
+brazilianrealsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://101075452345166',brazilianrealsignBankBuilding=
+'rbxassetid://98973047591934',brazilianrealsignBankBuildingFill=
+'rbxassetid://75511426648552',brazilianrealsignCircle=
+'rbxassetid://97704351842459',brazilianrealsignCircleFill=
+'rbxassetid://78800068933179',brazilianrealsignGaugeChartLefthalfRighthalf=
+'rbxassetid://81631327262795',
+brazilianrealsignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://127207787907253',brazilianrealsignRing=
+'rbxassetid://74080520557295',brazilianrealsignRingDashed=
+'rbxassetid://95538915598421',brazilianrealsignSquare=
+'rbxassetid://125151718943130',brazilianrealsignSquareFill=
+'rbxassetid://103532987773414',briefcase='rbxassetid://76302379241787',
+briefcaseCircle='rbxassetid://110072070889487',briefcaseCircleFill=
+'rbxassetid://131985436861601',briefcaseFill='rbxassetid://103653061652865',
+briefcaseSensorTagRadiowavesLeftAndRight='rbxassetid://78511981305968',
+briefcaseSensorTagRadiowavesLeftAndRightFill='rbxassetid://79579810164856',
+bubble='rbxassetid://77226486416802',bubbleAndPencil=
+'rbxassetid://80256643483910',bubbleCircle='rbxassetid://125219383982550',
+bubbleCircleFill='rbxassetid://109761907896649',bubbleFill=
+'rbxassetid://80953989271043',bubbleLeft='rbxassetid://98539019826711',
+bubbleLeftAndBubbleRight='rbxassetid://81405663217056',
+bubbleLeftAndBubbleRightFill='rbxassetid://102654503925514',
+bubbleLeftAndExclamationmarkBubbleRight='rbxassetid://89966432584239',
+bubbleLeftAndExclamationmarkBubbleRightFill='rbxassetid://134483997334229',
+bubbleLeftAndTextBubbleRight='rbxassetid://132793650670374',
+bubbleLeftAndTextBubbleRightFill='rbxassetid://74625622843211',bubbleLeftCircle=
+'rbxassetid://123298231169447',bubbleLeftCircleFill=
+'rbxassetid://80558763328280',bubbleLeftFill='rbxassetid://118600153442100',
+bubbleMiddleBottom='rbxassetid://95146405413872',bubbleMiddleBottomFill=
+'rbxassetid://88431074400146',bubbleMiddleTop='rbxassetid://103163735052752',
+bubbleMiddleTopFill='rbxassetid://74247184833387',bubbleRight=
+'rbxassetid://109759263505956',bubbleRightCircle='rbxassetid://100274251581597',
+bubbleRightCircleFill='rbxassetid://84058503436916',bubbleRightFill=
+'rbxassetid://118519568619648',bubblesAndSparkles='rbxassetid://106193796714647'
+,bubblesAndSparklesFill='rbxassetid://85576812393251',building=
+'rbxassetid://80702293989084',building2='rbxassetid://135138223013381',
+building2CropCircle='rbxassetid://115503248658638',building2CropCircleFill=
+'rbxassetid://112598319040010',building2Fill='rbxassetid://113360848137363',
+buildingColumns='rbxassetid://86341549293525',buildingColumnsCircle=
+'rbxassetid://89771684145053',buildingColumnsCircleFill=
+'rbxassetid://140466597342735',buildingColumnsFill=
+'rbxassetid://135456938295031',buildingFill='rbxassetid://118070055554916',burn=
+'rbxassetid://100741266216840',burst='rbxassetid://138219935094738',burstFill=
+'rbxassetid://90039414124678',bus='rbxassetid://132462958646640',busDoubledecker
+='rbxassetid://112589463325662',busDoubledeckerFill=
+'rbxassetid://71921128889600',busFill='rbxassetid://116866000758003',
+buttonAngledbottomHorizontalLeft='rbxassetid://87772134018393',
+buttonAngledbottomHorizontalLeftFill='rbxassetid://123942133715172',
+buttonAngledbottomHorizontalRight='rbxassetid://113637188276134',
+buttonAngledbottomHorizontalRightFill='rbxassetid://103324610775001',
+buttonAngledtopVerticalLeft='rbxassetid://127310958476000',
+buttonAngledtopVerticalLeftFill='rbxassetid://124737537456377',
+buttonAngledtopVerticalRight='rbxassetid://72737180265307',
+buttonAngledtopVerticalRightFill='rbxassetid://102557397415618',buttonHorizontal
+='rbxassetid://89869433999115',buttonHorizontalFill=
+'rbxassetid://94554169943088',buttonHorizontalTopPress=
+'rbxassetid://79953223577947',buttonHorizontalTopPressFill=
+'rbxassetid://132950668501139',buttonProgrammable='rbxassetid://115802779906954'
+,buttonProgrammableSquare='rbxassetid://128948305769440',
+buttonProgrammableSquareFill='rbxassetid://107393189633512',
+buttonRoundedbottomHorizontal='rbxassetid://139688387647553',
+buttonRoundedbottomHorizontalFill='rbxassetid://88109415580290',
+buttonRoundedtopHorizontal='rbxassetid://87461059045784',
+buttonRoundedtopHorizontalFill='rbxassetid://84354403826885',
+buttonVerticalLeftPress='rbxassetid://71757710227477',
+buttonVerticalLeftPressFill='rbxassetid://93218303828413',
+buttonVerticalRightPress='rbxassetid://78432364933892',
+buttonVerticalRightPressFill='rbxassetid://91015801699440',cCircle=
+'rbxassetid://139431771360926',cCircleFill='rbxassetid://105086158279600',
+cSquare='rbxassetid://86392562689553',cSquareFill='rbxassetid://118810898759104'
+,cabinet='rbxassetid://117939109046665',cabinetFill=
+'rbxassetid://87496272804280',cableCoaxial='rbxassetid://126480673488003',
+cableConnector='rbxassetid://76793572656021',cableConnectorHorizontal=
+'rbxassetid://128003436998791',cableConnectorSlash=
+'rbxassetid://138009988511903',cableConnectorVideo='rbxassetid://81787685713406'
+,cablecar='rbxassetid://84703971212857',cablecarFill=
+'rbxassetid://81461389662851',calendar='rbxassetid://105164540641328',
+calendarAndPerson='rbxassetid://118740780914749',calendarBadge=
+'rbxassetid://130252787898462',calendarBadgeCheckmark=
+'rbxassetid://89365467298075',calendarBadgeClock='rbxassetid://113445508292256',
+calendarBadgeExclamationmark='rbxassetid://91916369222792',calendarBadgeLock=
+'rbxassetid://118756663428958',calendarBadgeMinus='rbxassetid://82308953693338',
+calendarBadgePlus='rbxassetid://99904240335802',calendarCircle=
+'rbxassetid://97923261201903',calendarCircleFill='rbxassetid://134415097437184',
+calendarDayTimelineLeading='rbxassetid://92071534684267',
+calendarDayTimelineLeadingCircle='rbxassetid://123786645364610',
+calendarDayTimelineLeadingCircleFill='rbxassetid://95263183942485',
+calendarDayTimelineLeft='rbxassetid://140736157337049',
+calendarDayTimelineLeftCircle='rbxassetid://128152730753180',
+calendarDayTimelineLeftCircleFill='rbxassetid://101649394856316',
+calendarDayTimelineRight='rbxassetid://81354582567686',
+calendarDayTimelineRightCircle='rbxassetid://106345972168826',
+calendarDayTimelineRightCircleFill='rbxassetid://78552056440331',
+calendarDayTimelineTrailing='rbxassetid://98699864273977',
+calendarDayTimelineTrailingCircle='rbxassetid://106989432306674',
+calendarDayTimelineTrailingCircleFill='rbxassetid://84897746955767',camera=
+'rbxassetid://106049677807210',cameraAperture='rbxassetid://93748886326097',
+cameraBadgeClock='rbxassetid://96954869359913',cameraBadgeClockFill=
+'rbxassetid://129572022257677',cameraBadgeEllipsis='rbxassetid://84933908741123'
+,cameraBadgeEllipsisFill='rbxassetid://102950043916587',cameraCircle=
+'rbxassetid://136575450217928',cameraCircleFill='rbxassetid://132722961016601',
+cameraFill='rbxassetid://105791547551825',cameraFilters=
+'rbxassetid://132438444257023',cameraMacro='rbxassetid://90308044332993',
+cameraMacroCircle='rbxassetid://96744154304790',cameraMacroCircleFill=
+'rbxassetid://78401776068992',cameraMacroSlash='rbxassetid://125432490230233',
+cameraMacroSlashCircle='rbxassetid://124019357928403',cameraMacroSlashCircleFill
+='rbxassetid://79452825367107',cameraMeteringCenterWeighted=
+'rbxassetid://105415399925912',cameraMeteringCenterWeightedAverage=
+'rbxassetid://124373772637912',cameraMeteringMatrix=
+'rbxassetid://72423091421429',cameraMeteringMultispot=
+'rbxassetid://101264837387232',cameraMeteringNone='rbxassetid://108629649478914'
+,cameraMeteringPartial='rbxassetid://136722268952658',cameraMeteringSpot=
+'rbxassetid://131415808991981',cameraMeteringUnknown=
+'rbxassetid://103791550705277',cameraOnRectangle='rbxassetid://113075184701608',
+cameraOnRectangleFill='rbxassetid://136334711835785',
+cameraSensorTagRadiowavesLeftAndRight='rbxassetid://124176766677378',
+cameraSensorTagRadiowavesLeftAndRightFill='rbxassetid://75632082063593',
+cameraShutterButton='rbxassetid://90456792215761',cameraShutterButtonFill=
+'rbxassetid://84963312707697',cameraViewfinder='rbxassetid://85257199196973',
+candybarphone='rbxassetid://91875463862137',capslock=
+'rbxassetid://129510873768204',capslockFill='rbxassetid://74070850671559',
+capsule='rbxassetid://81831381214147',capsuleBottomhalfFilled=
+'rbxassetid://79711489491632',capsuleFill='rbxassetid://101969240257558',
+capsuleLefthalfFilled='rbxassetid://120935640012724',capsuleOnCapsule=
+'rbxassetid://125962363774490',capsuleOnCapsuleFill=
+'rbxassetid://85499949727796',capsuleOnRectangle='rbxassetid://95040820166081',
+capsuleOnRectangleFill='rbxassetid://105770621396050',capsulePortrait=
+'rbxassetid://99642816241588',capsulePortraitBottomhalfFilled=
+'rbxassetid://101845181967705',capsulePortraitFill=
+'rbxassetid://134018743561010',capsulePortraitLefthalfFilled=
+'rbxassetid://89543355365748',capsulePortraitRighthalfFilled=
+'rbxassetid://83813796130615',capsulePortraitTophalfFilled=
+'rbxassetid://122165531810954',capsuleRighthalfFilled=
+'rbxassetid://75406213303179',capsuleTophalfFilled=
+'rbxassetid://117681415719315',captionsBubble='rbxassetid://117417929637325',
+captionsBubbleFill='rbxassetid://131809011691174',car=
+'rbxassetid://128495454882226',car2='rbxassetid://97578883834004',car2Fill=
+'rbxassetid://133721936830795',carBadgeGearshape='rbxassetid://121514836966717',
+carBadgeGearshapeFill='rbxassetid://94538505333092',carCircle=
+'rbxassetid://93535532040070',carCircleFill='rbxassetid://116413251835553',
+carFerry='rbxassetid://126066171893470',carFerryFill=
+'rbxassetid://115970310065091',carFill='rbxassetid://120157979001146',
+carFrontWavesDown='rbxassetid://73974605458298',carFrontWavesDownFill=
+'rbxassetid://112916365434291',carFrontWavesLeftAndRightAndUp=
+'rbxassetid://93776100100461',carFrontWavesLeftAndRightAndUpFill=
+'rbxassetid://100684279352347',carFrontWavesUp='rbxassetid://95563447987178',
+carFrontWavesUpFill='rbxassetid://113013581989612',carRear=
+'rbxassetid://106736790731856',carRearAndCollisionRoadLane=
+'rbxassetid://73279442408907',carRearAndCollisionRoadLaneSlash=
+'rbxassetid://89753862961614',carRearAndTireMarks='rbxassetid://90284918615637',
+carRearAndTireMarksOff='rbxassetid://121559243559396',carRearAndTireMarksSlash=
+'rbxassetid://133003297173007',carRearFill='rbxassetid://94875494313831',
+carRearHazardsign='rbxassetid://81176038582242',carRearHazardsignFill=
+'rbxassetid://118042380942420',carRearRoadLane='rbxassetid://106146900593351',
+carRearRoadLaneDashed='rbxassetid://72003677424945',
+carRearRoadLaneDashedArrowtriangle2Outward='rbxassetid://131007235242118',
+carRearRoadLaneDistance1='rbxassetid://127940734523444',
+carRearRoadLaneDistance1AndGaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://94334222817359',carRearRoadLaneDistance2=
+'rbxassetid://71174865675916',
+carRearRoadLaneDistance2AndGaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://119164907256182',carRearRoadLaneDistance3=
+'rbxassetid://135647159201253',
+carRearRoadLaneDistance3AndGaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://76305713845211',carRearRoadLaneDistance4=
+'rbxassetid://102603761274028',
+carRearRoadLaneDistance4AndGaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://105468736067403',carRearRoadLaneDistance5=
+'rbxassetid://112963693265764',
+carRearRoadLaneDistance5AndGaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://107369882581908',carRearRoadLaneOff='rbxassetid://109767288290225'
+,carRearRoadLaneWaveUp='rbxassetid://100245066913455',
+carRearTiltRoadLanesCurvedRight='rbxassetid://127430126262647',carRearWavesUp=
+'rbxassetid://129534910434287',carRearWavesUpFill='rbxassetid://132630790194670'
+,carSide='rbxassetid://123727230876023',carSideAirCirculate=
+'rbxassetid://129819788394181',carSideAirCirculateFill=
+'rbxassetid://84434233331006',carSideAirFresh='rbxassetid://96826195272673',
+carSideAirFreshFill='rbxassetid://119969844288900',carSideAndExclamationmark=
+'rbxassetid://131867351843012',carSideAndExclamationmarkFill=
+'rbxassetid://114889185254237',carSideArrowLeftAndRight=
+'rbxassetid://132025369793047',carSideArrowLeftAndRightFill=
+'rbxassetid://114322757158315',carSideArrowtriangleDown=
+'rbxassetid://70559673683673',carSideArrowtriangleDownFill=
+'rbxassetid://123699022550270',carSideArrowtriangleUp=
+'rbxassetid://86416823330109',carSideArrowtriangleUpArrowtriangleDown=
+'rbxassetid://136484069843029',carSideArrowtriangleUpArrowtriangleDownFill=
+'rbxassetid://112039352485090',carSideArrowtriangleUpFill=
+'rbxassetid://101950075430741',carSideFill='rbxassetid://134365111379084',
+carSideFrontOpen='rbxassetid://113954965550455',carSideFrontOpenCrop=
+'rbxassetid://82479251905391',carSideFrontOpenCropFill=
+'rbxassetid://104032074636855',carSideFrontOpenFill=
+'rbxassetid://84063705179151',carSideHillDescentControl=
+'rbxassetid://134307743041436',carSideHillDescentControlFill=
+'rbxassetid://70571506563107',carSideHillDown='rbxassetid://127663646775564',
+carSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangle=
+'rbxassetid://135438547755627',
+carSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangleFill=
+'rbxassetid://126863447170500',carSideHillDownFill=
+'rbxassetid://123845478959576',carSideHillUp='rbxassetid://85662738311671',
+carSideHillUpFill='rbxassetid://137182275581929',carSideLock=
+'rbxassetid://89133577708824',carSideLockFill='rbxassetid://139374257452667',
+carSideLockOpen='rbxassetid://73799606963227',carSideLockOpenFill=
+'rbxassetid://113815388443315',carSideRearAndCollisionAndCarSideFront=
+'rbxassetid://99933366959957',
+carSideRearAndCollisionAndCarSideFrontAndArrowForward=
+'rbxassetid://131674539097286',
+carSideRearAndCollisionAndCarSideFrontAndSteeringwheel=
+'rbxassetid://95675889148537',carSideRearAndCollisionAndCarSideFrontSlash=
+'rbxassetid://126195085802057',carSideRearAndExclamationmarkAndCarSideFront=
+'rbxassetid://140644239188800',carSideRearAndExclamationmarkAndCarSideFrontOff=
+'rbxassetid://138499860628048',carSideRearAndWave3AndCarSideFront=
+'rbxassetid://71923913494011',carSideRearCropTrunkPartition=
+'rbxassetid://84550560822967',carSideRearCropTrunkPartitionFill=
+'rbxassetid://123573397918828',carSideRearOpen='rbxassetid://88012230238253',
+carSideRearOpenCrop='rbxassetid://129882870954526',carSideRearOpenCropFill=
+'rbxassetid://126796702854347',carSideRearOpenFill='rbxassetid://86788038143818'
+,carSideRearTowHitch='rbxassetid://134168233048942',carSideRearTowHitchFill=
+'rbxassetid://86801046249588',carSideRoofCargoCarrier=
+'rbxassetid://104771078663560',carSideRoofCargoCarrierFill=
+'rbxassetid://90138154580521',carSideRoofCargoCarrierSlash=
+'rbxassetid://138727479392520',carSideRoofCargoCarrierSlashFill=
+'rbxassetid://92406618590649',carTopArrowtriangleFrontLeft=
+'rbxassetid://123222259486467',carTopArrowtriangleFrontLeftFill=
+'rbxassetid://84759596863076',carTopArrowtriangleFrontRight=
+'rbxassetid://117838105385476',carTopArrowtriangleFrontRightFill=
+'rbxassetid://92362685636289',carTopArrowtriangleRearLeft=
+'rbxassetid://73954649933688',carTopArrowtriangleRearLeftFill=
+'rbxassetid://132436036528631',carTopArrowtriangleRearRight=
+'rbxassetid://78772570541846',carTopArrowtriangleRearRightFill=
+'rbxassetid://108137783518479',
+carTopDoorFrontLeftAndFrontRightAndRearLeftAndRearRightOpen=
+'rbxassetid://80363013214098',
+carTopDoorFrontLeftAndFrontRightAndRearLeftAndRearRightOpenFill=
+'rbxassetid://108894171052291',carTopDoorFrontLeftAndFrontRightAndRearLeftOpen=
+'rbxassetid://123212226339031',
+carTopDoorFrontLeftAndFrontRightAndRearLeftOpenFill=
+'rbxassetid://101562090992305',carTopDoorFrontLeftAndFrontRightAndRearRightOpen=
+'rbxassetid://110631034665291',
+carTopDoorFrontLeftAndFrontRightAndRearRightOpenFill=
+'rbxassetid://139873570903173',carTopDoorFrontLeftAndFrontRightOpen=
+'rbxassetid://74788648223269',carTopDoorFrontLeftAndFrontRightOpenFill=
+'rbxassetid://86215017441713',carTopDoorFrontLeftAndRearLeftAndRearRightOpen=
+'rbxassetid://131484052357343',
+carTopDoorFrontLeftAndRearLeftAndRearRightOpenFill='rbxassetid://89363125622972'
+,carTopDoorFrontLeftAndRearLeftOpen='rbxassetid://136031029179173',
+carTopDoorFrontLeftAndRearLeftOpenFill='rbxassetid://137046170507650',
+carTopDoorFrontLeftAndRearRightOpen='rbxassetid://87031066098040',
+carTopDoorFrontLeftAndRearRightOpenFill='rbxassetid://128332791898221',
+carTopDoorFrontLeftOpen='rbxassetid://81445878346757',
+carTopDoorFrontLeftOpenFill='rbxassetid://109057462580081',
+carTopDoorFrontRightAndRearLeftAndRearRightOpen='rbxassetid://78018818420040',
+carTopDoorFrontRightAndRearLeftAndRearRightOpenFill=
+'rbxassetid://84749548678375',carTopDoorFrontRightAndRearLeftOpen=
+'rbxassetid://120269651846295',carTopDoorFrontRightAndRearLeftOpenFill=
+'rbxassetid://78066029950386',carTopDoorFrontRightAndRearRightOpen=
+'rbxassetid://70567122240859',carTopDoorFrontRightAndRearRightOpenFill=
+'rbxassetid://116264095664357',carTopDoorFrontRightOpen=
+'rbxassetid://97417623414623',carTopDoorFrontRightOpenFill=
+'rbxassetid://84331480606171',carTopDoorRearLeftAndRearRightOpen=
+'rbxassetid://89308026145118',carTopDoorRearLeftAndRearRightOpenFill=
+'rbxassetid://110224159210139',carTopDoorRearLeftOpen=
+'rbxassetid://117679988412307',carTopDoorRearLeftOpenFill=
+'rbxassetid://103275469741774',carTopDoorRearRightOpen=
+'rbxassetid://134727516346244',carTopDoorRearRightOpenFill=
+'rbxassetid://76042471844419',carTopDoorSlidingLeftOpen=
+'rbxassetid://114193700451377',carTopDoorSlidingLeftOpenFill=
+'rbxassetid://88845688904454',carTopDoorSlidingRightOpen=
+'rbxassetid://125155196045524',carTopDoorSlidingRightOpenFill=
+'rbxassetid://90631209953802',
+carTopFrontRadiowavesFrontLeftAndFrontAndFrontRight=
+'rbxassetid://116813641912560',
+carTopFrontRadiowavesFrontLeftAndFrontAndFrontRightFill=
+'rbxassetid://99204992957472',carTopFrontleftArrowtriangle=
+'rbxassetid://74249929591233',carTopFrontrightArrowtriangle=
+'rbxassetid://109439050535736',carTopLaneDashedArrowtriangleInward=
+'rbxassetid://111343898744983',carTopLaneDashedArrowtriangleInwardFill=
+'rbxassetid://75649906069159',carTopLaneDashedBadgeSteeringwheel=
+'rbxassetid://109175591331591',carTopLaneDashedBadgeSteeringwheelFill=
+'rbxassetid://99737560328566',carTopLaneDashedDepartureLeft=
+'rbxassetid://105946066504996',carTopLaneDashedDepartureLeftFill=
+'rbxassetid://133030233235812',carTopLaneDashedDepartureLeftSlash=
+'rbxassetid://102591664146154',carTopLaneDashedDepartureLeftSlashFill=
+'rbxassetid://134823708023730',carTopLaneDashedDepartureRight=
+'rbxassetid://128417056182752',carTopLaneDashedDepartureRightFill=
+'rbxassetid://117041928860784',carTopLaneDashedDepartureRightSlash=
+'rbxassetid://118261490125488',carTopLaneDashedDepartureRightSlashFill=
+'rbxassetid://130656050187719',carTopRadiowaves2FrontLeftFrontFrontRight=
+'rbxassetid://95526058568755',carTopRadiowaves2FrontLeftFrontFrontRightFill=
+'rbxassetid://77293070849440',carTopRadiowaves2RearLeftRearRearRight=
+'rbxassetid://115935038426649',carTopRadiowaves2RearLeftRearRearRightFill=
+'rbxassetid://82056639801498',carTopRadiowavesFront=
+'rbxassetid://133607318826630',carTopRadiowavesFrontFill=
+'rbxassetid://81383834313147',carTopRadiowavesRear=
+'rbxassetid://125297507525835',carTopRadiowavesRearFill=
+'rbxassetid://78203718067568',carTopRadiowavesRearLeft=
+'rbxassetid://80414529165992',carTopRadiowavesRearLeftAndRearRight=
+'rbxassetid://106289875711195',carTopRadiowavesRearLeftAndRearRightFill=
+'rbxassetid://105696129533991',carTopRadiowavesRearLeftCarTopFront=
+'rbxassetid://76064734358653',carTopRadiowavesRearLeftCarTopFrontFill=
+'rbxassetid://97770197457840',carTopRadiowavesRearLeftFill=
+'rbxassetid://108315739511697',carTopRadiowavesRearRight=
+'rbxassetid://75242343694458',carTopRadiowavesRearRightBadgeExclamationmark=
+'rbxassetid://139745112794803',carTopRadiowavesRearRightBadgeExclamationmarkFill
+='rbxassetid://83075965159111',carTopRadiowavesRearRightBadgeXmark=
+'rbxassetid://123230437909232',carTopRadiowavesRearRightBadgeXmarkFill=
+'rbxassetid://70407895765158',carTopRadiowavesRearRightCarTopFront=
+'rbxassetid://131947111049560',carTopRadiowavesRearRightCarTopFrontFill=
+'rbxassetid://72077613330190',carTopRadiowavesRearRightFill=
+'rbxassetid://88012174287090',carTopRearRadiowavesRearLeftAndRearAndRearRight=
+'rbxassetid://88120058138309',
+carTopRearRadiowavesRearLeftAndRearAndRearRightFill=
+'rbxassetid://73216347350191',carTopRearleftArrowtriangle=
+'rbxassetid://132477167189845',carTopRearrightArrowtriangle=
+'rbxassetid://121164497326761',carTopVideoRearLeft='rbxassetid://72271021597106'
+,carTopVideoRearLeftFill='rbxassetid://71654523784960',carTopVideoRearRight=
+'rbxassetid://114116872591998',carTopVideoRearRightFill=
+'rbxassetid://137959831857002',carWindowLeft='rbxassetid://86756481448690',
+carWindowLeftBadgeExclamationmark='rbxassetid://128521824982284',
+carWindowLeftBadgeLock='rbxassetid://74945260791121',carWindowLeftBadgeXmark=
+'rbxassetid://126631257556393',carWindowLeftExclamationmark=
+'rbxassetid://73994718634793',carWindowLeftXmark='rbxassetid://99106662522022',
+carWindowRight='rbxassetid://95397796099425',carWindowRightBadgeExclamationmark=
+'rbxassetid://137691133108353',carWindowRightBadgeLock=
+'rbxassetid://109825199930596',carWindowRightBadgeXmark=
+'rbxassetid://113338395744934',carWindowRightExclamationmark=
+'rbxassetid://98295643301246',carWindowRightXmark='rbxassetid://108600675223720'
+,carbonDioxideCloud='rbxassetid://76366963920532',carbonDioxideCloudFill=
+'rbxassetid://134345598862121',carbonMonoxideCloud=
+'rbxassetid://116628010954326',carbonMonoxideCloudFill=
+'rbxassetid://108732016966215',carrot='rbxassetid://86588469030196',carrotFill=
+'rbxassetid://117181669639260',carseatLeft='rbxassetid://92701856050395',
+carseatLeft1='rbxassetid://130693652944034',carseatLeft1Fill=
+'rbxassetid://106012772377881',carseatLeft2='rbxassetid://97305403792548',
+carseatLeft2Fill='rbxassetid://85685205406693',carseatLeft3=
+'rbxassetid://127225716289512',carseatLeft3Fill='rbxassetid://98079963311844',
+carseatLeftAndHeatWaves='rbxassetid://136058084732653',
+carseatLeftAndHeatWavesFill='rbxassetid://138059967999511',
+carseatLeftBackrestUpAndDown='rbxassetid://108455978558375',
+carseatLeftBackrestUpAndDownFill='rbxassetid://132193352969179',carseatLeftFan=
+'rbxassetid://109491477716325',carseatLeftFanFill='rbxassetid://92653087286034',
+carseatLeftFill='rbxassetid://118896758627771',carseatLeftForwardAndBackward=
+'rbxassetid://103737852803606',carseatLeftForwardAndBackwardFill=
+'rbxassetid://80914430111661',carseatLeftMassage='rbxassetid://110277390360496',
+carseatLeftMassageFill='rbxassetid://113778384545082',carseatLeftUpAndDown=
+'rbxassetid://139435554215192',carseatLeftUpAndDownFill=
+'rbxassetid://93609533999754',carseatRight='rbxassetid://139995356802592',
+carseatRight1='rbxassetid://72264832504032',carseatRight1Fill=
+'rbxassetid://137548535535010',carseatRight2='rbxassetid://125971106368177',
+carseatRight2Fill='rbxassetid://140561721922196',carseatRight3=
+'rbxassetid://117423139105628',carseatRight3Fill='rbxassetid://92691917532826',
+carseatRightAndHeatWaves='rbxassetid://131216200983766',
+carseatRightAndHeatWavesFill='rbxassetid://135515163923925',
+carseatRightBackrestUpAndDown='rbxassetid://116883448300446',
+carseatRightBackrestUpAndDownFill='rbxassetid://110724862492710',carseatRightFan
+='rbxassetid://72695279927845',carseatRightFanFill=
+'rbxassetid://136482229464042',carseatRightFill='rbxassetid://118564586970353',
+carseatRightForwardAndBackward='rbxassetid://133538142433603',
+carseatRightForwardAndBackwardFill='rbxassetid://130117771768091',
+carseatRightMassage='rbxassetid://97404558707824',carseatRightMassageFill=
+'rbxassetid://124278125047452',carseatRightUpAndDown=
+'rbxassetid://103900898320263',carseatRightUpAndDownFill=
+'rbxassetid://81259033424146',cart='rbxassetid://120970975539765',cartBadgeClock
+='rbxassetid://121047592354792',cartBadgeClockFill=
+'rbxassetid://108098854699224',cartBadgeMinus='rbxassetid://94921095508486',
+cartBadgePlus='rbxassetid://74497004572470',cartBadgeQuestionmark=
+'rbxassetid://99604576439516',cartCircle='rbxassetid://74390949952121',
+cartCircleFill='rbxassetid://81723599390977',cartFill=
+'rbxassetid://122095585357706',cartFillBadgeMinus='rbxassetid://78126067125241',
+cartFillBadgePlus='rbxassetid://109643096003552',cartFillBadgeQuestionmark=
+'rbxassetid://96329797572754',case='rbxassetid://131671593455396',caseFill=
+'rbxassetid://133667743842833',caseGylph='rbxassetid://72684442825623',cat=
+'rbxassetid://76438043402065',catCircle='rbxassetid://125040552553301',
+catCircleFill='rbxassetid://105496505191189',catFill=
+'rbxassetid://75596623477851',cedisign='rbxassetid://103299702073207',
+cedisignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://110438377324030'
+,cedisignBankBuilding='rbxassetid://94391063534756',cedisignBankBuildingFill=
+'rbxassetid://98460480681983',cedisignCircle='rbxassetid://130372607949366',
+cedisignCircleFill='rbxassetid://92011821597293',
+cedisignGaugeChartLefthalfRighthalf='rbxassetid://130943895529460',
+cedisignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://91190898873471',
+cedisignRing='rbxassetid://130183023961084',cedisignRingDashed=
+'rbxassetid://107629417082778',cedisignSquare='rbxassetid://138180702536840',
+cedisignSquareFill='rbxassetid://111554398707505',cellularbars=
+'rbxassetid://125832308574063',cellularbarsCircle='rbxassetid://106772243084439'
+,cellularbarsCircleFill='rbxassetid://75137148416999',centsign=
+'rbxassetid://105925251377949',centsignArrowTriangleheadCounterclockwiseRotate90
+='rbxassetid://116762184007471',centsignBankBuilding=
+'rbxassetid://97825181867350',centsignBankBuildingFill=
+'rbxassetid://127430294496635',centsignCircle='rbxassetid://82940891704153',
+centsignCircleFill='rbxassetid://90090839272956',
+centsignGaugeChartLefthalfRighthalf='rbxassetid://114208104708871',
+centsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://129300951818917',
+centsignRing='rbxassetid://140362456321464',centsignRingDashed=
+'rbxassetid://74787978516657',centsignSquare='rbxassetid://111622219613255',
+centsignSquareFill='rbxassetid://124455198437315',chair=
+'rbxassetid://81031147056732',chairFill='rbxassetid://104928042194690',
+chairLounge='rbxassetid://86782375467651',chairLoungeFill=
+'rbxassetid://134838176918598',chandelier='rbxassetid://114256133376087',
+chandelierFill='rbxassetid://140034611273760',character=
+'rbxassetid://70520208661164',characterBookClosed='rbxassetid://98811544621143',
+characterBookClosedFill='rbxassetid://106951098218047',characterBubble=
+'rbxassetid://135972436057073',characterBubbleFill='rbxassetid://88670019070119'
+,characterCircle='rbxassetid://120600115126394',characterCircleFill=
+'rbxassetid://138588485044134',characterCursorIbeam=
+'rbxassetid://70471184047263',characterDuployan='rbxassetid://126945262264539',
+characterMagnify='rbxassetid://93955130363457',characterPhonetic=
+'rbxassetid://115826427725683',characterSquare='rbxassetid://74845204135026',
+characterSquareFill='rbxassetid://73662884801491',characterSutton=
+'rbxassetid://80770715140920',characterTextJustify='rbxassetid://95949746183744'
+,characterTextbox='rbxassetid://111364553064358',characterTextboxBadgeSparkles=
+'rbxassetid://131808194478683',charactersLowercase='rbxassetid://88128764384529'
+,charactersUppercase='rbxassetid://71028973098762',chartBar=
+'rbxassetid://97312304809598',chartBarDocHorizontal=
+'rbxassetid://88206449206082',chartBarFill='rbxassetid://71315621261538',
+chartBarHorizontalPage='rbxassetid://104809785659828',chartBarHorizontalPageFill
+='rbxassetid://79906850504673',chartBarXaxis='rbxassetid://70369400252147',
+chartBarXaxisAscending='rbxassetid://82359236009090',
+chartBarXaxisAscendingBadgeClock='rbxassetid://124185325005143',
+chartBarXaxisDescending='rbxassetid://133906778698960',chartBarYaxis=
+'rbxassetid://99099708214794',chartDotsScatter='rbxassetid://121018735962977',
+chartLineDowntrendXyaxis='rbxassetid://72084011691095',
+chartLineDowntrendXyaxisCircle='rbxassetid://76215613064769',
+chartLineDowntrendXyaxisCircleFill='rbxassetid://138273764461717',
+chartLineFlattrendXyaxis='rbxassetid://110690574915489',
+chartLineFlattrendXyaxisCircle='rbxassetid://76783856599745',
+chartLineFlattrendXyaxisCircleFill='rbxassetid://132276486757230',
+chartLineTextClipboard='rbxassetid://97981178714527',chartLineTextClipboardFill=
+'rbxassetid://96087723608983',chartLineUptrendXyaxis=
+'rbxassetid://139061824225089',chartLineUptrendXyaxisCircle=
+'rbxassetid://96828643866957',chartLineUptrendXyaxisCircleFill=
+'rbxassetid://80941846198870',chartPie='rbxassetid://122200783940691',
+chartPieFill='rbxassetid://128608698529987',chartXyaxisLine=
+'rbxassetid://92614224702926',checklist='rbxassetid://125339100043044',
+checklistChecked='rbxassetid://128970854124435',checklistUnchecked=
+'rbxassetid://95294773465186',checkmark='rbxassetid://117709091345748',
+checkmarkApp='rbxassetid://73945071177652',checkmarkAppFill=
+'rbxassetid://96250250366221',checkmarkApplewatch='rbxassetid://97180578736402',
+checkmarkArrowTriangleheadClockwise='rbxassetid://107495937127772',
+checkmarkArrowTriangleheadCounterclockwise='rbxassetid://103676257085698',
+checkmarkBubble='rbxassetid://113427758353101',checkmarkBubbleFill=
+'rbxassetid://138390397309804',checkmarkCircle='rbxassetid://113497182715811',
+checkmarkCircleBadgeAirplane='rbxassetid://128585382975580',
+checkmarkCircleBadgeAirplaneFill='rbxassetid://125423417750617',
+checkmarkCircleBadgePlus='rbxassetid://117765136842107',
+checkmarkCircleBadgePlusFill='rbxassetid://135313130011967',
+checkmarkCircleBadgeQuestionmark='rbxassetid://138820692867130',
+checkmarkCircleBadgeQuestionmarkFill='rbxassetid://95057426558621',
+checkmarkCircleBadgeXmark='rbxassetid://81262261190949',
+checkmarkCircleBadgeXmarkFill='rbxassetid://103457398237353',
+checkmarkCircleDotted='rbxassetid://95176388046983',checkmarkCircleFill=
+'rbxassetid://80701432625608',checkmarkCircleTrianglebadgeExclamationmark=
+'rbxassetid://70460675920599',checkmarkCircleTrianglebadgeExclamationmarkFill=
+'rbxassetid://70825651489467',checkmarkDiamond='rbxassetid://127964709086707',
+checkmarkDiamondFill='rbxassetid://126380432099282',checkmarkGobackward=
+'rbxassetid://137921605172447',checkmarkIcloud='rbxassetid://91002425672304',
+checkmarkIcloudFill='rbxassetid://118772663634007',checkmarkMessage=
+'rbxassetid://115941539799893',checkmarkMessageFill=
+'rbxassetid://106074683578973',checkmarkRectangle='rbxassetid://80011475108827',
+checkmarkRectangleFill='rbxassetid://109346468847413',checkmarkRectanglePortrait
+='rbxassetid://110710722715340',checkmarkRectanglePortraitFill=
+'rbxassetid://106934167289889',checkmarkRectangleStack=
+'rbxassetid://105010458802288',checkmarkRectangleStackFill=
+'rbxassetid://101287404944931',checkmarkSeal='rbxassetid://79347843080910',
+checkmarkSealFill='rbxassetid://108989677395192',checkmarkSealTextPage=
+'rbxassetid://95930917032294',checkmarkSealTextPageFill=
+'rbxassetid://81864860271766',checkmarkShield='rbxassetid://116476478760645',
+checkmarkShieldFill='rbxassetid://123693100854806',checkmarkSquare=
+'rbxassetid://90140343305408',checkmarkSquareFill='rbxassetid://81712190011585',
+chevronBackward='rbxassetid://91193161432296',chevronBackward2=
+'rbxassetid://139857646802844',chevronBackwardChevronBackwardDotted=
+'rbxassetid://134698694323812',chevronBackwardCircle=
+'rbxassetid://111843022069820',chevronBackwardCircleFill=
+'rbxassetid://106726041209256',chevronBackwardSquare=
+'rbxassetid://119395442945672',chevronBackwardSquareFill=
+'rbxassetid://137650555775550',chevronBackwardToLine=
+'rbxassetid://119263941294390',chevronCompactBackward=
+'rbxassetid://133203717156144',chevronCompactDown='rbxassetid://100092606470558'
+,chevronCompactForward='rbxassetid://71064478971121',chevronCompactLeft=
+'rbxassetid://102340620945726',chevronCompactLeftChevronCompactRight=
+'rbxassetid://74422735550656',chevronCompactRight='rbxassetid://90848510900151',
+chevronCompactUp='rbxassetid://129845251522502',
+chevronCompactUpChevronCompactDown='rbxassetid://101290677380772',
+chevronCompactUpChevronCompactRightChevronCompactDownChevronCompactLeft=
+'rbxassetid://94444191245039',chevronDown='rbxassetid://116067852952871',
+chevronDown2='rbxassetid://83293178829681',chevronDownCircle=
+'rbxassetid://106048568785334',chevronDownCircleFill=
+'rbxassetid://137482091804957',chevronDownDotted2='rbxassetid://125100120340183'
+,chevronDownForward2='rbxassetid://80146358470761',chevronDownForwardDotted2=
+'rbxassetid://105001073803635',chevronDownRight2='rbxassetid://117900088200237',
+chevronDownRightDotted2='rbxassetid://70778643695183',chevronDownSquare=
+'rbxassetid://90429530228079',chevronDownSquareFill=
+'rbxassetid://113144434425347',chevronForward='rbxassetid://85597205001941',
+chevronForward2='rbxassetid://118305569049773',chevronForwardCircle=
+'rbxassetid://85622575012397',chevronForwardCircleFill=
+'rbxassetid://105928949880596',chevronForwardDottedChevronForward=
+'rbxassetid://118611532406974',chevronForwardSquare=
+'rbxassetid://121248135678052',chevronForwardSquareFill=
+'rbxassetid://136901211975528',chevronForwardToLine=
+'rbxassetid://113251427810828',chevronLeft='rbxassetid://120112805068615',
+chevronLeft2='rbxassetid://135271611992131',chevronLeftChevronLeftDotted=
+'rbxassetid://89493654076591',chevronLeftChevronRight=
+'rbxassetid://126091837718448',chevronLeftCircle='rbxassetid://79371642062729',
+chevronLeftCircleFill='rbxassetid://85025727393821',
+chevronLeftForwardslashChevronRight='rbxassetid://89806716346278',
+chevronLeftSquare='rbxassetid://76844555323813',chevronLeftSquareFill=
+'rbxassetid://85373254243633',chevronLeftToLine='rbxassetid://110571725143380',
+chevronRight='rbxassetid://78578344679238',chevronRight2=
+'rbxassetid://128617068570209',chevronRightCircle='rbxassetid://137319086285901'
+,chevronRightCircleFill='rbxassetid://106247315510084',
+chevronRightDottedChevronRight='rbxassetid://90280104847900',chevronRightSquare=
+'rbxassetid://108383056663215',chevronRightSquareFill=
+'rbxassetid://112928454370933',chevronRightToLine='rbxassetid://88538085601212',
+chevronUp='rbxassetid://71994936177602',chevronUp2='rbxassetid://79472666988214'
+,chevronUpChevronDown='rbxassetid://115187614425058',chevronUpChevronDownSquare=
+'rbxassetid://90721207484341',chevronUpChevronDownSquareFill=
+'rbxassetid://77237411567916',chevronUpChevronRightChevronDownChevronLeft=
+'rbxassetid://76064929254887',chevronUpCircle='rbxassetid://100279286464112',
+chevronUpCircleFill='rbxassetid://116618139465058',chevronUpDotted2=
+'rbxassetid://104672280488626',chevronUpForward2='rbxassetid://104274296097003',
+chevronUpForwardDotted2='rbxassetid://95660075484148',chevronUpRight2=
+'rbxassetid://109081501210155',chevronUpRightDotted2=
+'rbxassetid://81120090509930',chevronUpSquare='rbxassetid://128957757104189',
+chevronUpSquareFill='rbxassetid://139591043142298',chineseyuanrenminbisign=
+'rbxassetid://106647652850967',
+chineseyuanrenminbisignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://133627043954478',chineseyuanrenminbisignBankBuilding=
+'rbxassetid://135345149638301',chineseyuanrenminbisignBankBuildingFill=
+'rbxassetid://117468270794690',chineseyuanrenminbisignCircle=
+'rbxassetid://99238289619208',chineseyuanrenminbisignCircleFill=
+'rbxassetid://114815486361826',
+chineseyuanrenminbisignGaugeChartLefthalfRighthalf='rbxassetid://97094906069731'
+,chineseyuanrenminbisignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://126731737755120',chineseyuanrenminbisignRing=
+'rbxassetid://112854552761514',chineseyuanrenminbisignRingDashed=
+'rbxassetid://115412544764832',chineseyuanrenminbisignSquare=
+'rbxassetid://106069486060345',chineseyuanrenminbisignSquareFill=
+'rbxassetid://138122887058133',circle='rbxassetid://77351764572440',
+circleAndLineHorizontal='rbxassetid://122925249738775',
+circleAndLineHorizontalFill='rbxassetid://71198922364962',circleBadgeCheckmark=
+'rbxassetid://76550446292600',circleBadgeCheckmarkFill=
+'rbxassetid://122095089484720',circleBadgeExclamationmark=
+'rbxassetid://118464207416019',circleBadgeExclamationmarkFill=
+'rbxassetid://116397404821243',circleBadgeMinus='rbxassetid://140477954283913',
+circleBadgeMinusFill='rbxassetid://112082222631971',circleBadgePlus=
+'rbxassetid://74158974124425',circleBadgePlusFill='rbxassetid://102359232710725'
+,circleBadgeQuestionmark='rbxassetid://84105237816535',
+circleBadgeQuestionmarkFill='rbxassetid://107508739526231',circleBadgeXmark=
+'rbxassetid://75715075079912',circleBadgeXmarkFill=
+'rbxassetid://108800417260586',circleBottomhalfFilled=
+'rbxassetid://93772228869204',circleBottomhalfFilledInverse=
+'rbxassetid://100348037143199',circleBottomrighthalfCheckered=
+'rbxassetid://122575558098594',circleBottomrighthalfPatternCheckered=
+'rbxassetid://94163682140627',circleCircle='rbxassetid://71758569358351',
+circleCircleFill='rbxassetid://110715985557449',circleDashed=
+'rbxassetid://80873602883859',circleDashedRectangle=
+'rbxassetid://128384956155268',circleDotted='rbxassetid://105302007261428',
+circleDottedAndCircle='rbxassetid://88524317015989',circleDottedCircle=
+'rbxassetid://73982217657417',circleDottedCircleFill=
+'rbxassetid://74317409458538',circleFill='rbxassetid://132609101842833',
+circleFilledIpad='rbxassetid://118410279026483',circleFilledIpadFill=
+'rbxassetid://138916749945804',circleFilledIpadLandscape=
+'rbxassetid://98083380583955',circleFilledIpadLandscapeFill=
+'rbxassetid://107790137388850',circleFilledIphone='rbxassetid://122754969849891'
+,circleFilledIphoneFill='rbxassetid://97935781680008',
+circleFilledPatternDiagonallineRectangle='rbxassetid://84692213314115',
+circleGrid2x1='rbxassetid://126879867009619',circleGrid2x1Fill=
+'rbxassetid://118105257533357',circleGrid2x1LeftFilled=
+'rbxassetid://107581688387909',circleGrid2x1RightFilled=
+'rbxassetid://75046917797428',circleGrid2x2='rbxassetid://136579717851920',
+circleGrid2x2Fill='rbxassetid://114454902590504',
+circleGrid2x2TopleftCheckmarkFilled='rbxassetid://89913344340254',circleGrid3x3=
+'rbxassetid://94448556408587',circleGrid3x3Circle='rbxassetid://132776725985146'
+,circleGrid3x3CircleFill='rbxassetid://81436799538589',circleGrid3x3Fill=
+'rbxassetid://76516952302413',circleGridCross='rbxassetid://111852820274501',
+circleGridCrossDownFilled='rbxassetid://122925459913152',circleGridCrossFill=
+'rbxassetid://110500814372682',circleGridCrossLeftFilled=
+'rbxassetid://90411348277462',circleGridCrossRightFilled=
+'rbxassetid://73198600977610',circleGridCrossUpFilled=
+'rbxassetid://140639075369170',circleHexagongrid='rbxassetid://115766942150344',
+circleHexagongridCircle='rbxassetid://134748651158488',
+circleHexagongridCircleFill='rbxassetid://81549201853724',circleHexagongridFill=
+'rbxassetid://110857449976245',circleHexagonpath='rbxassetid://85916325663168',
+circleHexagonpathFill='rbxassetid://137583129970644',circleLefthalfFilled=
+'rbxassetid://97825242263995',circleLefthalfFilledInverse=
+'rbxassetid://95093722032121',circleLefthalfFilledRighthalfStripedHorizontal=
+'rbxassetid://108512481868469',
+circleLefthalfFilledRighthalfStripedHorizontalInverse=
+'rbxassetid://82874739567085',circleLefthalfStripedHorizontal=
+'rbxassetid://93826488584783',circleLefthalfStripedHorizontalInverse=
+'rbxassetid://97829908032507',circleOnSquare='rbxassetid://97779341422775',
+circleOnSquareIntersectionDotted='rbxassetid://120659491389976',
+circleOnSquareMerge='rbxassetid://78931485816076',circleRectangleDashed=
+'rbxassetid://125046628567305',circleRectangleFilledPatternDiagonalline=
+'rbxassetid://113655167746204',circleRighthalfFilled=
+'rbxassetid://78313004126214',circleRighthalfFilledInverse=
+'rbxassetid://114210082181728',circleSlash='rbxassetid://116513396479523',
+circleSlashFill='rbxassetid://72982692904185',circleSquare=
+'rbxassetid://122783494268200',circleSquareFill='rbxassetid://102931934264046',
+circleTophalfFilled='rbxassetid://91615555048147',circleTophalfFilledInverse=
+'rbxassetid://140511657377882',circlebadge='rbxassetid://91455021015370',
+circlebadge2='rbxassetid://125133188090635',circlebadge2Fill=
+'rbxassetid://96114399074311',circlebadgeFill='rbxassetid://100596250735760',
+clear='rbxassetid://86389300199089',clearFill='rbxassetid://94709581536945',
+clipboard='rbxassetid://131839244113738',clipboardFill=
+'rbxassetid://134384663588746',clock='rbxassetid://118494205518216',
+clockArrow2Circlepath='rbxassetid://120448260426448',clockArrowCirclepath=
+'rbxassetid://83500708276723',clockArrowTrianglehead2CounterclockwiseRotate90=
+'rbxassetid://115137084749223',clockArrowTriangleheadClockwiseRotate90PathDotted
+='rbxassetid://109195459563384',clockArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://89226626342302',clockBadge='rbxassetid://115327553111420',
+clockBadgeAirplane='rbxassetid://88667530307852',clockBadgeAirplaneFill=
+'rbxassetid://91355511171537',clockBadgeCheckmark='rbxassetid://83498643149203',
+clockBadgeCheckmarkFill='rbxassetid://77828663867935',clockBadgeExclamationmark=
+'rbxassetid://130712128950744',clockBadgeExclamationmarkFill=
+'rbxassetid://120350431132914',clockBadgeFill='rbxassetid://88269624942481',
+clockBadgeQuestionmark='rbxassetid://140419785571575',clockBadgeQuestionmarkFill
+='rbxassetid://89682323416952',clockBadgeXmark='rbxassetid://100973182473925',
+clockBadgeXmarkFill='rbxassetid://81230821710210',clockCircle=
+'rbxassetid://91059286420704',clockCircleFill='rbxassetid://85551007246698',
+clockFill='rbxassetid://111548973303929',cloud='rbxassetid://105957371924111',
+cloudBolt='rbxassetid://97438995257422',cloudBoltCircle=
+'rbxassetid://102467209270679',cloudBoltCircleFill='rbxassetid://86605548042299'
+,cloudBoltFill='rbxassetid://108857264198967',cloudBoltRain=
+'rbxassetid://119315902598803',cloudBoltRainCircle='rbxassetid://75667970292186'
+,cloudBoltRainCircleFill='rbxassetid://101185113049432',cloudBoltRainFill=
+'rbxassetid://105734599370391',cloudCircle='rbxassetid://75595371373901',
+cloudCircleFill='rbxassetid://100351258374804',cloudDrizzle=
+'rbxassetid://118772556442825',cloudDrizzleCircle='rbxassetid://134748373557774'
+,cloudDrizzleCircleFill='rbxassetid://116611455603766',cloudDrizzleFill=
+'rbxassetid://132048424719835',cloudFill='rbxassetid://81929130099582',cloudFog=
+'rbxassetid://88316772996583',cloudFogCircle='rbxassetid://91971244695380',
+cloudFogCircleFill='rbxassetid://107932107751895',cloudFogFill=
+'rbxassetid://140333418982777',cloudHail='rbxassetid://109477306347948',
+cloudHailCircle='rbxassetid://111935689657678',cloudHailCircleFill=
+'rbxassetid://113958303878705',cloudHailFill='rbxassetid://88337312532907',
+cloudHeavyrain='rbxassetid://119601076239239',cloudHeavyrainCircle=
+'rbxassetid://113148606737260',cloudHeavyrainCircleFill=
+'rbxassetid://93841246166430',cloudHeavyrainFill='rbxassetid://88892490794016',
+cloudMoon='rbxassetid://81142197017787',cloudMoonBolt=
+'rbxassetid://122762071192157',cloudMoonBoltCircle=
+'rbxassetid://130186762815605',cloudMoonBoltCircleFill=
+'rbxassetid://88717135754929',cloudMoonBoltFill='rbxassetid://132632709705945',
+cloudMoonCircle='rbxassetid://101603611950498',cloudMoonCircleFill=
+'rbxassetid://74403315229993',cloudMoonFill='rbxassetid://131415283779316',
+cloudMoonRain='rbxassetid://123752971704324',cloudMoonRainCircle=
+'rbxassetid://91321181570006',cloudMoonRainCircleFill=
+'rbxassetid://99999475568772',cloudMoonRainFill='rbxassetid://87465253394705',
+cloudRain='rbxassetid://73594633942444',cloudRainCircle=
+'rbxassetid://135073289493994',cloudRainCircleFill=
+'rbxassetid://107231577649535',cloudRainFill='rbxassetid://117683267149042',
+cloudRainbowCrop='rbxassetid://100908348397951',cloudRainbowCropFill=
+'rbxassetid://126657444384304',cloudRainbowHalf='rbxassetid://80949891966526',
+cloudSleet='rbxassetid://91110633048392',cloudSleetCircle=
+'rbxassetid://96915941810109',cloudSleetCircleFill=
+'rbxassetid://126874750937247',cloudSleetFill='rbxassetid://92708514394653',
+cloudSnow='rbxassetid://105037978809526',cloudSnowCircle=
+'rbxassetid://133719082885022',cloudSnowCircleFill='rbxassetid://87293225773295'
+,cloudSnowFill='rbxassetid://86264528698010',cloudSun=
+'rbxassetid://90643281481332',cloudSunBolt='rbxassetid://131455198927801',
+cloudSunBoltCircle='rbxassetid://125648631050001',cloudSunBoltCircleFill=
+'rbxassetid://84471773945729',cloudSunBoltFill='rbxassetid://112333664152593',
+cloudSunCircle='rbxassetid://113784163787232',cloudSunCircleFill=
+'rbxassetid://129881246784143',cloudSunFill='rbxassetid://124208622832507',
+cloudSunRain='rbxassetid://85585305376134',cloudSunRainCircle=
+'rbxassetid://101680887245230',cloudSunRainCircleFill=
+'rbxassetid://112862634540035',cloudSunRainFill='rbxassetid://96381809768088',
+coat='rbxassetid://138683384493955',coatCircle='rbxassetid://92296510927085',
+coatCircleFill='rbxassetid://96955835035080',coatFill=
+'rbxassetid://85343931320953',coloncurrencysign='rbxassetid://70610561043896',
+coloncurrencysignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://121730405897063',coloncurrencysignBankBuilding=
+'rbxassetid://70532040854333',coloncurrencysignBankBuildingFill=
+'rbxassetid://112013535327197',coloncurrencysignCircle=
+'rbxassetid://72472930693295',coloncurrencysignCircleFill=
+'rbxassetid://87581274361487',coloncurrencysignGaugeChartLefthalfRighthalf=
+'rbxassetid://81410792250924',
+coloncurrencysignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://117861383134809',coloncurrencysignRing=
+'rbxassetid://90425639365292',coloncurrencysignRingDashed=
+'rbxassetid://123033006789245',coloncurrencysignSquare=
+'rbxassetid://123318002368880',coloncurrencysignSquareFill=
+'rbxassetid://92584369957351',comb='rbxassetid://91258665510440',combFill=
+'rbxassetid://75935642339195',command='rbxassetid://106412276667065',
+commandCircle='rbxassetid://132133934704997',commandCircleFill=
+'rbxassetid://129804286574492',commandSquare='rbxassetid://125800470592169',
+commandSquareFill='rbxassetid://80987808644627',compassDrawing=
+'rbxassetid://132752181112407',computermouse='rbxassetid://74192781750262',
+computermouseFill='rbxassetid://122971754731281',cone=
+'rbxassetid://136677139752159',coneFill='rbxassetid://102731753185841',
+contactSensor='rbxassetid://78390045190635',contactSensorFill=
+'rbxassetid://107941147884609',contextualmenuAndCursorarrow=
+'rbxassetid://123228274012415',contextualmenuAndPointerArrow=
+'rbxassetid://104765402938366',control='rbxassetid://122628517345884',
+convertibleSide='rbxassetid://88056497032702',convertibleSideAirCirculate=
+'rbxassetid://98143091298529',convertibleSideAirCirculateFill=
+'rbxassetid://100789655329813',convertibleSideAirFresh=
+'rbxassetid://133740317868475',convertibleSideAirFreshFill=
+'rbxassetid://102875203407099',convertibleSideAndExclamationmark=
+'rbxassetid://98977481869672',convertibleSideAndExclamationmarkFill=
+'rbxassetid://75447287801799',convertibleSideArrowLeftAndRight=
+'rbxassetid://86781979323180',convertibleSideArrowLeftAndRightFill=
+'rbxassetid://132788293962828',convertibleSideArrowTriangleheadBackward=
+'rbxassetid://78827119413410',convertibleSideArrowTriangleheadBackwardFill=
+'rbxassetid://104495302305788',convertibleSideArrowTriangleheadForward=
+'rbxassetid://74390894600361',convertibleSideArrowTriangleheadForwardAndBackward
+='rbxassetid://111786845642207',
+convertibleSideArrowTriangleheadForwardAndBackwardFill=
+'rbxassetid://72089424692194',convertibleSideArrowTriangleheadForwardFill=
+'rbxassetid://78071911288530',convertibleSideArrowtriangleDown=
+'rbxassetid://94542124218390',convertibleSideArrowtriangleDownFill=
+'rbxassetid://106589035606078',convertibleSideArrowtriangleUp=
+'rbxassetid://120865137899154',convertibleSideArrowtriangleUpArrowtriangleDown=
+'rbxassetid://74101665628817',
+convertibleSideArrowtriangleUpArrowtriangleDownFill=
+'rbxassetid://71804342394234',convertibleSideArrowtriangleUpFill=
+'rbxassetid://110118762963000',convertibleSideFill=
+'rbxassetid://109733797871544',convertibleSideFrontOpen=
+'rbxassetid://131524948510161',convertibleSideFrontOpenCrop=
+'rbxassetid://85705555161852',convertibleSideFrontOpenCropFill=
+'rbxassetid://114271147567717',convertibleSideFrontOpenFill=
+'rbxassetid://95366775755410',convertibleSideHillDescentControl=
+'rbxassetid://71720992446425',convertibleSideHillDescentControlFill=
+'rbxassetid://88324401650008',convertibleSideHillDown=
+'rbxassetid://108529567267858',
+convertibleSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangle=
+'rbxassetid://107975199810052',
+convertibleSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangleFill=
+'rbxassetid://125979092076687',convertibleSideHillDownFill=
+'rbxassetid://131556252117231',convertibleSideHillUp=
+'rbxassetid://105616874495927',convertibleSideHillUpFill=
+'rbxassetid://129311678978143',convertibleSideLock=
+'rbxassetid://112823065019915',convertibleSideLockFill=
+'rbxassetid://111356282511740',convertibleSideLockOpen=
+'rbxassetid://113482904283039',convertibleSideLockOpenFill=
+'rbxassetid://84761446199699',cooktop='rbxassetid://88834174813644',cooktopFill=
+'rbxassetid://129568808107438',cpu='rbxassetid://124308556421451',cpuFill=
+'rbxassetid://103202408856526',creditcard='rbxassetid://81319932685854',
+creditcardAnd123='rbxassetid://87625010126625',creditcardAndNumbers=
+'rbxassetid://94218302612103',creditcardArrowTrianglehead2ClockwiseRotate90=
+'rbxassetid://137775649489006',creditcardCircle='rbxassetid://115901734894378',
+creditcardCircleFill='rbxassetid://94325401969577',creditcardFill=
+'rbxassetid://137205665020340',creditcardRewards='rbxassetid://105224490601254',
+creditcardRewardsFill='rbxassetid://122388666096808',
+creditcardTrianglebadgeExclamationmark='rbxassetid://128465389472705',
+creditcardTrianglebadgeExclamationmarkFill='rbxassetid://134046944234972',
+creditcardViewfinder='rbxassetid://107524109192728',cricketBall=
+'rbxassetid://107557445941992',cricketBallCircle='rbxassetid://108046247330406',
+cricketBallCircleFill='rbxassetid://97707187254281',cricketBallFill=
+'rbxassetid://124235035918902',crop='rbxassetid://76267866840424',cropRotate=
+'rbxassetid://112208131294712',cross='rbxassetid://117291897053132',crossCase=
+'rbxassetid://85203105573889',crossCaseCircle='rbxassetid://80349542022495',
+crossCaseCircleFill='rbxassetid://98787370493226',crossCaseFill=
+'rbxassetid://108835778654525',crossCircle='rbxassetid://127430494755623',
+crossCircleFill='rbxassetid://74611741813087',crossFill=
+'rbxassetid://108668325552210',crossVial='rbxassetid://139445714175616',
+crossVialFill='rbxassetid://134692391930699',crown='rbxassetid://75313755369933'
+,crownFill='rbxassetid://113744176715187',cruzeirosign=
+'rbxassetid://126565022512426',
+cruzeirosignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://74744481288811',cruzeirosignBankBuilding=
+'rbxassetid://131787371672007',cruzeirosignBankBuildingFill=
+'rbxassetid://124556542732831',cruzeirosignCircle='rbxassetid://108994326873163'
+,cruzeirosignCircleFill='rbxassetid://92977831088874',
+cruzeirosignGaugeChartLefthalfRighthalf='rbxassetid://112870188799383',
+cruzeirosignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://82432008607525',
+cruzeirosignRing='rbxassetid://73494393849183',cruzeirosignRingDashed=
+'rbxassetid://122245608823787',cruzeirosignSquare='rbxassetid://109516455287703'
+,cruzeirosignSquareFill='rbxassetid://104979541987178',cube=
+'rbxassetid://99085671007116',cubeCircle='rbxassetid://74137474397517',
+cubeCircleFill='rbxassetid://134571955348253',cubeFill=
+'rbxassetid://98135374759567',cubeTransparent='rbxassetid://80565642502539',
+cubeTransparentFill='rbxassetid://126536927378991',cupAndHeatWaves=
+'rbxassetid://74078659549582',cupAndHeatWavesFill='rbxassetid://131989311539655'
+,cupAndSaucer='rbxassetid://72514825273993',cupAndSaucerFill=
+'rbxassetid://119230927536360',curlybraces='rbxassetid://129788587428692',
+curlybracesSquare='rbxassetid://129045503496668',curlybracesSquareFill=
+'rbxassetid://123432376294099',cursorarrow='rbxassetid://76353347413637',
+cursorarrowAndSquareOnSquareDashed='rbxassetid://123035396911468',
+cursorarrowClick='rbxassetid://120755931811218',cursorarrowClick2=
+'rbxassetid://131954684779465',cursorarrowClickBadgeClock=
+'rbxassetid://96674815416136',cursorarrowMotionlines=
+'rbxassetid://117420120397428',cursorarrowMotionlinesClick=
+'rbxassetid://81573780818011',cursorarrowRays='rbxassetid://126392116415147',
+cursorarrowSlash='rbxassetid://91144329352020',cursorarrowSlashSquare=
+'rbxassetid://95513304668296',cursorarrowSquare='rbxassetid://131316405162767',
+curtainsClosed='rbxassetid://101807311791533',curtainsOpen=
+'rbxassetid://122412153002106',cylinder='rbxassetid://128980035962696',
+cylinderFill='rbxassetid://111577778638579',cylinderSplit1x2=
+'rbxassetid://127863382272636',cylinderSplit1x2Fill=
+'rbxassetid://88248682215663',dCircle='rbxassetid://139348136095117',dCircleFill
+='rbxassetid://119613399981436',dSquare='rbxassetid://117814926531634',
+dSquareFill='rbxassetid://108548965881707',danishkronesign=
+'rbxassetid://131739695626393',
+danishkronesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://105778149797087',danishkronesignBankBuilding=
+'rbxassetid://107331257039732',danishkronesignBankBuildingFill=
+'rbxassetid://110654132210408',danishkronesignCircle=
+'rbxassetid://71261610464877',danishkronesignCircleFill=
+'rbxassetid://81494386563215',danishkronesignGaugeChartLefthalfRighthalf=
+'rbxassetid://96925630529917',
+danishkronesignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://137030980787422',danishkronesignRing='rbxassetid://97079964616730'
+,danishkronesignRingDashed='rbxassetid://133795816793944',danishkronesignSquare=
+'rbxassetid://124245881324486',danishkronesignSquareFill=
+'rbxassetid://85244239694374',decreaseIndent='rbxassetid://88589482580566',
+decreaseQuotelevel='rbxassetid://116467773015005',degreesignCelsius=
+'rbxassetid://89989256393732',degreesignFahrenheit=
+'rbxassetid://104819176215784',dehumidifier='rbxassetid://124560404977624',
+dehumidifierFill='rbxassetid://137890774655891',deleteBackward=
+'rbxassetid://97287995124465',deleteBackwardFill='rbxassetid://91714832072413',
+deleteForward='rbxassetid://126070993467794',deleteForwardFill=
+'rbxassetid://101546743976234',deleteLeft='rbxassetid://129252293455681',
+deleteLeftFill='rbxassetid://103030116283513',deleteRight=
+'rbxassetid://107553771079065',deleteRightFill='rbxassetid://111969523580666',
+deskclock='rbxassetid://128981521415034',deskclockFill=
+'rbxassetid://77381200322602',desktopcomputer='rbxassetid://107766434710685',
+desktopcomputerAndArrowDown='rbxassetid://72903302027184',
+desktopcomputerAndMacbook='rbxassetid://123097897733245',
+desktopcomputerBadgeCheckmark='rbxassetid://113146178110887',
+desktopcomputerBadgeShieldCheckmark='rbxassetid://92532490405861',
+desktopcomputerTrianglebadgeExclamationmark='rbxassetid://105558126089739',
+deskview='rbxassetid://121089828258182',deskviewFill=
+'rbxassetid://117267790741411',dialHigh='rbxassetid://73577823641217',
+dialHighFill='rbxassetid://138768311720985',dialLow=
+'rbxassetid://73103006519174',dialLowFill='rbxassetid://98791719425867',
+dialMedium='rbxassetid://125486906119866',dialMediumFill=
+'rbxassetid://101803104687767',diamond='rbxassetid://100452260150000',
+diamondBottomhalfFilled='rbxassetid://119790712303249',diamondCircle=
+'rbxassetid://85000945258354',diamondCircleFill='rbxassetid://130795247628751',
+diamondFill='rbxassetid://135326379832516',diamondLefthalfFilled=
+'rbxassetid://111934789670996',diamondRighthalfFilled=
+'rbxassetid://116111158801385',diamondTophalfFilled=
+'rbxassetid://110438206140750',dice='rbxassetid://101607867208664',diceFill=
+'rbxassetid://132513568893953',dieFace1='rbxassetid://93511055000612',
+dieFace1Fill='rbxassetid://101810661456778',dieFace2=
+'rbxassetid://97436037441224',dieFace2Fill='rbxassetid://107358011011984',
+dieFace3='rbxassetid://120095408336817',dieFace3Fill=
+'rbxassetid://72211886706012',dieFace4='rbxassetid://106899046151642',
+dieFace4Fill='rbxassetid://84516247319545',dieFace5=
+'rbxassetid://129586843517471',dieFace5Fill='rbxassetid://89575782614538',
+dieFace6='rbxassetid://118434046380828',dieFace6Fill=
+'rbxassetid://79919588843970',digitalcrownArrowClockwise=
+'rbxassetid://113038599465284',digitalcrownArrowClockwiseFill=
+'rbxassetid://125537117338217',digitalcrownArrowCounterclockwise=
+'rbxassetid://91415160437248',digitalcrownArrowCounterclockwiseFill=
+'rbxassetid://135521665801021',digitalcrownHorizontalArrowClockwise=
+'rbxassetid://103189101099622',digitalcrownHorizontalArrowClockwiseFill=
+'rbxassetid://134814847872732',digitalcrownHorizontalArrowCounterclockwise=
+'rbxassetid://127977551895798',digitalcrownHorizontalArrowCounterclockwiseFill=
+'rbxassetid://128234037577616',digitalcrownHorizontalPress=
+'rbxassetid://96420371236309',digitalcrownHorizontalPressFill=
+'rbxassetid://128765548994947',digitalcrownPress='rbxassetid://78417970263455',
+digitalcrownPressFill='rbxassetid://117434984032927',directcurrent=
+'rbxassetid://131799886298156',dishwasher='rbxassetid://87710012658252',
+dishwasherCircle='rbxassetid://101196794042889',dishwasherCircleFill=
+'rbxassetid://125490773916925',dishwasherFill='rbxassetid://107996524055597',
+display='rbxassetid://129576202104478',display2='rbxassetid://104707340982471',
+displayAndArrowDown='rbxassetid://125200972320706',displayAndScrewdriver=
+'rbxassetid://88947373615358',displayTrianglebadgeExclamationmark=
+'rbxassetid://74215695749246',distributeHorizontal='rbxassetid://70445662962312'
+,distributeHorizontalCenter='rbxassetid://80437477134490',
+distributeHorizontalCenterFill='rbxassetid://119697341124280',
+distributeHorizontalFill='rbxassetid://81547792767797',distributeHorizontalLeft=
+'rbxassetid://107554802550012',distributeHorizontalLeftFill=
+'rbxassetid://94354038132668',distributeHorizontalRight=
+'rbxassetid://108003162032073',distributeHorizontalRightFill=
+'rbxassetid://73286830298055',distributeVertical='rbxassetid://76030980380639',
+distributeVerticalBottom='rbxassetid://125371761357477',
+distributeVerticalBottomFill='rbxassetid://101717338101326',
+distributeVerticalCenter='rbxassetid://118073308636361',
+distributeVerticalCenterFill='rbxassetid://87414672077654',
+distributeVerticalFill='rbxassetid://107674189896422',distributeVerticalTop=
+'rbxassetid://76620811418507',distributeVerticalTopFill=
+'rbxassetid://124081343166798',divide='rbxassetid://79215535863886',divideCircle
+='rbxassetid://113145969264461',divideCircleFill='rbxassetid://123714081526266',
+divideSquare='rbxassetid://111006580979570',divideSquareFill=
+'rbxassetid://105584343535953',doc='rbxassetid://80680488161934',docAppend=
+'rbxassetid://92502742629439',docBadgeArrowUp='rbxassetid://80297421254328',
+docBadgeClock='rbxassetid://106217049362270',docBadgeEllipsis=
+'rbxassetid://131787139108704',docBadgeGearshape='rbxassetid://75017579898518',
+docBadgePlus='rbxassetid://124537298304533',docCircle=
+'rbxassetid://114937888569701',docOnClipboard='rbxassetid://94277113748864',
+docOnDoc='rbxassetid://74221368188325',docPlaintext=
+'rbxassetid://116104151169652',docRichtext='rbxassetid://94749196343692',docText
+='rbxassetid://106048817459549',docTextBelowEcg='rbxassetid://111731877748125',
+docTextImage='rbxassetid://122105011236494',docTextMagnifyingglass=
+'rbxassetid://86983114420254',docViewfinder='rbxassetid://137034209283570',
+docZipper='rbxassetid://96676285483415',dockArrowDownRectangle=
+'rbxassetid://79678007655929',dockArrowUpRectangle=
+'rbxassetid://103809621231446',dockRectangle='rbxassetid://116915015149373',
+document='rbxassetid://124796793806383',documentBadgeArrowUp=
+'rbxassetid://123268508542979',documentBadgeArrowUpFill=
+'rbxassetid://90983453010822',documentBadgeClock='rbxassetid://110094088290911',
+documentBadgeClockFill='rbxassetid://125542031580318',documentBadgeEllipsis=
+'rbxassetid://117158658954997',documentBadgeEllipsisFill=
+'rbxassetid://76114071497838',documentBadgeGearshape=
+'rbxassetid://77928287555730',documentBadgeGearshapeFill=
+'rbxassetid://84274129384253',documentBadgePlus='rbxassetid://131301015581855',
+documentBadgePlusFill='rbxassetid://119897017745527',documentCircle=
+'rbxassetid://115432124967770',documentCircleFill='rbxassetid://81065392469526',
+documentFill='rbxassetid://102002749838822',documentOnClipboard=
+'rbxassetid://93839365739605',documentOnClipboardFill=
+'rbxassetid://112586343230192',documentOnDocument='rbxassetid://107508916580138'
+,documentOnDocumentFill='rbxassetid://74882215448372',documentOnTrash=
+'rbxassetid://121400057226892',documentOnTrashFill='rbxassetid://81536752681320'
+,documentViewfinder='rbxassetid://121616818189343',documentViewfinderFill=
+'rbxassetid://70819609607946',dog='rbxassetid://117451448671654',dogCircle=
+'rbxassetid://105450428935772',dogCircleFill='rbxassetid://98543830678397',
+dogFill='rbxassetid://92378974436965',dollarsign='rbxassetid://114666918383783',
+dollarsignArrowCirclepath='rbxassetid://111141236452341',
+dollarsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://89635002789945',dollarsignBankBuilding=
+'rbxassetid://105920028179036',dollarsignBankBuildingFill=
+'rbxassetid://132899638309304',dollarsignCircle='rbxassetid://102492024082780',
+dollarsignCircleFill='rbxassetid://71830017801030',
+dollarsignGaugeChartLefthalfRighthalf='rbxassetid://129052029424233',
+dollarsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://78922584980415',
+dollarsignRing='rbxassetid://135226063978248',dollarsignRingDashed=
+'rbxassetid://112067357041185',dollarsignSquare='rbxassetid://137446308450569',
+dollarsignSquareFill='rbxassetid://135191385118976',dongsign=
+'rbxassetid://131470155313598',dongsignArrowTriangleheadCounterclockwiseRotate90
+='rbxassetid://78266004720742',dongsignBankBuilding=
+'rbxassetid://93291038171841',dongsignBankBuildingFill=
+'rbxassetid://134028059678599',dongsignCircle='rbxassetid://78578408861421',
+dongsignCircleFill='rbxassetid://97359784120063',
+dongsignGaugeChartLefthalfRighthalf='rbxassetid://126111988758130',
+dongsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://132144167952188',
+dongsignRing='rbxassetid://77819742511029',dongsignRingDashed=
+'rbxassetid://74495453626839',dongsignSquare='rbxassetid://101387193682428',
+dongsignSquareFill='rbxassetid://82247973365677',doorFrenchClosed=
+'rbxassetid://72674657682992',doorFrenchOpen='rbxassetid://71650861494809',
+doorGarageClosed='rbxassetid://76882327011413',
+doorGarageClosedTrianglebadgeExclamationmark='rbxassetid://77158083946409',
+doorGarageDoubleBayClosed='rbxassetid://80981083592931',
+doorGarageDoubleBayClosedTrianglebadgeExclamationmark=
+'rbxassetid://126845743919696',doorGarageDoubleBayOpen=
+'rbxassetid://80126036062871',
+doorGarageDoubleBayOpenTrianglebadgeExclamationmark=
+'rbxassetid://81451333563049',doorGarageOpen='rbxassetid://119088880497339',
+doorGarageOpenTrianglebadgeExclamationmark='rbxassetid://87728457848837',
+doorLeftHandClosed='rbxassetid://135128964730567',doorLeftHandOpen=
+'rbxassetid://83765067910138',doorRightHandClosed='rbxassetid://110182995960620'
+,doorRightHandOpen='rbxassetid://106043050975592',doorSlidingLeftHandClosed=
+'rbxassetid://87632050696273',doorSlidingLeftHandOpen=
+'rbxassetid://78005731822470',doorSlidingRightHandClosed=
+'rbxassetid://128301725703574',doorSlidingRightHandOpen=
+'rbxassetid://84574799071754',dotArrowtrianglesUpRightDownLeftCircle=
+'rbxassetid://131760626023852',dotCarTopRadiowaves2RearLeftRearRearRight=
+'rbxassetid://90311472253622',dotCarTopRadiowaves2RearLeftRearRearRightFill=
+'rbxassetid://108359832311792',dotCircleAndCursorarrow=
+'rbxassetid://115122421262820',dotCircleAndHandPointUpLeftFill=
+'rbxassetid://128518318617359',dotCircleAndPointerArrow=
+'rbxassetid://111417453409808',dotCircleViewfinder='rbxassetid://96091854795879'
+,dotCrosshair='rbxassetid://111411956958702',dotRadiowavesForward=
+'rbxassetid://107117879701250',dotRadiowavesLeftAndRight=
+'rbxassetid://130013546237645',dotRadiowavesRight='rbxassetid://83521858010518',
+dotRadiowavesUpForward='rbxassetid://137844140535297',dotScope=
+'rbxassetid://121005306065203',dotScopeDisplay='rbxassetid://133201781049322',
+dotScopeLaptopcomputer='rbxassetid://90429518888381',dotSquare=
+'rbxassetid://136076872200498',dotSquareFill='rbxassetid://73545757794889',
+dotSquareshape='rbxassetid://115421844852656',dotSquareshapeFill=
+'rbxassetid://131818751234447',dotSquareshapeSplit2x2=
+'rbxassetid://111473506170578',dotViewfinder='rbxassetid://113016896284675',
+dotsAndLineVerticalAndCursorarrowRectangle='rbxassetid://82575719013218',
+dotsAndLineVerticalAndPointerArrowRectangle='rbxassetid://92115593886595',dpad=
+'rbxassetid://112675157052076',dpadDownFilled='rbxassetid://112396763830267',
+dpadFill='rbxassetid://122140108936845',dpadLeftFilled=
+'rbxassetid://87311733672381',dpadRightFilled='rbxassetid://130745043343873',
+dpadUpFilled='rbxassetid://134846020479603',drone='rbxassetid://78690133487507',
+droneFill='rbxassetid://133031915402113',drop='rbxassetid://118377862469616',
+dropCircle='rbxassetid://71240363811196',dropCircleFill=
+'rbxassetid://88945998378182',dropDegreesign='rbxassetid://77649680596146',
+dropDegreesignFill='rbxassetid://94362397679873',dropDegreesignSlash=
+'rbxassetid://110482944076581',dropDegreesignSlashFill=
+'rbxassetid://71669882733811',dropFill='rbxassetid://85349169340444',
+dropHalffull='rbxassetid://91240077152622',dropKeypadRectangle=
+'rbxassetid://70840237003373',dropKeypadRectangleFill=
+'rbxassetid://125931309084435',dropTransmission='rbxassetid://101407191451186',
+dropTriangle='rbxassetid://84183738522099',dropTriangleFill=
+'rbxassetid://90805606987344',dryer='rbxassetid://104968399783199',dryerCircle=
+'rbxassetid://120074568345505',dryerCircleFill='rbxassetid://111654035272821',
+dryerFill='rbxassetid://136500520544490',duffleBag='rbxassetid://88923927348266'
+,duffleBagFill='rbxassetid://99592794377634',dumbbell=
+'rbxassetid://131658449144206',dumbbellFill='rbxassetid://102647184300293',
+eCircle='rbxassetid://103742511836669',eCircleFill='rbxassetid://95162271305994'
+,eSquare='rbxassetid://101495905268164',eSquareFill=
+'rbxassetid://90805151324988',ear='rbxassetid://93167066666811',
+earBadgeCheckmark='rbxassetid://118287233995960',earBadgeWaveform=
+'rbxassetid://96770578331307',earFill='rbxassetid://74082991593421',
+earTrianglebadgeExclamationmark='rbxassetid://77722678508145',earbudLeft=
+'rbxassetid://90739084119105',earbudRight='rbxassetid://70630407521257',earbuds=
+'rbxassetid://79401980005894',earbudsBoneConduction=
+'rbxassetid://102719667776865',earbudsBoneConductionLeft=
+'rbxassetid://86650415805297',earbudsBoneConductionRight=
+'rbxassetid://87823184053006',earbudsCase='rbxassetid://140476224814409',
+earbudsCaseFill='rbxassetid://111148501625727',earbudsInEar=
+'rbxassetid://109063443614950',earbudsInEarLeft='rbxassetid://106492595834880',
+earbudsInEarRight='rbxassetid://125584398701209',earbudsStemless=
+'rbxassetid://99846906714452',earbudsStemlessLeft='rbxassetid://98848664729808',
+earbudsStemlessRight='rbxassetid://122917678453047',earpods=
+'rbxassetid://74278614743942',eject='rbxassetid://120765145931209',ejectCircle=
+'rbxassetid://104332244648721',ejectCircleFill='rbxassetid://140628083571758',
+ejectFill='rbxassetid://71327024184670',electronicTollCollection=
+'rbxassetid://136913224306634',electronicTollCollectionRectangle=
+'rbxassetid://128593575467422',electronicTollCollectionRectangleFill=
+'rbxassetid://112309550756861',electronicTollCollectionRectangleSlash=
+'rbxassetid://95728463970850',electronicTollCollectionRectangleSlashFill=
+'rbxassetid://125346120200754',
+electronicTollCollectionRectangleTrianglebadgeExclamationmark=
+'rbxassetid://90467983733711',
+electronicTollCollectionRectangleTrianglebadgeExclamationmarkFill=
+'rbxassetid://94360087978127',ellipsis='rbxassetid://124361135229418',
+ellipsisBubble='rbxassetid://126798458237130',ellipsisBubbleFill=
+'rbxassetid://79069091642283',ellipsisCalendar='rbxassetid://124805713057261',
+ellipsisCircle='rbxassetid://113784442485781',ellipsisCircleBadge=
+'rbxassetid://130244717421714',ellipsisCircleBadgeFill=
+'rbxassetid://82159336176596',ellipsisCircleFill='rbxassetid://122334603788097',
+ellipsisCurlybraces='rbxassetid://107977531225704',ellipsisMessage=
+'rbxassetid://80558243872489',ellipsisMessageFill='rbxassetid://132149801435799'
+,ellipsisRectangle='rbxassetid://83388291144122',ellipsisRectangleFill=
+'rbxassetid://117142929617215',ellipsisVerticalBubble=
+'rbxassetid://72015532400199',ellipsisVerticalBubbleFill=
+'rbxassetid://116203081148848',ellipsisViewfinder='rbxassetid://94637317080093',
+engineCombustion='rbxassetid://92302125521416',
+engineCombustionBadgeExclamationmark='rbxassetid://76712122282370',
+engineCombustionBadgeExclamationmarkFill='rbxassetid://89069786141963',
+engineCombustionFill='rbxassetid://99487338050460',
+engineEmissionAndDrop2WaterWaveBelow='rbxassetid://87305393152974',
+engineEmissionAndExclamationmark='rbxassetid://114464443552928',
+engineEmissionAndFilter='rbxassetid://127179695323664',entryLeverKeypad=
+'rbxassetid://118027558598911',entryLeverKeypadFill=
+'rbxassetid://118392320417223',entryLeverKeypadTrianglebadgeExclamationmark=
+'rbxassetid://137214809742459',entryLeverKeypadTrianglebadgeExclamationmarkFill=
+'rbxassetid://75303037354493',envelope='rbxassetid://106830949234316',
+envelopeAndArrow3Down='rbxassetid://117149942819834',envelopeAndArrow3DownFill=
+'rbxassetid://79378848825247',envelopeAndArrowTriangleheadBranch=
+'rbxassetid://104523224983991',envelopeAndArrowTriangleheadBranchFill=
+'rbxassetid://100707359290921',envelopeAndHandRaised=
+'rbxassetid://78356406355168',envelopeAndHandRaisedFill=
+'rbxassetid://107728689664001',envelopeArrowTriangleBranch=
+'rbxassetid://124377309512740',envelopeBadge='rbxassetid://93576600755016',
+envelopeBadgeFill='rbxassetid://116876097672908',envelopeBadgeMinus=
+'rbxassetid://130814870797193',envelopeBadgeMinusFill=
+'rbxassetid://76642074014671',envelopeBadgePersonCrop=
+'rbxassetid://105705646416572',envelopeBadgePersonCropFill=
+'rbxassetid://79242615918290',envelopeBadgePlus='rbxassetid://107588810121905',
+envelopeBadgePlusFill='rbxassetid://117435240335216',
+envelopeBadgeShieldHalfFilled='rbxassetid://140515835641833',
+envelopeBadgeShieldHalfFilledFill='rbxassetid://81922163345893',envelopeCircle=
+'rbxassetid://136873814874607',envelopeCircleFill='rbxassetid://111051395244412'
+,envelopeFill='rbxassetid://127507072697652',envelopeFront=
+'rbxassetid://122506649095626',envelopeFrontFill='rbxassetid://104299711974123',
+envelopeOpen='rbxassetid://100877378812997',envelopeOpenBadgeClock=
+'rbxassetid://100228997184187',envelopeOpenBadgeClockFill=
+'rbxassetid://71379109503673',envelopeOpenFill='rbxassetid://85763605331589',
+envelopeStack='rbxassetid://87145831106000',envelopeStackFill=
+'rbxassetid://123354851119926',environments='rbxassetid://70776273028500',
+environmentsCircle='rbxassetid://105521855459846',environmentsCircleFill=
+'rbxassetid://104935991380195',environmentsFill='rbxassetid://105632666776458',
+environmentsSlash='rbxassetid://104765532616958',environmentsSlashCircle=
+'rbxassetid://78007865985283',environmentsSlashCircleFill=
+'rbxassetid://91748220983526',environmentsSlashFill=
+'rbxassetid://75145189219140',equal='rbxassetid://81928889048192',equalCircle=
+'rbxassetid://79382669951914',equalCircleFill='rbxassetid://86371079165197',
+equalSquare='rbxassetid://79936726576289',equalSquareFill=
+'rbxassetid://104388387477692',eraser='rbxassetid://131139520079799',
+eraserBadgeXmark='rbxassetid://80645300777635',eraserBadgeXmarkFill=
+'rbxassetid://110922477071984',eraserFill='rbxassetid://108705331076102',
+eraserLineDashed='rbxassetid://76929643809652',eraserLineDashedFill=
+'rbxassetid://81891295746096',eraserSlash='rbxassetid://136706221907454',
+eraserSlashFill='rbxassetid://83380933600841',eraserTrianglebadgeExclamationmark
+='rbxassetid://105319193923389',eraserTrianglebadgeExclamationmarkFill=
+'rbxassetid://98230351518742',escape='rbxassetid://133789976668661',esim=
+'rbxassetid://131303958903026',esimFill='rbxassetid://86636914917717',eurosign=
+'rbxassetid://82925976421520',eurosignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://99526735026701',eurosignBankBuilding='rbxassetid://89483927128263'
+,eurosignBankBuildingFill='rbxassetid://108012299359814',eurosignCircle=
+'rbxassetid://140251138055967',eurosignCircleFill='rbxassetid://87679842728207',
+eurosignGaugeChartLefthalfRighthalf='rbxassetid://114065360584117',
+eurosignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://72338154797145',
+eurosignRing='rbxassetid://134135280297519',eurosignRingDashed=
+'rbxassetid://81105789808808',eurosignSquare='rbxassetid://118857707505659',
+eurosignSquareFill='rbxassetid://85458107728944',eurozonesign=
+'rbxassetid://106111186723394',
+eurozonesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://96687530526973',eurozonesignBankBuilding=
+'rbxassetid://101771619031147',eurozonesignBankBuildingFill=
+'rbxassetid://125592888577896',eurozonesignCircle='rbxassetid://114038615288773'
+,eurozonesignCircleFill='rbxassetid://82301050010699',
+eurozonesignGaugeChartLefthalfRighthalf='rbxassetid://123642748750595',
+eurozonesignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://139979957807793'
+,eurozonesignRing='rbxassetid://105011696428140',eurozonesignRingDashed=
+'rbxassetid://93030366645152',eurozonesignSquare='rbxassetid://105016814402384',
+eurozonesignSquareFill='rbxassetid://112888895324413',evCharger=
+'rbxassetid://97939002186339',evChargerArrowtriangleLeft=
+'rbxassetid://78531181074444',evChargerArrowtriangleLeftFill=
+'rbxassetid://129265466116295',evChargerArrowtriangleRight=
+'rbxassetid://73571516368733',evChargerArrowtriangleRightFill=
+'rbxassetid://133332267515902',evChargerExclamationmark=
+'rbxassetid://71284303991317',evChargerExclamationmarkFill=
+'rbxassetid://73242768019910',evChargerFill='rbxassetid://135357327350082',
+evChargerSlash='rbxassetid://119392987220859',evChargerSlashFill=
+'rbxassetid://117895186907340',evPlugAcGbT='rbxassetid://124662740249269',
+evPlugAcGbTFill='rbxassetid://97796850278979',evPlugAcType1=
+'rbxassetid://105942058683839',evPlugAcType1Fill='rbxassetid://87565275880095',
+evPlugAcType2='rbxassetid://109491714154043',evPlugAcType2Fill=
+'rbxassetid://136749111819862',evPlugDcCcs1='rbxassetid://111896860617304',
+evPlugDcCcs1Fill='rbxassetid://135258359505207',evPlugDcCcs2=
+'rbxassetid://89215178998105',evPlugDcCcs2Fill='rbxassetid://132543470987109',
+evPlugDcChademo='rbxassetid://118191687282802',evPlugDcChademoFill=
+'rbxassetid://115432509818358',evPlugDcGbT='rbxassetid://99656496942844',
+evPlugDcGbTFill='rbxassetid://76353846804034',evPlugDcNacs=
+'rbxassetid://128552750734766',evPlugDcNacsFill='rbxassetid://72083694831744',
+exclamationmark='rbxassetid://105489810797515',exclamationmark2=
+'rbxassetid://138940800083904',exclamationmark3='rbxassetid://96062819103435',
+exclamationmarkApplewatch='rbxassetid://70859643783699',
+exclamationmarkArrowCirclepath='rbxassetid://111446640991646',
+exclamationmarkArrowTriangle2Circlepath='rbxassetid://121048701816249',
+exclamationmarkArrowTrianglehead2ClockwiseRotate90='rbxassetid://87427147276965'
+,exclamationmarkArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://120412511808787',exclamationmarkBrakesignal=
+'rbxassetid://73594089484983',exclamationmarkBubble=
+'rbxassetid://95883853598192',exclamationmarkBubbleCircle=
+'rbxassetid://75160551591562',exclamationmarkBubbleCircleFill=
+'rbxassetid://94137052992947',exclamationmarkBubbleFill=
+'rbxassetid://120138139594154',exclamationmarkCircle=
+'rbxassetid://124980468238909',exclamationmarkCircleFill=
+'rbxassetid://118467060972001',exclamationmarkIcloud=
+'rbxassetid://76695078178669',exclamationmarkIcloudFill=
+'rbxassetid://131208143896029',exclamationmarkLock=
+'rbxassetid://106384248542364',exclamationmarkLockFill=
+'rbxassetid://109195138504207',exclamationmarkMagnifyingglass=
+'rbxassetid://92574625679787',exclamationmarkMessage=
+'rbxassetid://138562668016011',exclamationmarkMessageFill=
+'rbxassetid://132448718389247',exclamationmarkOctagon=
+'rbxassetid://137747340644933',exclamationmarkOctagonFill=
+'rbxassetid://105984442012480',exclamationmarkQuestionmark=
+'rbxassetid://92436083739221',exclamationmarkShield=
+'rbxassetid://112276285190661',exclamationmarkShieldFill=
+'rbxassetid://83928233244528',exclamationmarkSquare=
+'rbxassetid://80560347785472',exclamationmarkSquareFill=
+'rbxassetid://116001111235657',exclamationmarkTirepressure=
+'rbxassetid://91238920104209',exclamationmarkTransmission=
+'rbxassetid://102604704591626',exclamationmarkTriangle=
+'rbxassetid://107822175160368',exclamationmarkTriangleFill=
+'rbxassetid://114874558386316',exclamationmarkTriangleTextPage=
+'rbxassetid://129462348942674',exclamationmarkTriangleTextPageFill=
+'rbxassetid://87819250469566',exclamationmarkWarninglight=
+'rbxassetid://129488082492608',exclamationmarkWarninglightFill=
+'rbxassetid://109563951728634',externaldrive='rbxassetid://80232260950078',
+externaldriveBadgeCheckmark='rbxassetid://127808980665357',
+externaldriveBadgeExclamationmark='rbxassetid://138816851149625',
+externaldriveBadgeIcloud='rbxassetid://134043240118451',externaldriveBadgeMinus=
+'rbxassetid://93718911516002',externaldriveBadgePersonCrop=
+'rbxassetid://131468993878865',externaldriveBadgePlus=
+'rbxassetid://120630286835644',externaldriveBadgeQuestionmark=
+'rbxassetid://95288528165880',externaldriveBadgeTimemachine=
+'rbxassetid://98241082446758',externaldriveBadgeWifi=
+'rbxassetid://79557098906550',externaldriveBadgeXmark=
+'rbxassetid://122842097395468',externaldriveConnectedToLineBelow=
+'rbxassetid://130509526753365',externaldriveConnectedToLineBelowFill=
+'rbxassetid://95945834927517',externaldriveFill='rbxassetid://111188851017397',
+externaldriveFillBadgeCheckmark='rbxassetid://122664727689795',
+externaldriveFillBadgeExclamationmark='rbxassetid://139443980658229',
+externaldriveFillBadgeIcloud='rbxassetid://111658236910597',
+externaldriveFillBadgeMinus='rbxassetid://138322201910424',
+externaldriveFillBadgePersonCrop='rbxassetid://128003216586005',
+externaldriveFillBadgePlus='rbxassetid://114554892368455',
+externaldriveFillBadgeQuestionmark='rbxassetid://76317585194672',
+externaldriveFillBadgeTimemachine='rbxassetid://106899749894347',
+externaldriveFillBadgeWifi='rbxassetid://72486197994673',
+externaldriveFillBadgeXmark='rbxassetid://98595452028940',
+externaldriveFillTrianglebadgeExclamationmark='rbxassetid://98123683908795',
+externaldriveTrianglebadgeExclamationmark='rbxassetid://106750675144343',eye=
+'rbxassetid://111055543166389',eyeCircle='rbxassetid://107190923208298',
+eyeCircleFill='rbxassetid://135793946948356',eyeFill=
+'rbxassetid://77235800413545',eyeHalfClosed='rbxassetid://77207415123898',
+eyeHalfClosedFill='rbxassetid://113576230437344',eyeSlash=
+'rbxassetid://119498809185323',eyeSlashCircle='rbxassetid://132524732539324',
+eyeSlashCircleFill='rbxassetid://103154106288950',eyeSlashFill=
+'rbxassetid://81778913526360',eyeSquare='rbxassetid://95242157997285',
+eyeSquareFill='rbxassetid://126083471525251',eyeTrianglebadgeExclamationmark=
+'rbxassetid://89778592723539',eyeTrianglebadgeExclamationmarkFill=
+'rbxassetid://109952601896975',eyebrow='rbxassetid://138874889430672',eyedropper
+='rbxassetid://122887134386475',eyedropperFull='rbxassetid://91873383286058',
+eyedropperHalffull='rbxassetid://110456203480587',eyeglasses=
+'rbxassetid://81029046265930',eyeglassesSlash='rbxassetid://124054712844326',
+eyes='rbxassetid://78678714479511',eyesInverse='rbxassetid://79358575110860',
+fCircle='rbxassetid://120350062281724',fCircleFill='rbxassetid://85941153359585'
+,fCursive='rbxassetid://121112615529535',fCursiveCircle=
+'rbxassetid://118145351560598',fCursiveCircleFill='rbxassetid://79867894564651',
+fCursiveSlash='rbxassetid://82830783756850',fSquare=
+'rbxassetid://138319993082756',fSquareFill='rbxassetid://103704824525018',
+faceDashed='rbxassetid://115965004314399',faceDashedFill=
+'rbxassetid://85477783339034',faceSmiling='rbxassetid://78636671887809',
+faceSmilingInverse='rbxassetid://89152469821007',faceid=
+'rbxassetid://95081493927842',facemask='rbxassetid://99230089481142',
+facemaskFill='rbxassetid://87358950271058',fan='rbxassetid://104236974088032',
+fanAndLightCeiling='rbxassetid://107305354245185',fanAndLightCeilingFill=
+'rbxassetid://79601447011266',fanBadgeArrowUpAndDownAndArrowLeftAndRight=
+'rbxassetid://113898399220980',fanBadgeArrowUpAndDownAndArrowLeftAndRightFill=
+'rbxassetid://124338705997821',fanBadgeAutomatic='rbxassetid://134431646851799',
+fanBadgeAutomaticFill='rbxassetid://136476275577129',fanCeiling=
+'rbxassetid://96665114463151',fanCeilingFill='rbxassetid://138987560662626',
+fanCircle='rbxassetid://70854430102154',fanCircleFill=
+'rbxassetid://117605684696409',fanDesk='rbxassetid://114862891749128',
+fanDeskFill='rbxassetid://93071498661239',fanFill='rbxassetid://77445753113040',
+fanFloor='rbxassetid://109401757372728',fanFloorFill=
+'rbxassetid://81956707111904',fanGaugeOpen='rbxassetid://116949823717075',
+fanOscillation='rbxassetid://140040205782084',fanOscillationFill=
+'rbxassetid://95940480162856',fanSlash='rbxassetid://88988508555905',
+fanSlashFill='rbxassetid://91132405529736',faxmachine=
+'rbxassetid://98463604203755',faxmachineFill='rbxassetid://133950895418533',
+ferry='rbxassetid://104552475367467',ferryFill='rbxassetid://135078258733005',
+fibrechannel='rbxassetid://98030247410028',fieldOfViewUltrawide=
+'rbxassetid://114057852168752',fieldOfViewUltrawideFill=
+'rbxassetid://83751448891679',fieldOfViewWide='rbxassetid://96004890847207',
+fieldOfViewWideFill='rbxassetid://137899142791405',figure=
+'rbxassetid://110213647176253',figure2='rbxassetid://138808308230792',
+figure2AndChildHoldinghands='rbxassetid://102771612569539',figure2ArmsOpen=
+'rbxassetid://92288487915619',figure2Circle='rbxassetid://94206481778029',
+figure2CircleFill='rbxassetid://129196015079328',figure2LeftHoldinghands=
+'rbxassetid://100537110943074',figure2RightHoldinghands=
+'rbxassetid://119526196408433',figureAmericanFootball=
+'rbxassetid://91093899560194',figureAmericanFootballCircle=
+'rbxassetid://73526407862195',figureAmericanFootballCircleFill=
+'rbxassetid://125643881949592',figureAndChildHoldinghands=
+'rbxassetid://98234143469303',figureArchery='rbxassetid://91146536671456',
+figureArcheryCircle='rbxassetid://126114292998662',figureArcheryCircleFill=
+'rbxassetid://139817967546701',figureArmsOpen='rbxassetid://91747516641055',
+figureAustralianFootball='rbxassetid://95801007298244',
+figureAustralianFootballCircle='rbxassetid://114857191814495',
+figureAustralianFootballCircleFill='rbxassetid://96243863542381',figureBadminton
+='rbxassetid://76476251455465',figureBadmintonCircle=
+'rbxassetid://89195992414478',figureBadmintonCircleFill=
+'rbxassetid://114444756914155',figureBarre='rbxassetid://110544483608061',
+figureBarreCircle='rbxassetid://135837012134445',figureBarreCircleFill=
+'rbxassetid://127607577096807',figureBaseball='rbxassetid://97849278832097',
+figureBaseballCircle='rbxassetid://114304222609888',figureBaseballCircleFill=
+'rbxassetid://123393585149734',figureBasketball='rbxassetid://70458961636702',
+figureBasketballCircle='rbxassetid://133108362517016',figureBasketballCircleFill
+='rbxassetid://118516949832825',figureBowling='rbxassetid://87430224954145',
+figureBowlingCircle='rbxassetid://92291199433832',figureBowlingCircleFill=
+'rbxassetid://83424282699101',figureBoxing='rbxassetid://85849315745014',
+figureBoxingCircle='rbxassetid://108865178770018',figureBoxingCircleFill=
+'rbxassetid://103918369499522',figureChild='rbxassetid://110064985871757',
+figureChildAndLock='rbxassetid://73535299980245',figureChildAndLockFill=
+'rbxassetid://71218198833330',figureChildAndLockOpen=
+'rbxassetid://108694793096350',figureChildAndLockOpenFill=
+'rbxassetid://125673450678214',figureChildCircle='rbxassetid://81423849672320',
+figureChildCircleFill='rbxassetid://82354760379505',figureClimbing=
+'rbxassetid://120678773528166',figureClimbingCircle=
+'rbxassetid://120120038724485',figureClimbingCircleFill=
+'rbxassetid://132240539735275',figureCooldown='rbxassetid://92932298775664',
+figureCooldownCircle='rbxassetid://116114093190620',figureCooldownCircleFill=
+'rbxassetid://121936218292480',figureCoreTraining='rbxassetid://123052378717278'
+,figureCoreTrainingCircle='rbxassetid://72613470087026',
+figureCoreTrainingCircleFill='rbxassetid://89955491381206',figureCricket=
+'rbxassetid://116071257091954',figureCricketCircle=
+'rbxassetid://134233377377044',figureCricketCircleFill=
+'rbxassetid://72325772863796',figureCrossTraining='rbxassetid://73418643387339',
+figureCrossTrainingCircle='rbxassetid://72456662052046',
+figureCrossTrainingCircleFill='rbxassetid://77850653388101',figureCurling=
+'rbxassetid://133903499695545',figureCurlingCircle=
+'rbxassetid://125787714674084',figureCurlingCircleFill=
+'rbxassetid://119803288536473',figureDance='rbxassetid://82823113185452',
+figureDanceCircle='rbxassetid://129448865281588',figureDanceCircleFill=
+'rbxassetid://99987979019469',figureDiscSports='rbxassetid://97666785998608',
+figureDiscSportsCircle='rbxassetid://111401373560932',figureDiscSportsCircleFill
+='rbxassetid://71691339998044',figureDressLineVerticalFigure=
+'rbxassetid://100940012571116',figureElliptical='rbxassetid://103011240387444',
+figureEllipticalCircle='rbxassetid://131478855174617',figureEllipticalCircleFill
+='rbxassetid://104064244810242',figureEquestrianSports=
+'rbxassetid://113004809635168',figureEquestrianSportsCircle=
+'rbxassetid://85892477745919',figureEquestrianSportsCircleFill=
+'rbxassetid://97852470945461',figureFall='rbxassetid://78917096397322',
+figureFallCircle='rbxassetid://120817219815068',figureFallCircleFill=
+'rbxassetid://131207735766677',figureFencing='rbxassetid://88727868093192',
+figureFencingCircle='rbxassetid://106032601544162',figureFencingCircleFill=
+'rbxassetid://98217461416689',figureFieldHockey='rbxassetid://97574076033706',
+figureFieldHockeyCircle='rbxassetid://104931510950353',
+figureFieldHockeyCircleFill='rbxassetid://130141092753763',figureFishing=
+'rbxassetid://97928619322397',figureFishingCircle='rbxassetid://110360794736175'
+,figureFishingCircleFill='rbxassetid://136506795917678',figureFlexibility=
+'rbxassetid://102643174092557',figureFlexibilityCircle=
+'rbxassetid://107915680316772',figureFlexibilityCircleFill=
+'rbxassetid://131562203565834',figureGolf='rbxassetid://108030447882352',
+figureGolfCircle='rbxassetid://75259568650212',figureGolfCircleFill=
+'rbxassetid://78581076173636',figureGymnastics='rbxassetid://110639559835087',
+figureGymnasticsCircle='rbxassetid://123858181191697',figureGymnasticsCircleFill
+='rbxassetid://102190187170175',figureHandCycling='rbxassetid://105321743988781'
+,figureHandCyclingCircle='rbxassetid://85007285093415',
+figureHandCyclingCircleFill='rbxassetid://91530596716487',figureHandball=
+'rbxassetid://115838442370626',figureHandballCircle=
+'rbxassetid://70759727291307',figureHandballCircleFill=
+'rbxassetid://119475164895904',figureHighintensityIntervaltraining=
+'rbxassetid://76737326147568',figureHighintensityIntervaltrainingCircle=
+'rbxassetid://80397488456920',figureHighintensityIntervaltrainingCircleFill=
+'rbxassetid://98555009338585',figureHiking='rbxassetid://95596775753518',
+figureHikingCircle='rbxassetid://138221954074963',figureHikingCircleFill=
+'rbxassetid://88401031990874',figureHockey='rbxassetid://90256454862003',
+figureHockeyCircle='rbxassetid://94383755687550',figureHockeyCircleFill=
+'rbxassetid://136334583328074',figureHunting='rbxassetid://104331371922960',
+figureHuntingCircle='rbxassetid://127527976370774',figureHuntingCircleFill=
+'rbxassetid://81475211852623',figureIceHockey='rbxassetid://107583026067878',
+figureIceHockeyCircle='rbxassetid://118193809208332',figureIceHockeyCircleFill=
+'rbxassetid://111522178102920',figureIceSkating='rbxassetid://135617966638935',
+figureIceSkatingCircle='rbxassetid://138214165419825',figureIceSkatingCircleFill
+='rbxassetid://98770013409291',figureIndoorCycle='rbxassetid://80969946389201',
+figureIndoorCycleCircle='rbxassetid://134390336862454',
+figureIndoorCycleCircleFill='rbxassetid://95479995212663',figureIndoorRowing=
+'rbxassetid://84240034900060',figureIndoorRowingCircle=
+'rbxassetid://136778375743254',figureIndoorRowingCircleFill=
+'rbxassetid://106705352180779',figureIndoorSoccer='rbxassetid://101995448808644'
+,figureIndoorSoccerCircle='rbxassetid://98693757644611',
+figureIndoorSoccerCircleFill='rbxassetid://115853013474405',figureJumprope=
+'rbxassetid://112314762824266',figureJumpropeCircle=
+'rbxassetid://131867434437690',figureJumpropeCircleFill=
+'rbxassetid://82475486201404',figureKickboxing='rbxassetid://71547925836213',
+figureKickboxingCircle='rbxassetid://111712574527276',figureKickboxingCircleFill
+='rbxassetid://90368178358769',figureLacrosse='rbxassetid://131555411154516',
+figureLacrosseCircle='rbxassetid://125836289315347',figureLacrosseCircleFill=
+'rbxassetid://128431465303733',figureMartialArts='rbxassetid://135745150496906',
+figureMartialArtsCircle='rbxassetid://119796908146049',
+figureMartialArtsCircleFill='rbxassetid://113266429878233',figureMindAndBody=
+'rbxassetid://103860527144324',figureMindAndBodyCircle=
+'rbxassetid://106858535249934',figureMindAndBodyCircleFill=
+'rbxassetid://138656680070798',figureMixedCardio='rbxassetid://121353989624376',
+figureMixedCardioCircle='rbxassetid://124865593330962',
+figureMixedCardioCircleFill='rbxassetid://133316587934777',figureOpenWaterSwim=
+'rbxassetid://99134075301751',figureOpenWaterSwimCircle=
+'rbxassetid://135738254961736',figureOpenWaterSwimCircleFill=
+'rbxassetid://73573960201738',figureOutdoorCycle='rbxassetid://94389585238104',
+figureOutdoorCycleCircle='rbxassetid://104565216263530',
+figureOutdoorCycleCircleFill='rbxassetid://85407648912798',figureOutdoorRowing=
+'rbxassetid://97214365802337',figureOutdoorRowingCircle=
+'rbxassetid://110435954031642',figureOutdoorRowingCircleFill=
+'rbxassetid://89699495932779',figureOutdoorSoccer='rbxassetid://111514292464663'
+,figureOutdoorSoccerCircle='rbxassetid://78804307665587',
+figureOutdoorSoccerCircleFill='rbxassetid://84815226618665',figurePickleball=
+'rbxassetid://103908880748936',figurePickleballCircle=
+'rbxassetid://136344983007459',figurePickleballCircleFill=
+'rbxassetid://71182848325604',figurePilates='rbxassetid://108752699363037',
+figurePilatesCircle='rbxassetid://113467772255977',figurePilatesCircleFill=
+'rbxassetid://132440163880650',figurePlay='rbxassetid://125930862891634',
+figurePlayCircle='rbxassetid://77583381787661',figurePlayCircleFill=
+'rbxassetid://134400678202309',figurePoolSwim='rbxassetid://137689299313028',
+figurePoolSwimCircle='rbxassetid://89666987644291',figurePoolSwimCircleFill=
+'rbxassetid://92630998913564',figureRacquetball='rbxassetid://99889129274922',
+figureRacquetballCircle='rbxassetid://129504301099369',
+figureRacquetballCircleFill='rbxassetid://78638439110000',figureRoll=
+'rbxassetid://92890687621570',figureRollCircle='rbxassetid://115447965292337',
+figureRollCircleFill='rbxassetid://78758776592473',figureRollRunningpace=
+'rbxassetid://103258084151079',figureRollRunningpaceCircle=
+'rbxassetid://119394454598856',figureRollRunningpaceCircleFill=
+'rbxassetid://71338146987517',figureRolling='rbxassetid://96544717929655',
+figureRollingCircle='rbxassetid://130243270009292',figureRollingCircleFill=
+'rbxassetid://81436799482432',figureRower='rbxassetid://101478600974292',
+figureRugby='rbxassetid://109148647244317',figureRugbyCircle=
+'rbxassetid://121768904436252',figureRugbyCircleFill=
+'rbxassetid://124286693797479',figureRun='rbxassetid://113159658934048',
+figureRunCircle='rbxassetid://107121944951745',figureRunCircleFill=
+'rbxassetid://134197067094502',figureRunSquareStack=
+'rbxassetid://112190947223332',figureRunSquareStackFill=
+'rbxassetid://79407822771023',figureRunTreadmill='rbxassetid://72845166434800',
+figureRunTreadmillCircle='rbxassetid://100935270576310',
+figureRunTreadmillCircleFill='rbxassetid://90094962041285',figureSailing=
+'rbxassetid://101372266533215',figureSailingCircle=
+'rbxassetid://132108643163002',figureSailingCircleFill=
+'rbxassetid://105305283071460',figureSeatedSeatbelt=
+'rbxassetid://106552740060057',figureSeatedSeatbeltAndAirbagOff=
+'rbxassetid://98186865777515',figureSeatedSeatbeltAndAirbagOn=
+'rbxassetid://91150009110532',figureSeatedSeatbeltLeftDriveSeats1=
+'rbxassetid://85946255939735',figureSeatedSeatbeltLeftDriveSeats11=
+'rbxassetid://79678492525730',figureSeatedSeatbeltLeftDriveSeats11Fill=
+'rbxassetid://129089651219076',figureSeatedSeatbeltLeftDriveSeats12=
+'rbxassetid://93143466530275',figureSeatedSeatbeltLeftDriveSeats12Fill=
+'rbxassetid://105065766784936',figureSeatedSeatbeltLeftDriveSeats1Fill=
+'rbxassetid://113481718311782',figureSeatedSeatbeltLeftDriveSeats2=
+'rbxassetid://75226954452926',figureSeatedSeatbeltLeftDriveSeats22=
+'rbxassetid://101101160267265',figureSeatedSeatbeltLeftDriveSeats222=
+'rbxassetid://118909297450613',figureSeatedSeatbeltLeftDriveSeats222Fill=
+'rbxassetid://93791159425519',figureSeatedSeatbeltLeftDriveSeats223=
+'rbxassetid://78036184824175',figureSeatedSeatbeltLeftDriveSeats223Fill=
+'rbxassetid://92266074429811',figureSeatedSeatbeltLeftDriveSeats22Fill=
+'rbxassetid://116221944283747',figureSeatedSeatbeltLeftDriveSeats23=
+'rbxassetid://127024965881932',figureSeatedSeatbeltLeftDriveSeats232=
+'rbxassetid://117513359005767',figureSeatedSeatbeltLeftDriveSeats232Fill=
+'rbxassetid://82664717592655',figureSeatedSeatbeltLeftDriveSeats233=
+'rbxassetid://119483437512021',figureSeatedSeatbeltLeftDriveSeats233Fill=
+'rbxassetid://71345890100600',figureSeatedSeatbeltLeftDriveSeats23Fill=
+'rbxassetid://131875209072674',figureSeatedSeatbeltLeftDriveSeats2Fill=
+'rbxassetid://79587393298221',figureSeatedSeatbeltLeftDriveSeats3=
+'rbxassetid://74148888025573',figureSeatedSeatbeltLeftDriveSeats33=
+'rbxassetid://116237917433348',figureSeatedSeatbeltLeftDriveSeats333=
+'rbxassetid://74481906475225',figureSeatedSeatbeltLeftDriveSeats333Fill=
+'rbxassetid://117037471107630',figureSeatedSeatbeltLeftDriveSeats33Fill=
+'rbxassetid://128363081385683',figureSeatedSeatbeltLeftDriveSeats3Fill=
+'rbxassetid://107990648154861',figureSeatedSide='rbxassetid://103157176969588',
+figureSeatedSideAirDistributionLower='rbxassetid://120257665940386',
+figureSeatedSideAirDistributionMiddle='rbxassetid://92433515109818',
+figureSeatedSideAirDistributionMiddleAndLower='rbxassetid://118216495126795',
+figureSeatedSideAirDistributionMiddleAndLowerAngled=
+'rbxassetid://132877218661072',figureSeatedSideAirDistributionUpper=
+'rbxassetid://80332126775420',
+figureSeatedSideAirDistributionUpperAngledAndLowerAngled=
+'rbxassetid://128830311959827',
+figureSeatedSideAirDistributionUpperAngledAndMiddle=
+'rbxassetid://110778248234270',
+figureSeatedSideAirDistributionUpperAngledAndMiddleAndLowerAngled=
+'rbxassetid://112235343241027',figureSeatedSideAirbagOff=
+'rbxassetid://104984860910066',figureSeatedSideAirbagOff2=
+'rbxassetid://123574096899524',figureSeatedSideAirbagOn=
+'rbxassetid://112751749735103',figureSeatedSideAirbagOn2=
+'rbxassetid://133224719349931',figureSeatedSideAutomatic=
+'rbxassetid://136215915659039',figureSeatedSideLeft=
+'rbxassetid://77481740371688',figureSeatedSideLeftAirDistributionIndirect=
+'rbxassetid://79336558528852',figureSeatedSideLeftAirDistributionLower=
+'rbxassetid://127392790646826',
+figureSeatedSideLeftAirDistributionLowerAngledAndUpperAngled=
+'rbxassetid://112078481062843',figureSeatedSideLeftAirDistributionMiddle=
+'rbxassetid://78706747938686',figureSeatedSideLeftAirDistributionMiddleAndLower=
+'rbxassetid://100831410587505',
+figureSeatedSideLeftAirDistributionMiddleAndLowerAngled=
+'rbxassetid://75259277174467',figureSeatedSideLeftAirDistributionUpper=
+'rbxassetid://74202315829466',
+figureSeatedSideLeftAirDistributionUpperAndMiddleAndLower=
+'rbxassetid://114743873533519',
+figureSeatedSideLeftAirDistributionUpperAngledAndDottedlineAndLowerAngled=
+'rbxassetid://74199874956849',
+figureSeatedSideLeftAirDistributionUpperAngledAndLowerAngled=
+'rbxassetid://105111573378012',
+figureSeatedSideLeftAirDistributionUpperAngledAndMiddle=
+'rbxassetid://89346514926957',
+figureSeatedSideLeftAirDistributionUpperAngledAndMiddleAndLowerAngled=
+'rbxassetid://80317618153794',figureSeatedSideLeftAirbagOff=
+'rbxassetid://86363377016551',figureSeatedSideLeftAirbagOff2=
+'rbxassetid://131286776968522',figureSeatedSideLeftAirbagOn=
+'rbxassetid://82060834562607',figureSeatedSideLeftAirbagOn2=
+'rbxassetid://93600189126601',figureSeatedSideLeftAutomatic=
+'rbxassetid://96448990318081',figureSeatedSideLeftFan=
+'rbxassetid://95773073671580',figureSeatedSideLeftSteeringwheel=
+'rbxassetid://99756030999052',figureSeatedSideLeftWindshieldFrontAndHeatWaves=
+'rbxassetid://92505789545181',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionLower=
+'rbxassetid://137421564202284',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionMiddle=
+'rbxassetid://81437547930986',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionMiddleAndLower=
+'rbxassetid://136445257646948',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionUpper=
+'rbxassetid://88397915417301',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionUpperAndLower=
+'rbxassetid://92086059777005',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddle=
+'rbxassetid://88932521630743',
+figureSeatedSideLeftWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddleAndLower
+='rbxassetid://89902175830534',figureSeatedSideRight=
+'rbxassetid://136726651600980',figureSeatedSideRightAirDistributionIndirect=
+'rbxassetid://89934262166596',figureSeatedSideRightAirDistributionLower=
+'rbxassetid://73300805424690',
+figureSeatedSideRightAirDistributionLowerAngledAndUpperAngled=
+'rbxassetid://112866271533668',figureSeatedSideRightAirDistributionMiddle=
+'rbxassetid://112098509009862',
+figureSeatedSideRightAirDistributionMiddleAndLower=
+'rbxassetid://140706729304027',
+figureSeatedSideRightAirDistributionMiddleAndLowerAngled=
+'rbxassetid://112352134374515',figureSeatedSideRightAirDistributionUpper=
+'rbxassetid://98585139293028',
+figureSeatedSideRightAirDistributionUpperAndMiddleAndLower=
+'rbxassetid://129371148484159',
+figureSeatedSideRightAirDistributionUpperAngledAndDottedlineAndLowerAngled=
+'rbxassetid://71258161512054',
+figureSeatedSideRightAirDistributionUpperAngledAndLowerAngled=
+'rbxassetid://135103013327810',
+figureSeatedSideRightAirDistributionUpperAngledAndMiddle=
+'rbxassetid://103548517854131',
+figureSeatedSideRightAirDistributionUpperAngledAndMiddleAndLowerAngled=
+'rbxassetid://134493708141205',figureSeatedSideRightAirbagOff=
+'rbxassetid://94058410986970',figureSeatedSideRightAirbagOff2=
+'rbxassetid://100168980896563',figureSeatedSideRightAirbagOn=
+'rbxassetid://116869659816584',figureSeatedSideRightAirbagOn2=
+'rbxassetid://132818635170679',figureSeatedSideRightAutomatic=
+'rbxassetid://111548991851424',figureSeatedSideRightChildLap=
+'rbxassetid://76765306258341',figureSeatedSideRightFan=
+'rbxassetid://105598745260535',figureSeatedSideRightSteeringwheel=
+'rbxassetid://90687210460576',figureSeatedSideRightWindshieldFrontAndHeatWaves=
+'rbxassetid://86526553476751',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionLower=
+'rbxassetid://81180167854979',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionMiddle=
+'rbxassetid://73749499001488',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionMiddleAndLower=
+'rbxassetid://97986729272402',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionUpper=
+'rbxassetid://86983951557733',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionUpperAndLower=
+'rbxassetid://83534989566232',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddle=
+'rbxassetid://110050631545966',
+figureSeatedSideRightWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddleAndLower
+='rbxassetid://121091370522998',figureSeatedSideWindshieldFrontAndHeatWaves=
+'rbxassetid://87077410641628',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionLower=
+'rbxassetid://95211211764474',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionMiddle=
+'rbxassetid://79055808238898',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionMiddleAndLower=
+'rbxassetid://95139994219690',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionUpper=
+'rbxassetid://112780319350991',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionUpperAndLower=
+'rbxassetid://118828536958349',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddle=
+'rbxassetid://117604588619581',
+figureSeatedSideWindshieldFrontAndHeatWavesAirDistributionUpperAndMiddleAndLower
+='rbxassetid://133887310459410',figureSkateboarding=
+'rbxassetid://120531764531561',figureSkateboardingCircle=
+'rbxassetid://89075859489979',figureSkateboardingCircleFill=
+'rbxassetid://107428167276894',figureSkating='rbxassetid://131519789461691',
+figureSkiingCrosscountry='rbxassetid://95376513080244',
+figureSkiingCrosscountryCircle='rbxassetid://91319383729536',
+figureSkiingCrosscountryCircleFill='rbxassetid://100781904758952',
+figureSkiingDownhill='rbxassetid://94948924926037',figureSkiingDownhillCircle=
+'rbxassetid://124726796339746',figureSkiingDownhillCircleFill=
+'rbxassetid://133873735630410',figureSnowboarding='rbxassetid://93552707410765',
+figureSnowboardingCircle='rbxassetid://91124188336468',
+figureSnowboardingCircleFill='rbxassetid://80006732027627',figureSoccer=
+'rbxassetid://116190117656300',figureSocialdance='rbxassetid://98146311664249',
+figureSocialdanceCircle='rbxassetid://128341017230082',
+figureSocialdanceCircleFill='rbxassetid://90611956553302',figureSoftball=
+'rbxassetid://121025439420310',figureSoftballCircle=
+'rbxassetid://102433510764523',figureSoftballCircleFill=
+'rbxassetid://72322590245571',figureSquash='rbxassetid://115910960216751',
+figureSquashCircle='rbxassetid://108255500001887',figureSquashCircleFill=
+'rbxassetid://92599428723725',figureStairStepper='rbxassetid://97526748063558',
+figureStairStepperCircle='rbxassetid://93435159397362',
+figureStairStepperCircleFill='rbxassetid://86095743098312',figureStairs=
+'rbxassetid://80928066724578',figureStairsCircle='rbxassetid://108007736984499',
+figureStairsCircleFill='rbxassetid://97282222240704',figureStand=
+'rbxassetid://94523389012151',figureStandDress='rbxassetid://81879939422801',
+figureStandDressLineVerticalFigure='rbxassetid://75755749939997',
+figureStandLineDottedFigureStand='rbxassetid://74698954943767',
+figureStepTraining='rbxassetid://89082931649415',figureStepTrainingCircle=
+'rbxassetid://83798887901170',figureStepTrainingCircleFill=
+'rbxassetid://103288596282785',figureStrengthtrainingFunctional=
+'rbxassetid://104636472308678',figureStrengthtrainingFunctionalCircle=
+'rbxassetid://71887020003942',figureStrengthtrainingFunctionalCircleFill=
+'rbxassetid://136782284825758',figureStrengthtrainingTraditional=
+'rbxassetid://86384766229916',figureStrengthtrainingTraditionalCircle=
+'rbxassetid://137707664026627',figureStrengthtrainingTraditionalCircleFill=
+'rbxassetid://122169081610135',figureSurfing='rbxassetid://96005835479619',
+figureSurfingCircle='rbxassetid://97406987955422',figureSurfingCircleFill=
+'rbxassetid://71245429084383',figureTableTennis='rbxassetid://84629739397090',
+figureTableTennisCircle='rbxassetid://75152334648876',
+figureTableTennisCircleFill='rbxassetid://103942005472858',figureTaichi=
+'rbxassetid://110478807239910',figureTaichiCircle='rbxassetid://75278727258055',
+figureTaichiCircleFill='rbxassetid://71467374422500',figureTennis=
+'rbxassetid://109986369675921',figureTennisCircle='rbxassetid://102155111733843'
+,figureTennisCircleFill='rbxassetid://131743158972045',figureTrackAndField=
+'rbxassetid://136538052321610',figureTrackAndFieldCircle=
+'rbxassetid://103736888619277',figureTrackAndFieldCircleFill=
+'rbxassetid://123902162029358',figureVolleyball='rbxassetid://94303634727000',
+figureVolleyballCircle='rbxassetid://136059877417611',figureVolleyballCircleFill
+='rbxassetid://79422865723683',figureWalk='rbxassetid://79511822122227',
+figureWalkArrival='rbxassetid://126341672233316',figureWalkCircle=
+'rbxassetid://103084762751916',figureWalkCircleFill=
+'rbxassetid://91923043437287',figureWalkDeparture='rbxassetid://102119906082019'
+,figureWalkDiamond='rbxassetid://114194884373216',figureWalkDiamondFill=
+'rbxassetid://126938906614617',figureWalkMotion='rbxassetid://112030395820861',
+figureWalkMotionTrianglebadgeExclamationmark='rbxassetid://106410785966772',
+figureWalkSuitcaseRolling='rbxassetid://139035074665377',
+figureWalkSuitcaseRollingCircle='rbxassetid://71150674505180',
+figureWalkSuitcaseRollingCircleFill='rbxassetid://113530785990351',
+figureWalkTreadmill='rbxassetid://73060375741248',figureWalkTreadmillCircle=
+'rbxassetid://96470047881214',figureWalkTreadmillCircleFill=
+'rbxassetid://98035075220974',figureWalkTriangle='rbxassetid://78276655377384',
+figureWalkTriangleFill='rbxassetid://98344113716078',figureWaterFitness=
+'rbxassetid://91138168805690',figureWaterFitnessCircle=
+'rbxassetid://104634803350077',figureWaterFitnessCircleFill=
+'rbxassetid://76002732032150',figureWaterpolo='rbxassetid://139456823152794',
+figureWaterpoloCircle='rbxassetid://118729585287398',figureWaterpoloCircleFill=
+'rbxassetid://83689434096148',figureWave='rbxassetid://126350733687264',
+figureWaveCircle='rbxassetid://103869802030971',figureWaveCircleFill=
+'rbxassetid://82754948484397',figureWrestling='rbxassetid://81893433411503',
+figureWrestlingCircle='rbxassetid://134981808172623',figureWrestlingCircleFill=
+'rbxassetid://94060023878868',figureYoga='rbxassetid://131429815541470',
+figureYogaCircle='rbxassetid://98261961081745',figureYogaCircleFill=
+'rbxassetid://110744567898624',filemenuAndCursorarrow=
+'rbxassetid://103877132330792',filemenuAndPointerArrow=
+'rbxassetid://80797128300493',filemenuAndSelection=
+'rbxassetid://133250059618545',film='rbxassetid://86941949111966',filmCircle=
+'rbxassetid://124831403308365',filmCircleFill='rbxassetid://110423444595475',
+filmFill='rbxassetid://93532359201336',filmStack='rbxassetid://93437740666776',
+filmStackFill='rbxassetid://77875956814737',finder=
+'rbxassetid://105028817444613',fireExtinguisher='rbxassetid://115098785397510',
+fireExtinguisherFill='rbxassetid://110280038568592',fireplace=
+'rbxassetid://112954869899081',fireplaceFill='rbxassetid://75619406961928',
+firewall='rbxassetid://126760488734970',firewallFill=
+'rbxassetid://84638883483155',fireworks='rbxassetid://99494540765134',fish=
+'rbxassetid://125194628802668',fishCircle='rbxassetid://124319918102703',
+fishCircleFill='rbxassetid://77945311435195',fishFill=
+'rbxassetid://106504216014923',flag='rbxassetid://122736846758534',flag2Crossed=
+'rbxassetid://78844784013079',flag2CrossedCircle='rbxassetid://78584216590675',
+flag2CrossedCircleFill='rbxassetid://86134708117980',flag2CrossedFill=
+'rbxassetid://84296510463315',flagAndFlagFilledCrossed=
+'rbxassetid://100745243139308',flagBadgeEllipsis='rbxassetid://92803573179376',
+flagBadgeEllipsisFill='rbxassetid://91092814709500',flagCheckered=
+'rbxassetid://78821229595515',flagCheckered2Crossed=
+'rbxassetid://78412090520637',flagCheckeredCircle='rbxassetid://123648433572775'
+,flagCircle='rbxassetid://77170785894950',flagCircleFill=
+'rbxassetid://99647307774250',flagFill='rbxassetid://131669346188016',
+flagFilledAndFlagCrossed='rbxassetid://118037026885077',flagPatternCheckered=
+'rbxassetid://125386743240339',flagPatternCheckered2Crossed=
+'rbxassetid://115034252105148',flagPatternCheckeredCircle=
+'rbxassetid://88125322330487',flagPatternCheckeredCircleFill=
+'rbxassetid://80253578332366',flagPatternCheckeredLc=
+'rbxassetid://79015272896327',flagSlash='rbxassetid://136165673088536',
+flagSlashCircle='rbxassetid://92686158250177',flagSlashCircleFill=
+'rbxassetid://111660599139888',flagSlashFill='rbxassetid://71634940997338',
+flagSquare='rbxassetid://71479706467165',flagSquareFill=
+'rbxassetid://100277208162099',flame='rbxassetid://108768547584054',flameCircle=
+'rbxassetid://82747734852018',flameCircleFill='rbxassetid://86456375644145',
+flameFill='rbxassetid://119270312720784',flameGaugeOpen=
+'rbxassetid://113126271179041',flashlightOffCircle=
+'rbxassetid://117830570878966',flashlightOffCircleFill=
+'rbxassetid://72961865361048',flashlightOffFill='rbxassetid://101207421230626',
+flashlightOnCircle='rbxassetid://79621682641826',flashlightOnCircleFill=
+'rbxassetid://122824628666008',flashlightOnFill='rbxassetid://104818867409741',
+flashlightSlash='rbxassetid://124642568340306',flashlightSlashCircle=
+'rbxassetid://106284752783985',flashlightSlashCircleFill=
+'rbxassetid://131469491577650',flask='rbxassetid://71705325441366',flaskFill=
+'rbxassetid://73156360900679',fleuron='rbxassetid://84029089647656',fleuronFill=
+'rbxassetid://132784812676419',flipphone='rbxassetid://86153595900991',
+florinsign='rbxassetid://82815295829174',
+florinsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://131747551393628',florinsignBankBuilding=
+'rbxassetid://101348563612482',florinsignBankBuildingFill=
+'rbxassetid://73257997241079',florinsignCircle='rbxassetid://102666413087615',
+florinsignCircleFill='rbxassetid://101645622228381',
+florinsignGaugeChartLefthalfRighthalf='rbxassetid://110044104730017',
+florinsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://95345432829840',
+florinsignRing='rbxassetid://140452194895022',florinsignRingDashed=
+'rbxassetid://96409551878599',florinsignSquare='rbxassetid://131511638483506',
+florinsignSquareFill='rbxassetid://99961037421189',flowchart=
+'rbxassetid://112012575789082',flowchartFill='rbxassetid://85988923904543',
+fluidBatteryblock='rbxassetid://87171297845261',fluidBrakesignal=
+'rbxassetid://85409681443732',fluidCoolant='rbxassetid://94305313777913',
+fluidTransmission='rbxassetid://81520433429253',fn=
+'rbxassetid://136973223245238',folder='rbxassetid://125012160621787',
+folderBadgeGearshape='rbxassetid://110354717501799',folderBadgeMinus=
+'rbxassetid://105424398626891',folderBadgePersonCrop=
+'rbxassetid://118262710565929',folderBadgePlus='rbxassetid://86162465085192',
+folderBadgeQuestionmark='rbxassetid://96129876038348',folderCircle=
+'rbxassetid://136623654746784',folderCircleFill='rbxassetid://71560799678637',
+folderFill='rbxassetid://139360049720186',folderFillBadgeGearshape=
+'rbxassetid://86874469728544',folderFillBadgeMinus=
+'rbxassetid://126706256406221',folderFillBadgePersonCrop=
+'rbxassetid://116825460620355',folderFillBadgePlus=
+'rbxassetid://117713198610469',folderFillBadgeQuestionmark=
+'rbxassetid://101253803162337',football='rbxassetid://99824306110508',
+footballCircle='rbxassetid://82719329435185',forkKnife=
+'rbxassetid://88625690387037',forkKnifeCircle='rbxassetid://114255039792324',
+forkKnifeCircleFill='rbxassetid://74351929405604',formfittingGamecontroller=
+'rbxassetid://91206901253404',formfittingGamecontrollerFill=
+'rbxassetid://88145883762633',forward='rbxassetid://113037057903118',
+forwardCircle='rbxassetid://115172960663901',forwardCircleFill=
+'rbxassetid://77543137210165',forwardEnd='rbxassetid://130719114360778',
+forwardEndAlt='rbxassetid://119828878420743',forwardEndAltFill=
+'rbxassetid://87004210011550',forwardEndCircle='rbxassetid://127570430828500',
+forwardEndCircleFill='rbxassetid://77630986993530',forwardEndFill=
+'rbxassetid://135891363464093',forwardFill='rbxassetid://118726763278360',
+forwardFrame='rbxassetid://117425644293321',forwardFrameFill=
+'rbxassetid://119062379885277',fossilShell='rbxassetid://108141425042235',
+fossilShellFill='rbxassetid://92090095699092',francsign=
+'rbxassetid://104329955978670',
+francsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://123734401541585',francsignBankBuilding=
+'rbxassetid://140379990360270',francsignBankBuildingFill=
+'rbxassetid://101202870300556',francsignCircle='rbxassetid://92045068970438',
+francsignCircleFill='rbxassetid://109010950306083',
+francsignGaugeChartLefthalfRighthalf='rbxassetid://111277658129239',
+francsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://82217136095508',
+francsignRing='rbxassetid://124717081982767',francsignRingDashed=
+'rbxassetid://111221536076635',francsignSquare='rbxassetid://117783360698586',
+francsignSquareFill='rbxassetid://139671995243527',fryingPan=
+'rbxassetid://95665944113167',fryingPanFill='rbxassetid://131190456038889',
+fuelFilterWater='rbxassetid://114849224744442',fuelpump=
+'rbxassetid://128432265591197',fuelpumpAndFilter='rbxassetid://132403377755564',
+fuelpumpArrowtriangleLeft='rbxassetid://77219675885475',
+fuelpumpArrowtriangleLeftFill='rbxassetid://105580200622844',
+fuelpumpArrowtriangleRight='rbxassetid://78806432937161',
+fuelpumpArrowtriangleRightFill='rbxassetid://116584326215382',fuelpumpCircle=
+'rbxassetid://92321665086316',fuelpumpCircleFill='rbxassetid://109590002626519',
+fuelpumpExclamationmark='rbxassetid://124935631685999',
+fuelpumpExclamationmarkFill='rbxassetid://114211970014735',fuelpumpFill=
+'rbxassetid://89804646715125',fuelpumpSlash='rbxassetid://112344106152981',
+fuelpumpSlashFill='rbxassetid://131380848022445',fuelpumpThermometer=
+'rbxassetid://105776255539239',fuelpumpThermometerFill=
+'rbxassetid://91014703108179',['function']='rbxassetid://105988244015471',fx=
+'rbxassetid://133676038076601',gCircle='rbxassetid://92465681841123',gCircleFill
+='rbxassetid://117703861321064',gSquare='rbxassetid://98413842477799',
+gSquareFill='rbxassetid://121882609445976',gamecontroller=
+'rbxassetid://136899701592916',gamecontrollerCircle=
+'rbxassetid://115838851199918',gamecontrollerCircleFill=
+'rbxassetid://100513486519514',gamecontrollerFill='rbxassetid://107710782304881'
+,gaugeChartLefthalfRighthalf='rbxassetid://88317515489831',
+gaugeChartLeftthirdTopthirdRightthird='rbxassetid://117914290141041',gaugeOpen=
+'rbxassetid://72661873101783',
+gaugeOpenRighthalfDottedWithNeedleAndArrowTriangleheadBackward=
+'rbxassetid://106683214692474',gaugeOpenWithLinesNeedle33percent=
+'rbxassetid://96930938614147',
+gaugeOpenWithLinesNeedle33percentAndArrowTriangleheadFrom0percentTo50percent=
+'rbxassetid://72455258039917',gaugeOpenWithLinesNeedle33percentAndArrowtriangle=
+'rbxassetid://129905955726763',
+gaugeOpenWithLinesNeedle33percentAndArrowtriangleFrom0percentTo50percent=
+'rbxassetid://81580637007677',gaugeOpenWithLinesNeedle67percentAndArrowtriangle=
+'rbxassetid://104277227320240',
+gaugeOpenWithLinesNeedle67percentAndArrowtriangleAndCar=
+'rbxassetid://74920052592412',gaugeOpenWithLinesNeedle84percentExclamation=
+'rbxassetid://131118944109256',gaugeWithDotsNeedle0percent=
+'rbxassetid://71374226674159',gaugeWithDotsNeedle100percent=
+'rbxassetid://82175977935882',gaugeWithDotsNeedle33percent=
+'rbxassetid://92757773478553',gaugeWithDotsNeedle50percent=
+'rbxassetid://115384416941293',gaugeWithDotsNeedle67percent=
+'rbxassetid://109864469246268',gaugeWithDotsNeedleBottom0percent=
+'rbxassetid://74885486474683',gaugeWithDotsNeedleBottom100percent=
+'rbxassetid://72579321556049',gaugeWithDotsNeedleBottom50percent=
+'rbxassetid://120735235060336',gaugeWithDotsNeedleBottom50percentBadgeMinus=
+'rbxassetid://140660728462393',gaugeWithDotsNeedleBottom50percentBadgePlus=
+'rbxassetid://104491325572328',gaugeWithNeedle='rbxassetid://77994983474118',
+gaugeWithNeedleFill='rbxassetid://72397110171923',gear=
+'rbxassetid://133102912527371',gearBadge='rbxassetid://114821006676114',
+gearBadgeCheckmark='rbxassetid://116948953549356',gearBadgeQuestionmark=
+'rbxassetid://94190722082023',gearBadgeXmark='rbxassetid://102962629872900',
+gearCircle='rbxassetid://80927635234925',gearCircleFill=
+'rbxassetid://78683348854232',gearshape='rbxassetid://127735318557062',
+gearshape2='rbxassetid://95807134365871',gearshape2Fill=
+'rbxassetid://132207224797441',gearshapeArrowTriangle2Circlepath=
+'rbxassetid://84641602565527',gearshapeArrowTrianglehead2ClockwiseRotate90=
+'rbxassetid://130625453122583',gearshapeCircle='rbxassetid://70545341819845',
+gearshapeCircleFill='rbxassetid://105088281654478',gearshapeFill=
+'rbxassetid://98061574923339',gearshiftLayoutSixspeed=
+'rbxassetid://83954102394855',gift='rbxassetid://130378804447034',giftCircle=
+'rbxassetid://105693012395359',giftCircleFill='rbxassetid://75831198909976',
+giftFill='rbxassetid://122811099954906',giftcard='rbxassetid://74001358275222',
+giftcardFill='rbxassetid://80648895512474',globe='rbxassetid://75166161739358',
+globeAmericas='rbxassetid://82208390184303',globeAmericasFill=
+'rbxassetid://117216039216006',globeAsiaAustralia='rbxassetid://101174379892302'
+,globeAsiaAustraliaFill='rbxassetid://125274596435685',globeBadgeChevronBackward
+='rbxassetid://118399161412796',globeBadgeClock='rbxassetid://81246082209280',
+globeBadgeClockFill='rbxassetid://133084199012794',globeCentralSouthAsia=
+'rbxassetid://122671652893265',globeCentralSouthAsiaFill=
+'rbxassetid://120361963069758',globeDesk='rbxassetid://74995477837587',
+globeDeskFill='rbxassetid://98081463950992',globeEuropeAfrica=
+'rbxassetid://136835539161615',globeEuropeAfricaFill=
+'rbxassetid://130908776432341',globeFill='rbxassetid://108905553032102',glowplug
+='rbxassetid://81022835723835',gobackward='rbxassetid://91320889824011',
+gobackward10='rbxassetid://90559603880621',gobackward15=
+'rbxassetid://120316938540272',gobackward30='rbxassetid://140354039230051',
+gobackward45='rbxassetid://93434813605748',gobackward5=
+'rbxassetid://97130008586442',gobackward60='rbxassetid://91215922364999',
+gobackward75='rbxassetid://140735752535943',gobackward90=
+'rbxassetid://108207845332277',gobackwardMinus='rbxassetid://92431716781150',
+goforward='rbxassetid://131297950123949',goforward10=
+'rbxassetid://136515914036455',goforward15='rbxassetid://91999877907911',
+goforward30='rbxassetid://77322694446691',goforward45=
+'rbxassetid://90174945269280',goforward5='rbxassetid://92986838147448',
+goforward60='rbxassetid://116153177521739',goforward75=
+'rbxassetid://71594405050565',goforward90='rbxassetid://81147746129102',
+goforwardPlus='rbxassetid://130621369072851',graduationcap=
+'rbxassetid://125671553630065',graduationcapCircle=
+'rbxassetid://113915747930128',graduationcapCircleFill=
+'rbxassetid://105306913757085',graduationcapFill='rbxassetid://133021220811177',
+graph2d='rbxassetid://115562943064650',graph3d='rbxassetid://78081408845927',
+greaterthan='rbxassetid://72942886858684',greaterthanCircle=
+'rbxassetid://86205987134419',greaterthanCircleFill=
+'rbxassetid://86221088035316',greaterthanSquare='rbxassetid://138820278327055',
+greaterthanSquareFill='rbxassetid://82992552700740',greaterthanorequalto=
+'rbxassetid://84817672830093',greaterthanorequaltoCircle=
+'rbxassetid://129245462379395',greaterthanorequaltoCircleFill=
+'rbxassetid://71490024938088',greaterthanorequaltoSquare=
+'rbxassetid://74647437313735',greaterthanorequaltoSquareFill=
+'rbxassetid://116032105238422',greetingcard='rbxassetid://71909891559012',
+greetingcardFill='rbxassetid://129481097749734',grid=
+'rbxassetid://137977554732401',gridCircle='rbxassetid://110916645524765',
+gridCircleFill='rbxassetid://128975539852133',guaranisign=
+'rbxassetid://112075506061752',
+guaranisignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://126343329265137',guaranisignBankBuilding=
+'rbxassetid://83180391553596',guaranisignBankBuildingFill=
+'rbxassetid://75636756682974',guaranisignCircle='rbxassetid://85150493060456',
+guaranisignCircleFill='rbxassetid://133828485193738',
+guaranisignGaugeChartLefthalfRighthalf='rbxassetid://96206193501856',
+guaranisignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://94122115224811',
+guaranisignRing='rbxassetid://81261354529999',guaranisignRingDashed=
+'rbxassetid://134424671572303',guaranisignSquare='rbxassetid://86259179384477',
+guaranisignSquareFill='rbxassetid://110801531280759',guidepointHorizontal=
+'rbxassetid://84781782029904',guidepointVertical='rbxassetid://75299633437864',
+guidepointVerticalArrowtriangleForward='rbxassetid://136880401311404',
+guidepointVerticalNumbers='rbxassetid://90754353774856',guitars=
+'rbxassetid://89759348254657',guitarsFill='rbxassetid://118628784478150',gymBag=
+'rbxassetid://91936141424860',gyroscope='rbxassetid://87245230868142',hCircle=
+'rbxassetid://79276843950798',hCircleFill='rbxassetid://88400318014142',hSquare=
+'rbxassetid://78518090497793',hSquareFill='rbxassetid://119310296219192',
+hSquareOnSquare='rbxassetid://73872611085563',hSquareOnSquareFill=
+'rbxassetid://87667186323197',hammer='rbxassetid://112993982210428',hammerCircle
+='rbxassetid://112608453897290',hammerCircleFill='rbxassetid://115343834000229',
+hammerFill='rbxassetid://102181818130125',handDraw=
+'rbxassetid://117279982831998',handDrawBadgeEllipsis=
+'rbxassetid://97969102000092',handDrawBadgeEllipsisFill=
+'rbxassetid://139146605060373',handDrawFill='rbxassetid://138962845497785',
+handPalmFacing='rbxassetid://78824669302390',handPalmFacingFill=
+'rbxassetid://128639333246378',handPinch='rbxassetid://117668308815958',
+handPinchFill='rbxassetid://133801146028572',handPointDown=
+'rbxassetid://112615598975626',handPointDownFill='rbxassetid://105179986613891',
+handPointLeft='rbxassetid://77661745009660',handPointLeftFill=
+'rbxassetid://70525211956387',handPointRight='rbxassetid://97538565682591',
+handPointRightFill='rbxassetid://121327486358231',handPointUp=
+'rbxassetid://117889120409602',handPointUpBraille='rbxassetid://132543668022892'
+,handPointUpBrailleBadgeEllipsis='rbxassetid://70655290798237',
+handPointUpBrailleBadgeEllipsisFill='rbxassetid://88987354661672',
+handPointUpBrailleFill='rbxassetid://138549174364488',handPointUpFill=
+'rbxassetid://128174530086050',handPointUpLeft='rbxassetid://75447182366329',
+handPointUpLeftAndText='rbxassetid://138503170903583',handPointUpLeftAndTextFill
+='rbxassetid://97238879602996',handPointUpLeftFill='rbxassetid://89676540164824'
+,handRaised='rbxassetid://84405411427687',handRaisedApp=
+'rbxassetid://114135263702771',handRaisedAppFill='rbxassetid://90067463663710',
+handRaisedBrakesignal='rbxassetid://137730513400429',handRaisedBrakesignalSlash=
+'rbxassetid://100352691199559',handRaisedCircle='rbxassetid://116446437426242',
+handRaisedCircleFill='rbxassetid://128584434185523',handRaisedFill=
+'rbxassetid://78380006817166',handRaisedFingersSpread=
+'rbxassetid://109788802602461',handRaisedFingersSpreadFill=
+'rbxassetid://100765574389067',handRaisedPalmFacing=
+'rbxassetid://97733489796350',handRaisedPalmFacingFill=
+'rbxassetid://135020525701876',handRaisedSlash='rbxassetid://102308446798846',
+handRaisedSlashFill='rbxassetid://103883906624498',handRaisedSquare=
+'rbxassetid://139713537529028',handRaisedSquareFill=
+'rbxassetid://132631307297758',handRaisedSquareOnSquare=
+'rbxassetid://92160946199919',handRaisedSquareOnSquareFill=
+'rbxassetid://107064045091001',handRays='rbxassetid://113827578510200',
+handRaysFill='rbxassetid://81107317241495',handTap=
+'rbxassetid://121078591974451',handTapFill='rbxassetid://107040362271120',
+handThumbsdown='rbxassetid://86244158573902',handThumbsdownCircle=
+'rbxassetid://131507665718313',handThumbsdownCircleFill=
+'rbxassetid://72570466776202',handThumbsdownFill='rbxassetid://119254958080448',
+handThumbsdownFilledHandThumbsup='rbxassetid://129312899514257',
+handThumbsdownHandThumbsup='rbxassetid://137009505636508',
+handThumbsdownHandThumbsupFill='rbxassetid://105367500517028',
+handThumbsdownHandThumbsupFilled='rbxassetid://107178383384090',
+handThumbsdownSlash='rbxassetid://79807256603775',handThumbsdownSlashFill=
+'rbxassetid://74459649358982',handThumbsup='rbxassetid://128825696312922',
+handThumbsupCircle='rbxassetid://103851740662333',handThumbsupCircleFill=
+'rbxassetid://76110205867291',handThumbsupFill='rbxassetid://99068764072945',
+handThumbsupSlash='rbxassetid://127685946159633',handThumbsupSlashFill=
+'rbxassetid://125613315163126',handWave='rbxassetid://99003092549916',
+handWaveFill='rbxassetid://121274581284216',handbag=
+'rbxassetid://119008806614003',handbagCircle='rbxassetid://121699579950837',
+handbagCircleFill='rbxassetid://119779307441201',handbagFill=
+'rbxassetid://132621634669616',handbagSensorTagRadiowavesLeftAndRight=
+'rbxassetid://120465117885302',handbagSensorTagRadiowavesLeftAndRightFill=
+'rbxassetid://137202755346414',handsAndSparkles='rbxassetid://117743916588668',
+handsAndSparklesFill='rbxassetid://79507225656287',handsClap=
+'rbxassetid://132285028680230',handsClapFill='rbxassetid://109479694040359',
+hanger='rbxassetid://110883707987214',hare='rbxassetid://117125651358452',
+hareCircle='rbxassetid://81410012263740',hareCircleFill=
+'rbxassetid://125075745793371',hareFill='rbxassetid://98813388968086',hatCap=
+'rbxassetid://128042779395199',hatCapFill='rbxassetid://102509811181096',
+hatWidebrim='rbxassetid://124186898685706',hatWidebrimFill=
+'rbxassetid://86146755083367',hazardsign='rbxassetid://77958913474310',
+hazardsignFill='rbxassetid://76749713980748',headProfileArrowForwardAndVisionPro
+='rbxassetid://70678052534847',headProfileArrowForwardAndVisionpro=
+'rbxassetid://121693109509839',headlightDaytime='rbxassetid://84175387087613',
+headlightDaytimeFill='rbxassetid://111429276707908',headlightFog=
+'rbxassetid://109963635819226',headlightFogFill='rbxassetid://112552940723745',
+headlightHighBeam='rbxassetid://74121554429267',headlightHighBeamFill=
+'rbxassetid://137245916188907',headlightLowBeam='rbxassetid://125392142355830',
+headlightLowBeamFill='rbxassetid://81479147676998',headphones=
+'rbxassetid://132794493030809',headphonesCircle='rbxassetid://72972156489516',
+headphonesCircleFill='rbxassetid://105101131622323',headphonesDots=
+'rbxassetid://99563475077840',headphonesOverEar='rbxassetid://94686833776442',
+headphonesSensorTagRadiowavesLeftAndRight='rbxassetid://90239603333031',
+headphonesSensorTagRadiowavesLeftAndRightFill='rbxassetid://127570957315647',
+headphonesSlash='rbxassetid://111042856026852',headset=
+'rbxassetid://130413167339658',headsetCircle='rbxassetid://102874182756345',
+headsetCircleFill='rbxassetid://99680766544161',hearingdeviceAndSignalMeter=
+'rbxassetid://122423830802161',hearingdeviceAndSignalMeterFill=
+'rbxassetid://101534259662449',hearingdeviceEar='rbxassetid://116592072523482',
+hearingdeviceEarFill='rbxassetid://79485233563481',heart=
+'rbxassetid://107768052948480',heartBadgeBolt='rbxassetid://108146593346669',
+heartBadgeBoltFill='rbxassetid://89201775898085',heartBadgeBoltSlash=
+'rbxassetid://101803582419656',heartBadgeBoltSlashFill=
+'rbxassetid://115081294249357',heartCircle='rbxassetid://74612932649320',
+heartCircleFill='rbxassetid://112366120879148',heartFill=
+'rbxassetid://133334197582974',heartGaugeOpen='rbxassetid://83392107700158',
+heartRectangle='rbxassetid://97775143423887',heartRectangleFill=
+'rbxassetid://81040147605111',heartSlash='rbxassetid://102340079577590',
+heartSlashCircle='rbxassetid://105081950550053',heartSlashCircleFill=
+'rbxassetid://117503908060806',heartSlashFill='rbxassetid://98288490017510',
+heartSquare='rbxassetid://112292843005652',heartSquareFill=
+'rbxassetid://113665033930324',heartTextClipboard='rbxassetid://135119715100910'
+,heartTextClipboardFill='rbxassetid://97188049534337',heartTextSquare=
+'rbxassetid://74020211110629',heartTextSquareFill='rbxassetid://96589545065469',
+heatElementWindshield='rbxassetid://85064985076162',heatWaves=
+'rbxassetid://117183214242618',heatWavesAndFan='rbxassetid://131275641266480',
+heatWavesCircle='rbxassetid://107780936807304',heatWavesCircleFill=
+'rbxassetid://124151920948426',heatWavesGaugeOpen='rbxassetid://109476160740075'
+,heaterVertical='rbxassetid://72918931799735',heaterVerticalFill=
+'rbxassetid://92635624311644',helm='rbxassetid://128890437419395',helmet=
+'rbxassetid://114891866790157',helmetFill='rbxassetid://119174880478810',hexagon
+='rbxassetid://121821922240266',hexagonBottomhalfFilled=
+'rbxassetid://111107059226028',hexagonFill='rbxassetid://82240827497051',
+hexagonLefthalfFilled='rbxassetid://101561513084357',hexagonRighthalfFilled=
+'rbxassetid://107562615063917',hexagonTophalfFilled=
+'rbxassetid://132335379358202',hifireceiver='rbxassetid://135361029083378',
+hifireceiverFill='rbxassetid://99759386860407',hifispeaker=
+'rbxassetid://99164524327344',hifispeaker2='rbxassetid://86111767037300',
+hifispeaker2BadgeMinus='rbxassetid://118971920951758',hifispeaker2BadgeMinusFill
+='rbxassetid://101665851094245',hifispeaker2BadgePlus=
+'rbxassetid://115961834970221',hifispeaker2BadgePlusFill=
+'rbxassetid://72006888131536',hifispeaker2Fill='rbxassetid://88815689838039',
+hifispeakerAndAppletv='rbxassetid://127147046090615',hifispeakerAndAppletvFill=
+'rbxassetid://83573337866673',hifispeakerAndHomepod=
+'rbxassetid://82595174597082',hifispeakerAndHomepodBadgeMinus=
+'rbxassetid://112609157830200',hifispeakerAndHomepodBadgeMinusFill=
+'rbxassetid://74023887981775',hifispeakerAndHomepodBadgePlus=
+'rbxassetid://85291697963379',hifispeakerAndHomepodBadgePlusFill=
+'rbxassetid://123316634293817',hifispeakerAndHomepodFill=
+'rbxassetid://73377066571876',hifispeakerAndHomepodMini=
+'rbxassetid://70934710071244',hifispeakerAndHomepodMiniBadgeMinus=
+'rbxassetid://78650669958266',hifispeakerAndHomepodMiniBadgeMinusFill=
+'rbxassetid://130888989200488',hifispeakerAndHomepodMiniBadgePlus=
+'rbxassetid://101156627050743',hifispeakerAndHomepodMiniBadgePlusFill=
+'rbxassetid://72856342595422',hifispeakerAndHomepodMiniFill=
+'rbxassetid://124757037235263',hifispeakerAndHomepodmini=
+'rbxassetid://104285147267424',hifispeakerArrowForward=
+'rbxassetid://106004965331315',hifispeakerArrowForwardFill=
+'rbxassetid://109292392722010',hifispeakerBadgeMinus=
+'rbxassetid://113543299876891',hifispeakerBadgeMinusFill=
+'rbxassetid://106840703331361',hifispeakerBadgePlus=
+'rbxassetid://86077612672916',hifispeakerBadgePlusFill=
+'rbxassetid://79039318209871',hifispeakerFill='rbxassetid://77801175030655',
+highlighter='rbxassetid://77046693747579',highlighterBadgeEllipsis=
+'rbxassetid://90559499376399',hockeyPuck='rbxassetid://82861679405783',
+hockeyPuckCircle='rbxassetid://74508151585209',hockeyPuckCircleFill=
+'rbxassetid://83552419639351',hockeyPuckFill='rbxassetid://112221361054966',
+holdBrakesignal='rbxassetid://93719484889123',homekit=
+'rbxassetid://129816863247706',homepod='rbxassetid://138665920971606',homepod2=
+'rbxassetid://124703967838105',homepod2BadgeMinus='rbxassetid://72010862188560',
+homepod2BadgeMinusFill='rbxassetid://122422111268643',homepod2BadgePlus=
+'rbxassetid://95527221485415',homepod2BadgePlusFill=
+'rbxassetid://124657181184492',homepod2Fill='rbxassetid://71022507008871',
+homepodAndAppletv='rbxassetid://137717079586958',homepodAndAppletvFill=
+'rbxassetid://109445378694806',homepodAndHomepodMini=
+'rbxassetid://121344187904185',homepodAndHomepodMiniBadgeMinus=
+'rbxassetid://111143025398497',homepodAndHomepodMiniBadgeMinusFill=
+'rbxassetid://136855742899911',homepodAndHomepodMiniBadgePlus=
+'rbxassetid://129503453741868',homepodAndHomepodMiniBadgePlusFill=
+'rbxassetid://73815090550857',homepodAndHomepodMiniFill=
+'rbxassetid://82957016359447',homepodAndHomepodmini=
+'rbxassetid://128138460912737',homepodArrowForward=
+'rbxassetid://112827593003603',homepodArrowForwardFill=
+'rbxassetid://111457680101526',homepodBadgeCheckmark=
+'rbxassetid://82279608071963',homepodBadgeCheckmarkFill=
+'rbxassetid://119126537015840',homepodBadgeMinus='rbxassetid://111844922298587',
+homepodBadgeMinusFill='rbxassetid://114830828502660',homepodBadgePlus=
+'rbxassetid://106645926660190',homepodBadgePlusFill=
+'rbxassetid://89951217734368',homepodFill='rbxassetid://126573700088988',
+homepodMini='rbxassetid://119380942973091',homepodMini2=
+'rbxassetid://119573077798052',homepodMini2BadgeMinus=
+'rbxassetid://75537675870052',homepodMini2BadgeMinusFill=
+'rbxassetid://89666757230874',homepodMini2BadgePlus=
+'rbxassetid://131253222073711',homepodMini2BadgePlusFill=
+'rbxassetid://122139521655674',homepodMini2Fill='rbxassetid://129534319223398',
+homepodMiniAndAppletv='rbxassetid://126403464830823',homepodMiniAndAppletvFill=
+'rbxassetid://102930412180504',homepodMiniArrowForward=
+'rbxassetid://103858774531499',homepodMiniArrowForwardFill=
+'rbxassetid://88548291845376',homepodMiniBadgeCheckmark=
+'rbxassetid://95602217269613',homepodMiniBadgeCheckmarkFill=
+'rbxassetid://138452597685198',homepodMiniBadgeMinus=
+'rbxassetid://119379139369139',homepodMiniBadgeMinusFill=
+'rbxassetid://126293519479293',homepodMiniBadgePlus=
+'rbxassetid://118379467986303',homepodMiniBadgePlusFill=
+'rbxassetid://111517543574290',homepodMiniFill='rbxassetid://115748763010662',
+homepodmini='rbxassetid://93368409427047',homepodmini2=
+'rbxassetid://138072319954848',homepodminiAndAppletv=
+'rbxassetid://96899217298462',horn='rbxassetid://133092229616767',hornBlast=
+'rbxassetid://114595846337741',hornBlastFill='rbxassetid://101724439604991',
+hornFill='rbxassetid://135647807274226',hourglass='rbxassetid://85321944407184',
+hourglassBadgeEye='rbxassetid://135319595841957',hourglassBadgeLock=
+'rbxassetid://76338330289232',hourglassBadgePlus='rbxassetid://114268852033821',
+hourglassBottomhalfFilled='rbxassetid://113354322030926',hourglassCircle=
+'rbxassetid://110733468934387',hourglassCircleFill=
+'rbxassetid://125048992318731',hourglassTophalfFilled=
+'rbxassetid://84671059736173',house='rbxassetid://137977066267668',houseAndFlag=
+'rbxassetid://86134823093935',houseAndFlagCircle='rbxassetid://127330265020154',
+houseAndFlagCircleFill='rbxassetid://70711300093336',houseAndFlagFill=
+'rbxassetid://109752212574467',houseBadgeExclamationmark=
+'rbxassetid://76429262032538',houseBadgeExclamationmarkFill=
+'rbxassetid://87392853954669',houseBadgeWifi='rbxassetid://135608851537692',
+houseBadgeWifiFill='rbxassetid://103445459783943',houseCircle=
+'rbxassetid://138648903313463',houseCircleFill='rbxassetid://108559873908847',
+houseFill='rbxassetid://139946019827392',houseLodge=
+'rbxassetid://85704833980676',houseLodgeCircle='rbxassetid://127650865114252',
+houseLodgeCircleFill='rbxassetid://71323700043692',houseLodgeFill=
+'rbxassetid://127089968967039',houseSlash='rbxassetid://81400788586332',
+houseSlashFill='rbxassetid://137443750353131',hryvniasign=
+'rbxassetid://103668150355749',
+hryvniasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://91688749623067',hryvniasignBankBuilding=
+'rbxassetid://129621086591675',hryvniasignBankBuildingFill=
+'rbxassetid://104628622071039',hryvniasignCircle='rbxassetid://94474243422007',
+hryvniasignCircleFill='rbxassetid://101794866939417',
+hryvniasignGaugeChartLefthalfRighthalf='rbxassetid://106063402550840',
+hryvniasignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://128998826362994',
+hryvniasignRing='rbxassetid://118368396656485',hryvniasignRingDashed=
+'rbxassetid://88816425414859',hryvniasignSquare='rbxassetid://75385636486518',
+hryvniasignSquareFill='rbxassetid://89586571568331',humidifier=
+'rbxassetid://77734577476092',humidifierAndDroplets=
+'rbxassetid://109490683520378',humidifierAndDropletsFill=
+'rbxassetid://81835383574136',humidifierAndEllipsis=
+'rbxassetid://119958476085943',humidifierAndEllipsisFill=
+'rbxassetid://107200405950324',humidifierFill='rbxassetid://127532491737560',
+humidity='rbxassetid://94944682462623',humidityFill=
+'rbxassetid://116083322385268',hurricane='rbxassetid://95533741958668',
+hurricaneCircle='rbxassetid://90440100760735',hurricaneCircleFill=
+'rbxassetid://130652138255798',hydrogen='rbxassetid://92886127488787',
+hydrogenCircle='rbxassetid://86547013940983',hydrogenCircleFill=
+'rbxassetid://89516381077394',hydrogenSquare='rbxassetid://139351374466565',
+hydrogenSquareFill='rbxassetid://137173913274988',iCircle=
+'rbxassetid://89113344291580',iCircleFill='rbxassetid://104332397605196',iSquare
+='rbxassetid://96564441985200',iSquareFill='rbxassetid://113037407421563',icloud
+='rbxassetid://110727461515621',icloudAndArrowDown=
+'rbxassetid://133728071871190',icloudAndArrowDownFill=
+'rbxassetid://91580842064758',icloudAndArrowUp='rbxassetid://82876886918286',
+icloudAndArrowUpFill='rbxassetid://80667605488140',icloudCircle=
+'rbxassetid://130045045841352',icloudCircleFill='rbxassetid://139289409047379',
+icloudDashed='rbxassetid://111793754917716',icloudFill=
+'rbxassetid://140102319448039',icloudSlash='rbxassetid://77090637996631',
+icloudSlashFill='rbxassetid://117065145373314',icloudSquare=
+'rbxassetid://102626362675694',icloudSquareFill='rbxassetid://97104665653244',
+increaseIndent='rbxassetid://88800434030947',increaseQuotelevel=
+'rbxassetid://104026428447630',indianrupeesign='rbxassetid://111754186050334',
+indianrupeesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://112994062871958',indianrupeesignBankBuilding=
+'rbxassetid://119082346279444',indianrupeesignBankBuildingFill=
+'rbxassetid://92479240380407',indianrupeesignCircle=
+'rbxassetid://123695503681843',indianrupeesignCircleFill=
+'rbxassetid://129318061897341',indianrupeesignGaugeChartLefthalfRighthalf=
+'rbxassetid://78225158661344',
+indianrupeesignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://82863857678210',indianrupeesignRing='rbxassetid://75461897769861',
+indianrupeesignRingDashed='rbxassetid://84664976795938',indianrupeesignSquare=
+'rbxassetid://122397780894486',indianrupeesignSquareFill=
+'rbxassetid://105131855370809',infinity='rbxassetid://71263460362433',
+infinityCircle='rbxassetid://71003157985047',infinityCircleFill=
+'rbxassetid://86156332621236',info='rbxassetid://119116685807529',infoBubble=
+'rbxassetid://137273126608579',infoBubbleFill='rbxassetid://124693206931792',
+infoCircle='rbxassetid://140318155547831',infoCircleFill=
+'rbxassetid://120424810493200',infoCircleTextPage='rbxassetid://125356901438011'
+,infoCircleTextPageFill='rbxassetid://80370826247197',infoSquare=
+'rbxassetid://110012911332380',infoSquareFill='rbxassetid://95776862176830',
+infoTriangle='rbxassetid://94781493039380',infoTriangleFill=
+'rbxassetid://95650689777625',infoWindshield='rbxassetid://128644339648564',
+inhaler='rbxassetid://121743497043663',inhalerFill='rbxassetid://71451949590628'
+,insetFilledApplewatchCase='rbxassetid://120279724059828',
+insetFilledBottomhalfRectangle='rbxassetid://136597041452039',
+insetFilledBottomhalfRectanglePortrait='rbxassetid://100868664232614',
+insetFilledBottomhalfTophalfRectangle='rbxassetid://127692599846777',
+insetFilledBottomleadingBottomtrailingRectangle='rbxassetid://84327980842976',
+insetFilledBottomleadingRectangle='rbxassetid://101305622798572',
+insetFilledBottomleadingRectanglePortrait='rbxassetid://139106808860498',
+insetFilledBottomleftBottomrightRectangle='rbxassetid://135473749561029',
+insetFilledBottomleftRectangle='rbxassetid://96902285478363',
+insetFilledBottomleftRectanglePortrait='rbxassetid://128299495559712',
+insetFilledBottomrightRectangle='rbxassetid://120529833708590',
+insetFilledBottomrightRectanglePortrait='rbxassetid://126122940689687',
+insetFilledBottomthirdRectangle='rbxassetid://92508256484902',
+insetFilledBottomthirdRectanglePortrait='rbxassetid://132794319919125',
+insetFilledBottomthirdSquare='rbxassetid://76623279068770',
+insetFilledBottomtrailingRectangle='rbxassetid://121412469782708',
+insetFilledBottomtrailingRectanglePortrait='rbxassetid://93668101678869',
+insetFilledCapsule='rbxassetid://90445157526338',insetFilledCapsulePortrait=
+'rbxassetid://108299551226678',insetFilledCenterRectangle=
+'rbxassetid://98977891812691',insetFilledCenterRectangleBadgePlus=
+'rbxassetid://104683887573848',insetFilledCenterRectanglePortrait=
+'rbxassetid://73922453045894',insetFilledCircle='rbxassetid://75917977120341',
+insetFilledCircleDashed='rbxassetid://116630264943051',insetFilledCircleSlash=
+'rbxassetid://121268175510312',insetFilledDiamond='rbxassetid://126741449338194'
+,insetFilledLeadinghalfArrowLeadingRectangle='rbxassetid://78017625118769',
+insetFilledLeadinghalfRectangle='rbxassetid://130706184301016',
+insetFilledLeadinghalfRectanglePortrait='rbxassetid://85919286811701',
+insetFilledLeadinghalfToptrailingBottomtrailingRectangle=
+'rbxassetid://70494881048997',insetFilledLeadinghalfTrailinghalfRectangle=
+'rbxassetid://134274869575399',insetFilledLeadingthirdRectangle=
+'rbxassetid://136915676163117',insetFilledLeadingthirdRectanglePortrait=
+'rbxassetid://113702527307183',insetFilledLeadingthirdSquare=
+'rbxassetid://109950316628586',insetFilledLefthalfArrowLeftRectangle=
+'rbxassetid://134984195372501',insetFilledLefthalfRectangle=
+'rbxassetid://72023436186359',insetFilledLefthalfRectanglePortrait=
+'rbxassetid://120313318229969',insetFilledLefthalfRighthalfRectangle=
+'rbxassetid://102132835584174',insetFilledLefthalfToprightBottomrightRectangle=
+'rbxassetid://111841202861656',
+insetFilledLeftthirdMiddlethirdRightthirdRectangle='rbxassetid://77699442899450'
+,insetFilledLeftthirdRectangle='rbxassetid://112754738404469',
+insetFilledLeftthirdRectanglePortrait='rbxassetid://131316644740016',
+insetFilledLeftthirdSquare='rbxassetid://122568783815641',insetFilledOval=
+'rbxassetid://111278423834459',insetFilledOvalPortrait=
+'rbxassetid://125501917035259',insetFilledPano='rbxassetid://80590947649666',
+insetFilledRectangle='rbxassetid://138708382163165',
+insetFilledRectangleAndPersonFilled='rbxassetid://87154458723474',
+insetFilledRectangleAndPersonFilledCircle='rbxassetid://95193435746744',
+insetFilledRectangleAndPersonFilledCircleFill='rbxassetid://71284408528556',
+insetFilledRectangleAndPointerArrow='rbxassetid://71367104401668',
+insetFilledRectangleBadgeRecord='rbxassetid://105070640753020',
+insetFilledRectangleOnRectangle='rbxassetid://120205174258551',
+insetFilledRectanglePortrait='rbxassetid://100405460391582',
+insetFilledRighthalfArrowRightRectangle='rbxassetid://136171522595126',
+insetFilledRighthalfLefthalfRectangle='rbxassetid://131735122239469',
+insetFilledRighthalfRectangle='rbxassetid://129492638501890',
+insetFilledRighthalfRectanglePortrait='rbxassetid://125346899504670',
+insetFilledRightthirdRectangle='rbxassetid://70604242598186',
+insetFilledRightthirdRectanglePortrait='rbxassetid://105069897135082',
+insetFilledRightthirdSquare='rbxassetid://104572444958233',insetFilledSquare=
+'rbxassetid://133012340169358',insetFilledSquareDashed=
+'rbxassetid://83067474683427',insetFilledTophalfBottomhalfRectangle=
+'rbxassetid://105407482136406',insetFilledTophalfBottomleftBottomrightRectangle=
+'rbxassetid://126213084936540',insetFilledTophalfRectangle=
+'rbxassetid://102954017318491',insetFilledTophalfRectanglePortrait=
+'rbxassetid://96770534088202',
+insetFilledTopleadingBottomleadingTrailinghalfRectangle=
+'rbxassetid://133635573770248',insetFilledTopleadingRectangle=
+'rbxassetid://82767537329467',insetFilledTopleadingRectanglePortrait=
+'rbxassetid://103128241995328',insetFilledTopleftBottomleftRighthalfRectangle=
+'rbxassetid://136216039981584',insetFilledTopleftRectangle=
+'rbxassetid://126843838930696',insetFilledTopleftRectanglePortrait=
+'rbxassetid://96032033362183',insetFilledTopleftToprightBottomhalfRectangle=
+'rbxassetid://131903028482382',
+insetFilledTopleftToprightBottomleftBottomrightRectangle=
+'rbxassetid://108794580005907',insetFilledToprightRectangle=
+'rbxassetid://128249878170636',insetFilledToprightRectanglePortrait=
+'rbxassetid://81500237959732',insetFilledTopthirdMiddlethirdBottomthirdRectangle
+='rbxassetid://125282916436565',insetFilledTopthirdRectangle=
+'rbxassetid://113341401260201',insetFilledTopthirdRectanglePortrait=
+'rbxassetid://120512386877930',insetFilledTopthirdSquare=
+'rbxassetid://119824385876092',insetFilledToptrailingRectangle=
+'rbxassetid://129029043300013',insetFilledToptrailingRectanglePortrait=
+'rbxassetid://100995703293630',insetFilledTrailinghalfArrowTrailingRectangle=
+'rbxassetid://84836774081264',insetFilledTrailinghalfLeadinghalfRectangle=
+'rbxassetid://103401929210623',insetFilledTrailinghalfRectangle=
+'rbxassetid://133451001758776',insetFilledTrailinghalfRectanglePortrait=
+'rbxassetid://112562041419219',insetFilledTrailingthirdRectangle=
+'rbxassetid://118636064884027',insetFilledTrailingthirdRectanglePortrait=
+'rbxassetid://75897427033432',insetFilledTrailingthirdSquare=
+'rbxassetid://114005042149867',insetFilledTriangle=
+'rbxassetid://121531632404240',insetFilledTv='rbxassetid://109545088046904',
+internaldrive='rbxassetid://102251712322050',internaldriveFill=
+'rbxassetid://75514367271798',ipad='rbxassetid://131230554306229',
+ipadAndArrowForward='rbxassetid://110049781892554',ipadAndIphone=
+'rbxassetid://133274203016358',ipadAndIphoneSlash='rbxassetid://98585690423131',
+ipadBadgeCheckmark='rbxassetid://123793516179129',ipadBadgeExclamationmark=
+'rbxassetid://113541137806339',ipadBadgeLocation='rbxassetid://117276337518182',
+ipadBadgePlay='rbxassetid://135586545630005',ipadCase=
+'rbxassetid://72648998001913',ipadCaseAndIphoneCase=
+'rbxassetid://105917542288684',ipadGen1='rbxassetid://123061750908863',
+ipadGen1BadgeExclamationmark='rbxassetid://97502161805065',ipadGen1BadgeLocation
+='rbxassetid://90300741766128',ipadGen1BadgePlay='rbxassetid://135252945335606',
+ipadGen1CropHomebuttonCircle='rbxassetid://123435089120942',ipadGen1Landscape=
+'rbxassetid://81891741408956',ipadGen1LandscapeBadgeExclamationmark=
+'rbxassetid://107044013715078',ipadGen1LandscapeBadgeLocation=
+'rbxassetid://124387888974099',ipadGen1LandscapeBadgePlay=
+'rbxassetid://81439451813082',ipadGen1LandscapeSlash=
+'rbxassetid://115395749352607',ipadGen1Sizes='rbxassetid://118294310937760',
+ipadGen1Slash='rbxassetid://137094723034266',ipadGen2=
+'rbxassetid://72845801035243',ipadGen2BadgeExclamationmark=
+'rbxassetid://86689553406739',ipadGen2BadgeLocation=
+'rbxassetid://123318608980440',ipadGen2BadgePlay='rbxassetid://120431580583179',
+ipadGen2Landscape='rbxassetid://73336322338582',
+ipadGen2LandscapeBadgeExclamationmark='rbxassetid://74543577579883',
+ipadGen2LandscapeBadgeLocation='rbxassetid://72978217701125',
+ipadGen2LandscapeBadgePlay='rbxassetid://88880081274171',ipadGen2LandscapeSlash=
+'rbxassetid://93298411493155',ipadGen2Sizes='rbxassetid://92860208821978',
+ipadGen2Slash='rbxassetid://97413632843279',ipadLandscape=
+'rbxassetid://98570913676933',ipadLandscapeAndApplewatch=
+'rbxassetid://78572604978981',ipadLandscapeAndIphone=
+'rbxassetid://103405408625627',ipadLandscapeAndIphoneSlash=
+'rbxassetid://83949384569338',ipadLandscapeAndIpod=
+'rbxassetid://126361538286391',ipadLandscapeBadgeExclamationmark=
+'rbxassetid://79735738496284',ipadLandscapeBadgeLocation=
+'rbxassetid://119487770282833',ipadLandscapeBadgePlay=
+'rbxassetid://131593550438106',ipadRearCamera='rbxassetid://100950321161338',
+ipadSizes='rbxassetid://117365106864126',iphone='rbxassetid://96785236033941',
+iphoneAndArrowForward='rbxassetid://117210262149661',iphoneAndArrowForwardInward
+='rbxassetid://127905379728905',iphoneAndArrowForwardOutward=
+'rbxassetid://80118778349170',iphoneAndArrowLeftAndArrowRight=
+'rbxassetid://104339904723080',iphoneAndArrowLeftAndArrowRightInward=
+'rbxassetid://117948708918605',iphoneAndArrowRightInward=
+'rbxassetid://79888523696187',iphoneAndArrowRightOutward=
+'rbxassetid://122240049510090',iphoneAndIpod='rbxassetid://97511296416293',
+iphoneAndVisionPro='rbxassetid://120484375912051',iphoneAppSwitcher=
+'rbxassetid://133135376021847',iphoneBadgeCheckmark=
+'rbxassetid://102860706153917',iphoneBadgeExclamationmark=
+'rbxassetid://71713794425391',iphoneBadgeLocation='rbxassetid://122605433839128'
+,iphoneBadgePlay='rbxassetid://99553977604210',iphoneCase=
+'rbxassetid://100408903353145',iphoneCircle='rbxassetid://136014152812869',
+iphoneCircleFill='rbxassetid://117758615235459',iphoneCropCircle=
+'rbxassetid://71562894009267',iphoneDockMotorizedViewfinder=
+'rbxassetid://132637320368921',iphoneGen1='rbxassetid://94152158848001',
+iphoneGen1AndArrowLeft='rbxassetid://127049565346505',
+iphoneGen1BadgeExclamationmark='rbxassetid://77237650629580',
+iphoneGen1BadgeLocation='rbxassetid://104241024785309',iphoneGen1BadgePlay=
+'rbxassetid://92461645076483',iphoneGen1Circle='rbxassetid://116798852794419',
+iphoneGen1CircleFill='rbxassetid://94921719612712',iphoneGen1CropCircle=
+'rbxassetid://105220191366334',iphoneGen1CropHomebuttonCircle=
+'rbxassetid://120481565169469',iphoneGen1Landscape=
+'rbxassetid://137867981805693',iphoneGen1LandscapeSlash=
+'rbxassetid://128717452111489',iphoneGen1Motion='rbxassetid://122054190796509',
+iphoneGen1RadiowavesLeftAndRight='rbxassetid://133529445742502',
+iphoneGen1RadiowavesLeftAndRightCircle='rbxassetid://125660794021542',
+iphoneGen1RadiowavesLeftAndRightCircleFill='rbxassetid://106520977934691',
+iphoneGen1Sizes='rbxassetid://133043833497584',iphoneGen1Slash=
+'rbxassetid://132512376385662',iphoneGen1SlashCircle=
+'rbxassetid://131363565228610',iphoneGen1SlashCircleFill=
+'rbxassetid://139459042705882',iphoneGen2='rbxassetid://126158544332994',
+iphoneGen2AndArrowLeftAndArrowRightInward='rbxassetid://116971900100346',
+iphoneGen2BadgeExclamationmark='rbxassetid://124222723580362',
+iphoneGen2BadgeLocation='rbxassetid://89458034440222',iphoneGen2BadgePlay=
+'rbxassetid://83586848263184',iphoneGen2Circle='rbxassetid://84600552457895',
+iphoneGen2CircleFill='rbxassetid://102360021492589',iphoneGen2CropCircle=
+'rbxassetid://86170718962353',iphoneGen2Landscape='rbxassetid://90012948331103',
+iphoneGen2LandscapeSlash='rbxassetid://107053953408192',iphoneGen2Motion=
+'rbxassetid://75209858125378',iphoneGen2RadiowavesLeftAndRight=
+'rbxassetid://137843293377967',iphoneGen2RadiowavesLeftAndRightCircle=
+'rbxassetid://78517623289183',iphoneGen2RadiowavesLeftAndRightCircleFill=
+'rbxassetid://131656745166889',iphoneGen2Sizes='rbxassetid://81272476589028',
+iphoneGen2Slash='rbxassetid://76336416899694',iphoneGen2SlashCircle=
+'rbxassetid://133859389260522',iphoneGen2SlashCircleFill=
+'rbxassetid://87199768439188',iphoneGen3='rbxassetid://92492572556324',
+iphoneGen3AndArrowLeftAndArrowRightInward='rbxassetid://118657589793721',
+iphoneGen3BadgeExclamationmark='rbxassetid://113121813406073',
+iphoneGen3BadgeLocation='rbxassetid://117982542340771',iphoneGen3BadgePlay=
+'rbxassetid://125330422338100',iphoneGen3Circle='rbxassetid://86912097932476',
+iphoneGen3CircleFill='rbxassetid://94525449390144',iphoneGen3CropCircle=
+'rbxassetid://94048325413237',iphoneGen3Landscape='rbxassetid://114233975397990'
+,iphoneGen3LandscapeSlash='rbxassetid://132992124593122',iphoneGen3Motion=
+'rbxassetid://98169599088581',iphoneGen3RadiowavesLeftAndRight=
+'rbxassetid://72200807533817',iphoneGen3RadiowavesLeftAndRightCircle=
+'rbxassetid://106374321761914',iphoneGen3RadiowavesLeftAndRightCircleFill=
+'rbxassetid://72465338711976',iphoneGen3Sizes='rbxassetid://76366535677582',
+iphoneGen3Slash='rbxassetid://90077097271339',iphoneGen3SlashCircle=
+'rbxassetid://111474089697962',iphoneGen3SlashCircleFill=
+'rbxassetid://111157278153150',iphoneLandscape='rbxassetid://127446547566888',
+iphoneMotion='rbxassetid://130536425029393',iphonePatternDiagonalline=
+'rbxassetid://135162003513277',
+iphonePatternDiagonallineOnRectanglePortraitDashed=
+'rbxassetid://112745590711907',iphoneRadiowavesLeftAndRight=
+'rbxassetid://100186481961591',iphoneRadiowavesLeftAndRightCircle=
+'rbxassetid://124241232816642',iphoneRadiowavesLeftAndRightCircleFill=
+'rbxassetid://120377260746135',iphoneRearCamera='rbxassetid://120522581577378',
+iphoneSizes='rbxassetid://135407341947073',iphoneSlash=
+'rbxassetid://90628537365176',iphoneSlashCircle='rbxassetid://122677491004031',
+iphoneSlashCircleFill='rbxassetid://115785875771965',iphoneSmartbatterycaseGen1=
+'rbxassetid://134849352121716',iphoneSmartbatterycaseGen2=
+'rbxassetid://85196761349659',ipod='rbxassetid://80468906468753',
+ipodAndApplewatch='rbxassetid://93719301646294',ipodAndVisionPro=
+'rbxassetid://83017359796219',ipodShuffleGen1='rbxassetid://136172132310552',
+ipodShuffleGen2='rbxassetid://76170036384439',ipodShuffleGen3=
+'rbxassetid://110263498432868',ipodShuffleGen4='rbxassetid://131032367315049',
+ipodTouch='rbxassetid://105267613849911',ipodTouchLandscape=
+'rbxassetid://116094116999635',ipodTouchSlash='rbxassetid://81927156094607',
+ipodshuffleGen1='rbxassetid://85956093711602',ipodshuffleGen2=
+'rbxassetid://85111088101023',ipodshuffleGen3='rbxassetid://123523059376894',
+ipodshuffleGen4='rbxassetid://73762011203526',ipodtouch=
+'rbxassetid://119129980411950',ipodtouchLandscape='rbxassetid://84719307699005',
+ipodtouchSlash='rbxassetid://71827533045992',italic=
+'rbxassetid://114841606569634',ivfluidBag='rbxassetid://85925137715594',
+ivfluidBagFill='rbxassetid://112534881575448',jCircle=
+'rbxassetid://113787719639007',jCircleFill='rbxassetid://136066715693266',
+jSquare='rbxassetid://132663369942785',jSquareFill=
+'rbxassetid://110186942350601',jSquareOnSquare='rbxassetid://70770700564140',
+jSquareOnSquareFill='rbxassetid://86732752263868',jacket=
+'rbxassetid://110977300370127',jacketCircle='rbxassetid://73905147156647',
+jacketCircleFill='rbxassetid://87569696632536',jacketFill=
+'rbxassetid://129429549539056',jacketSensorTagRadiowavesLeftAndRight=
+'rbxassetid://81170082341074',jacketSensorTagRadiowavesLeftAndRightFill=
+'rbxassetid://86875701016809',k='rbxassetid://131453804995230',kCircle=
+'rbxassetid://108260281955032',kCircleFill='rbxassetid://127917254878881',
+kSquare='rbxassetid://76333957199097',kSquareFill='rbxassetid://109715448814787'
+,kashidaArabic='rbxassetid://113587154651306',key='rbxassetid://133434192543807'
+,key2OnRing='rbxassetid://76703793889414',key2OnRingFill=
+'rbxassetid://76588755997300',keyCarRadiowavesForward=
+'rbxassetid://112640775536914',keyCarRadiowavesForwardFill=
+'rbxassetid://113133901858914',keyCarSide='rbxassetid://130777080754266',
+keyCarSideFill='rbxassetid://97814070412964',keyCard=
+'rbxassetid://115187278538124',keyCardFill='rbxassetid://139348357957386',
+keyCircle='rbxassetid://108973244339496',keyCircleFill=
+'rbxassetid://110326981381894',keyConvertibleSide='rbxassetid://89421482992474',
+keyConvertibleSideFill='rbxassetid://72129430413908',keyFill=
+'rbxassetid://100941145516940',keyHorizontal='rbxassetid://136772885372533',
+keyHorizontalFill='rbxassetid://120752932235278',keyIcloud=
+'rbxassetid://139241478885890',keyIcloudFill='rbxassetid://72564816797669',
+keyRadiowavesForward='rbxassetid://120443557468351',keyRadiowavesForwardFill=
+'rbxassetid://73268293809232',keyRadiowavesForwardSlash=
+'rbxassetid://91223085154439',keyRadiowavesForwardSlashFill=
+'rbxassetid://131793789575248',keySensorTagRadiowavesLeftAndRight=
+'rbxassetid://96659898144332',keySensorTagRadiowavesLeftAndRightFill=
+'rbxassetid://98758622563103',keyShield='rbxassetid://104889894182978',
+keyShieldFill='rbxassetid://115236492425793',keySlash=
+'rbxassetid://128541901933913',keySlashFill='rbxassetid://103334949123430',
+keySuvSide='rbxassetid://113533289572731',keySuvSideFill=
+'rbxassetid://98960872652240',keyTruckPickupSide='rbxassetid://140618494739761',
+keyTruckPickupSideFill='rbxassetid://72634089700259',keyViewfinder=
+'rbxassetid://102804665349975',keyboard='rbxassetid://105919136330989',
+keyboardBadgeEllipsis='rbxassetid://138764951588511',keyboardBadgeEllipsisFill=
+'rbxassetid://129826695434297',keyboardBadgeEye='rbxassetid://88947978884486',
+keyboardBadgeEyeFill='rbxassetid://113136519679576',keyboardChevronCompactDown=
+'rbxassetid://122434132254331',keyboardChevronCompactDownFill=
+'rbxassetid://132119530733764',keyboardChevronCompactLeft=
+'rbxassetid://93873100176471',keyboardChevronCompactLeftFill=
+'rbxassetid://122102681496501',keyboardFill='rbxassetid://107094757259919',
+keyboardMacwindow='rbxassetid://81009841388075',keyboardOnehandedLeft=
+'rbxassetid://96435588655591',keyboardOnehandedLeftFill=
+'rbxassetid://84926357433136',keyboardOnehandedRight=
+'rbxassetid://99512020372077',keyboardOnehandedRightFill=
+'rbxassetid://114811778842920',kipsign='rbxassetid://139124096600858',
+kipsignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://121587106422922',
+kipsignBankBuilding='rbxassetid://118184717903574',kipsignBankBuildingFill=
+'rbxassetid://124188099989927',kipsignCircle='rbxassetid://125257177249690',
+kipsignCircleFill='rbxassetid://87946535077535',
+kipsignGaugeChartLefthalfRighthalf='rbxassetid://132967067870371',
+kipsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://73726622341666',
+kipsignRing='rbxassetid://99797321226540',kipsignRingDashed=
+'rbxassetid://105404390233593',kipsignSquare='rbxassetid://133836203040078',
+kipsignSquareFill='rbxassetid://80235335357450',kph=
+'rbxassetid://117481583715113',kphCircle='rbxassetid://137148268988469',
+kphCircleFill='rbxassetid://126101024239774',l1ButtonRoundedbottomHorizontal=
+'rbxassetid://95790368795483',l1ButtonRoundedbottomHorizontalFill=
+'rbxassetid://128440014143027',l1Circle='rbxassetid://102236186726427',
+l1CircleFill='rbxassetid://116773512326026',l2ButtonAngledtopVerticalLeft=
+'rbxassetid://99495903296844',l2ButtonAngledtopVerticalLeftFill=
+'rbxassetid://110271917565119',l2ButtonRoundedtopHorizontal=
+'rbxassetid://91390095902654',l2ButtonRoundedtopHorizontalFill=
+'rbxassetid://79761826766984',l2Circle='rbxassetid://74248236678335',
+l2CircleFill='rbxassetid://109925799906152',l3ButtonAngledbottomHorizontalLeft=
+'rbxassetid://123803597683885',l3ButtonAngledbottomHorizontalLeftFill=
+'rbxassetid://134808114449129',l4ButtonHorizontal='rbxassetid://100597686733238'
+,l4ButtonHorizontalFill='rbxassetid://89171783331888',
+lButtonRoundedbottomHorizontal='rbxassetid://130058952204010',
+lButtonRoundedbottomHorizontalFill='rbxassetid://105492940635087',lCircle=
+'rbxassetid://88768237168264',lCircleFill='rbxassetid://115654171291345',
+lJoystick='rbxassetid://124158836435588',lJoystickFill=
+'rbxassetid://72524976304902',lJoystickPressDown='rbxassetid://126988825422704',
+lJoystickPressDownFill='rbxassetid://122290771310900',lJoystickTiltDown=
+'rbxassetid://98216370037941',lJoystickTiltDownFill=
+'rbxassetid://106818736496317',lJoystickTiltLeft='rbxassetid://117338893439682',
+lJoystickTiltLeftFill='rbxassetid://115979752014913',lJoystickTiltRight=
+'rbxassetid://104661243170230',lJoystickTiltRightFill=
+'rbxassetid://127932461706178',lJoystickTiltUp='rbxassetid://103418791124625',
+lJoystickTiltUpFill='rbxassetid://139059621301014',lSquare=
+'rbxassetid://135675870127012',lSquareFill='rbxassetid://92188040928529',ladybug
+='rbxassetid://106759060151131',ladybugCircle='rbxassetid://79448683961001',
+ladybugCircleFill='rbxassetid://133960361550152',ladybugFill=
+'rbxassetid://113818385620830',ladybugSlash='rbxassetid://122118980779982',
+ladybugSlashCircle='rbxassetid://79524457814539',ladybugSlashCircleFill=
+'rbxassetid://135161883645329',ladybugSlashFill='rbxassetid://90687484782825',
+lampCeiling='rbxassetid://130697710320625',lampCeilingFill=
+'rbxassetid://88194539041083',lampCeilingInverse='rbxassetid://94283461619651',
+lampDesk='rbxassetid://103868701476630',lampDeskFill=
+'rbxassetid://131947905513117',lampFloor='rbxassetid://118272420344055',
+lampFloorFill='rbxassetid://81002667912169',lampTable=
+'rbxassetid://131486052019715',lampTableFill='rbxassetid://78919597241075',lane=
+'rbxassetid://86601744938682',lanyardcard='rbxassetid://125357233986697',
+lanyardcardFill='rbxassetid://118783818997054',laptopcomputer=
+'rbxassetid://93924665405931',laptopcomputerAndArrowDown=
+'rbxassetid://136939371714748',laptopcomputerBadgeCheckmark=
+'rbxassetid://120482812026626',laptopcomputerSlash='rbxassetid://79424129365987'
+,laptopcomputerTrianglebadgeExclamationmark='rbxassetid://120513527990773',
+larisign='rbxassetid://136485640218866',
+larisignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://121246946230961'
+,larisignBankBuilding='rbxassetid://111789107676481',larisignBankBuildingFill=
+'rbxassetid://134210738755691',larisignCircle='rbxassetid://92080196175408',
+larisignCircleFill='rbxassetid://109430195650783',
+larisignGaugeChartLefthalfRighthalf='rbxassetid://104420126879803',
+larisignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://112845157907157',
+larisignRing='rbxassetid://82146466164245',larisignRingDashed=
+'rbxassetid://137685798255874',larisignSquare='rbxassetid://85653556559155',
+larisignSquareFill='rbxassetid://89054689413231',laserBurst=
+'rbxassetid://117110789250652',lasso='rbxassetid://73650965371496',
+lassoBadgeSparkles='rbxassetid://100331357189805',latch2Case=
+'rbxassetid://127322944927667',latch2CaseFill='rbxassetid://137373973211444',
+laurelLeading='rbxassetid://74230370864247',laurelLeadingLaurelTrailing=
+'rbxassetid://121289783441119',laurelTrailing='rbxassetid://100164466613687',
+lbButtonRoundedbottomHorizontal='rbxassetid://88293514053614',
+lbButtonRoundedbottomHorizontalFill='rbxassetid://98021114053942',lbCircle=
+'rbxassetid://74325404659334',lbCircleFill='rbxassetid://71487768652535',leaf=
+'rbxassetid://137721714285432',leafArrowTriangleCirclepath=
+'rbxassetid://84475508392251',leafArrowTriangleheadClockwise=
+'rbxassetid://113114088100330',leafCircle='rbxassetid://86174952690199',
+leafCircleFill='rbxassetid://93634187189693',leafFill=
+'rbxassetid://113484795763411',left='rbxassetid://107416334182822',leftCircle=
+'rbxassetid://119934421439703',leftCircleFill='rbxassetid://105463146320094',
+lessthan='rbxassetid://94199123453074',lessthanCircle=
+'rbxassetid://111066641037520',lessthanCircleFill='rbxassetid://100079024283083'
+,lessthanSquare='rbxassetid://84887643197832',lessthanSquareFill=
+'rbxassetid://113303675678039',lessthanorequalto='rbxassetid://90520186962478',
+lessthanorequaltoCircle='rbxassetid://89396258122438',
+lessthanorequaltoCircleFill='rbxassetid://80241893107159',
+lessthanorequaltoSquare='rbxassetid://103756445378013',
+lessthanorequaltoSquareFill='rbxassetid://113570432934713',letterACircle=
+'rbxassetid://102043519807680',letterASquare='rbxassetid://123876841192249',
+letterBCircle='rbxassetid://81796888108964',letterBSquare=
+'rbxassetid://107926268990493',letterCCircle='rbxassetid://102283325788464',
+letterCSquare='rbxassetid://77342805733080',letterDCircle=
+'rbxassetid://77271013016863',letterDSquare='rbxassetid://71745998559849',
+letterECircle='rbxassetid://110939040840018',letterESquare=
+'rbxassetid://130805805047117',letterFCircle='rbxassetid://75292206915955',
+letterFCursive='rbxassetid://129129749457489',letterFCursiveCircle=
+'rbxassetid://88414197139904',letterFSquare='rbxassetid://80222891036830',
+letterGCircle='rbxassetid://101617051624970',letterGSquare=
+'rbxassetid://101108516134256',letterHCircle='rbxassetid://104755888415516',
+letterHSquare='rbxassetid://119444843840302',letterHSquareOnSquare=
+'rbxassetid://138633232751099',letterICircle='rbxassetid://100265252155056',
+letterISquare='rbxassetid://78227741894490',letterJCircle=
+'rbxassetid://127681856901613',letterJSquare='rbxassetid://70614371401130',
+letterJSquareOnSquare='rbxassetid://136068707644750',letterK=
+'rbxassetid://93236576104824',letterKCircle='rbxassetid://126766755298208',
+letterKSquare='rbxassetid://132054295015575',
+letterLButtonRoundedbottomHorizontal='rbxassetid://86796430696473',letterLCircle
+='rbxassetid://115151845775938',letterLJoystick='rbxassetid://126954698608958',
+letterLJoystickPressDown='rbxassetid://101991839887936',letterLJoystickTiltDown=
+'rbxassetid://109426620639396',letterLJoystickTiltLeft=
+'rbxassetid://88760036840814',letterLJoystickTiltRight=
+'rbxassetid://123427118118507',letterLJoystickTiltUp=
+'rbxassetid://108699411245416',letterLSquare='rbxassetid://102129122454965',
+letterMCircle='rbxassetid://105252616936701',letterMSquare=
+'rbxassetid://91788346353476',letterNCircle='rbxassetid://108501754774630',
+letterNSquare='rbxassetid://134128630622949',letterOCircle=
+'rbxassetid://102216372092166',letterOSquare='rbxassetid://100189064332452',
+letterPCircle='rbxassetid://133454893649760',letterPSquare=
+'rbxassetid://121771081041226',letterQCircle='rbxassetid://121158947718797',
+letterQSquare='rbxassetid://138412895934294',
+letterRButtonRoundedbottomHorizontal='rbxassetid://127892690915857',
+letterRCircle='rbxassetid://71266917331154',letterRJoystick=
+'rbxassetid://77839293235193',letterRJoystickPressDown=
+'rbxassetid://101313826207669',letterRJoystickTiltDown=
+'rbxassetid://107724362619264',letterRJoystickTiltLeft=
+'rbxassetid://105136001525486',letterRJoystickTiltRight=
+'rbxassetid://110960582214040',letterRJoystickTiltUp=
+'rbxassetid://71286967299311',letterRSquare='rbxassetid://135777530848446',
+letterRSquareOnSquare='rbxassetid://123053148394613',letterSCircle=
+'rbxassetid://83393144046860',letterSSquare='rbxassetid://137609708051079',
+letterTCircle='rbxassetid://75623106527183',letterTSquare=
+'rbxassetid://116018632541398',letterUCircle='rbxassetid://100569535331718',
+letterUSquare='rbxassetid://76708256054317',letterVCircle=
+'rbxassetid://83920398217229',letterVSquare='rbxassetid://129063617167906',
+letterWCircle='rbxassetid://107802977183125',letterWSquare=
+'rbxassetid://83322547030564',letterXCircle='rbxassetid://99920343804208',
+letterXSquare='rbxassetid://123476212380657',letterXSquareroot=
+'rbxassetid://80429022258285',letterYCircle='rbxassetid://120543405393753',
+letterYSquare='rbxassetid://80658772608290',letterZCircle=
+'rbxassetid://109541227310226',letterZSquare='rbxassetid://139916717288653',
+level='rbxassetid://75072843777421',levelFill='rbxassetid://128257992127602',
+licenseplate='rbxassetid://130402934113130',licenseplateFill=
+'rbxassetid://117121209379254',lifepreserver='rbxassetid://125826954375015',
+lifepreserverFill='rbxassetid://118868969071769',lightBeaconMax=
+'rbxassetid://75066576103161',lightBeaconMaxFill='rbxassetid://87530931992175',
+lightBeaconMin='rbxassetid://107757740522836',lightBeaconMinFill=
+'rbxassetid://100129869918387',lightCylindricalCeiling=
+'rbxassetid://110334573858912',lightCylindricalCeilingFill=
+'rbxassetid://104211467198230',lightCylindricalCeilingInverse=
+'rbxassetid://75728133446100',lightMax='rbxassetid://84057115606407',lightMin=
+'rbxassetid://125533100436531',lightOverheadLeft='rbxassetid://122835138684644',
+lightOverheadLeftFill='rbxassetid://111580070717708',lightOverheadRight=
+'rbxassetid://117111693005736',lightOverheadRightFill=
+'rbxassetid://98686619044486',lightPanel='rbxassetid://106777073156176',
+lightPanelFill='rbxassetid://110860563202036',lightRecessed=
+'rbxassetid://126364480423039',lightRecessed3='rbxassetid://130398146961010',
+lightRecessed3Fill='rbxassetid://104115923130457',lightRecessed3Inverse=
+'rbxassetid://103615064195110',lightRecessedFill='rbxassetid://88775166873026',
+lightRecessedInverse='rbxassetid://78252492817119',lightRibbon=
+'rbxassetid://122142963253357',lightRibbonFill='rbxassetid://93066238961423',
+lightStrip2='rbxassetid://134019470579747',lightStrip2Fill=
+'rbxassetid://127276872174766',lightbulb='rbxassetid://82644985572724',
+lightbulb2='rbxassetid://112234784324905',lightbulb2Fill=
+'rbxassetid://127418974043306',lightbulbCircle='rbxassetid://126479516799358',
+lightbulbCircleFill='rbxassetid://120553924518927',lightbulbFill=
+'rbxassetid://73118667835537',lightbulbLed='rbxassetid://86111405001092',
+lightbulbLedFill='rbxassetid://114870437439505',lightbulbLedWide=
+'rbxassetid://117190619134004',lightbulbLedWideFill=
+'rbxassetid://102938343676175',lightbulbMax='rbxassetid://122168294554782',
+lightbulbMaxFill='rbxassetid://90138003500408',lightbulbMin=
+'rbxassetid://83516231106615',lightbulbMinBadgeExclamationmark=
+'rbxassetid://97382076149987',lightbulbMinBadgeExclamationmarkFill=
+'rbxassetid://103335346024590',lightbulbMinFill='rbxassetid://70934321968116',
+lightbulbSlash='rbxassetid://86800234658429',lightbulbSlashFill=
+'rbxassetid://132786331318088',lightrail='rbxassetid://96129918016259',
+lightrailFill='rbxassetid://76488782471583',lightspectrumHorizontal=
+'rbxassetid://135984270467670',lightswitchOff='rbxassetid://80355295612879',
+lightswitchOffFill='rbxassetid://128742926647255',lightswitchOffSquare=
+'rbxassetid://97372717984343',lightswitchOffSquareFill=
+'rbxassetid://128134911832629',lightswitchOn='rbxassetid://95538959639294',
+lightswitchOnFill='rbxassetid://115337416605268',lightswitchOnSquare=
+'rbxassetid://114272644374823',lightswitchOnSquareFill=
+'rbxassetid://117381560381596',line2HorizontalDecreaseCircle=
+'rbxassetid://117477657723597',line2HorizontalDecreaseCircleFill=
+'rbxassetid://118871890045553',line3CrossedSwirlCircle=
+'rbxassetid://118318609660111',line3CrossedSwirlCircleFill=
+'rbxassetid://134883004157167',line3Horizontal='rbxassetid://111782926831220',
+line3HorizontalButtonAngledtopVerticalRight='rbxassetid://111887877381966',
+line3HorizontalButtonAngledtopVerticalRightFill='rbxassetid://105369276135548',
+line3HorizontalCircle='rbxassetid://85990723384739',line3HorizontalCircleFill=
+'rbxassetid://134954138715896',line3HorizontalDecrease=
+'rbxassetid://88784585171582',line3HorizontalDecreaseCircle=
+'rbxassetid://111870154383622',line3HorizontalDecreaseCircleFill=
+'rbxassetid://111120609004176',lineDiagonal='rbxassetid://137379155901548',
+lineDiagonalArrow='rbxassetid://92568642919457',lineDiagonalTriangleheadUpRight=
+'rbxassetid://99642044971640',lineDiagonalTriangleheadUpRightLeftDown=
+'rbxassetid://117149190547171',lineHorizontalStarFillLineHorizontal=
+'rbxassetid://115363674331340',linesMeasurementHorizontal=
+'rbxassetid://136276260519777',linesMeasurementHorizontalAlignedBottom=
+'rbxassetid://83461597148439',linesMeasurementVertical=
+'rbxassetid://84074029327107',lineweight='rbxassetid://97237441591248',link=
+'rbxassetid://136619733214436',linkBadgePlus='rbxassetid://131321360443285',
+linkCircle='rbxassetid://87090441280339',linkCircleFill=
+'rbxassetid://107749660504734',linkIcloud='rbxassetid://111707841053107',
+linkIcloudFill='rbxassetid://105624820343494',lirasign=
+'rbxassetid://84073855052381',lirasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://112189369114653',lirasignBankBuilding=
+'rbxassetid://73850619799669',lirasignBankBuildingFill=
+'rbxassetid://107050841352588',lirasignCircle='rbxassetid://90679509165073',
+lirasignCircleFill='rbxassetid://120896567895081',
+lirasignGaugeChartLefthalfRighthalf='rbxassetid://81758283721386',
+lirasignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://85227261273468',
+lirasignRing='rbxassetid://107360539711488',lirasignRingDashed=
+'rbxassetid://120907404527155',lirasignSquare='rbxassetid://81175836370962',
+lirasignSquareFill='rbxassetid://72540101703939',listAndFilm=
+'rbxassetid://124042334716524',listBullet='rbxassetid://85287233895860',
+listBulletBadgeEllipsis='rbxassetid://140007423548089',listBulletBelowRectangle=
+'rbxassetid://97820811515269',listBulletCircle='rbxassetid://106489365197935',
+listBulletCircleFill='rbxassetid://76642065569774',listBulletClipboard=
+'rbxassetid://128179771023669',listBulletClipboardFill=
+'rbxassetid://126582430954250',listBulletIndent='rbxassetid://98732304151282',
+listBulletRectangle='rbxassetid://92743956457723',listBulletRectangleFill=
+'rbxassetid://133554938646728',listBulletRectanglePortrait=
+'rbxassetid://92563978202451',listBulletRectanglePortraitFill=
+'rbxassetid://85234388613283',listClipboard='rbxassetid://75088463417517',
+listClipboardFill='rbxassetid://113932200461935',listDash=
+'rbxassetid://100354325683976',listDashBadgeEllipsis=
+'rbxassetid://84510667031315',listDashHeaderRectangle=
+'rbxassetid://76123478093568',listDashHeaderRectangleFill=
+'rbxassetid://137696701087503',listNumber='rbxassetid://125517805939041',
+listNumberBadgeEllipsis='rbxassetid://106543491819062',listStar=
+'rbxassetid://88814060523780',listTriangle='rbxassetid://137615361230392',
+livephoto='rbxassetid://101779027126388',livephotoBadgeAutomatic=
+'rbxassetid://98509238080247',livephotoPlay='rbxassetid://76487982956241',
+livephotoSlash='rbxassetid://88783391904094',lizard=
+'rbxassetid://81394090984711',lizardCircle='rbxassetid://131956914242763',
+lizardCircleFill='rbxassetid://89102359342570',lizardFill=
+'rbxassetid://129667686919250',lmButtonHorizontal='rbxassetid://124518663294778'
+,lmButtonHorizontalFill='rbxassetid://137794225984963',location=
+'rbxassetid://87454675226726',locationApp='rbxassetid://108285658100441',
+locationAppFill='rbxassetid://115997390547074',locationCircle=
+'rbxassetid://102031654429688',locationCircleFill='rbxassetid://129255026559329'
+,locationFill='rbxassetid://104193509962276',locationFillViewfinder=
+'rbxassetid://72520718163831',locationMagnifyingglass=
+'rbxassetid://130738172515937',locationNorth='rbxassetid://91961895110874',
+locationNorthCircle='rbxassetid://92630833006450',locationNorthCircleFill=
+'rbxassetid://115261018724721',locationNorthFill='rbxassetid://82896630625065',
+locationNorthLine='rbxassetid://124393707860080',locationNorthLineFill=
+'rbxassetid://88364457142872',locationSlash='rbxassetid://91986292380461',
+locationSlashCircle='rbxassetid://133057661198672',locationSlashCircleFill=
+'rbxassetid://120666508274749',locationSlashFill='rbxassetid://74991633260544',
+locationSquare='rbxassetid://139433662072438',locationSquareFill=
+'rbxassetid://103262354171629',locationViewfinder='rbxassetid://107082380893473'
+,lock='rbxassetid://75059666276795',lockAppDashed='rbxassetid://73622959173423',
+lockApplewatch='rbxassetid://137701880303372',lockBadgeCheckmark=
+'rbxassetid://96107980975323',lockBadgeCheckmarkFill=
+'rbxassetid://125253362602913',lockBadgeClock='rbxassetid://125387425242561',
+lockBadgeClockFill='rbxassetid://103943585601256',lockBadgeXmark=
+'rbxassetid://89080108534797',lockBadgeXmarkFill='rbxassetid://128829841123231',
+lockCircle='rbxassetid://104937122562252',lockCircleDotted=
+'rbxassetid://129061462044090',lockCircleFill='rbxassetid://88199476099135',
+lockDesktopcomputer='rbxassetid://123694402953182',lockDisplay=
+'rbxassetid://107733113122735',lockDoc='rbxassetid://122591748345523',
+lockDocument='rbxassetid://136441673712336',lockDocumentFill=
+'rbxassetid://80722327719292',lockFill='rbxassetid://113641566747489',lockHeart=
+'rbxassetid://112515510772540',lockHeartFill='rbxassetid://100353400294809',
+lockIcloud='rbxassetid://115234882168637',lockIcloudFill=
+'rbxassetid://90477192363540',lockIpad='rbxassetid://73607136773648',lockIphone=
+'rbxassetid://102130527102632',lockLaptopcomputer='rbxassetid://128883775448444'
+,lockOpen='rbxassetid://102783678054610',lockOpenApplewatch=
+'rbxassetid://128492872401861',lockOpenDesktopcomputer=
+'rbxassetid://127601575525114',lockOpenDisplay='rbxassetid://117843429515636',
+lockOpenFill='rbxassetid://126165516505365',lockOpenIpad=
+'rbxassetid://115780599199820',lockOpenIphone='rbxassetid://102480932156704',
+lockOpenLaptopcomputer='rbxassetid://74819525049953',lockOpenRotation=
+'rbxassetid://109151898406267',lockOpenTrianglebadgeExclamationmark=
+'rbxassetid://103088164308480',lockOpenTrianglebadgeExclamationmarkFill=
+'rbxassetid://130688357894527',lockRectangle='rbxassetid://140203888025279',
+lockRectangleDashed='rbxassetid://92222544678056',lockRectangleFill=
+'rbxassetid://96253959861246',lockRectangleOnRectangle=
+'rbxassetid://119424922741745',lockRectangleOnRectangleDashed=
+'rbxassetid://89856654852797',lockRectangleOnRectangleFill=
+'rbxassetid://107606810987041',lockRectangleStack='rbxassetid://83653436779481',
+lockRectangleStackFill='rbxassetid://114142898348233',lockRotation=
+'rbxassetid://94299651317583',lockShield='rbxassetid://117164861385150',
+lockShieldFill='rbxassetid://103824281733541',lockSlash=
+'rbxassetid://109892378159236',lockSlashFill='rbxassetid://135056397155042',
+lockSquare='rbxassetid://100512753136328',lockSquareDashed=
+'rbxassetid://95009632896829',lockSquareFill='rbxassetid://131560134146883',
+lockSquareStack='rbxassetid://83170488776527',lockSquareStackFill=
+'rbxassetid://83676185405981',lockTrianglebadgeExclamationmark=
+'rbxassetid://130478937095272',lockTrianglebadgeExclamationmarkFill=
+'rbxassetid://106705811514881',longTextPageAndPencil=
+'rbxassetid://129681886055539',longTextPageAndPencilFill=
+'rbxassetid://110646299611764',loupe='rbxassetid://136500905165325',
+lsbButtonAngledbottomHorizontalLeft='rbxassetid://97637835138960',
+lsbButtonAngledbottomHorizontalLeftFill='rbxassetid://136029832054596',
+ltButtonRoundedtopHorizontal='rbxassetid://96312958043926',
+ltButtonRoundedtopHorizontalFill='rbxassetid://127843467436825',ltCircle=
+'rbxassetid://132916592513600',ltCircleFill='rbxassetid://108356683738396',lungs
+='rbxassetid://117606081876003',lungsFill='rbxassetid://140685394378840',
+m1ButtonHorizontal='rbxassetid://117446058381458',m1ButtonHorizontalFill=
+'rbxassetid://136281737177063',m2ButtonHorizontal='rbxassetid://119180376696999'
+,m2ButtonHorizontalFill='rbxassetid://91002798049706',m3ButtonHorizontal=
+'rbxassetid://113743093040871',m3ButtonHorizontalFill=
+'rbxassetid://115674075172130',m4ButtonHorizontal='rbxassetid://81579669296004',
+m4ButtonHorizontalFill='rbxassetid://107318562519231',mCircle=
+'rbxassetid://116476710361493',mCircleFill='rbxassetid://89150182712210',mSquare
+='rbxassetid://105213421328907',mSquareFill='rbxassetid://100315327640869',
+macbook='rbxassetid://107619424561359',macbookAndApplewatch=
+'rbxassetid://134730538343771',macbookAndIpad='rbxassetid://84294510781873',
+macbookAndIphone='rbxassetid://113315563711474',macbookAndIpod=
+'rbxassetid://104381697175744',macbookAndVisionPro=
+'rbxassetid://129796583480947',macbookAndVisionpro=
+'rbxassetid://127278593229556',macbookBadgeCheckmark=
+'rbxassetid://137440139904870',macbookBadgeExclamationmark=
+'rbxassetid://85004643818160',macbookBadgeShieldCheckmark=
+'rbxassetid://88995389590679',macbookGen1='rbxassetid://74836101201182',
+macbookGen1Sizes='rbxassetid://112015951125344',macbookGen2=
+'rbxassetid://112929584796976',macbookGen2Sizes='rbxassetid://72432237281471',
+macbookSizes='rbxassetid://107797400966607',macbookSlash=
+'rbxassetid://88363794341187',macbookTrianglebadgeExclamationmark=
+'rbxassetid://98986359944726',macmini='rbxassetid://125932491030705',
+macminiBadgeCheckmark='rbxassetid://124390002270280',macminiBadgeCheckmarkFill=
+'rbxassetid://134379510662161',macminiFill='rbxassetid://111771453982507',
+macminiGen2='rbxassetid://124604325683137',macminiGen2Fill=
+'rbxassetid://138242624341969',macminiGen3='rbxassetid://136203836384692',
+macminiGen3Fill='rbxassetid://108766825519262',macproGen1=
+'rbxassetid://113873630917668',macproGen1Fill='rbxassetid://123589284967809',
+macproGen2='rbxassetid://94400511740550',macproGen2Fill=
+'rbxassetid://120147027066863',macproGen3='rbxassetid://89147890594992',
+macproGen3BadgeCkeckmark='rbxassetid://106301224248574',
+macproGen3BadgeCkeckmarkFill='rbxassetid://84360535979337',macproGen3Fill=
+'rbxassetid://129039223637475',macproGen3Server='rbxassetid://108932834322099',
+macstudio='rbxassetid://140406615283661',macstudioBadgeCheckmark=
+'rbxassetid://77043299238345',macstudioBadgeCheckmarkFill=
+'rbxassetid://121308069902452',macstudioFill='rbxassetid://140537816153199',
+macwindow='rbxassetid://120538366729599',macwindowAndCursorarrow=
+'rbxassetid://90741041437063',macwindowAndPointerArrow=
+'rbxassetid://106055489705570',macwindowBadgePlus='rbxassetid://89261664954280',
+macwindowOnRectangle='rbxassetid://72758136163509',macwindowStack=
+'rbxassetid://134609194698391',magazine='rbxassetid://88500461277714',
+magazineFill='rbxassetid://91312620388624',magicmouse=
+'rbxassetid://92566698707027',magicmouseFill='rbxassetid://116129840309244',
+magnifyingglass='rbxassetid://91129038063259',magnifyingglassCircle=
+'rbxassetid://71402731578576',magnifyingglassCircleFill=
+'rbxassetid://98512634782850',magsafeBatterypack='rbxassetid://131576271474358',
+magsafeBatterypackFill='rbxassetid://93439484481400',mail=
+'rbxassetid://135177457181908',mailAndTextMagnifyingglass=
+'rbxassetid://86308377112063',mailFill='rbxassetid://97466777240439',mailStack=
+'rbxassetid://113856245093303',mailStackFill='rbxassetid://93335421635768',
+malaysianringgitsign='rbxassetid://122013191520543',
+malaysianringgitsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://95745537119203',malaysianringgitsignBankBuilding=
+'rbxassetid://95567815149875',malaysianringgitsignBankBuildingFill=
+'rbxassetid://73016241207079',malaysianringgitsignCircle=
+'rbxassetid://86469703884694',malaysianringgitsignCircleFill=
+'rbxassetid://75744193587657',malaysianringgitsignGaugeChartLefthalfRighthalf=
+'rbxassetid://123440228784595',
+malaysianringgitsignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://96465358645429',malaysianringgitsignRing=
+'rbxassetid://133834328268893',malaysianringgitsignRingDashed=
+'rbxassetid://90883710998179',malaysianringgitsignSquare=
+'rbxassetid://85460771757387',malaysianringgitsignSquareFill=
+'rbxassetid://107166651287050',manatsign='rbxassetid://139143453917100',
+manatsignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://70744179468784'
+,manatsignBankBuilding='rbxassetid://76245262473506',manatsignBankBuildingFill=
+'rbxassetid://114034267948261',manatsignCircle='rbxassetid://126199967859257',
+manatsignCircleFill='rbxassetid://140593155589193',
+manatsignGaugeChartLefthalfRighthalf='rbxassetid://118055801527619',
+manatsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://82336814813784',
+manatsignRing='rbxassetid://109963598001949',manatsignRingDashed=
+'rbxassetid://81986929118943',manatsignSquare='rbxassetid://73346293183441',
+manatsignSquareFill='rbxassetid://99779949454450',map=
+'rbxassetid://93531590659266',mapCircle='rbxassetid://134601191431751',
+mapCircleFill='rbxassetid://106092734589750',mapFill=
+'rbxassetid://132139046895902',mappin='rbxassetid://121615146959714',
+mappinAndEllipse='rbxassetid://121230726923110',mappinAndEllipseCircle=
+'rbxassetid://125429828094681',mappinAndEllipseCircleFill=
+'rbxassetid://139128577846173',mappinCircle='rbxassetid://92261727453112',
+mappinCircleFill='rbxassetid://92260033202215',mappinSlash=
+'rbxassetid://132771607889983',mappinSlashCircle='rbxassetid://74525734290852',
+mappinSlashCircleFill='rbxassetid://119484802415308',mappinSquare=
+'rbxassetid://104935304695180',mappinSquareFill='rbxassetid://86746492573973',
+matterLogo='rbxassetid://102406572400014',mecca='rbxassetid://127812717762114',
+medal='rbxassetid://71033385043976',medalFill='rbxassetid://90953143843307',
+medalStar='rbxassetid://120019164471743',medalStarFill=
+'rbxassetid://80020007851214',mediastick='rbxassetid://109549165782172',
+medicalThermometer='rbxassetid://136280158502496',medicalThermometerFill=
+'rbxassetid://119779476439580',megaphone='rbxassetid://117018716409794',
+megaphoneFill='rbxassetid://138594117290847',memories=
+'rbxassetid://81385055592525',memoriesBadgeCheckmark=
+'rbxassetid://101694983725997',memoriesBadgeMinus='rbxassetid://85572709182032',
+memoriesBadgePlus='rbxassetid://89625059340245',memoriesBadgeXmark=
+'rbxassetid://119611626635819',memoriesSlash='rbxassetid://119477438102752',
+memorychip='rbxassetid://72442769456866',memorychipFill=
+'rbxassetid://108024909200103',menubarArrowDownRectangle=
+'rbxassetid://78264857291724',menubarArrowUpRectangle=
+'rbxassetid://79499600876886',menubarDockRectangle='rbxassetid://73630204597242'
+,menubarDockRectangleBadgeRecord='rbxassetid://70512793203960',menubarRectangle=
+'rbxassetid://138854721784790',menucard='rbxassetid://140366101750659',
+menucardFill='rbxassetid://124582943019876',message=
+'rbxassetid://74395662017461',messageBadge='rbxassetid://100483745924724',
+messageBadgeCircle='rbxassetid://106085199916148',messageBadgeCircleFill=
+'rbxassetid://102395002843600',messageBadgeFill='rbxassetid://92248945524593',
+messageBadgeFilledFill='rbxassetid://89587973073375',messageBadgeWaveform=
+'rbxassetid://83330938459388',messageBadgeWaveformFill=
+'rbxassetid://130089782798576',messageCircle='rbxassetid://102977548422597',
+messageCircleFill='rbxassetid://98654060282404',messageFill=
+'rbxassetid://78470145456613',metronome='rbxassetid://106160116449584',
+metronomeFill='rbxassetid://113113603878861',mic='rbxassetid://70559142840213',
+micAndSignalMeter='rbxassetid://98371685797325',micBadgePlus=
+'rbxassetid://124905697228070',micBadgeXmark='rbxassetid://90776924897027',
+micCircle='rbxassetid://97798740260123',micSlash='rbxassetid://77413617305085',
+micSlashCircle='rbxassetid://124310703535746',micSquare=
+'rbxassetid://113336595252301',microbe='rbxassetid://101055634388755',
+microbeCircle='rbxassetid://71746458377734',microbeCircleFill=
+'rbxassetid://102842672445570',microbeFill='rbxassetid://89507986671859',
+microphone='rbxassetid://91483706052452',microphoneAndSignalMeter=
+'rbxassetid://92063694320161',microphoneAndSignalMeterFill=
+'rbxassetid://106138035371214',microphoneBadgeEllipsis=
+'rbxassetid://103989002655467',microphoneBadgeEllipsisFill=
+'rbxassetid://110996273867879',microphoneBadgePlus=
+'rbxassetid://117094983790077',microphoneBadgePlusFill=
+'rbxassetid://127145588822404',microphoneBadgeXmark=
+'rbxassetid://74319653306618',microphoneBadgeXmarkFill=
+'rbxassetid://72163348631659',microphoneCircle='rbxassetid://128457079809321',
+microphoneCircleFill='rbxassetid://124876886582740',microphoneFill=
+'rbxassetid://93919436903011',microphoneSlash='rbxassetid://128089521766130',
+microphoneSlashCircle='rbxassetid://81904243939624',microphoneSlashCircleFill=
+'rbxassetid://85089208509744',microphoneSlashFill='rbxassetid://114274894150098'
+,microphoneSquare='rbxassetid://114042644452492',microphoneSquareFill=
+'rbxassetid://100514210081121',microwave='rbxassetid://109825403791681',
+microwaveFill='rbxassetid://72225124273007',millsign=
+'rbxassetid://120612264843894',millsignArrowTriangleheadCounterclockwiseRotate90
+='rbxassetid://113401890675382',millsignBankBuilding=
+'rbxassetid://84067991643769',millsignBankBuildingFill=
+'rbxassetid://137124816253943',millsignCircle='rbxassetid://93145949048334',
+millsignCircleFill='rbxassetid://119498566433333',
+millsignGaugeChartLefthalfRighthalf='rbxassetid://87724227677679',
+millsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://136203853226981',
+millsignRing='rbxassetid://116690436863629',millsignRingDashed=
+'rbxassetid://110814114561866',millsignSquare='rbxassetid://77492773148562',
+millsignSquareFill='rbxassetid://106288582641608',minus=
+'rbxassetid://89004332408449',minusArrowTriangleheadClockwise=
+'rbxassetid://114634757784622',minusArrowTriangleheadCounterclockwise=
+'rbxassetid://107045388378537',minusCircle='rbxassetid://137503047808593',
+minusCircleFill='rbxassetid://114233698275838',minusDiamond=
+'rbxassetid://70626236941066',minusDiamondFill='rbxassetid://137055603164475',
+minusForwardslashPlus='rbxassetid://139481511724753',minusMagnifyingglass=
+'rbxassetid://134132342538161',minusPlusAndFluidBatteryblock=
+'rbxassetid://101939616357249',minusPlusBatteryblock=
+'rbxassetid://127012882466494',minusPlusBatteryblockExclamationmark=
+'rbxassetid://139500256583872',minusPlusBatteryblockExclamationmarkFill=
+'rbxassetid://96081928780644',minusPlusBatteryblockFill=
+'rbxassetid://117085342503922',minusPlusBatteryblockSlash=
+'rbxassetid://100393676834035',minusPlusBatteryblockSlashFill=
+'rbxassetid://124640512084539',minusPlusBatteryblockStack=
+'rbxassetid://79524287782222',minusPlusBatteryblockStackArrowtriangleLeft=
+'rbxassetid://122261351206637',minusPlusBatteryblockStackArrowtriangleLeftFill=
+'rbxassetid://115291043746629',minusPlusBatteryblockStackArrowtriangleRight=
+'rbxassetid://91966942937693',
+minusPlusBatteryblockStackArrowtriangleRightAndArrowtriangleLeft=
+'rbxassetid://134386149198478',
+minusPlusBatteryblockStackArrowtriangleRightAndArrowtriangleLeftFill=
+'rbxassetid://88265395694017',minusPlusBatteryblockStackArrowtriangleRightFill=
+'rbxassetid://121219514043882',minusPlusBatteryblockStackExclamationmark=
+'rbxassetid://123187360686442',minusPlusBatteryblockStackExclamationmarkFill=
+'rbxassetid://72073968796558',minusPlusBatteryblockStackFill=
+'rbxassetid://129390097165145',minusPlusLinesMeasurementHorizontalAlignedBottom=
+'rbxassetid://86287457532753',minusRectangle='rbxassetid://101832378845362',
+minusRectangleFill='rbxassetid://71255897440595',minusRectanglePortrait=
+'rbxassetid://79554895569395',minusRectanglePortraitFill=
+'rbxassetid://123355657429657',minusSquare='rbxassetid://92869320034967',
+minusSquareFill='rbxassetid://93926501938010',mirrorSideLeft=
+'rbxassetid://79676503129954',mirrorSideLeftAndArrowTurnDownRight=
+'rbxassetid://112735732212436',mirrorSideLeftAndHeatWaves=
+'rbxassetid://97452704291102',mirrorSideRight='rbxassetid://83056491035621',
+mirrorSideRightAndArrowTurnDownLeft='rbxassetid://118420715252545',
+mirrorSideRightAndHeatWaves='rbxassetid://74725135702403',moon=
+'rbxassetid://82139899083256',moonCircle='rbxassetid://85414026848067',
+moonCircleFill='rbxassetid://127455736032544',moonDust=
+'rbxassetid://80023875298780',moonDustCircle='rbxassetid://137917787774386',
+moonDustCircleFill='rbxassetid://89884876621538',moonDustFill=
+'rbxassetid://92755134821567',moonFill='rbxassetid://80943018865798',moonHaze=
+'rbxassetid://127865614718648',moonHazeCircle='rbxassetid://104234616092079',
+moonHazeCircleFill='rbxassetid://72550900291532',moonHazeFill=
+'rbxassetid://132090014257174',moonRoadLanes='rbxassetid://116463811762109',
+moonStars='rbxassetid://87321082119205',moonStarsCircle=
+'rbxassetid://75028167300841',moonStarsCircleFill='rbxassetid://83056445144978',
+moonStarsFill='rbxassetid://117208258351328',moonZzz=
+'rbxassetid://90271070534923',moonZzzFill='rbxassetid://120704152209521',
+moonphaseFirstQuarter='rbxassetid://117116577141627',
+moonphaseFirstQuarterInverse='rbxassetid://111603319059305',moonphaseFullMoon=
+'rbxassetid://101123767009739',moonphaseFullMoonInverse=
+'rbxassetid://87181814547523',moonphaseLastQuarter=
+'rbxassetid://125883223406968',moonphaseLastQuarterInverse=
+'rbxassetid://113591277926901',moonphaseNewMoon='rbxassetid://91400655736524',
+moonphaseNewMoonInverse='rbxassetid://94223725414952',moonphaseWaningCrescent=
+'rbxassetid://71889864039420',moonphaseWaningCrescentInverse=
+'rbxassetid://97971828509046',moonphaseWaningGibbous=
+'rbxassetid://125561957914316',moonphaseWaningGibbousInverse=
+'rbxassetid://133040082683778',moonphaseWaxingCrescent=
+'rbxassetid://109118424981772',moonphaseWaxingCrescentInverse=
+'rbxassetid://83389541865251',moonphaseWaxingGibbous=
+'rbxassetid://117103885736080',moonphaseWaxingGibbousInverse=
+'rbxassetid://81404317227610',moonrise='rbxassetid://115339490944432',
+moonriseCircle='rbxassetid://136045524355967',moonriseCircleFill=
+'rbxassetid://128404111997844',moonriseFill='rbxassetid://103140476284194',
+moonset='rbxassetid://72866577933832',moonsetCircle=
+'rbxassetid://74071623128842',moonsetCircleFill='rbxassetid://132376217303310',
+moonsetFill='rbxassetid://82467208130648',moped='rbxassetid://132510221978497',
+mopedFill='rbxassetid://118529287468863',mosaic='rbxassetid://89243776028649',
+mosaicFill='rbxassetid://95720390375780',motorcycle=
+'rbxassetid://82758135256909',motorcycleFill='rbxassetid://129675811040460',
+mount='rbxassetid://118225973874297',mountFill='rbxassetid://136416370964291',
+mountain2='rbxassetid://73789953244069',mountain2Circle=
+'rbxassetid://120539292840338',mountain2CircleFill=
+'rbxassetid://126616357820763',mountain2Fill='rbxassetid://72619625972809',mouth
+='rbxassetid://72658267669640',mouthFill='rbxassetid://100047036743743',move3d=
+'rbxassetid://112398672404328',movieclapper='rbxassetid://80954194772844',
+movieclapperFill='rbxassetid://135561411591078',mph=
+'rbxassetid://128529074792406',mphCircle='rbxassetid://81809274837519',
+mphCircleFill='rbxassetid://121437826766049',mug='rbxassetid://110628058332506',
+mugFill='rbxassetid://139140377653653',multiply='rbxassetid://136891818007188',
+multiplyCircle='rbxassetid://127978128794846',multiplyCircleFill=
+'rbxassetid://127229291230155',multiplySquare='rbxassetid://97309344874453',
+multiplySquareFill='rbxassetid://112070371616255',musicMic=
+'rbxassetid://126510932173223',musicMicCircle='rbxassetid://121995856123205',
+musicMicrophone='rbxassetid://100824169660656',musicMicrophoneCircle=
+'rbxassetid://131498749144552',musicMicrophoneCircleFill=
+'rbxassetid://120791444280471',musicNote='rbxassetid://126082822807584',
+musicNoteArrowTriangleheadClockwise='rbxassetid://133288353146842',
+musicNoteHouse='rbxassetid://91704654202540',musicNoteHouseFill=
+'rbxassetid://99180255941950',musicNoteList='rbxassetid://96230339803471',
+musicNoteSlash='rbxassetid://127771624449291',musicNoteSquareStack=
+'rbxassetid://88198486537881',musicNoteSquareStackFill=
+'rbxassetid://136399162566805',musicNoteTv='rbxassetid://118014044046358',
+musicNoteTvFill='rbxassetid://101072939696766',musicPages=
+'rbxassetid://98131195358883',musicPagesFill='rbxassetid://100815742404062',
+musicQuarternote3='rbxassetid://72571169895421',mustache=
+'rbxassetid://81213625247949',mustacheFill='rbxassetid://135889093221272',
+nCircle='rbxassetid://119692721835646',nCircleFill=
+'rbxassetid://139590129950612',nSquare='rbxassetid://82639756767208',nSquareFill
+='rbxassetid://77756021605509',nairasign='rbxassetid://106795085125512',
+nairasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://136163098752557',nairasignBankBuilding=
+'rbxassetid://118269030455068',nairasignBankBuildingFill=
+'rbxassetid://102921613899751',nairasignCircle='rbxassetid://75558341136080',
+nairasignCircleFill='rbxassetid://74947644324829',
+nairasignGaugeChartLefthalfRighthalf='rbxassetid://129556356646485',
+nairasignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://96821649386281',
+nairasignRing='rbxassetid://117523908784311',nairasignRingDashed=
+'rbxassetid://105742853876513',nairasignSquare='rbxassetid://135120380049763',
+nairasignSquareFill='rbxassetid://132052855718549',network=
+'rbxassetid://120498202241355',networkBadgeShieldHalfFilled=
+'rbxassetid://113813057412690',networkSlash='rbxassetid://101003667032615',
+newspaper='rbxassetid://104839010601075',newspaperCircle=
+'rbxassetid://115347908928306',newspaperCircleFill=
+'rbxassetid://105464060542335',newspaperFill='rbxassetid://137360183744130',
+norwegiankronesign='rbxassetid://119731208635088',
+norwegiankronesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://101411001215020',norwegiankronesignBankBuilding=
+'rbxassetid://85695886048676',norwegiankronesignBankBuildingFill=
+'rbxassetid://95684757727036',norwegiankronesignCircle=
+'rbxassetid://81846373779456',norwegiankronesignCircleFill=
+'rbxassetid://109254117252040',norwegiankronesignGaugeChartLefthalfRighthalf=
+'rbxassetid://113781025133033',
+norwegiankronesignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://78092984701784',norwegiankronesignRing=
+'rbxassetid://138947979267546',norwegiankronesignRingDashed=
+'rbxassetid://77241946000543',norwegiankronesignSquare=
+'rbxassetid://95995824513915',norwegiankronesignSquareFill=
+'rbxassetid://96123508833499',nose='rbxassetid://74544706026614',noseFill=
+'rbxassetid://124371438722659',nosign='rbxassetid://110675356214733',nosignApp=
+'rbxassetid://90400743739520',nosignAppFill='rbxassetid://107658749612961',
+nosignBadgeClock='rbxassetid://137939836191842',note=
+'rbxassetid://93279801394323',noteText='rbxassetid://128260562606530',
+noteTextBadgePlus='rbxassetid://103069459660634',notequal=
+'rbxassetid://86562600167503',notequalCircle='rbxassetid://135789760267660',
+notequalCircleFill='rbxassetid://75312888708455',notequalSquare=
+'rbxassetid://81897503982741',notequalSquareFill='rbxassetid://72731357908400',
+number='rbxassetid://127208629756456',number00Circle=
+'rbxassetid://131779637005640',number00Square='rbxassetid://81236373352019',
+number01Circle='rbxassetid://138017951861028',number01Square=
+'rbxassetid://97241538934163',number02Circle='rbxassetid://133242670562001',
+number02Square='rbxassetid://99179290111993',number03Circle=
+'rbxassetid://105983470184277',number03Square='rbxassetid://132291497347326',
+number04Circle='rbxassetid://116987436384055',number04Square=
+'rbxassetid://104100419385488',number05Circle='rbxassetid://130314809611820',
+number05Square='rbxassetid://114379850471491',number06Circle=
+'rbxassetid://137452105712472',number06Square='rbxassetid://103212010162769',
+number07Circle='rbxassetid://102549222409891',number07Square=
+'rbxassetid://80554919883042',number08Circle='rbxassetid://133051884093292',
+number08Square='rbxassetid://128176821770996',number09Circle=
+'rbxassetid://76455988018714',number09Square='rbxassetid://87408221362281',
+number0Circle='rbxassetid://112630144563845',number0Square=
+'rbxassetid://83690626547054',number10Circle='rbxassetid://96193951740646',
+number10Lane='rbxassetid://81314525759681',number10Square=
+'rbxassetid://81808119537499',number11Circle='rbxassetid://121287509877595',
+number11Lane='rbxassetid://103036455180106',number11Square=
+'rbxassetid://137943364469277',number123Rectangle='rbxassetid://115605993616370'
+,number12Circle='rbxassetid://95488831711839',number12Lane=
+'rbxassetid://122996912273287',number12Square='rbxassetid://134346701257530',
+number13Circle='rbxassetid://117905874629917',number13Square=
+'rbxassetid://117293639837435',number14Circle='rbxassetid://108407748009645',
+number14Square='rbxassetid://87120163705904',number15Circle=
+'rbxassetid://101007633009470',number15Square='rbxassetid://78052584911395',
+number16Circle='rbxassetid://107648080370730',number16Square=
+'rbxassetid://127190639879155',number17Circle='rbxassetid://104117985546346',
+number17Square='rbxassetid://73499070638265',number18Circle=
+'rbxassetid://102380885337705',number18Square='rbxassetid://80311469813477',
+number19Circle='rbxassetid://134713999920408',number19Square=
+'rbxassetid://102272936095513',number1Brakesignal='rbxassetid://79144309389823',
+number1Circle='rbxassetid://90420045405973',number1Lane=
+'rbxassetid://125260612972564',number1Magnifyingglass=
+'rbxassetid://111096049925424',number1Square='rbxassetid://108186243137995',
+number20Circle='rbxassetid://119790353650997',number20Square=
+'rbxassetid://73427706736721',number21Circle='rbxassetid://115011080119497',
+number21Square='rbxassetid://100575245011241',number22Circle=
+'rbxassetid://79147656530403',number22Square='rbxassetid://107808365980228',
+number23Circle='rbxassetid://113967161448579',number23Square=
+'rbxassetid://126327561252667',number24Circle='rbxassetid://77688026724586',
+number24Square='rbxassetid://102948515141281',number25Circle=
+'rbxassetid://103932230280729',number25Square='rbxassetid://85964236323828',
+number26Circle='rbxassetid://110095157711014',number26Square=
+'rbxassetid://72769891775076',number27Circle='rbxassetid://80413679989648',
+number27Square='rbxassetid://78907626263409',number28Circle=
+'rbxassetid://77630558937328',number28Square='rbxassetid://101516015146640',
+number29Circle='rbxassetid://112151950673070',number29Square=
+'rbxassetid://126060868481076',number2Brakesignal='rbxassetid://130026522834900'
+,number2Circle='rbxassetid://115644023941063',number2Lane=
+'rbxassetid://76895941784764',number2Square='rbxassetid://135434406067611',
+number30Circle='rbxassetid://93539842298014',number30Square=
+'rbxassetid://92360148508407',number31Circle='rbxassetid://117202855882818',
+number31Square='rbxassetid://72665219530870',number32Circle=
+'rbxassetid://102701322952852',number32Square='rbxassetid://97548734649989',
+number33Circle='rbxassetid://76331950936098',number33Square=
+'rbxassetid://91723950606376',number34Circle='rbxassetid://76108893775703',
+number34Square='rbxassetid://98356773601222',number35Circle=
+'rbxassetid://128638587888904',number35Square='rbxassetid://114874576219731',
+number36Circle='rbxassetid://124580301053177',number36Square=
+'rbxassetid://128676757513519',number37Circle='rbxassetid://105355724679695',
+number37Square='rbxassetid://111356313667440',number38Circle=
+'rbxassetid://140658654909786',number38Square='rbxassetid://87276444787352',
+number39Circle='rbxassetid://127160538226349',number39Square=
+'rbxassetid://110607591007885',number3Circle='rbxassetid://82210102360256',
+number3Lane='rbxassetid://123566814024217',number3Square=
+'rbxassetid://100151903595968',number40Circle='rbxassetid://76284811463961',
+number40Square='rbxassetid://108964733911464',number41Circle=
+'rbxassetid://81051156411638',number41Square='rbxassetid://108180042091768',
+number42Circle='rbxassetid://105367690120970',number42Square=
+'rbxassetid://121398683227303',number43Circle='rbxassetid://116742062830209',
+number43Square='rbxassetid://114456062917463',number44Circle=
+'rbxassetid://95645523276973',number44Square='rbxassetid://74196270639498',
+number45Circle='rbxassetid://131982584078162',number45Square=
+'rbxassetid://112633410131411',number46Circle='rbxassetid://98121889785827',
+number46Square='rbxassetid://71827970370485',number47Circle=
+'rbxassetid://110683991524351',number47Square='rbxassetid://130355817586206',
+number48Circle='rbxassetid://100680920554029',number48Square=
+'rbxassetid://137504486853690',number49Circle='rbxassetid://85012410965666',
+number49Square='rbxassetid://112216977302610',number4AltCircle=
+'rbxassetid://120280636483094',number4AltSquare='rbxassetid://122930727055244',
+number4Circle='rbxassetid://113950512097158',number4Lane=
+'rbxassetid://80369915269072',number4Square='rbxassetid://85342885629372',
+number50Circle='rbxassetid://76596482604277',number50Square=
+'rbxassetid://89126185617207',number5Circle='rbxassetid://84249571663594',
+number5Lane='rbxassetid://80082125386311',number5Square=
+'rbxassetid://92555254652509',number6AltCircle='rbxassetid://132108212531324',
+number6AltSquare='rbxassetid://133921705918574',number6Circle=
+'rbxassetid://139508584419391',number6Lane='rbxassetid://120411900425268',
+number6Square='rbxassetid://136827465810666',number7Circle=
+'rbxassetid://91048231428377',number7Lane='rbxassetid://89152600086974',
+number7Square='rbxassetid://128474224252993',number8Circle=
+'rbxassetid://90175124244732',number8Lane='rbxassetid://135579479621822',
+number8Square='rbxassetid://103037928409169',number9AltCircle=
+'rbxassetid://89157942477413',number9AltSquare='rbxassetid://127573342279334',
+number9Circle='rbxassetid://122405410433743',number9Lane=
+'rbxassetid://118878335756561',number9Square='rbxassetid://113640399773664',
+numberCircle='rbxassetid://91537062236961',numberCircleFill=
+'rbxassetid://128309928890652',numberSquare='rbxassetid://82329567357914',
+numberSquareFill='rbxassetid://126805206921861',numbers=
+'rbxassetid://84498045988050',numbersRectangle='rbxassetid://94260654225058',
+numbersRectangleFill='rbxassetid://94598633915174',numbersign=
+'rbxassetid://95244886174960',numeric2h='rbxassetid://105497397405088',
+numeric2hCircle='rbxassetid://70624293530403',numeric4a=
+'rbxassetid://86756867568912',numeric4aCircle='rbxassetid://80949635570356',
+numeric4h='rbxassetid://111499849309749',numeric4hCircle=
+'rbxassetid://108759735497325',numeric4kTv='rbxassetid://138479967752101',
+numeric4l='rbxassetid://132669284716581',numeric4lCircle=
+'rbxassetid://81144013373119',oCircle='rbxassetid://106397024350624',oCircleFill
+='rbxassetid://76217943049253',oSquare='rbxassetid://73833935065451',oSquareFill
+='rbxassetid://96189217216385',oar2Crossed='rbxassetid://87527605793944',
+oar2CrossedCircle='rbxassetid://136436924320890',oar2CrossedCircleFill=
+'rbxassetid://101685289108994',octagon='rbxassetid://79038916131641',
+octagonBottomhalfFilled='rbxassetid://114692214649659',octagonFill=
+'rbxassetid://107625404272807',octagonLefthalfFilled=
+'rbxassetid://99209930883951',octagonRighthalfFilled=
+'rbxassetid://112842649283426',octagonTophalfFilled=
+'rbxassetid://114065832521760',oilcan='rbxassetid://135272223692064',
+oilcanAndThermometer='rbxassetid://117495873565426',oilcanAndThermometerFill=
+'rbxassetid://112607162891091',oilcanFill='rbxassetid://118078317492971',
+opticaldisc='rbxassetid://123902479206565',opticaldiscFill=
+'rbxassetid://93483653186548',opticaldiscdrive='rbxassetid://73954391898782',
+opticaldiscdriveFill='rbxassetid://134334854298944',opticid=
+'rbxassetid://122071408513811',opticidFill='rbxassetid://120138153821378',option
+='rbxassetid://132861598935618',oval='rbxassetid://113810873605238',
+ovalBottomhalfFilled='rbxassetid://126916332045325',ovalFill=
+'rbxassetid://94952343843714',ovalLefthalfFilled='rbxassetid://113389656237279',
+ovalPortrait='rbxassetid://132483754313621',ovalPortraitBottomhalfFilled=
+'rbxassetid://71422335054914',ovalPortraitFill='rbxassetid://79131278329666',
+ovalPortraitLefthalfFilled='rbxassetid://109381437626839',
+ovalPortraitRighthalfFilled='rbxassetid://111288429681074',
+ovalPortraitTophalfFilled='rbxassetid://123536161343998',ovalRighthalfFilled=
+'rbxassetid://104199544496623',ovalTophalfFilled='rbxassetid://101770441746408',
+oven='rbxassetid://86234645623692',ovenFill='rbxassetid://83900517666474',
+p1ButtonHorizontal='rbxassetid://126562898638354',p1ButtonHorizontalFill=
+'rbxassetid://110710525929608',p2ButtonHorizontal='rbxassetid://77218364525379',
+p2ButtonHorizontalFill='rbxassetid://133839416874548',p3ButtonHorizontal=
+'rbxassetid://138792223238109',p3ButtonHorizontalFill=
+'rbxassetid://106186118395145',p4ButtonHorizontal='rbxassetid://77853304593628',
+p4ButtonHorizontalFill='rbxassetid://130778443695025',pCircle=
+'rbxassetid://117640721311754',pCircleFill='rbxassetid://87813691082387',pSquare
+='rbxassetid://107762110453705',pSquareFill='rbxassetid://96012467396262',
+padHeader='rbxassetid://92020313753615',paddleshifterLeft=
+'rbxassetid://126265871847369',paddleshifterLeftFill=
+'rbxassetid://125673273656120',paddleshifterRight='rbxassetid://117840207563380'
+,paddleshifterRightFill='rbxassetid://80336378319314',paintBucketClassic=
+'rbxassetid://85152836091310',paintbrush='rbxassetid://109533740362394',
+paintbrushFill='rbxassetid://99513788554382',paintbrushPointed=
+'rbxassetid://127402849243896',paintbrushPointedFill=
+'rbxassetid://88165121517273',paintpalette='rbxassetid://138490319699379',
+paintpaletteFill='rbxassetid://131716243676081',pano=
+'rbxassetid://107256596811076',panoBadgePlay='rbxassetid://105599907508172',
+panoBadgePlayFill='rbxassetid://131513740947262',panoFill=
+'rbxassetid://89694664506298',paperclip='rbxassetid://137882336475940',
+paperclipBadgeEllipsis='rbxassetid://134936619429895',paperclipCircle=
+'rbxassetid://110142955736619',paperclipCircleFill=
+'rbxassetid://133602092264853',paperplane='rbxassetid://80974571487117',
+paperplaneCircle='rbxassetid://137118091888490',paperplaneCircleFill=
+'rbxassetid://71065495715325',paperplaneFill='rbxassetid://74965599538986',
+paragraphsign='rbxassetid://94556416337049',parentheses=
+'rbxassetid://130009418294104',parkinglight='rbxassetid://109225690951003',
+parkinglightFill='rbxassetid://99882392916301',parkingsign=
+'rbxassetid://75870889123264',parkingsignBrakesignal=
+'rbxassetid://112789415747617',parkingsignBrakesignalSlash=
+'rbxassetid://71858648062530',parkingsignCircle='rbxassetid://99556995799552',
+parkingsignCircleFill='rbxassetid://87920284156496',
+parkingsignRadiowavesDownRightOff='rbxassetid://138123234771263',
+parkingsignRadiowavesLeftAndRight='rbxassetid://103933467168122',
+parkingsignRadiowavesLeftAndRightSlash='rbxassetid://97814507902059',
+parkingsignRadiowavesRightAndSafetycone='rbxassetid://104481497468858',
+parkingsignSquare='rbxassetid://77549829356466',parkingsignSquareFill=
+'rbxassetid://94937107598603',parkingsignSteeringwheel=
+'rbxassetid://113877456839912',partyPopper='rbxassetid://97097770522299',
+partyPopperFill='rbxassetid://126854429415327',pause=
+'rbxassetid://86021151376401',pauseCircle='rbxassetid://121043050488805',
+pauseCircleFill='rbxassetid://113265459725055',pauseFill=
+'rbxassetid://133135421688612',pauseRectangle='rbxassetid://79118144830856',
+pauseRectangleFill='rbxassetid://98884467605829',pawprint=
+'rbxassetid://72805687268685',pawprintCircle='rbxassetid://82961293618699',
+pawprintCircleFill='rbxassetid://133414719283799',pawprintFill=
+'rbxassetid://120051601058569',pc='rbxassetid://84697360225761',peacesign=
+'rbxassetid://83716327577706',pedalAccelerator='rbxassetid://107951710156857',
+pedalAcceleratorFill='rbxassetid://130529659230331',pedalBrake=
+'rbxassetid://127337111670528',pedalBrakeFill='rbxassetid://71467964364715',
+pedalClutch='rbxassetid://73279295635737',pedalClutchFill=
+'rbxassetid://103699453075905',pedestrianGateClosed=
+'rbxassetid://110977038522546',pedestrianGateClosedTrianglebadgeExclamationmark=
+'rbxassetid://84254696178218',pedestrianGateOpen='rbxassetid://131872346865052',
+pedestrianGateOpenTrianglebadgeExclamationmark='rbxassetid://131146459812890',
+pencil='rbxassetid://130705269869803',pencilAndListClipboard=
+'rbxassetid://108221324478019',pencilAndOutline='rbxassetid://71370761213291',
+pencilAndRuler='rbxassetid://130053969230904',pencilAndRulerFill=
+'rbxassetid://135794725468905',pencilAndScribble='rbxassetid://71841329049910',
+pencilCircle='rbxassetid://126091045493595',pencilCircleFill=
+'rbxassetid://120665154874259',pencilLine='rbxassetid://114694675953537',
+pencilSlash='rbxassetid://99813950298838',pencilTip=
+'rbxassetid://72990698962317',pencilTipCropCircle='rbxassetid://116258147913478'
+,pencilTipCropCircleBadgeArrowForward='rbxassetid://138569973971114',
+pencilTipCropCircleBadgeArrowForwardFill='rbxassetid://80339580243434',
+pencilTipCropCircleBadgeMinus='rbxassetid://137149264289620',
+pencilTipCropCircleBadgeMinusFill='rbxassetid://106175372040589',
+pencilTipCropCircleBadgePlus='rbxassetid://81912638436848',
+pencilTipCropCircleBadgePlusFill='rbxassetid://135279218878675',
+pencilTipCropCircleFill='rbxassetid://123542970215827',pentagon=
+'rbxassetid://113187250562484',pentagonBottomhalfFilled=
+'rbxassetid://77804606585420',pentagonFill='rbxassetid://107612785851729',
+pentagonLefthalfFilled='rbxassetid://102272146625100',pentagonRighthalfFilled=
+'rbxassetid://71901071200525',pentagonTophalfFilled=
+'rbxassetid://124042937629059',percent='rbxassetid://127492144708581',person=
+'rbxassetid://110701632373035',person2='rbxassetid://112399905717309',
+person2ArrowTriangleheadCounterclockwise='rbxassetid://123475483919631',
+person2Badge='rbxassetid://81421024779982',person2BadgeFill=
+'rbxassetid://138318005759141',person2BadgeGearshape=
+'rbxassetid://132573815056374',person2BadgeGearshapeFill=
+'rbxassetid://73944930602710',person2BadgeKey='rbxassetid://93647666096573',
+person2BadgeKeyFill='rbxassetid://136470113852487',person2BadgeMinus=
+'rbxassetid://84645992076966',person2BadgeMinusFill=
+'rbxassetid://77898589792614',person2BadgePlus='rbxassetid://135162242901966',
+person2BadgePlusFill='rbxassetid://123701745548055',person2Circle=
+'rbxassetid://91806733116755',person2CircleFill='rbxassetid://130770498958716',
+person2CropSquareStack='rbxassetid://116331579710856',person2CropSquareStackFill
+='rbxassetid://132329087604078',person2Fill='rbxassetid://140041117183015',
+person2Gobackward='rbxassetid://77336790373231',person2Shield=
+'rbxassetid://124016438026144',person2ShieldFill='rbxassetid://139070659357420',
+person2Slash='rbxassetid://87644578467719',person2SlashFill=
+'rbxassetid://137522706511369',person2Wave2='rbxassetid://122652213620435',
+person2Wave2Fill='rbxassetid://76240613584680',person3=
+'rbxassetid://129473219512684',person3Fill='rbxassetid://105740784710191',
+person3Sequence='rbxassetid://107389006554677',person3SequenceFill=
+'rbxassetid://85888945527165',personAndArrowLeftAndArrowRight=
+'rbxassetid://128164370218812',personAndArrowLeftAndArrowRightOutward=
+'rbxassetid://101409421769868',personAndBackgroundDotted=
+'rbxassetid://83784991200691',personAndBackgroundStripedHorizontal=
+'rbxassetid://75509951269289',personBadgeClock='rbxassetid://97908584137499',
+personBadgeClockFill='rbxassetid://76924073855200',personBadgeKey=
+'rbxassetid://98218511075004',personBadgeKeyFill='rbxassetid://140402839580918',
+personBadgeMinus='rbxassetid://125565222576571',personBadgePlus=
+'rbxassetid://115656988628904',personBadgeShieldCheckmark=
+'rbxassetid://83267413868149',personBadgeShieldCheckmarkFill=
+'rbxassetid://131283863488112',personBadgeShieldExclamationmark=
+'rbxassetid://84408939526129',personBadgeShieldExclamationmarkFill=
+'rbxassetid://87987647501843',personBubble='rbxassetid://133030906481167',
+personBubbleFill='rbxassetid://117517528643201',personBust=
+'rbxassetid://87620323313188',personBustCircle='rbxassetid://79288327836334',
+personBustCircleFill='rbxassetid://101400531456668',personBustFill=
+'rbxassetid://111810892942700',personCheckmarkAndXmark=
+'rbxassetid://94288741955083',personCircle='rbxassetid://135997814266617',
+personCircleFill='rbxassetid://90118396547869',personCropArtframe=
+'rbxassetid://90385788840374',personCropBadgeMagnifyingglass=
+'rbxassetid://97394616198512',personCropBadgeMagnifyingglassFill=
+'rbxassetid://132389329009693',personCropCircle='rbxassetid://118995818358156',
+personCropCircleBadge='rbxassetid://131364710689047',
+personCropCircleBadgeCheckmark='rbxassetid://103344345950122',
+personCropCircleBadgeClock='rbxassetid://127451044762338',
+personCropCircleBadgeClockFill='rbxassetid://76718758852507',
+personCropCircleBadgeEllipsis='rbxassetid://96642912386901',
+personCropCircleBadgeEllipsisFill='rbxassetid://88343482632492',
+personCropCircleBadgeExclamationmark='rbxassetid://139365729353052',
+personCropCircleBadgeExclamationmarkFill='rbxassetid://109742792874521',
+personCropCircleBadgeFill='rbxassetid://107018668861828',
+personCropCircleBadgeMinus='rbxassetid://97855563994788',
+personCropCircleBadgeMoon='rbxassetid://133337215391424',
+personCropCircleBadgeMoonFill='rbxassetid://122077316360614',
+personCropCircleBadgePlus='rbxassetid://81853344224695',
+personCropCircleBadgeQuestionmark='rbxassetid://139239900008701',
+personCropCircleBadgeQuestionmarkFill='rbxassetid://99804179170835',
+personCropCircleBadgeXmark='rbxassetid://91489653759413',personCropCircleDashed=
+'rbxassetid://82498046222304',personCropCircleDashedCircle=
+'rbxassetid://71063283330455',personCropCircleDashedCircleFill=
+'rbxassetid://137889244981033',personCropCircleFill=
+'rbxassetid://124171421403082',personCropCircleFillBadgeCheckmark=
+'rbxassetid://104885997312791',personCropCircleFillBadgeMinus=
+'rbxassetid://81459239482197',personCropCircleFillBadgePlus=
+'rbxassetid://79413393740430',personCropCircleFillBadgeXmark=
+'rbxassetid://75776588765496',personCropRectangle='rbxassetid://80086996421928',
+personCropRectangleBadgePlus='rbxassetid://102909379035898',
+personCropRectangleBadgePlusFill='rbxassetid://76635295827459',
+personCropRectangleFill='rbxassetid://105492427236467',personCropRectangleStack=
+'rbxassetid://100303396427325',personCropRectangleStackFill=
+'rbxassetid://121443905592285',personCropSquare='rbxassetid://73096364605342',
+personCropSquareBadgeCamera='rbxassetid://135346755645322',
+personCropSquareBadgeCameraFill='rbxassetid://92729904669185',
+personCropSquareBadgeVideo='rbxassetid://78518587851789',
+personCropSquareBadgeVideoFill='rbxassetid://114816625385618',
+personCropSquareFill='rbxassetid://105841006579983',
+personCropSquareFilledAndAtRectangle='rbxassetid://118924461813330',
+personCropSquareFilledAndAtRectangleFill='rbxassetid://80381762756864',
+personCropSquareOnSquareAngled='rbxassetid://85148546794958',
+personCropSquareOnSquareAngledFill='rbxassetid://97667541433512',personFill=
+'rbxassetid://87697331384088',personFillAndArrowLeftAndArrowRightOutward=
+'rbxassetid://122634217727119',personFillBadgeMinus=
+'rbxassetid://81924980008824',personFillBadgePlus='rbxassetid://134231365958570'
+,personFillCheckmark='rbxassetid://103977509186960',personFillCheckmarkAndXmark=
+'rbxassetid://101086334574836',personFillQuestionmark=
+'rbxassetid://84568714854237',personFillTurnDown='rbxassetid://138058666704795',
+personFillTurnLeft='rbxassetid://126438219715870',personFillTurnRight=
+'rbxassetid://78937173520484',personFillViewfinder=
+'rbxassetid://118288055558650',personFillXmark='rbxassetid://125072040338347',
+personIcloud='rbxassetid://120820184523425',personIcloudFill=
+'rbxassetid://133378049835063',personLineDottedPerson=
+'rbxassetid://102084674613931',personLineDottedPersonFill=
+'rbxassetid://135829432223513',personSlash='rbxassetid://72782294100335',
+personSlashFill='rbxassetid://121955009050346',personSpatialaudio3dFill=
+'rbxassetid://84698678474801',personSpatialaudioFill=
+'rbxassetid://78014656341517',personSpatialaudioStereo3dFill=
+'rbxassetid://97758734740805',personSpatialaudioStereoFill=
+'rbxassetid://120513790757334',personTextRectangle=
+'rbxassetid://128884463766600',personTextRectangleFill=
+'rbxassetid://137564215419438',personTextRectangleTrianglebadgeExclamationmark=
+'rbxassetid://80430192542431',
+personTextRectangleTrianglebadgeExclamationmarkFill=
+'rbxassetid://95425946810987',personWave2='rbxassetid://107176133016557',
+personWave2Fill='rbxassetid://119313962458106',personalhotspot=
+'rbxassetid://100375127059556',personalhotspotCircle=
+'rbxassetid://75798505357181',personalhotspotCircleFill=
+'rbxassetid://91105949987614',personalhotspotSlash=
+'rbxassetid://121054134249173',perspective='rbxassetid://126209555168111',
+peruviansolessign='rbxassetid://118377143493294',
+peruviansolessignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://128283504294445',peruviansolessignBankBuilding=
+'rbxassetid://102898750065832',peruviansolessignBankBuildingFill=
+'rbxassetid://74069927107160',peruviansolessignCircle=
+'rbxassetid://73491243272124',peruviansolessignCircleFill=
+'rbxassetid://88303394405719',peruviansolessignGaugeChartLefthalfRighthalf=
+'rbxassetid://95412355379458',
+peruviansolessignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://105242621393318',peruviansolessignRing=
+'rbxassetid://70902936676598',peruviansolessignRingDashed=
+'rbxassetid://73633708956892',peruviansolessignSquare=
+'rbxassetid://73308117343401',peruviansolessignSquareFill=
+'rbxassetid://102892314110416',pesetasign='rbxassetid://85532413742774',
+pesetasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://95814949182701',pesetasignBankBuilding=
+'rbxassetid://70435245510011',pesetasignBankBuildingFill=
+'rbxassetid://76828425934083',pesetasignCircle='rbxassetid://73689448530780',
+pesetasignCircleFill='rbxassetid://129145068296499',
+pesetasignGaugeChartLefthalfRighthalf='rbxassetid://135650251052406',
+pesetasignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://125057752565087',
+pesetasignRing='rbxassetid://138901454310015',pesetasignRingDashed=
+'rbxassetid://139127402491166',pesetasignSquare='rbxassetid://120082289628623',
+pesetasignSquareFill='rbxassetid://92637657922110',pesosign=
+'rbxassetid://131506373872953',pesosignArrowTriangleheadCounterclockwiseRotate90
+='rbxassetid://95176369235434',pesosignBankBuilding=
+'rbxassetid://133065437589460',pesosignBankBuildingFill=
+'rbxassetid://133018359221072',pesosignCircle='rbxassetid://82936186087157',
+pesosignCircleFill='rbxassetid://122355951938355',
+pesosignGaugeChartLefthalfRighthalf='rbxassetid://71731520831769',
+pesosignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://79927907535836',
+pesosignRing='rbxassetid://96568771428940',pesosignRingDashed=
+'rbxassetid://114760367933760',pesosignSquare='rbxassetid://99221907869730',
+pesosignSquareFill='rbxassetid://104090017006574',petCarrier=
+'rbxassetid://92747235907572',petCarrierCircle='rbxassetid://89684260845982',
+petCarrierCircleFill='rbxassetid://136795292748871',petCarrierFill=
+'rbxassetid://118526244393497',phone='rbxassetid://130274090404678',
+phoneArrowDownLeft='rbxassetid://132462917948039',phoneArrowDownLeftFill=
+'rbxassetid://87805128798557',phoneArrowRight='rbxassetid://72030777597334',
+phoneArrowRightFill='rbxassetid://121404647674426',phoneArrowUpRight=
+'rbxassetid://79872298851136',phoneArrowUpRightCircle=
+'rbxassetid://70948578186592',phoneArrowUpRightCircleFill=
+'rbxassetid://84134830279781',phoneArrowUpRightFill=
+'rbxassetid://133725301955212',phoneBadgeCheckmark=
+'rbxassetid://133676619626440',phoneBadgeClock='rbxassetid://105195846197897',
+phoneBadgeClockFill='rbxassetid://76558752952090',phoneBadgePlus=
+'rbxassetid://77530999977499',phoneBadgeWaveform='rbxassetid://82744515131009',
+phoneBadgeWaveformFill='rbxassetid://115162205181132',phoneBubble=
+'rbxassetid://107177706753542',phoneBubbleFill='rbxassetid://116143288406977',
+phoneCircle='rbxassetid://99640263570255',phoneCircleFill=
+'rbxassetid://111534598395128',phoneConnection='rbxassetid://107182975371124',
+phoneConnectionFill='rbxassetid://132948841358108',phoneDown=
+'rbxassetid://102456970457868',phoneDownCircle='rbxassetid://82910023145953',
+phoneDownCircleFill='rbxassetid://72377511837884',phoneDownFill=
+'rbxassetid://86552310564370',phoneDownWavesLeftAndRight=
+'rbxassetid://136971996615575',phoneFill='rbxassetid://120429135463665',
+phoneFillBadgeCheckmark='rbxassetid://115261691430286',phoneFillBadgePlus=
+'rbxassetid://87819134346668',phonePause='rbxassetid://134150100031688',
+phonePauseCircle='rbxassetid://110785714836445',phonePauseCircleFill=
+'rbxassetid://78369532938975',phonePauseFill='rbxassetid://95822352892272',photo
+='rbxassetid://132914683561588',photoArtframe='rbxassetid://87277781880011',
+photoArtframeCircle='rbxassetid://130558529142621',photoArtframeCircleFill=
+'rbxassetid://137928811461182',photoBadgeArrowDown=
+'rbxassetid://111884951858150',photoBadgeArrowDownFill=
+'rbxassetid://107871390721167',photoBadgeCheckmark='rbxassetid://87641114310982'
+,photoBadgeCheckmarkFill='rbxassetid://135388635005016',
+photoBadgeExclamationmark='rbxassetid://85889142841805',
+photoBadgeExclamationmarkFill='rbxassetid://70564106880729',
+photoBadgeMagnifyingglass='rbxassetid://135894823011821',
+photoBadgeMagnifyingglassFill='rbxassetid://104248787134254',photoBadgePlus=
+'rbxassetid://139218119153470',photoBadgePlusFill='rbxassetid://137533733758015'
+,photoBadgeShieldExclamationmark='rbxassetid://93485639865954',
+photoBadgeShieldExclamationmarkFill='rbxassetid://106649923225765',photoCircle=
+'rbxassetid://82562621732217',photoCircleFill='rbxassetid://94004054038412',
+photoFill='rbxassetid://111680668639782',photoFillOnRectangleFill=
+'rbxassetid://139880248650794',photoOnRectangle='rbxassetid://74009493246173',
+photoOnRectangleAngled='rbxassetid://78929588928496',photoOnRectangleAngledFill=
+'rbxassetid://116615960255503',photoStack='rbxassetid://116744098593728',
+photoStackFill='rbxassetid://136351647084409',photoTrianglebadgeExclamationmark=
+'rbxassetid://127380965749556',photoTrianglebadgeExclamationmarkFill=
+'rbxassetid://138953418202254',photoTv='rbxassetid://83951502842716',pi=
+'rbxassetid://137262054651372',piCircle='rbxassetid://135373869294798',
+piCircleFill='rbxassetid://120888427088049',piSquare=
+'rbxassetid://87692915899283',piSquareFill='rbxassetid://134420038676982',
+pianokeys='rbxassetid://100398610027172',pianokeysInverse=
+'rbxassetid://79698280620441',pill='rbxassetid://126278443123311',pillCircle=
+'rbxassetid://113470872116477',pillCircleFill='rbxassetid://102134863235143',
+pillFill='rbxassetid://118865334913811',pills='rbxassetid://135654600545618',
+pillsCircle='rbxassetid://101748290464454',pillsCircleFill=
+'rbxassetid://83035294003188',pillsFill='rbxassetid://80480569153430',pin=
+'rbxassetid://134143049313259',pinCircle='rbxassetid://140386216854767',
+pinCircleFill='rbxassetid://125997437793325',pinFill=
+'rbxassetid://105480877942834',pinSlash='rbxassetid://133152106066233',
+pinSlashFill='rbxassetid://108270742635671',pinSquare=
+'rbxassetid://96954048377270',pinSquareFill='rbxassetid://119024645426263',pip=
+'rbxassetid://71575912606161',pipEnter='rbxassetid://128947069900942',pipExit=
+'rbxassetid://100796125872672',pipFill='rbxassetid://124361284867478',pipRemove=
+'rbxassetid://124134881366416',pipSwap='rbxassetid://108274050795309',
+pipeAndDrop='rbxassetid://138939198499930',pipeAndDropFill=
+'rbxassetid://95117828700088',placeholdertextFill='rbxassetid://96792035090493',
+platter2FilledIpad='rbxassetid://128464213678375',platter2FilledIpadLandscape=
+'rbxassetid://72335641279980',platter2FilledIphone=
+'rbxassetid://137441342349837',platter2FilledIphoneLandscape=
+'rbxassetid://85490241202606',platterBottomApplewatchCase=
+'rbxassetid://89203668651377',platterFilledBottomAndArrowDownIphone=
+'rbxassetid://78340878366169',platterFilledBottomApplewatchCase=
+'rbxassetid://117063618828962',platterFilledBottomIphone=
+'rbxassetid://89570583999672',platterFilledTopAndArrowUpIphone=
+'rbxassetid://140598804745662',platterFilledTopApplewatchCase=
+'rbxassetid://107739762615230',platterFilledTopIphone=
+'rbxassetid://103028129852720',platterTopApplewatchCase=
+'rbxassetid://127796874000587',play='rbxassetid://128461418943884',playCircle=
+'rbxassetid://87454676201433',playCircleFill='rbxassetid://124194494139839',
+playDesktopcomputer='rbxassetid://74705756726462',playDiamond=
+'rbxassetid://131173183307365',playDiamondFill='rbxassetid://78111564875160',
+playDisplay='rbxassetid://136301237559742',playFill=
+'rbxassetid://74081916085124',playHouse='rbxassetid://74331836079552',
+playHouseFill='rbxassetid://70509927496555',playLaptopcomputer=
+'rbxassetid://112462416731590',playRectangle='rbxassetid://132181670569066',
+playRectangleFill='rbxassetid://123039425293555',playRectangleOnRectangle=
+'rbxassetid://91792326674527',playRectangleOnRectangleCircle=
+'rbxassetid://99863288190795',playRectangleOnRectangleCircleFill=
+'rbxassetid://139424729084085',playRectangleOnRectangleFill=
+'rbxassetid://103121137803119',playSlash='rbxassetid://82231292976761',
+playSlashFill='rbxassetid://74138387205614',playSquare=
+'rbxassetid://99287717986788',playSquareFill='rbxassetid://100136882189765',
+playSquareStack='rbxassetid://136134360831800',playSquareStackFill=
+'rbxassetid://77854517062047',playTv='rbxassetid://127415500882482',playTvFill=
+'rbxassetid://124672671078352',playpause='rbxassetid://132431310473376',
+playpauseCircle='rbxassetid://72027567560609',playpauseCircleFill=
+'rbxassetid://118948449910159',playpauseFill='rbxassetid://107001358735898',
+playstationLogo='rbxassetid://101885651661801',plus=
+'rbxassetid://104140268501180',plusApp='rbxassetid://134819696943007',
+plusAppFill='rbxassetid://139827794242362',plusArrowTriangleheadClockwise=
+'rbxassetid://81474708153460',plusArrowTriangleheadCounterclockwise=
+'rbxassetid://90333321199077',plusBubble='rbxassetid://128128287086136',
+plusBubbleFill='rbxassetid://88837705212786',plusCapsule=
+'rbxassetid://82351860129396',plusCapsuleFill='rbxassetid://104771688220153',
+plusCircle='rbxassetid://134903849508497',plusCircleDashed=
+'rbxassetid://119427886715979',plusCircleFill='rbxassetid://126835916552120',
+plusDiamond='rbxassetid://134706332882585',plusDiamondFill=
+'rbxassetid://72471945998883',plusForwardslashMinus=
+'rbxassetid://133024001773788',plusMagnifyingglass='rbxassetid://82229255785570'
+,plusMessage='rbxassetid://139025440106833',plusMessageFill=
+'rbxassetid://114656782830996',plusMinusCapsule='rbxassetid://95862408206488',
+plusMinusCapsuleFill='rbxassetid://137433402562537',plusRectangle=
+'rbxassetid://89928096593027',plusRectangleFill='rbxassetid://123873894242124',
+plusRectangleFillOnRectangleFill='rbxassetid://84851475351254',
+plusRectangleOnFolder='rbxassetid://135314696846977',plusRectangleOnFolderFill=
+'rbxassetid://113831084139629',plusRectangleOnRectangle=
+'rbxassetid://89954508073842',plusRectanglePortrait=
+'rbxassetid://88469415424027',plusRectanglePortraitFill=
+'rbxassetid://88043287673951',plusSquare='rbxassetid://132384125062898',
+plusSquareDashed='rbxassetid://117358731219699',plusSquareFill=
+'rbxassetid://105523739695601',plusSquareFillOnSquareFill=
+'rbxassetid://102251470244460',plusSquareOnSquare='rbxassetid://112818981162820'
+,plusViewfinder='rbxassetid://84219920382349',plusminus=
+'rbxassetid://131496757526861',plusminusCircle='rbxassetid://75924435734916',
+plusminusCircleFill='rbxassetid://139932340069454',
+point3ConnectedTrianglepathDotted='rbxassetid://128994831109851',
+point3FilledConnectedTrianglepathDotted='rbxassetid://87411273022672',
+pointBottomleftFilledForwardToPointToprightScurvepath=
+'rbxassetid://72345610995933',pointBottomleftForwardToArrowTriangleScurvepath=
+'rbxassetid://121105380488921',
+pointBottomleftForwardToArrowTriangleScurvepathFill=
+'rbxassetid://86439950360839',
+pointBottomleftForwardToArrowTriangleUturnScurvepath=
+'rbxassetid://94608869275416',
+pointBottomleftForwardToArrowTriangleUturnScurvepathFill=
+'rbxassetid://127677527213790',
+pointBottomleftForwardToArrowtriangleUturnScurvepath=
+'rbxassetid://137756040106336',
+pointBottomleftForwardToPointToprightFilledScurvepath=
+'rbxassetid://78467837682881',pointBottomleftForwardToPointToprightScurvepath=
+'rbxassetid://105949443136809',
+pointBottomleftForwardToPointToprightScurvepathFill=
+'rbxassetid://90155416426752',pointForwardToPointCapsulepath=
+'rbxassetid://79088115694851',pointForwardToPointCapsulepathFill=
+'rbxassetid://133249842443694',pointTopleftDownToPointBottomrightCurvepath=
+'rbxassetid://96359498330738',pointTopleftDownToPointBottomrightCurvepathFill=
+'rbxassetid://131034155006095',pointTopleftDownToPointBottomrightFilledCurvepath
+='rbxassetid://109330439433857',
+pointTopleftFilledDownToPointBottomrightCurvepath='rbxassetid://119244357459528'
+,pointToprightArrowTriangleBackwardToPointBottomleftFilledScurvepath=
+'rbxassetid://125761722930816',
+pointToprightArrowTriangleBackwardToPointBottomleftScurvepath=
+'rbxassetid://101374675671818',
+pointToprightArrowTriangleBackwardToPointBottomleftScurvepathFill=
+'rbxassetid://95471389312772',
+pointToprightFilledArrowTriangleBackwardToPointBottomleftScurvepath=
+'rbxassetid://106008918139871',pointerArrow='rbxassetid://93575391711601',
+pointerArrowAndSquareOnSquareDashed='rbxassetid://112982475519464',
+pointerArrowClick='rbxassetid://79734702283129',pointerArrowClick2=
+'rbxassetid://140079580041973',pointerArrowClickBadgeClock=
+'rbxassetid://87250670163722',pointerArrowIpad='rbxassetid://98232849648450',
+pointerArrowIpadAndSquareOnSquareDashed='rbxassetid://108327718703042',
+pointerArrowIpadRays='rbxassetid://137810650560332',pointerArrowIpadSlash=
+'rbxassetid://82866450058915',pointerArrowIpadSlashSquare=
+'rbxassetid://84816174673121',pointerArrowIpadSlashSquareFill=
+'rbxassetid://75197308300656',pointerArrowIpadSquare=
+'rbxassetid://82086279301281',pointerArrowIpadSquareFill=
+'rbxassetid://128704735814595',pointerArrowMotionlines=
+'rbxassetid://82915304520768',pointerArrowMotionlinesClick=
+'rbxassetid://120030717856082',pointerArrowRays='rbxassetid://122560061254398',
+pointerArrowSlash='rbxassetid://115758764584094',pointerArrowSlashSquare=
+'rbxassetid://94514670924898',pointerArrowSlashSquareFill=
+'rbxassetid://90831995454066',pointerArrowSquare='rbxassetid://123890299712468',
+pointerArrowSquareFill='rbxassetid://118743928429611',polishzlotysign=
+'rbxassetid://71190576997998',
+polishzlotysignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://139116746882232',polishzlotysignBankBuilding=
+'rbxassetid://103554770878168',polishzlotysignBankBuildingFill=
+'rbxassetid://100219158970095',polishzlotysignCircle=
+'rbxassetid://133425103954783',polishzlotysignCircleFill=
+'rbxassetid://85302846852426',polishzlotysignGaugeChartLefthalfRighthalf=
+'rbxassetid://112861300466078',
+polishzlotysignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://91379228929120',polishzlotysignRing='rbxassetid://115900998535144'
+,polishzlotysignRingDashed='rbxassetid://133083266308972',polishzlotysignSquare=
+'rbxassetid://116010000718053',polishzlotysignSquareFill=
+'rbxassetid://126842829605701',popcorn='rbxassetid://106164924042161',
+popcornCircle='rbxassetid://132014547567987',popcornCircleFill=
+'rbxassetid://70873676213803',popcornFill='rbxassetid://133726972459236',power=
+'rbxassetid://91472904792853',powerCircle='rbxassetid://128963948777063',
+powerCircleFill='rbxassetid://88039046868989',powerDotted=
+'rbxassetid://129852471510614',powercord='rbxassetid://101999056711715',
+powercordFill='rbxassetid://94896872366691',powermeter=
+'rbxassetid://102108395105231',poweroff='rbxassetid://98968411908379',poweron=
+'rbxassetid://91641740625722',poweroutletStrip='rbxassetid://73585415920677',
+poweroutletStripFill='rbxassetid://74011653309219',poweroutletTypeA=
+'rbxassetid://73898196043019',poweroutletTypeAFill=
+'rbxassetid://126838690734726',poweroutletTypeASquare=
+'rbxassetid://100201655940379',poweroutletTypeASquareFill=
+'rbxassetid://134442831578984',poweroutletTypeB='rbxassetid://120104867205082',
+poweroutletTypeBFill='rbxassetid://102950626262427',poweroutletTypeBSquare=
+'rbxassetid://126307738972122',poweroutletTypeBSquareFill=
+'rbxassetid://114873968799324',poweroutletTypeC='rbxassetid://98862353177781',
+poweroutletTypeCFill='rbxassetid://79114190266484',poweroutletTypeCSquare=
+'rbxassetid://108182409003389',poweroutletTypeCSquareFill=
+'rbxassetid://105015853211076',poweroutletTypeD='rbxassetid://78983099018117',
+poweroutletTypeDFill='rbxassetid://131871506048623',poweroutletTypeDSquare=
+'rbxassetid://78796990769278',poweroutletTypeDSquareFill=
+'rbxassetid://117146065393423',poweroutletTypeE='rbxassetid://101410063610134',
+poweroutletTypeEFill='rbxassetid://119773723139439',poweroutletTypeESquare=
+'rbxassetid://84827194983461',poweroutletTypeESquareFill=
+'rbxassetid://131818068004254',poweroutletTypeF='rbxassetid://75994498593867',
+poweroutletTypeFFill='rbxassetid://108147822804278',poweroutletTypeFSquare=
+'rbxassetid://114669882203509',poweroutletTypeFSquareFill=
+'rbxassetid://129347734091030',poweroutletTypeG='rbxassetid://130509534014794',
+poweroutletTypeGFill='rbxassetid://73751279322201',poweroutletTypeGSquare=
+'rbxassetid://132654111874788',poweroutletTypeGSquareFill=
+'rbxassetid://139171546199909',poweroutletTypeH='rbxassetid://121221625495909',
+poweroutletTypeHFill='rbxassetid://104469280742634',poweroutletTypeHSquare=
+'rbxassetid://102349433186821',poweroutletTypeHSquareFill=
+'rbxassetid://87225476098525',poweroutletTypeI='rbxassetid://108432173595940',
+poweroutletTypeIFill='rbxassetid://90953576052611',poweroutletTypeISquare=
+'rbxassetid://85563920583968',poweroutletTypeISquareFill=
+'rbxassetid://92987652110826',poweroutletTypeJ='rbxassetid://126517587735560',
+poweroutletTypeJFill='rbxassetid://70372330202631',poweroutletTypeJSquare=
+'rbxassetid://108455386185985',poweroutletTypeJSquareFill=
+'rbxassetid://110671250365058',poweroutletTypeK='rbxassetid://90986976673417',
+poweroutletTypeKFill='rbxassetid://104105946842300',poweroutletTypeKSquare=
+'rbxassetid://71665389391339',poweroutletTypeKSquareFill=
+'rbxassetid://100252749143408',poweroutletTypeL='rbxassetid://102082292598917',
+poweroutletTypeLFill='rbxassetid://95679765765332',poweroutletTypeLSquare=
+'rbxassetid://101581018956257',poweroutletTypeLSquareFill=
+'rbxassetid://108089600610800',poweroutletTypeM='rbxassetid://77038437139981',
+poweroutletTypeMFill='rbxassetid://102565240968296',poweroutletTypeMSquare=
+'rbxassetid://137482102637754',poweroutletTypeMSquareFill=
+'rbxassetid://101061604726738',poweroutletTypeN='rbxassetid://131231933791747',
+poweroutletTypeNFill='rbxassetid://122521914168552',poweroutletTypeNSquare=
+'rbxassetid://88193045014774',poweroutletTypeNSquareFill=
+'rbxassetid://117707236613750',poweroutletTypeO='rbxassetid://71518035241990',
+poweroutletTypeOFill='rbxassetid://124355652039674',poweroutletTypeOSquare=
+'rbxassetid://93155191747385',poweroutletTypeOSquareFill=
+'rbxassetid://75876768217678',powerplug='rbxassetid://113915951601980',
+powerplugFill='rbxassetid://72971139891393',powerplugPortrait=
+'rbxassetid://134444701296189',powerplugPortraitFill=
+'rbxassetid://129569799503764',powersleep='rbxassetid://136441993961962',printer
+='rbxassetid://92726076996600',printerDotmatrix='rbxassetid://71926967169220',
+printerDotmatrixFill='rbxassetid://87728661853490',
+printerDotmatrixFilledAndPaper='rbxassetid://105425549423600',
+printerDotmatrixFilledAndPaperInverse='rbxassetid://74443986062725',
+printerDotmatrixInverse='rbxassetid://91372868092556',printerFill=
+'rbxassetid://77630139933554',printerFilledAndPaper=
+'rbxassetid://97682473483014',printerFilledAndPaperInverse=
+'rbxassetid://137162835775605',printerInverse='rbxassetid://96106141032867',
+progressIndicator='rbxassetid://89634242697334',projective=
+'rbxassetid://73010755604065',purchased='rbxassetid://89342661938554',
+purchasedCircle='rbxassetid://119930548891031',purchasedCircleFill=
+'rbxassetid://125749909647263',puzzlepiece='rbxassetid://127623471300702',
+puzzlepieceExtension='rbxassetid://106644636346231',puzzlepieceExtensionFill=
+'rbxassetid://75203726915481',puzzlepieceFill='rbxassetid://117289958016840',
+pyramid='rbxassetid://112564763709051',pyramidFill='rbxassetid://92297972398994'
+,qCircle='rbxassetid://134479590621303',qCircleFill=
+'rbxassetid://85104022920098',qSquare='rbxassetid://126798899208180',qSquareFill
+='rbxassetid://131372232713091',qrcode='rbxassetid://135429731093760',
+qrcodeViewfinder='rbxassetid://70376735626959',questionmark=
+'rbxassetid://135728947505125',questionmarkApp='rbxassetid://125486303792695',
+questionmarkAppDashed='rbxassetid://93908191503686',questionmarkAppFill=
+'rbxassetid://132390651792916',questionmarkBubble='rbxassetid://79680750661243',
+questionmarkBubbleFill='rbxassetid://109480620904091',questionmarkCircle=
+'rbxassetid://106563268903746',questionmarkCircleDashed=
+'rbxassetid://90578083008627',questionmarkCircleFill=
+'rbxassetid://84091622533619',questionmarkDiamond='rbxassetid://133039366755179'
+,questionmarkDiamondFill='rbxassetid://96713509421435',questionmarkFolder=
+'rbxassetid://123509903209077',questionmarkFolderFill=
+'rbxassetid://109535614084769',questionmarkKeyFilled=
+'rbxassetid://115154856009498',questionmarkMessage=
+'rbxassetid://120735530943822',questionmarkMessageFill=
+'rbxassetid://138648428289642',questionmarkSquare='rbxassetid://80342776780001',
+questionmarkSquareDashed='rbxassetid://100367436719082',questionmarkSquareFill=
+'rbxassetid://76990513345923',questionmarkTextPage='rbxassetid://77522269508702'
+,questionmarkTextPageFill='rbxassetid://74250116725322',questionmarkVideo=
+'rbxassetid://96965650538855',questionmarkVideoFill=
+'rbxassetid://102872787704052',quoteBubble='rbxassetid://120785470678014',
+quoteBubbleFill='rbxassetid://134548894341595',quoteClosing=
+'rbxassetid://128300262716157',quoteOpening='rbxassetid://85648900225966',
+quotelevel='rbxassetid://133835140047628',r1ButtonRoundedbottomHorizontal=
+'rbxassetid://73494380889514',r1ButtonRoundedbottomHorizontalFill=
+'rbxassetid://87732102079281',r1Circle='rbxassetid://135769834088860',
+r1CircleFill='rbxassetid://130502350729327',r2ButtonAngledtopVerticalRight=
+'rbxassetid://133768730605538',r2ButtonAngledtopVerticalRightFill=
+'rbxassetid://88773533237354',r2ButtonRoundedtopHorizontal=
+'rbxassetid://98251601517278',r2ButtonRoundedtopHorizontalFill=
+'rbxassetid://106192967203243',r2Circle='rbxassetid://106631267824223',
+r2CircleFill='rbxassetid://132126702469862',r3ButtonAngledbottomHorizontalRight=
+'rbxassetid://137304943113639',r3ButtonAngledbottomHorizontalRightFill=
+'rbxassetid://89807708696162',r4ButtonHorizontal='rbxassetid://101176118558083',
+r4ButtonHorizontalFill='rbxassetid://111110114987717',
+rButtonRoundedbottomHorizontal='rbxassetid://106791314037092',
+rButtonRoundedbottomHorizontalFill='rbxassetid://127088507444504',rCircle=
+'rbxassetid://100474397953607',rCircleFill='rbxassetid://109515288026300',
+rJoystick='rbxassetid://82799323747888',rJoystickFill=
+'rbxassetid://88376161432211',rJoystickPressDown='rbxassetid://130205975134988',
+rJoystickPressDownFill='rbxassetid://82709360617451',rJoystickTiltDown=
+'rbxassetid://125350323338775',rJoystickTiltDownFill=
+'rbxassetid://122451980946728',rJoystickTiltLeft='rbxassetid://100163992653880',
+rJoystickTiltLeftFill='rbxassetid://126371751528008',rJoystickTiltRight=
+'rbxassetid://73216566650577',rJoystickTiltRightFill=
+'rbxassetid://95154512055976',rJoystickTiltUp='rbxassetid://89422740003979',
+rJoystickTiltUpFill='rbxassetid://124671519494711',rSquare=
+'rbxassetid://71910946326643',rSquareFill='rbxassetid://93196796932773',
+rSquareOnSquare='rbxassetid://107811193096025',rSquareOnSquareFill=
+'rbxassetid://113609306294519',radio='rbxassetid://83922658753052',radioFill=
+'rbxassetid://122048912816887',rainbow='rbxassetid://91453713893762',rays=
+'rbxassetid://82549830905060',rbButtonRoundedbottomHorizontal=
+'rbxassetid://99388233415918',rbButtonRoundedbottomHorizontalFill=
+'rbxassetid://115801079364851',rbCircle='rbxassetid://138035345745553',
+rbCircleFill='rbxassetid://101169325937487',receipt=
+'rbxassetid://76381361847492',receiptFill='rbxassetid://89891989598979',
+recordCircle='rbxassetid://108217106941598',recordCircleFill=
+'rbxassetid://105698081236112',recordingtape='rbxassetid://127308726768030',
+recordingtapeCircle='rbxassetid://104143200089711',recordingtapeCircleFill=
+'rbxassetid://80198600120854',rectangle='rbxassetid://111414459754261',
+rectangle2Swap='rbxassetid://131330634853965',rectangle3Group=
+'rbxassetid://135787395657285',rectangle3GroupBubble=
+'rbxassetid://116160459807032',rectangle3GroupBubbleFill=
+'rbxassetid://139621481371395',rectangle3GroupDashed=
+'rbxassetid://110904729324036',rectangle3GroupFill='rbxassetid://93139300368934'
+,rectangleAndArrowUpRightAndArrowDownLeft='rbxassetid://93638105367907',
+rectangleAndArrowUpRightAndArrowDownLeftSlash='rbxassetid://106369518263199',
+rectangleAndHandPointUpLeft='rbxassetid://93683011357377',
+rectangleAndHandPointUpLeftFill='rbxassetid://99025075004423',
+rectangleAndHandPointUpLeftFilled='rbxassetid://76034474354386',
+rectangleAndPaperclip='rbxassetid://105337301519485',
+rectangleAndPencilAndEllipsis='rbxassetid://78563329334131',
+rectangleAndTextMagnifyingglass='rbxassetid://127177835398113',
+rectangleArrowtriangle2Inward='rbxassetid://138600951302016',
+rectangleArrowtriangle2Outward='rbxassetid://136346043617802',
+rectangleBadgeCheckmark='rbxassetid://72076028531820',rectangleBadgeMinus=
+'rbxassetid://102402218146653',rectangleBadgePersonCrop=
+'rbxassetid://70527611658257',rectangleBadgePlus='rbxassetid://106486906660779',
+rectangleBadgeXmark='rbxassetid://108083111117375',rectangleBottomhalfFilled=
+'rbxassetid://101103984667014',rectangleCheckered='rbxassetid://93153326915076',
+rectangleCompressVertical='rbxassetid://121411068286936',
+rectangleConnectedToLineBelow='rbxassetid://77423923606068',rectangleDashed=
+'rbxassetid://138713016735236',rectangleDashedAndPaperclip=
+'rbxassetid://110455441885522',rectangleDashedBadgeRecord=
+'rbxassetid://128289633292737',rectangleExpandDiagonal=
+'rbxassetid://122288568531399',rectangleExpandVertical=
+'rbxassetid://115245648914946',rectangleFill='rbxassetid://130588385351314',
+rectangleFillBadgeCheckmark='rbxassetid://101292450070677',
+rectangleFillBadgeMinus='rbxassetid://87052252529460',
+rectangleFillBadgePersonCrop='rbxassetid://79555531925800',
+rectangleFillBadgePlus='rbxassetid://78893754793162',rectangleFillBadgeXmark=
+'rbxassetid://103536021556291',rectangleFillOnRectangleAngledFill=
+'rbxassetid://91215625396644',rectangleFillOnRectangleFill=
+'rbxassetid://138672467195296',rectangleFilledAndHandPointUpLeft=
+'rbxassetid://129165814821096',rectangleGrid1x2='rbxassetid://90808025440357',
+rectangleGrid1x2Fill='rbxassetid://73911101625046',rectangleGrid1x3=
+'rbxassetid://117353042982000',rectangleGrid1x3Fill=
+'rbxassetid://111448923249339',rectangleGrid2x2='rbxassetid://92889258947698',
+rectangleGrid2x2Fill='rbxassetid://79589884272899',rectangleGrid3x1=
+'rbxassetid://76689994608928',rectangleGrid3x1Fill=
+'rbxassetid://131318740621070',rectangleGrid3x2='rbxassetid://137686973180621',
+rectangleGrid3x2Fill='rbxassetid://76899837809257',rectangleGrid3x3=
+'rbxassetid://111445407298994',rectangleGrid3x3Fill=
+'rbxassetid://117660783834604',rectangleInsetBadgeRecord=
+'rbxassetid://80945153582789',rectangleLandscapeRotate=
+'rbxassetid://92428477483439',rectangleLandscapeRotateSlash=
+'rbxassetid://82008920679309',rectangleLeadinghalfFilled=
+'rbxassetid://79972096403571',rectangleLefthalfFilled=
+'rbxassetid://131457794136852',rectangleOnRectangle=
+'rbxassetid://125190929833969',rectangleOnRectangleAngled=
+'rbxassetid://122398141357009',rectangleOnRectangleBadgeGearshape=
+'rbxassetid://101252695124574',rectangleOnRectangleButtonAngledtopVerticalLeft=
+'rbxassetid://124890917881545',
+rectangleOnRectangleButtonAngledtopVerticalLeftFill=
+'rbxassetid://122574969411469',rectangleOnRectangleCircle=
+'rbxassetid://73017118558797',rectangleOnRectangleCircleFill=
+'rbxassetid://106477109606197',rectangleOnRectangleDashed=
+'rbxassetid://100408401861363',rectangleOnRectangleSlash=
+'rbxassetid://77613589607929',rectangleOnRectangleSlashCircle=
+'rbxassetid://91428157222160',rectangleOnRectangleSlashCircleFill=
+'rbxassetid://140066340357199',rectangleOnRectangleSlashFill=
+'rbxassetid://79680969346171',rectangleOnRectangleSquare=
+'rbxassetid://71711185277015',rectangleOnRectangleSquareFill=
+'rbxassetid://80274524367727',rectanglePatternCheckered=
+'rbxassetid://107724057059604',rectanglePortrait='rbxassetid://125236374031015',
+rectanglePortraitAndArrowForward='rbxassetid://120445430817911',
+rectanglePortraitAndArrowForwardFill='rbxassetid://91657691983927',
+rectanglePortraitAndArrowRight='rbxassetid://78586132872195',
+rectanglePortraitAndArrowRightFill='rbxassetid://100165849200729',
+rectanglePortraitArrowtriangle2Inward='rbxassetid://140269657314813',
+rectanglePortraitArrowtriangle2Outward='rbxassetid://137195383116487',
+rectanglePortraitBadgePlus='rbxassetid://98290274050547',
+rectanglePortraitBadgePlusFill='rbxassetid://122337836606239',
+rectanglePortraitBottomhalfFilled='rbxassetid://114165508753177',
+rectanglePortraitFill='rbxassetid://98444426893441',
+rectanglePortraitLefthalfFilled='rbxassetid://118614403436193',
+rectanglePortraitOnRectanglePortrait='rbxassetid://88124841316261',
+rectanglePortraitOnRectanglePortraitAngled='rbxassetid://100172422875638',
+rectanglePortraitOnRectanglePortraitAngledFill='rbxassetid://131829103874258',
+rectanglePortraitOnRectanglePortraitFill='rbxassetid://90599203086952',
+rectanglePortraitOnRectanglePortraitSlash='rbxassetid://91665771440270',
+rectanglePortraitOnRectanglePortraitSlashFill='rbxassetid://109451249077103',
+rectanglePortraitRighthalfFilled='rbxassetid://100066536343390',
+rectanglePortraitRotate='rbxassetid://81490858477590',
+rectanglePortraitRotateSlash='rbxassetid://114808604031742',
+rectanglePortraitSlash='rbxassetid://72406543095141',rectanglePortraitSlashFill=
+'rbxassetid://136630733879613',rectanglePortraitSplit2x1=
+'rbxassetid://87323130284872',rectanglePortraitSplit2x1Fill=
+'rbxassetid://85586482314976',rectanglePortraitSplit2x1Slash=
+'rbxassetid://118538465517234',rectanglePortraitSplit2x1SlashFill=
+'rbxassetid://103708519113694',rectanglePortraitTophalfFilled=
+'rbxassetid://108433047247888',rectangleRatio16To9=
+'rbxassetid://137417821446334',rectangleRatio16To9Fill=
+'rbxassetid://88975270022668',rectangleRatio3To4='rbxassetid://80074563926947',
+rectangleRatio3To4Fill='rbxassetid://93688722112538',rectangleRatio4To3=
+'rbxassetid://113646253383623',rectangleRatio4To3Fill=
+'rbxassetid://118821190872382',rectangleRatio9To16='rbxassetid://78790871575968'
+,rectangleRatio9To16Fill='rbxassetid://86914887040905',rectangleRighthalfFilled=
+'rbxassetid://114536690093297',rectangleSlash='rbxassetid://93912868038495',
+rectangleSlashFill='rbxassetid://125060844525663',rectangleSplit1x2=
+'rbxassetid://78612147332368',rectangleSplit1x2Fill=
+'rbxassetid://80761667288444',rectangleSplit2x1='rbxassetid://119372955276022',
+rectangleSplit2x1Fill='rbxassetid://139921639891469',rectangleSplit2x1Slash=
+'rbxassetid://104484575664164',rectangleSplit2x1SlashFill=
+'rbxassetid://114315803976014',rectangleSplit2x2='rbxassetid://83495194872523',
+rectangleSplit2x2Fill='rbxassetid://114784847338074',rectangleSplit3x1=
+'rbxassetid://105846009511841',rectangleSplit3x1Fill=
+'rbxassetid://113328142141984',rectangleSplit3x3='rbxassetid://78793707576857',
+rectangleSplit3x3Fill='rbxassetid://78131312150919',rectangleStack=
+'rbxassetid://105605876322301',rectangleStackBadgeMinus=
+'rbxassetid://127965533772535',rectangleStackBadgePersonCrop=
+'rbxassetid://129251589155547',rectangleStackBadgePersonCropFill=
+'rbxassetid://79977200721454',rectangleStackBadgePlay=
+'rbxassetid://103484646951126',rectangleStackBadgePlayFill=
+'rbxassetid://74796728731284',rectangleStackBadgePlus=
+'rbxassetid://79107569318116',rectangleStackFill='rbxassetid://135855303627369',
+rectangleStackFillBadgeMinus='rbxassetid://107768535623331',
+rectangleStackFillBadgePlus='rbxassetid://97606185836694',rectangleStackSlash=
+'rbxassetid://104855023839912',rectangleStackSlashFill=
+'rbxassetid://94713737257399',rectangleTophalfFilled=
+'rbxassetid://116794907916061',rectangleTrailinghalfFilled=
+'rbxassetid://116099294996666',refrigerator='rbxassetid://115470198294720',
+refrigeratorFill='rbxassetid://91481483660716',['repeat']=
+'rbxassetid://89312130153366',repeat1='rbxassetid://95914998265758',
+repeat1Circle='rbxassetid://125048734108902',repeat1CircleFill=
+'rbxassetid://103291311712495',repeatBadgeXmark='rbxassetid://136313092066440',
+repeatCircle='rbxassetid://103368260994746',repeatCircleFill=
+'rbxassetid://75689548597847',repeatGlyph='rbxassetid://94715683784128',restart=
+'rbxassetid://79478375893990',restartCircle='rbxassetid://74213777320248',
+restartCircleFill='rbxassetid://93709981958260',retarderBrakesignal=
+'rbxassetid://116812543667964',retarderBrakesignalAndExclamationmark=
+'rbxassetid://128582163780524',retarderBrakesignalSlash=
+'rbxassetid://91774982651852',['return']='rbxassetid://93686227671158',
+returnGlyph='rbxassetid://125022377592914',returnLeft=
+'rbxassetid://110666344633227',returnRight='rbxassetid://125304385375369',
+rhombus='rbxassetid://130322524489833',rhombusFill=
+'rbxassetid://137003561050469',richtextPage='rbxassetid://101913089792940',
+richtextPageFill='rbxassetid://120660865942330',right=
+'rbxassetid://93581059929312',rightCircle='rbxassetid://126673356006020',
+rightCircleFill='rbxassetid://107888523128870',righttriangle=
+'rbxassetid://98781907340244',righttriangleFill='rbxassetid://97751299193494',
+righttriangleSplitDiagonal='rbxassetid://140267826439171',
+righttriangleSplitDiagonalFill='rbxassetid://134486346049833',ring=
+'rbxassetid://134891574217355',ringDashed='rbxassetid://79016816094406',
+rmButtonHorizontal='rbxassetid://112649649945799',rmButtonHorizontalFill=
+'rbxassetid://101555031791001',roadLaneArrowtriangle2Inward=
+'rbxassetid://83028812738091',roadLaneArrowtriangle2Outward=
+'rbxassetid://125107735583240',roadLanes='rbxassetid://121827579804737',
+roadLanesCurvedLeft='rbxassetid://114689746540833',roadLanesCurvedRight=
+'rbxassetid://76090752203397',roboticVacuum='rbxassetid://85432635849466',
+roboticVacuumAndArrowtriangleUp='rbxassetid://99360183176046',
+roboticVacuumAndArrowtriangleUpFill='rbxassetid://133281032251829',
+roboticVacuumAndEllipsis='rbxassetid://133526596908702',
+roboticVacuumAndEllipsisFill='rbxassetid://71988250367062',roboticVacuumFill=
+'rbxassetid://129505593002521',rollerShadeClosed='rbxassetid://104900591917665',
+rollerShadeOpen='rbxassetid://88571033999479',romanShadeClosed=
+'rbxassetid://96918750802866',romanShadeOpen='rbxassetid://90499680966105',
+rosette='rbxassetid://128397706826097',rotate3d='rbxassetid://79997216476659',
+rotate3dCircle='rbxassetid://134023839176423',rotate3dCircleFill=
+'rbxassetid://136024177936496',rotate3dFill='rbxassetid://140259573440265',
+rotateLeft='rbxassetid://104293817458403',rotateLeftFill=
+'rbxassetid://108834532920454',rotateRight='rbxassetid://101811576269464',
+rotateRightFill='rbxassetid://132494268034794',
+rsbButtonAngledbottomHorizontalRight='rbxassetid://104443343478623',
+rsbButtonAngledbottomHorizontalRightFill='rbxassetid://105946161113872',
+rtButtonRoundedtopHorizontal='rbxassetid://88197217150788',
+rtButtonRoundedtopHorizontalFill='rbxassetid://137834814026503',rtCircle=
+'rbxassetid://130736157262549',rtCircleFill='rbxassetid://90688963975051',
+rublesign='rbxassetid://79995340276002',
+rublesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://107533533773481',rublesignBankBuilding=
+'rbxassetid://112367554211189',rublesignBankBuildingFill=
+'rbxassetid://74276645461175',rublesignCircle='rbxassetid://138616838615062',
+rublesignCircleFill='rbxassetid://117918611348729',
+rublesignGaugeChartLefthalfRighthalf='rbxassetid://121997111268342',
+rublesignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://124825936849158',
+rublesignRing='rbxassetid://102327958941047',rublesignRingDashed=
+'rbxassetid://127403954235716',rublesignSquare='rbxassetid://93428290716501',
+rublesignSquareFill='rbxassetid://91069416883880',rugbyball=
+'rbxassetid://107813412868735',rugbyballCircle='rbxassetid://74520104438728',
+rugbyballCircleFill='rbxassetid://132264267384386',rugbyballFill=
+'rbxassetid://133697647276958',ruler='rbxassetid://137893325259884',rulerFill=
+'rbxassetid://95614061471677',rupeesign='rbxassetid://109206009121524',
+rupeesignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://128550816369153',rupeesignBankBuilding=
+'rbxassetid://105737039771832',rupeesignBankBuildingFill=
+'rbxassetid://131896695518623',rupeesignCircle='rbxassetid://131458084468081',
+rupeesignCircleFill='rbxassetid://76182665186164',
+rupeesignGaugeChartLefthalfRighthalf='rbxassetid://125393632929329',
+rupeesignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://96777336576753',
+rupeesignRing='rbxassetid://125467764440847',rupeesignRingDashed=
+'rbxassetid://82381851316657',rupeesignSquare='rbxassetid://111461203852733',
+rupeesignSquareFill='rbxassetid://108460282949877',sCircle=
+'rbxassetid://70797943728324',sCircleFill='rbxassetid://114752832731487',sSquare
+='rbxassetid://97768874847459',sSquareFill='rbxassetid://124722554149961',safari
+='rbxassetid://76428111544714',safariFill='rbxassetid://85821469115818',sailboat
+='rbxassetid://99246226977355',sailboatCircle='rbxassetid://92706155026002',
+sailboatCircleFill='rbxassetid://119525831244370',sailboatFill=
+'rbxassetid://125556225154215',scale3d='rbxassetid://116105033501936',scalemass=
+'rbxassetid://117780975283623',scalemassFill='rbxassetid://78891902031658',
+scanner='rbxassetid://73017296718236',scannerFill='rbxassetid://86721241098861',
+scissors='rbxassetid://95513121521151',scissorsBadgeEllipsis=
+'rbxassetid://116175702980810',scissorsCircle='rbxassetid://100442513150877',
+scissorsCircleFill='rbxassetid://133071884128532',scooter=
+'rbxassetid://106371037983152',scope='rbxassetid://114797558688010',screwdriver=
+'rbxassetid://128552531928875',screwdriverFill='rbxassetid://111697095003710',
+scribble='rbxassetid://73635938346366',scribbleVariable=
+'rbxassetid://95857213844977',scroll='rbxassetid://100024126240372',scrollFill=
+'rbxassetid://86513801307528',sdcard='rbxassetid://91999340306150',sdcardFill=
+'rbxassetid://86816824579142',seal='rbxassetid://112968110857352',sealFill=
+'rbxassetid://111595007269811',selectionPinInOut='rbxassetid://81834666710003',
+sensor='rbxassetid://79957599284236',sensorFill='rbxassetid://100348356748640',
+sensorRadiowavesLeftAndRight='rbxassetid://137434009722117',
+sensorRadiowavesLeftAndRightFill='rbxassetid://106680582974812',
+sensorTagRadiowavesForward='rbxassetid://106463263648802',
+sensorTagRadiowavesForwardFill='rbxassetid://99279214867737',serverRack=
+'rbxassetid://83940756291905',serviceDog='rbxassetid://139343512896351',
+serviceDogFill='rbxassetid://81589591908524',shadow=
+'rbxassetid://115420710489840',sharedWithYou='rbxassetid://99587894742741',
+sharedWithYouCircle='rbxassetid://105105656683870',sharedWithYouSlash=
+'rbxassetid://110559749416219',sharedwithyou='rbxassetid://98071581699327',
+sharedwithyouCircle='rbxassetid://76114224177131',sharedwithyouCircleFill=
+'rbxassetid://81557681633469',sharedwithyouSlash='rbxassetid://86347172828564',
+shareplay='rbxassetid://102891055337180',shareplaySlash=
+'rbxassetid://116971365339623',shazamLogo='rbxassetid://92839379188348',
+shazamLogoFill='rbxassetid://103713552773129',shekelsign=
+'rbxassetid://129156275836476',
+shekelsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://88176105509519',shekelsignBankBuilding=
+'rbxassetid://83980545208734',shekelsignBankBuildingFill=
+'rbxassetid://75899516654392',shekelsignCircle='rbxassetid://118065137678244',
+shekelsignCircleFill='rbxassetid://110241676766230',
+shekelsignGaugeChartLefthalfRighthalf='rbxassetid://138077316594571',
+shekelsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://106188539296043',
+shekelsignRing='rbxassetid://96814236600555',shekelsignRingDashed=
+'rbxassetid://77084151086437',shekelsignSquare='rbxassetid://98662725701428',
+shekelsignSquareFill='rbxassetid://138075137740999',shield=
+'rbxassetid://140526681233529',shieldCheckered='rbxassetid://122359446295344',
+shieldFill='rbxassetid://124747829928806',shieldLefthalfFilled=
+'rbxassetid://117577138863097',shieldLefthalfFilledBadgeCheckmark=
+'rbxassetid://87003650517234',shieldLefthalfFilledSlash=
+'rbxassetid://135125468470118',shieldLefthalfFilledTrianglebadgeExclamationmark=
+'rbxassetid://72778955082789',shieldPatternCheckered=
+'rbxassetid://130283063693178',shieldRighthalfFilled=
+'rbxassetid://121059176356852',shieldSlash='rbxassetid://110010335990680',
+shieldSlashFill='rbxassetid://90727030243014',shift=
+'rbxassetid://139605024762137',shiftFill='rbxassetid://103534834680447',
+shippingbox='rbxassetid://135179382969903',shippingboxAndArrowBackward=
+'rbxassetid://121360973310421',shippingboxAndArrowBackwardFill=
+'rbxassetid://93727205953096',shippingboxCircle='rbxassetid://96682399196466',
+shippingboxCircleFill='rbxassetid://132322216128885',shippingboxFill=
+'rbxassetid://90240043893822',shoe='rbxassetid://70988953478341',shoe2=
+'rbxassetid://103120492305654',shoe2Fill='rbxassetid://140691495305840',
+shoeArrowTriangleheadUpAndDown='rbxassetid://127847462147663',
+shoeArrowTriangleheadUpAndDownFill='rbxassetid://110267382636824',
+shoeArrowTriangleheadUpRight='rbxassetid://84029339972591',
+shoeArrowTriangleheadUpRightCircle='rbxassetid://130133214377534',
+shoeArrowTriangleheadUpRightCircleFill='rbxassetid://83387140921529',
+shoeArrowTriangleheadUpRightFill='rbxassetid://114661642297786',shoeCircle=
+'rbxassetid://139385430751379',shoeCircleFill='rbxassetid://96913294618430',
+shoeFill='rbxassetid://70447777963358',shoeprintsFill=
+'rbxassetid://83128922492077',shower='rbxassetid://136336766208797',showerFill=
+'rbxassetid://128574689734106',showerHandheld='rbxassetid://123682140353662',
+showerHandheldFill='rbxassetid://105769933058151',showerSidejet=
+'rbxassetid://79554964698952',showerSidejetFill='rbxassetid://127129458580502',
+shuffle='rbxassetid://75346543378152',shuffleCircle=
+'rbxassetid://116411175114787',shuffleCircleFill='rbxassetid://102012828566108',
+sidebarLeading='rbxassetid://83956276332602',sidebarLeft=
+'rbxassetid://71643705896266',sidebarRight='rbxassetid://114611117811607',
+sidebarSquaresLeading='rbxassetid://126932130215814',sidebarSquaresLeft=
+'rbxassetid://102411145840494',sidebarSquaresRight='rbxassetid://81074371398892'
+,sidebarSquaresTrailing='rbxassetid://132148034874544',sidebarTrailing=
+'rbxassetid://95429731716641',signature='rbxassetid://110131488283477',
+signpostAndArrowtriangleUp='rbxassetid://97583682433894',
+signpostAndArrowtriangleUpCircle='rbxassetid://108385973369296',
+signpostAndArrowtriangleUpCircleFill='rbxassetid://107743240413148',
+signpostAndArrowtriangleUpFill='rbxassetid://138825662345098',signpostLeft=
+'rbxassetid://95412606669027',signpostLeftCircle='rbxassetid://115318963051502',
+signpostLeftCircleFill='rbxassetid://91336762767303',signpostLeftFill=
+'rbxassetid://75163090487583',signpostRight='rbxassetid://101774272755085',
+signpostRightAndLeft='rbxassetid://113062367181841',signpostRightAndLeftCircle=
+'rbxassetid://81815780687045',signpostRightAndLeftCircleFill=
+'rbxassetid://89749102061487',signpostRightAndLeftFill=
+'rbxassetid://72053416932561',signpostRightCircle='rbxassetid://128089922540621'
+,signpostRightCircleFill='rbxassetid://81406314178274',signpostRightFill=
+'rbxassetid://136784047816620',simcard='rbxassetid://102108051244372',simcard2=
+'rbxassetid://138566470635829',simcard2Fill='rbxassetid://103016244826117',
+simcardFill='rbxassetid://126517779550731',singaporedollarsign=
+'rbxassetid://134448746581237',
+singaporedollarsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://76846054562178',singaporedollarsignBankBuilding=
+'rbxassetid://72931926178709',singaporedollarsignBankBuildingFill=
+'rbxassetid://107456617296294',singaporedollarsignCircle=
+'rbxassetid://112775243884034',singaporedollarsignCircleFill=
+'rbxassetid://88834107058222',singaporedollarsignGaugeChartLefthalfRighthalf=
+'rbxassetid://105134570441636',
+singaporedollarsignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://119200364920688',singaporedollarsignRing=
+'rbxassetid://120499586212229',singaporedollarsignRingDashed=
+'rbxassetid://134361953001558',singaporedollarsignSquare=
+'rbxassetid://137523797948046',singaporedollarsignSquareFill=
+'rbxassetid://117230157948981',sink='rbxassetid://97332507094909',sinkFill=
+'rbxassetid://119601343432289',siri='rbxassetid://78943861759065',skateboard=
+'rbxassetid://96609489094400',skateboardFill='rbxassetid://125654589784907',skew
+='rbxassetid://103633680634238',skis='rbxassetid://114314985218926',skisFill=
+'rbxassetid://128694681935126',slashCircle='rbxassetid://91525074193799',
+slashCircleFill='rbxassetid://113050340993198',sleep=
+'rbxassetid://112657466251253',sleepCircle='rbxassetid://135948050894103',
+sleepCircleFill='rbxassetid://110524174707079',
+sliderHorizontal2ArrowTriangleheadCounterclockwise='rbxassetid://86778232183781'
+,sliderHorizontal2Gobackward='rbxassetid://82873088218553',
+sliderHorizontal2RectangleAndArrowTriangle2Circlepath=
+'rbxassetid://114334030505190',
+sliderHorizontal2RectangleAndArrowTrianglehead2ClockwiseRotate90=
+'rbxassetid://86330070759013',sliderHorizontal2Square=
+'rbxassetid://90937235818005',sliderHorizontal2SquareBadgeArrowDown=
+'rbxassetid://110530322362077',sliderHorizontal2SquareOnSquare=
+'rbxassetid://102145308436014',sliderHorizontal3='rbxassetid://99890330649872',
+sliderHorizontalBelowCircleLefthalfFilled='rbxassetid://104764044327011',
+sliderHorizontalBelowCircleLefthalfFilledInverse='rbxassetid://138896643212114',
+sliderHorizontalBelowCircleRighthalfFilled='rbxassetid://115251627584565',
+sliderHorizontalBelowCircleRighthalfFilledInverse='rbxassetid://83816451711529',
+sliderHorizontalBelowRectangle='rbxassetid://119305687087086',
+sliderHorizontalBelowSquareAndSquareFilled='rbxassetid://120455732453266',
+sliderHorizontalBelowSquareFilledAndSquare='rbxassetid://129990694640165',
+sliderHorizontalBelowSunMax='rbxassetid://105031304876055',sliderVertical3=
+'rbxassetid://102020200694699',slowmo='rbxassetid://114262094447775',
+smallcircleCircle='rbxassetid://120436203127403',smallcircleCircleFill=
+'rbxassetid://102648410553101',smallcircleFilledCircle=
+'rbxassetid://85691773230977',smallcircleFilledCircleFill=
+'rbxassetid://111196996738405',smartphone='rbxassetid://93476228253050',smoke=
+'rbxassetid://104871896251732',smokeCircle='rbxassetid://108737671657911',
+smokeCircleFill='rbxassetid://129640575733880',smokeFill=
+'rbxassetid://127452968050922',snowboard='rbxassetid://113780393933543',
+snowboardFill='rbxassetid://108936879402105',snowflake=
+'rbxassetid://125255611954484',snowflakeCircle='rbxassetid://113404635828886',
+snowflakeCircleFill='rbxassetid://137890067722669',snowflakeRoadLane=
+'rbxassetid://100143850770605',snowflakeRoadLaneDashed=
+'rbxassetid://104817339834131',snowflakeSlash='rbxassetid://99651415315718',
+soccerball='rbxassetid://125849468854224',soccerballCircle=
+'rbxassetid://130263604545849',soccerballCircleFill=
+'rbxassetid://119282850587959',soccerballCircleFillInverse=
+'rbxassetid://112192357428946',soccerballCircleInverse=
+'rbxassetid://74573317455595',soccerballInverse='rbxassetid://98858584469175',
+sofa='rbxassetid://120600522494597',sofaFill='rbxassetid://114779564549333',sos=
+'rbxassetid://84474540582122',sosCircle='rbxassetid://79680196200371',
+sosCircleFill='rbxassetid://133944108925355',space='rbxassetid://88505792015757'
+,sparkle='rbxassetid://105137821962797',sparkleMagnifyingglass=
+'rbxassetid://103946109249635',sparkleTextClipboard=
+'rbxassetid://110580783587021',sparkleTextClipboardFill=
+'rbxassetid://106843999265230',sparkles='rbxassetid://105054419961789',sparkles2
+='rbxassetid://101006703552517',sparklesRectangleStack=
+'rbxassetid://86520437063065',sparklesRectangleStackFill=
+'rbxassetid://130420912432593',sparklesSquareFilledOnSquare=
+'rbxassetid://70460348597208',sparklesTv='rbxassetid://134275091244818',
+sparklesTvFill='rbxassetid://82800085062329',spatialCapture=
+'rbxassetid://127355928805920',spatialCaptureFill='rbxassetid://115385600235982'
+,spatialCaptureOnHexagon='rbxassetid://105807064072492',
+spatialCaptureOnHexagonFill='rbxassetid://98568195175603',spatialCaptureSlash=
+'rbxassetid://83328140433280',spatialCaptureSlashFill=
+'rbxassetid://77330821689586',speaker='rbxassetid://90795640862724',
+speakerBadgeExclamationmark='rbxassetid://79417919763353',
+speakerBadgeExclamationmarkFill='rbxassetid://101773223278790',speakerCircle=
+'rbxassetid://79358452707141',speakerCircleFill='rbxassetid://80055212262386',
+speakerFill='rbxassetid://97746085265210',speakerMinus=
+'rbxassetid://87806168928121',speakerMinusFill='rbxassetid://82240551019132',
+speakerPlus='rbxassetid://84033072891945',speakerPlusFill=
+'rbxassetid://102724697463555',speakerSlash='rbxassetid://111943193498500',
+speakerSlashCircle='rbxassetid://90600051448985',speakerSlashCircleFill=
+'rbxassetid://130708719346289',speakerSlashFill='rbxassetid://110093423263690',
+speakerSquare='rbxassetid://71945065645813',speakerSquareFill=
+'rbxassetid://129912752069784',speakerTrianglebadgeExclamationmark=
+'rbxassetid://98367643133076',speakerTrianglebadgeExclamationmarkFill=
+'rbxassetid://139026865817721',speakerWave1='rbxassetid://76621154546819',
+speakerWave1ArrowtrianglesUpRightDownLeft='rbxassetid://73074603671410',
+speakerWave1Fill='rbxassetid://117491707887443',speakerWave2=
+'rbxassetid://93687295077826',speakerWave2Bubble='rbxassetid://118881789849031',
+speakerWave2BubbleFill='rbxassetid://106305154684153',speakerWave2Circle=
+'rbxassetid://84575739119409',speakerWave2CircleFill=
+'rbxassetid://85071023796255',speakerWave2Fill='rbxassetid://103180330131669',
+speakerWave3='rbxassetid://79826224325031',speakerWave3Fill=
+'rbxassetid://114293469707588',speakerZzz='rbxassetid://118545156089427',
+speakerZzzFill='rbxassetid://86985126077561',spigot=
+'rbxassetid://106805522407528',spigotFill='rbxassetid://99217504785092',
+spoonServing='rbxassetid://138932624792540',sportscourt=
+'rbxassetid://82512117398294',sportscourtCircle='rbxassetid://99070240252051',
+sportscourtCircleFill='rbxassetid://74270844136365',sportscourtFill=
+'rbxassetid://135388374191975',sprinkler='rbxassetid://129645897217574',
+sprinklerAndDroplets='rbxassetid://102114964726064',sprinklerAndDropletsFill=
+'rbxassetid://97896768650190',sprinklerFill='rbxassetid://73036232822178',square
+='rbxassetid://85143053995767',square2Layers3d='rbxassetid://70552485257532',
+square2Layers3dBottomFilled='rbxassetid://125761993163696',square2Layers3dFill=
+'rbxassetid://124738920278180',square2Layers3dTopFilled=
+'rbxassetid://136259102006947',square3Layers3d='rbxassetid://115210073684938',
+square3Layers3dBottomFilled='rbxassetid://129811646195969',
+square3Layers3dDownBackward='rbxassetid://72949225714356',
+square3Layers3dDownForward='rbxassetid://135710811999897',
+square3Layers3dDownLeft='rbxassetid://106845150399737',
+square3Layers3dDownLeftSlash='rbxassetid://127231103569358',
+square3Layers3dDownRight='rbxassetid://71437542849844',
+square3Layers3dDownRightSlash='rbxassetid://76582107849526',
+square3Layers3dMiddleFilled='rbxassetid://123108929754648',square3Layers3dSlash=
+'rbxassetid://101399839734504',square3Layers3dTopFilled=
+'rbxassetid://106415948057755',squareAndArrowDown='rbxassetid://128746411462402'
+,squareAndArrowDownBadgeCheckmark='rbxassetid://130768898099008',
+squareAndArrowDownBadgeCheckmarkFill='rbxassetid://86242132249455',
+squareAndArrowDownBadgeClock='rbxassetid://121820372914588',
+squareAndArrowDownBadgeClockFill='rbxassetid://72247714968114',
+squareAndArrowDownBadgeXmark='rbxassetid://105432945173625',
+squareAndArrowDownBadgeXmarkFill='rbxassetid://75948895538876',
+squareAndArrowDownFill='rbxassetid://120212545963289',squareAndArrowDownOnSquare
+='rbxassetid://119110082141361',squareAndArrowDownOnSquareFill=
+'rbxassetid://110434202328008',squareAndArrowUp='rbxassetid://113313553903045',
+squareAndArrowUpBadgeCheckmark='rbxassetid://89060462360490',
+squareAndArrowUpBadgeCheckmarkFill='rbxassetid://87427475669342',
+squareAndArrowUpBadgeClock='rbxassetid://132739866805226',
+squareAndArrowUpBadgeClockFill='rbxassetid://91052085672226',
+squareAndArrowUpCircle='rbxassetid://103969691300137',squareAndArrowUpCircleFill
+='rbxassetid://76698142129351',squareAndArrowUpFill=
+'rbxassetid://90828927970385',squareAndArrowUpOnSquare=
+'rbxassetid://135435626478341',squareAndArrowUpOnSquareFill=
+'rbxassetid://95336766785015',squareAndArrowUpTrianglebadgeExclamationmark=
+'rbxassetid://109390466933337',squareAndArrowUpTrianglebadgeExclamationmarkFill=
+'rbxassetid://139318666375380',squareAndAtRectangle=
+'rbxassetid://119683592096853',squareAndAtRectangleFill=
+'rbxassetid://104255435377085',squareAndLineVerticalAndSquare=
+'rbxassetid://79431983646769',squareAndLineVerticalAndSquareFilled=
+'rbxassetid://112081990601652',squareAndPencil='rbxassetid://76634037563084',
+squareAndPencilCircle='rbxassetid://139505288481527',squareAndPencilCircleFill=
+'rbxassetid://82248531304358',squareArrowtriangle4Outward=
+'rbxassetid://77298189568568',squareBadgePlus='rbxassetid://98210383623230',
+squareBadgePlusFill='rbxassetid://103356838075193',squareBottomhalfFilled=
+'rbxassetid://96604220147547',squareCircle='rbxassetid://139790165393025',
+squareCircleFill='rbxassetid://103079992812239',squareDashed=
+'rbxassetid://119064141453799',squareDotted='rbxassetid://117586347327317',
+squareFill='rbxassetid://89837132511355',squareFillAndLineVerticalAndSquareFill=
+'rbxassetid://75144623179474',squareFillOnCircleFill=
+'rbxassetid://115476599238356',squareFillOnSquareFill=
+'rbxassetid://89417266423147',squareFillTextGrid1x2=
+'rbxassetid://84290036715096',squareFilledAndLineVerticalAndSquare=
+'rbxassetid://80885900269249',squareFilledOnSquare=
+'rbxassetid://124428264818823',squareGrid2x2='rbxassetid://80913360698670',
+squareGrid2x2Fill='rbxassetid://71760249952566',squareGrid3x1BelowLineGrid1x2=
+'rbxassetid://81912688426584',squareGrid3x1BelowLineGrid1x2Fill=
+'rbxassetid://119653016618376',squareGrid3x1FolderBadgePlus=
+'rbxassetid://74842079191055',squareGrid3x1FolderFillBadgePlus=
+'rbxassetid://106031789047089',squareGrid3x2='rbxassetid://97502417328341',
+squareGrid3x2Fill='rbxassetid://95159780378426',squareGrid3x3=
+'rbxassetid://87652573110584',squareGrid3x3BottomleftFilled=
+'rbxassetid://130862064876074',squareGrid3x3BottommiddleFilled=
+'rbxassetid://116581882016989',squareGrid3x3BottomrightFilled=
+'rbxassetid://137824218288354',squareGrid3x3Fill='rbxassetid://110325541887257',
+squareGrid3x3MiddleFilled='rbxassetid://99768140128642',
+squareGrid3x3MiddleleftFilled='rbxassetid://131771722713881',
+squareGrid3x3MiddlerightFilled='rbxassetid://128882572939518',
+squareGrid3x3Square='rbxassetid://107787495576279',
+squareGrid3x3SquareBadgeEllipsis='rbxassetid://96252060080671',
+squareGrid3x3TopleftFilled='rbxassetid://111902279638097',
+squareGrid3x3TopmiddleFilled='rbxassetid://100251003844223',
+squareGrid3x3ToprightFilled='rbxassetid://77522429310417',squareGrid4x3Fill=
+'rbxassetid://89822928143221',squareLefthalfFilled=
+'rbxassetid://123727097279981',squareOnCircle='rbxassetid://87453442013043',
+squareOnSquare='rbxassetid://112515729133848',squareOnSquareBadgePersonCrop=
+'rbxassetid://81628150473526',squareOnSquareBadgePersonCropFill=
+'rbxassetid://70798178911051',squareOnSquareDashed='rbxassetid://85708721830387'
+,squareOnSquareIntersectionDashed='rbxassetid://123685576963261',
+squareOnSquareSquareshapeControlhandles='rbxassetid://132317434182442',
+squareResize='rbxassetid://103137389011632',squareResizeDown=
+'rbxassetid://131580684994902',squareResizeUp='rbxassetid://96408134862696',
+squareRighthalfFilled='rbxassetid://83773994148405',squareSlash=
+'rbxassetid://121563515816803',squareSlashFill='rbxassetid://81337393217510',
+squareSplit1x2='rbxassetid://102758119479068',squareSplit1x2Fill=
+'rbxassetid://126457976074520',squareSplit2x1='rbxassetid://85495348203340',
+squareSplit2x1Fill='rbxassetid://99719747307469',squareSplit2x2=
+'rbxassetid://103048676495294',squareSplit2x2Fill='rbxassetid://91776792312073',
+squareSplitBottomrightquarter='rbxassetid://78077560669550',
+squareSplitBottomrightquarterFill='rbxassetid://103695791513241',
+squareSplitDiagonal='rbxassetid://107073898601138',squareSplitDiagonal2x2=
+'rbxassetid://87887098327053',squareSplitDiagonal2x2Fill=
+'rbxassetid://115495101484518',squareSplitDiagonalFill=
+'rbxassetid://123204849485732',squareStack='rbxassetid://112149539989443',
+squareStack3dDownForward='rbxassetid://123371888588139',
+squareStack3dDownForwardFill='rbxassetid://92818923054422',
+squareStack3dDownRight='rbxassetid://126509104158127',squareStack3dDownRightFill
+='rbxassetid://101922856349607',squareStack3dForwardDottedline=
+'rbxassetid://77002442081347',squareStack3dForwardDottedlineFill=
+'rbxassetid://136457639194171',squareStack3dUp='rbxassetid://117987207006038',
+squareStack3dUpBadgeAutomatic='rbxassetid://135930328075691',
+squareStack3dUpBadgeAutomaticFill='rbxassetid://113654146090095',
+squareStack3dUpFill='rbxassetid://91370889810852',squareStack3dUpSlash=
+'rbxassetid://115258770745856',squareStack3dUpSlashFill=
+'rbxassetid://126902421297621',squareStack3dUpTrianglebadgeExclamationmark=
+'rbxassetid://75728258130488',squareStack3dUpTrianglebadgeExclamationmarkFill=
+'rbxassetid://94716024705571',squareStackFill='rbxassetid://122760509196742',
+squareTextSquare='rbxassetid://130921034757762',squareTextSquareFill=
+'rbxassetid://84685736764504',squareTophalfFilled='rbxassetid://104415472214123'
+,squareroot='rbxassetid://122874159989395',squaresBelowRectangle=
+'rbxassetid://102583434437834',squaresLeadingRectangle=
+'rbxassetid://84658886266010',squaresLeadingRectangleFill=
+'rbxassetid://77216416187205',squareshape='rbxassetid://108626932621362',
+squareshapeControlhandlesOnSquareshapeControlhandles=
+'rbxassetid://136325582686841',squareshapeDottedSplit2x2=
+'rbxassetid://91166447813616',squareshapeDottedSquareshape=
+'rbxassetid://92681355705894',squareshapeFill='rbxassetid://140350880119310',
+squareshapeSplit2x2='rbxassetid://107381495625763',squareshapeSplit2x2Dotted=
+'rbxassetid://128554723537974',squareshapeSplit2x2DottedInside=
+'rbxassetid://137947623907113',squareshapeSplit2x2DottedInsideAndOutside=
+'rbxassetid://120474492600718',squareshapeSplit2x2DottedOutside=
+'rbxassetid://123897485566440',squareshapeSplit3x3=
+'rbxassetid://133278932515243',squareshapeSquareshapeDotted=
+'rbxassetid://108989106976024',stairs='rbxassetid://70523530478444',star=
+'rbxassetid://97208341574073',starBubble='rbxassetid://137118519724278',
+starBubbleFill='rbxassetid://95375870183734',starCircle=
+'rbxassetid://74436398890361',starCircleFill='rbxassetid://117124119701813',
+starFill='rbxassetid://112524490690853',starHexagon=
+'rbxassetid://94649353014438',starHexagonFill='rbxassetid://97287319969332',
+starLeadinghalfFilled='rbxassetid://76971128862533',starSlash=
+'rbxassetid://70849976350941',starSlashFill='rbxassetid://134310116619944',
+starSquare='rbxassetid://91348274885593',starSquareFill=
+'rbxassetid://100772579100177',starSquareOnSquare='rbxassetid://70718742076403',
+starSquareOnSquareFill='rbxassetid://119810588488900',staroflife=
+'rbxassetid://114798584744904',staroflifeCircle='rbxassetid://76564007357028',
+staroflifeCircleFill='rbxassetid://111984257276107',staroflifeFill=
+'rbxassetid://71371042350725',staroflifeShield='rbxassetid://103781038038265',
+staroflifeShieldFill='rbxassetid://120953658795745',steeringwheel=
+'rbxassetid://98041075523701',steeringwheelAndHands=
+'rbxassetid://87829430123778',steeringwheelAndHeatWaves=
+'rbxassetid://118659521340187',steeringwheelAndKey=
+'rbxassetid://114365366703405',steeringwheelAndLiquidWave=
+'rbxassetid://132962907493387',steeringwheelAndLock=
+'rbxassetid://74743575328404',
+steeringwheelArrowTriangleheadCounterclockwiseAndClockwise=
+'rbxassetid://114349664849833',steeringwheelArrowtriangleLeft=
+'rbxassetid://133696680147741',steeringwheelArrowtriangleRight=
+'rbxassetid://119016823583713',steeringwheelBadgeExclamationmark=
+'rbxassetid://138427420451609',steeringwheelBadgeLock=
+'rbxassetid://126529278950442',steeringwheelCircle=
+'rbxassetid://124168726734871',steeringwheelCircleFill=
+'rbxassetid://107253978218132',steeringwheelExclamationmark=
+'rbxassetid://136154239115325',steeringwheelRoadLane=
+'rbxassetid://89255699549572',steeringwheelRoadLaneDashed=
+'rbxassetid://132868959701894',steeringwheelSlash='rbxassetid://91448583789774',
+sterlingsign='rbxassetid://126562532499500',
+sterlingsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://136352701272619',sterlingsignBankBuilding=
+'rbxassetid://129465260320590',sterlingsignBankBuildingFill=
+'rbxassetid://89415549253328',sterlingsignCircle='rbxassetid://128090877950956',
+sterlingsignCircleFill='rbxassetid://96577595539313',
+sterlingsignGaugeChartLefthalfRighthalf='rbxassetid://74815105245464',
+sterlingsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://90408777058185',
+sterlingsignRing='rbxassetid://109328496049218',sterlingsignRingDashed=
+'rbxassetid://126044081571443',sterlingsignSquare='rbxassetid://123909441953591'
+,sterlingsignSquareFill='rbxassetid://97561315012730',stethoscope=
+'rbxassetid://108847491450617',stethoscopeCircle='rbxassetid://112416231109184',
+stethoscopeCircleFill='rbxassetid://133482297875986',stop=
+'rbxassetid://132098862323602',stopCircle='rbxassetid://128321680998373',
+stopCircleFill='rbxassetid://118901612585535',stopFill=
+'rbxassetid://74225402177219',stopwatch='rbxassetid://98740179195407',
+stopwatchFill='rbxassetid://107592823329819',storefront=
+'rbxassetid://135841176957124',storefrontCircle='rbxassetid://74529585747704',
+storefrontCircleFill='rbxassetid://82510167755966',storefrontFill=
+'rbxassetid://129684177323455',stove='rbxassetid://117736045694658',stoveFill=
+'rbxassetid://106652953751053',strikethrough='rbxassetid://119273162148826',
+strikethroughDouble='rbxassetid://102575177328559',strokeLineDiagonal=
+'rbxassetid://77560205356047',strokeLineDiagonalSlash=
+'rbxassetid://140086402893267',stroller='rbxassetid://133514081157613',
+strollerFill='rbxassetid://132666279884023',studentdesk=
+'rbxassetid://81200616483866',suitClub='rbxassetid://115355448500067',
+suitClubFill='rbxassetid://106423658416550',suitDiamond=
+'rbxassetid://102316895916267',suitDiamondFill='rbxassetid://136303405954770',
+suitHeart='rbxassetid://102805929221332',suitHeartFill=
+'rbxassetid://122686479848611',suitSpade='rbxassetid://85616337997149',
+suitSpadeFill='rbxassetid://88147851638314',suitcase=
+'rbxassetid://87609836872373',suitcaseCart='rbxassetid://125186079383688',
+suitcaseCartFill='rbxassetid://80277015090553',suitcaseCircle=
+'rbxassetid://119900683591433',suitcaseCircleFill='rbxassetid://135347326350559'
+,suitcaseFill='rbxassetid://136958536826666',suitcaseRolling=
+'rbxassetid://75357230115730',suitcaseRollingAndFilm=
+'rbxassetid://122394094533244',suitcaseRollingAndFilmCircle=
+'rbxassetid://97301794440482',suitcaseRollingAndFilmCircleFill=
+'rbxassetid://99640827791378',suitcaseRollingAndFilmFill=
+'rbxassetid://93468357058716',suitcaseRollingAndSuitcase=
+'rbxassetid://121055774157302',suitcaseRollingAndSuitcaseCircle=
+'rbxassetid://121378802217257',suitcaseRollingAndSuitcaseCircleFill=
+'rbxassetid://92889078287104',suitcaseRollingAndSuitcaseFill=
+'rbxassetid://104192984670894',suitcaseRollingCircle=
+'rbxassetid://129768986866053',suitcaseRollingCircleFill=
+'rbxassetid://73955642672556',suitcaseRollingFill='rbxassetid://74877686253838',
+sum='rbxassetid://121256596249395',sunDust='rbxassetid://103445379416568',
+sunDustCircle='rbxassetid://121983227528375',sunDustCircleFill=
+'rbxassetid://89732002886704',sunDustFill='rbxassetid://80641416859494',sunHaze=
+'rbxassetid://135475190059548',sunHazeCircle='rbxassetid://85520066827867',
+sunHazeCircleFill='rbxassetid://114146986427142',sunHazeFill=
+'rbxassetid://119817446395343',sunHorizon='rbxassetid://84120651165632',
+sunHorizonCircle='rbxassetid://94640978320968',sunHorizonCircleFill=
+'rbxassetid://73242682466487',sunHorizonFill='rbxassetid://100176954875747',
+sunLefthalfFilled='rbxassetid://99948010377860',sunMax=
+'rbxassetid://136191950602850',sunMaxCircle='rbxassetid://84176626743969',
+sunMaxCircleFill='rbxassetid://135937714886387',sunMaxFill=
+'rbxassetid://129021699626953',sunMaxTrianglebadgeExclamationmark=
+'rbxassetid://135358000268431',sunMaxTrianglebadgeExclamationmarkFill=
+'rbxassetid://99021447947882',sunMin='rbxassetid://103991364155847',sunMinFill=
+'rbxassetid://106524277066060',sunRain='rbxassetid://117346545789896',
+sunRainCircle='rbxassetid://116714247993788',sunRainCircleFill=
+'rbxassetid://72120512860534',sunRainFill='rbxassetid://119708329959073',
+sunRighthalfFilled='rbxassetid://130384758326055',sunSnow=
+'rbxassetid://140218841895149',sunSnowCircle='rbxassetid://85080431656012',
+sunSnowCircleFill='rbxassetid://139753867511118',sunSnowFill=
+'rbxassetid://79961567888677',sunglasses='rbxassetid://139478408108550',
+sunglassesFill='rbxassetid://83172262555556',sunrise=
+'rbxassetid://84294788506747',sunriseCircle='rbxassetid://85082595836648',
+sunriseCircleFill='rbxassetid://134981377023180',sunriseFill=
+'rbxassetid://88724560564927',sunset='rbxassetid://84258742471324',sunsetCircle=
+'rbxassetid://74528127670070',sunsetCircleFill='rbxassetid://111819138531245',
+sunsetFill='rbxassetid://72039785697529',surfboard=
+'rbxassetid://140238778372965',surfboardFill='rbxassetid://103281693034156',
+suspensionShock='rbxassetid://82815963336131',suvSide=
+'rbxassetid://113818306073178',suvSideAirCirculate=
+'rbxassetid://101209179997042',suvSideAirCirculateFill=
+'rbxassetid://95604708193928',suvSideAirFresh='rbxassetid://119537195789706',
+suvSideAirFreshFill='rbxassetid://128602482925386',suvSideAndExclamationmark=
+'rbxassetid://70935742116781',suvSideAndExclamationmarkFill=
+'rbxassetid://134726230610351',suvSideArrowLeftAndRight=
+'rbxassetid://139550769625928',suvSideArrowLeftAndRightFill=
+'rbxassetid://135409490346330',suvSideArrowtriangleDown=
+'rbxassetid://71707878766537',suvSideArrowtriangleDownFill=
+'rbxassetid://88284067475836',suvSideArrowtriangleUp=
+'rbxassetid://109244877917656',suvSideArrowtriangleUpArrowtriangleDown=
+'rbxassetid://118056351833978',suvSideArrowtriangleUpArrowtriangleDownFill=
+'rbxassetid://125999031098593',suvSideArrowtriangleUpFill=
+'rbxassetid://90910642207609',suvSideFill='rbxassetid://82704988425727',
+suvSideFrontOpen='rbxassetid://72250378572119',suvSideFrontOpenCrop=
+'rbxassetid://120980559843625',suvSideFrontOpenCropFill=
+'rbxassetid://125542014790146',suvSideFrontOpenFill=
+'rbxassetid://132460379724922',suvSideHillDescentControl=
+'rbxassetid://126063797863800',suvSideHillDescentControlFill=
+'rbxassetid://77045237271977',suvSideHillDown='rbxassetid://134786730212068',
+suvSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangle=
+'rbxassetid://83945172818973',
+suvSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangleFill=
+'rbxassetid://114026491508514',suvSideHillDownFill='rbxassetid://72730443837671'
+,suvSideHillUp='rbxassetid://129652117525451',suvSideHillUpFill=
+'rbxassetid://134588895330123',suvSideLock='rbxassetid://135078968309336',
+suvSideLockFill='rbxassetid://123003915936036',suvSideLockOpen=
+'rbxassetid://115230659352541',suvSideLockOpenFill=
+'rbxassetid://129135935833817',suvSideRearOpen='rbxassetid://139226380860692',
+suvSideRearOpenCrop='rbxassetid://88433095209406',suvSideRearOpenCropFill=
+'rbxassetid://71941757962126',suvSideRearOpenFill='rbxassetid://121255200757213'
+,suvSideRoofCargoCarrier='rbxassetid://90680771893599',
+suvSideRoofCargoCarrierFill='rbxassetid://133507228256677',
+suvSideRoofCargoCarrierSlash='rbxassetid://73339283777162',
+suvSideRoofCargoCarrierSlashFill='rbxassetid://72759140430639',swatchpalette=
+'rbxassetid://125516289768416',swatchpaletteFill='rbxassetid://111232642263672',
+swedishkronasign='rbxassetid://115059054061881',
+swedishkronasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://107015130866436',swedishkronasignBankBuilding=
+'rbxassetid://94661078864168',swedishkronasignBankBuildingFill=
+'rbxassetid://122674758234286',swedishkronasignCircle=
+'rbxassetid://130820223023461',swedishkronasignCircleFill=
+'rbxassetid://96231802699012',swedishkronasignGaugeChartLefthalfRighthalf=
+'rbxassetid://90449849273258',
+swedishkronasignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://85748624360232',swedishkronasignRing=
+'rbxassetid://105958553353498',swedishkronasignRingDashed=
+'rbxassetid://115761962010012',swedishkronasignSquare=
+'rbxassetid://128931505796379',swedishkronasignSquareFill=
+'rbxassetid://86509975102581',swift='rbxassetid://135681872987394',swiftdata=
+'rbxassetid://74282041662791',swirlCircleRighthalfFilled=
+'rbxassetid://103405176082247',swirlCircleRighthalfFilledInverse=
+'rbxassetid://75696463542233',switch2='rbxassetid://99218016450501',
+switchProgrammable='rbxassetid://84251494436351',switchProgrammableFill=
+'rbxassetid://85826821975584',switchProgrammableSquare=
+'rbxassetid://109202516688828',switchProgrammableSquareFill=
+'rbxassetid://140038440376679',syringe='rbxassetid://134779716432867',
+syringeFill='rbxassetid://105718946268724',tCircle=
+'rbxassetid://113271024609284',tCircleFill='rbxassetid://119571720599814',
+tSquare='rbxassetid://87546740989322',tSquareFill='rbxassetid://117186355627025'
+,tableFurniture='rbxassetid://118809430961100',tableFurnitureFill=
+'rbxassetid://128445581622810',tablecells='rbxassetid://85004798836302',
+tablecellsBadgeEllipsis='rbxassetid://79889013681142',tablecellsFill=
+'rbxassetid://109601246909544',tablecellsFillBadgeEllipsis=
+'rbxassetid://129079091406121',tachometer='rbxassetid://100567385026177',tag=
+'rbxassetid://104278823123794',tagCircle='rbxassetid://74061891188761',
+tagCircleFill='rbxassetid://114556711951516',tagFill=
+'rbxassetid://89746504735605',tagSlash='rbxassetid://76661632603924',
+tagSlashFill='rbxassetid://109012633470146',tagSquare=
+'rbxassetid://87621218946117',tagSquareFill='rbxassetid://114890035110337',
+taillightFog='rbxassetid://82333208021035',taillightFogFill=
+'rbxassetid://99709323035641',takeoutbagAndCupAndStraw=
+'rbxassetid://135148907059856',takeoutbagAndCupAndStrawFill=
+'rbxassetid://103318663213516',target='rbxassetid://84037566052726',teddybear=
+'rbxassetid://89621151313364',teddybearFill='rbxassetid://81297274380624',
+teletype='rbxassetid://107362767762739',teletypeAnswer=
+'rbxassetid://139631101200787',teletypeAnswerCircle=
+'rbxassetid://90200447484716',teletypeAnswerCircleFill=
+'rbxassetid://111381178181644',teletypeCircle='rbxassetid://138872701729896',
+teletypeCircleFill='rbxassetid://80115468549244',tengesign=
+'rbxassetid://76988463911430',tengesignArrowTriangleheadCounterclockwiseRotate90
+='rbxassetid://75892461467217',tengesignBankBuilding=
+'rbxassetid://112391984014443',tengesignBankBuildingFill=
+'rbxassetid://126608973721961',tengesignCircle='rbxassetid://111459092131195',
+tengesignCircleFill='rbxassetid://123410462749809',
+tengesignGaugeChartLefthalfRighthalf='rbxassetid://95846595281122',
+tengesignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://133479365260141',
+tengesignRing='rbxassetid://134859673001983',tengesignRingDashed=
+'rbxassetid://118456008853764',tengesignSquare='rbxassetid://108744664506456',
+tengesignSquareFill='rbxassetid://137042676059462',tennisRacket=
+'rbxassetid://117271664113564',tennisRacketCircle='rbxassetid://76019214542356',
+tennisRacketCircleFill='rbxassetid://125737548729214',tennisball=
+'rbxassetid://104744228251964',tennisballCircle='rbxassetid://121952139494198',
+tennisballCircleFill='rbxassetid://75309517708716',tennisballFill=
+'rbxassetid://94298365160647',tent='rbxassetid://107006023598958',tent2=
+'rbxassetid://95982406617723',tent2Circle='rbxassetid://131199860472116',
+tent2CircleFill='rbxassetid://85668483723444',tent2Fill=
+'rbxassetid://91088067443876',tentCircle='rbxassetid://70607897797397',
+tentCircleFill='rbxassetid://135778310997601',tentFill=
+'rbxassetid://71561855929740',testtube2='rbxassetid://80066702459692',
+textAligncenter='rbxassetid://71237993847541',textAlignleft=
+'rbxassetid://126414082317242',textAlignright='rbxassetid://84350767056630',
+textAndCommandMacwindow='rbxassetid://86957010693702',textAppend=
+'rbxassetid://108335281304146',textBadgeCheckmark='rbxassetid://105812612281248'
+,textBadgeMinus='rbxassetid://83327763553474',textBadgePlus=
+'rbxassetid://129239148873683',textBadgeStar='rbxassetid://128027608333717',
+textBadgeXmark='rbxassetid://101988186707064',textBelowFolder=
+'rbxassetid://87822055347956',textBelowFolderFill='rbxassetid://130066865275998'
+,textBelowPhoto='rbxassetid://139379154126272',textBelowPhotoFill=
+'rbxassetid://134160367064989',textBookClosed='rbxassetid://111192629904131',
+textBookClosedFill='rbxassetid://97841285729388',textBubble=
+'rbxassetid://128793402405217',textBubbleBadgeClock=
+'rbxassetid://93907819124534',textBubbleBadgeClockFill=
+'rbxassetid://88289318147358',textBubbleFill='rbxassetid://116249834530262',
+textDocument='rbxassetid://124309426221022',textDocumentFill=
+'rbxassetid://124730277333625',textInsert='rbxassetid://97126037596934',
+textJustify='rbxassetid://92189821886998',textJustifyLeading=
+'rbxassetid://99075460859575',textJustifyLeft='rbxassetid://131541181777984',
+textJustifyRight='rbxassetid://129280972878245',textJustifyTrailing=
+'rbxassetid://129652399217283',textLine2Summary='rbxassetid://140230863430130',
+textLine2SummaryBadgeXmark='rbxassetid://70429489437963',textLine3Summary=
+'rbxassetid://81766828169006',textLineFirstAndArrowtriangleForward=
+'rbxassetid://85328963821966',textLineLastAndArrowtriangleForward=
+'rbxassetid://108463662081854',textLineMagnify='rbxassetid://95577209625603',
+textMagnifyingglass='rbxassetid://114116769689132',textPadHeader=
+'rbxassetid://106064080795897',textPadHeaderBadgeClock=
+'rbxassetid://124262662260972',textPadHeaderBadgePlus=
+'rbxassetid://136283903785863',textPage='rbxassetid://92314254916759',
+textPageBadgeMagnifyingglass='rbxassetid://127124929104557',textPageFill=
+'rbxassetid://139449259721285',textPageSlash='rbxassetid://113189115705323',
+textPageSlashFill='rbxassetid://105274129885608',textQuote=
+'rbxassetid://71027928151952',textRectangle='rbxassetid://130318963677643',
+textRectangleFill='rbxassetid://108940510434765',textRectanglePage=
+'rbxassetid://86723219970269',textRectanglePageFill=
+'rbxassetid://114057346576950',textRedaction='rbxassetid://105235021121957',
+textSquareFilled='rbxassetid://112727132354588',textViewfinder=
+'rbxassetid://95798719444148',textWordSpacing='rbxassetid://75789106006521',
+textformat='rbxassetid://107710559061740',textformat12=
+'rbxassetid://96656679869431',textformat123='rbxassetid://134142879344254',
+textformatAbc='rbxassetid://138305677898152',textformatAbcDottedunderline=
+'rbxassetid://94626317959618',textformatAlt='rbxassetid://132159623766191',
+textformatCharacters='rbxassetid://117802849867936',
+textformatCharactersArrowLeftAndRight='rbxassetid://129388475589128',
+textformatCharactersDottedunderline='rbxassetid://78315218057352',
+textformatNumbers='rbxassetid://124177082221864',textformatSize=
+'rbxassetid://93771567593788',textformatSizeLarger='rbxassetid://93387252147805'
+,textformatSizeSmaller='rbxassetid://109995000982679',textformatSubscript=
+'rbxassetid://86381798212299',textformatSuperscript=
+'rbxassetid://81076327481935',theatermaskAndPaintbrush=
+'rbxassetid://88404865436421',theatermaskAndPaintbrushFill=
+'rbxassetid://127636624966411',theatermasks='rbxassetid://119325864262704',
+theatermasksCircle='rbxassetid://80160373236658',theatermasksCircleFill=
+'rbxassetid://122778091246019',theatermasksFill='rbxassetid://118820244647209',
+thermometerAndEllipsis='rbxassetid://106404759350042',thermometerAndLiquidWaves=
+'rbxassetid://110474674863751',thermometerAndLiquidWavesSnowflake=
+'rbxassetid://127007809849613',
+thermometerAndLiquidWavesTrianglebadgeExclamationmark=
+'rbxassetid://74515683264588',thermometerBrakesignal=
+'rbxassetid://78708806961918',thermometerGaugeOpen=
+'rbxassetid://122264305417542',thermometerHigh='rbxassetid://89229451444519',
+thermometerLow='rbxassetid://131420426530700',thermometerMedium=
+'rbxassetid://71148830790297',thermometerMediumSlash=
+'rbxassetid://118717870879578',thermometerSnowflake=
+'rbxassetid://75391106253368',thermometerSnowflakeCircle=
+'rbxassetid://131952215879048',thermometerSnowflakeCircleFill=
+'rbxassetid://133994251139774',thermometerSun='rbxassetid://107951087495619',
+thermometerSunCircle='rbxassetid://82549716179412',thermometerSunCircleFill=
+'rbxassetid://74970074280056',thermometerSunFill='rbxassetid://120808413699971',
+thermometerTirepressure='rbxassetid://89391830630971',thermometerTransmission=
+'rbxassetid://84090975599959',thermometerVariable='rbxassetid://123361025458437'
+,thermometerVariableAndFigure='rbxassetid://71146322185292',
+thermometerVariableAndFigureCircle='rbxassetid://126503466826501',
+thermometerVariableAndFigureCircleFill='rbxassetid://112639012001535',
+thermometerVariableBadgeClock='rbxassetid://77637851179488',
+thermometerVariableBadgePlay='rbxassetid://138406770912999',ticket=
+'rbxassetid://78850938480744',ticketCircle='rbxassetid://125548492810962',
+ticketCircleFill='rbxassetid://81789279996088',ticketFill=
+'rbxassetid://134666026768258',timelapse='rbxassetid://96365441062279',
+timelineSelection='rbxassetid://93679306913299',timer=
+'rbxassetid://131232244017070',timerCircle='rbxassetid://104963768880474',
+timerCircleFill='rbxassetid://74781722205278',timerSquare=
+'rbxassetid://136926278456877',tire='rbxassetid://121804115558084',
+tireBadgeSnowflake='rbxassetid://118870916845492',tirepressure=
+'rbxassetid://139354888430441',togglepower='rbxassetid://126792360918660',toilet
+='rbxassetid://139322044959527',toiletCircle='rbxassetid://132862220807496',
+toiletCircleFill='rbxassetid://86592804374521',toiletFill=
+'rbxassetid://89608461240931',tornado='rbxassetid://93394540448953',
+tornadoCircle='rbxassetid://120622162002991',tornadoCircleFill=
+'rbxassetid://119975169838498',tortoise='rbxassetid://89207957369788',
+tortoiseCircle='rbxassetid://138114227730926',tortoiseCircleFill=
+'rbxassetid://113462643523462',tortoiseFill='rbxassetid://108775029902688',torus
+='rbxassetid://132235380088261',touchid='rbxassetid://127151466748359',towHitch=
+'rbxassetid://98604376318167',towHitchExclamationmark=
+'rbxassetid://117587622340065',towHitchExclamationmarkFill=
+'rbxassetid://77885472071490',towHitchFill='rbxassetid://136757672238841',
+tractionControlTirepressure='rbxassetid://89446879516569',
+tractionControlTirepressureExclamationmark='rbxassetid://129579264199158',
+tractionControlTirepressureSlash='rbxassetid://82258262400115',trainSideFrontCar
+='rbxassetid://81352707597032',trainSideMiddleCar='rbxassetid://84241439668483',
+trainSideRearCar='rbxassetid://114688400647868',tram=
+'rbxassetid://84554772135786',tramCard='rbxassetid://94311647704427',
+tramCardFill='rbxassetid://72197519771173',tramCircle=
+'rbxassetid://99917178213901',tramCircleFill='rbxassetid://84107263038489',
+tramFill='rbxassetid://124882868874709',tramFillTunnel=
+'rbxassetid://82427435127609',translate='rbxassetid://74057651757937',
+transmission='rbxassetid://78486925087835',trapezoidAndLineHorizontal=
+'rbxassetid://117248222414382',trapezoidAndLineHorizontalFill=
+'rbxassetid://83400087360136',trapezoidAndLineVertical=
+'rbxassetid://122849535680037',trapezoidAndLineVerticalFill=
+'rbxassetid://83143223589474',trash='rbxassetid://138210305619993',trashCircle=
+'rbxassetid://73759030470557',trashCircleFill='rbxassetid://108682997886275',
+trashFill='rbxassetid://106522682727620',trashSlash=
+'rbxassetid://137129524605524',trashSlashCircle='rbxassetid://75985404698667',
+trashSlashCircleFill='rbxassetid://119475662673602',trashSlashFill=
+'rbxassetid://86415395411354',trashSlashSquare='rbxassetid://75415733626570',
+trashSlashSquareFill='rbxassetid://111819411879473',trashSquare=
+'rbxassetid://139489659801239',trashSquareFill='rbxassetid://109042030275157',
+tray='rbxassetid://73132187606290',tray2='rbxassetid://109273606771685',
+tray2Fill='rbxassetid://114990115453763',trayAndArrowDown=
+'rbxassetid://138530153829354',trayAndArrowDownFill=
+'rbxassetid://91720907960301',trayAndArrowUp='rbxassetid://77418052891963',
+trayAndArrowUpFill='rbxassetid://111348199178010',trayBadge=
+'rbxassetid://99876442266432',trayBadgeFill='rbxassetid://101926737161042',
+trayCircle='rbxassetid://98784166534236',trayCircleFill=
+'rbxassetid://131639114232091',trayFill='rbxassetid://122084538861944',trayFull=
+'rbxassetid://132151007573012',trayFullFill='rbxassetid://91743715077166',tree=
+'rbxassetid://131434292632259',treeCircle='rbxassetid://77869416588663',
+treeCircleFill='rbxassetid://118871328720111',treeFill=
+'rbxassetid://127929585101588',triangle='rbxassetid://103147443822886',
+triangleBottomhalfFilled='rbxassetid://91709533626215',triangleCircle=
+'rbxassetid://111397146609147',triangleCircleFill='rbxassetid://131784417798929'
+,triangleFill='rbxassetid://98911778107051',triangleLefthalfFilled=
+'rbxassetid://122088513245439',triangleRighthalfFilled=
+'rbxassetid://133484476485466',triangleTophalfFilled=
+'rbxassetid://114334455043672',triangleshape='rbxassetid://103860060139536',
+triangleshapeFill='rbxassetid://137360750563384',trophy=
+'rbxassetid://113423520493674',trophyCircle='rbxassetid://80943025177785',
+trophyCircleFill='rbxassetid://76982971562787',trophyFill=
+'rbxassetid://74977361750490',tropicalstorm='rbxassetid://97305087052372',
+tropicalstormCircle='rbxassetid://117783495371346',tropicalstormCircleFill=
+'rbxassetid://90338028011988',truckBox='rbxassetid://83851227799136',
+truckBoxBadgeClock='rbxassetid://89308426660825',truckBoxBadgeClockFill=
+'rbxassetid://132276325552498',truckBoxFill='rbxassetid://110475724637231',
+truckPickupSide='rbxassetid://123433678430058',truckPickupSideAirCirculate=
+'rbxassetid://80768683207277',truckPickupSideAirCirculateFill=
+'rbxassetid://101108911081174',truckPickupSideAirFresh=
+'rbxassetid://71635746134403',truckPickupSideAirFreshFill=
+'rbxassetid://87057182945703',truckPickupSideAndExclamationmark=
+'rbxassetid://139134957787137',truckPickupSideAndExclamationmarkFill=
+'rbxassetid://95516163286881',truckPickupSideArrowLeftAndRight=
+'rbxassetid://134277371887972',truckPickupSideArrowLeftAndRightFill=
+'rbxassetid://120454836734609',truckPickupSideArrowtriangleDown=
+'rbxassetid://132765732566337',truckPickupSideArrowtriangleDownFill=
+'rbxassetid://126435076757533',truckPickupSideArrowtriangleUp=
+'rbxassetid://129927853101620',truckPickupSideArrowtriangleUpArrowtriangleDown=
+'rbxassetid://76463006668039',
+truckPickupSideArrowtriangleUpArrowtriangleDownFill=
+'rbxassetid://102914968611680',truckPickupSideArrowtriangleUpFill=
+'rbxassetid://103734412692534',truckPickupSideFill='rbxassetid://97841418868342'
+,truckPickupSideFrontOpen='rbxassetid://130338401662393',
+truckPickupSideFrontOpenCrop='rbxassetid://130602145974071',
+truckPickupSideFrontOpenCropFill='rbxassetid://80394069134521',
+truckPickupSideFrontOpenFill='rbxassetid://140564339078125',
+truckPickupSideHillDown='rbxassetid://81855572295261',
+truckPickupSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangle=
+'rbxassetid://120535414775272',
+truckPickupSideHillDownAndGaugeOpenWithLinesNeedle25percentAndArrowtriangleFill=
+'rbxassetid://96717003085498',truckPickupSideHillDownFill=
+'rbxassetid://129981288263838',truckPickupSideHillUp=
+'rbxassetid://120531308583244',truckPickupSideHillUpFill=
+'rbxassetid://118462546162839',truckPickupSideLock='rbxassetid://90874238611008'
+,truckPickupSideLockFill='rbxassetid://139300624211362',truckPickupSideLockOpen=
+'rbxassetid://111751710170128',truckPickupSideLockOpenFill=
+'rbxassetid://117854506670260',truckSideHillDescentControl=
+'rbxassetid://106358378146490',truckSideHillDescentControlFill=
+'rbxassetid://100686764237291',truckSideRoofCargoCarrier=
+'rbxassetid://71548640889981',truckSideRoofCargoCarrierFill=
+'rbxassetid://70901858186322',truckSideRoofCargoCarrierSlash=
+'rbxassetid://107972634370880',truckSideRoofCargoCarrierSlashFill=
+'rbxassetid://122020656964646',tsa='rbxassetid://134948426765455',tsaCircle=
+'rbxassetid://108199751556422',tsaCircleFill='rbxassetid://72935539681008',
+tsaSlash='rbxassetid://99849566895544',tshirt='rbxassetid://78149665788013',
+tshirtCircle='rbxassetid://124062591825671',tshirtCircleFill=
+'rbxassetid://95738553763485',tshirtFill='rbxassetid://93980224214143',
+tugriksign='rbxassetid://81138137513450',
+tugriksignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://126226333785383',tugriksignBankBuilding=
+'rbxassetid://110652295230466',tugriksignBankBuildingFill=
+'rbxassetid://109410303282690',tugriksignCircle='rbxassetid://100568170639157',
+tugriksignCircleFill='rbxassetid://86051072080818',
+tugriksignGaugeChartLefthalfRighthalf='rbxassetid://122980287842808',
+tugriksignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://71970544968459',
+tugriksignRing='rbxassetid://114551163304551',tugriksignRingDashed=
+'rbxassetid://131188971913163',tugriksignSquare='rbxassetid://113572701477700',
+tugriksignSquareFill='rbxassetid://102159003271983',tuningfork=
+'rbxassetid://101642064626347',turkishlirasign='rbxassetid://100432595691389',
+turkishlirasignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://125963477298669',turkishlirasignBankBuilding=
+'rbxassetid://86988859548682',turkishlirasignBankBuildingFill=
+'rbxassetid://101316166861444',turkishlirasignCircle=
+'rbxassetid://129136113627430',turkishlirasignCircleFill=
+'rbxassetid://96077985019311',turkishlirasignGaugeChartLefthalfRighthalf=
+'rbxassetid://132308066882364',
+turkishlirasignGaugeChartLeftthirdTopthirdRightthird=
+'rbxassetid://135569336786362',turkishlirasignRing=
+'rbxassetid://126842663496567',turkishlirasignRingDashed=
+'rbxassetid://89470219812321',turkishlirasignSquare=
+'rbxassetid://80810143950534',turkishlirasignSquareFill=
+'rbxassetid://81730250023213',tv='rbxassetid://134683634154697',
+tvAndHifispeakerFill='rbxassetid://126365816064099',tvAndMediabox=
+'rbxassetid://86190133697909',tvAndMediaboxFill='rbxassetid://70794673467646',
+tvBadgeWifi='rbxassetid://134114499802296',tvBadgeWifiFill=
+'rbxassetid://99921301995389',tvCircle='rbxassetid://108467456786283',
+tvCircleFill='rbxassetid://104378375131972',tvFill=
+'rbxassetid://134052066796282',tvSlash='rbxassetid://87329837865736',tvSlashFill
+='rbxassetid://138613370587055',uCircle='rbxassetid://133864802523646',
+uCircleFill='rbxassetid://83802229447704',uSquare='rbxassetid://70478293186949',
+uSquareFill='rbxassetid://103098702036404',uiwindowSplit2x1=
+'rbxassetid://94654002409260',umbrella='rbxassetid://107688268920202',
+umbrellaCircle='rbxassetid://78176157826476',umbrellaCircleFill=
+'rbxassetid://90379909796237',umbrellaFill='rbxassetid://125319557780841',
+umbrellaGaugeOpen='rbxassetid://115390159124102',umbrellaPercent=
+'rbxassetid://74004447484301',umbrellaPercentFill='rbxassetid://98934968468500',
+umbrellaSensorTagRadiowavesLeftAndRight='rbxassetid://111616368640765',
+umbrellaSensorTagRadiowavesLeftAndRightFill='rbxassetid://84410220519393',
+underline='rbxassetid://79716535798546',underlineDouble=
+'rbxassetid://95042272345021',vCircle='rbxassetid://78905420701975',vCircleFill=
+'rbxassetid://109231824858777',vSquare='rbxassetid://112544504091047',
+vSquareFill='rbxassetid://95651976776858',ventHeatWavesUpward=
+'rbxassetid://81373110761347',vialViewfinder='rbxassetid://120653091554663',
+video='rbxassetid://75234641923007',videoBadgeCheckmark=
+'rbxassetid://93588020970649',videoBadgeEllipsis='rbxassetid://73931355581093',
+videoBadgePlus='rbxassetid://77189160054067',videoBadgeWaveform=
+'rbxassetid://94770313707904',videoBadgeWaveformFill=
+'rbxassetid://91311029131545',videoBubble='rbxassetid://111260570124310',
+videoBubbleFill='rbxassetid://98571132429169',videoCircle=
+'rbxassetid://126991025094281',videoCircleFill='rbxassetid://102639060158177',
+videoDoorbell='rbxassetid://127205026449016',videoDoorbellFill=
+'rbxassetid://87815257505023',videoFill='rbxassetid://139148806818337',
+videoFillBadgeCheckmark='rbxassetid://94758158365454',videoFillBadgeEllipsis=
+'rbxassetid://115997809417535',videoFillBadgePlus='rbxassetid://71066361916528',
+videoSlash='rbxassetid://77940555638934',videoSlashCircle=
+'rbxassetid://78499840932408',videoSlashCircleFill=
+'rbxassetid://106447121815942',videoSlashFill='rbxassetid://85954124688252',
+videoSquare='rbxassetid://74932084950455',videoSquareFill=
+'rbxassetid://108239592630600',videoprojector='rbxassetid://102503253637538',
+videoprojectorFill='rbxassetid://123004409391173',view2d=
+'rbxassetid://137344398414768',view3d='rbxassetid://108397171176671',viewfinder=
+'rbxassetid://94783896988587',viewfinderCircle='rbxassetid://121365827431194',
+viewfinderCircleFill='rbxassetid://123480648427476',viewfinderRectangular=
+'rbxassetid://92938228120219',viewfinderTrianglebadgeExclamationmark=
+'rbxassetid://110389074265828',visionPro='rbxassetid://86658888521866',
+visionProAndArrowForward='rbxassetid://92640289852602',
+visionProAndArrowForwardFill='rbxassetid://131506122489642',
+visionProBadgeCheckmark='rbxassetid://91300537956331',
+visionProBadgeCheckmarkFill='rbxassetid://131430228822693',
+visionProBadgeExclamationmark='rbxassetid://131951123332852',
+visionProBadgeExclamationmarkFill='rbxassetid://127300971189191',
+visionProBadgePlay='rbxassetid://86395593898709',visionProBadgePlayFill=
+'rbxassetid://97801624322845',visionProCircle='rbxassetid://97576563076177',
+visionProCircleFill='rbxassetid://139552674437388',visionProFill=
+'rbxassetid://108432448592279',visionProSlash='rbxassetid://109140558729897',
+visionProSlashCircle='rbxassetid://88113051707571',visionProSlashCircleFill=
+'rbxassetid://135642237204795',visionProSlashFill='rbxassetid://121260021824503'
+,visionProTrianglebadgeExclamationmark='rbxassetid://134894440127646',
+visionProTrianglebadgeExclamationmarkFill='rbxassetid://91237961536763',
+visionpro='rbxassetid://76932342920990',visionproAndArrowForward=
+'rbxassetid://108237299822657',visionproBadgeExclamationmark=
+'rbxassetid://78812515285709',visionproBadgePlay='rbxassetid://122979325623328',
+visionproCircle='rbxassetid://70783957641063',visionproSlash=
+'rbxassetid://118082278749251',visionproSlashCircle=
+'rbxassetid://116051094478142',voiceover='rbxassetid://136800595376174',
+volleyball='rbxassetid://73970433297176',volleyballCircle=
+'rbxassetid://76121885043459',volleyballCircleFill=
+'rbxassetid://139162144058450',volleyballFill='rbxassetid://78657080282621',
+wCircle='rbxassetid://83697484178752',wCircleFill='rbxassetid://82337186361293',
+wSquare='rbxassetid://71979974267181',wSquareFill='rbxassetid://81077708796392',
+wake='rbxassetid://134066791044326',wakeCircle='rbxassetid://96591606910274',
+wakeCircleFill='rbxassetid://79093975624302',walletBifold=
+'rbxassetid://136364251846065',walletBifoldFill='rbxassetid://119240717399847',
+walletPass='rbxassetid://134909953531837',walletPassFill=
+'rbxassetid://96808145241944',walletSensorTagRadiowavesLeftAndRight=
+'rbxassetid://126915780100901',walletSensorTagRadiowavesLeftAndRightFill=
+'rbxassetid://81271116607581',wandAndOutline='rbxassetid://129284003313828',
+wandAndOutlineInverse='rbxassetid://71138507542324',wandAndRays=
+'rbxassetid://92752161512332',wandAndRaysInverse='rbxassetid://125975271070513',
+wandAndSparkles='rbxassetid://72040453503595',wandAndSparklesInverse=
+'rbxassetid://79333469702486',wandAndStars='rbxassetid://95449961416091',
+wandAndStarsInverse='rbxassetid://108387310992441',warninglight=
+'rbxassetid://84007946028451',warninglightFill='rbxassetid://109840072719326',
+washer='rbxassetid://93685448107607',washerCircle='rbxassetid://105378880332708'
+,washerCircleFill='rbxassetid://119955243167699',washerFill=
+'rbxassetid://89945593257514',watchAnalog='rbxassetid://88617234755283',
+watchfaceApplewatchCase='rbxassetid://73863272801256',waterWaves=
+'rbxassetid://138305668238725',waterWavesAndArrowDown=
+'rbxassetid://108671761307420',
+waterWavesAndArrowDownTrianglebadgeExclamationmark=
+'rbxassetid://126530403017273',waterWavesAndArrowTriangleheadDown=
+'rbxassetid://90118761233028',
+waterWavesAndArrowTriangleheadDownTrianglebadgeExclamationmark=
+'rbxassetid://85387752450910',waterWavesAndArrowTriangleheadUp=
+'rbxassetid://127164136396826',waterWavesAndArrowUp=
+'rbxassetid://117956742428464',waterWavesSlash='rbxassetid://111588668015905',
+waterbottle='rbxassetid://138004611200910',waterbottleFill=
+'rbxassetid://121256533818085',wave3Backward='rbxassetid://80847645712657',
+wave3BackwardCircle='rbxassetid://136031088324218',wave3BackwardCircleFill=
+'rbxassetid://71061533127513',wave3Down='rbxassetid://108832060215003',
+wave3DownCarSide='rbxassetid://123655331264678',wave3DownCarSideFill=
+'rbxassetid://115209382072100',wave3DownCircle='rbxassetid://114336657044130',
+wave3DownCircleFill='rbxassetid://74329989717731',wave3DownConvertibleSide=
+'rbxassetid://131401811268042',wave3DownConvertibleSideFill=
+'rbxassetid://79499527400603',wave3DownPickupSide='rbxassetid://97436480627142',
+wave3DownPickupSideFill='rbxassetid://129019641239034',wave3DownSuvSide=
+'rbxassetid://71035812422373',wave3DownSuvSideFill=
+'rbxassetid://134610119907297',wave3Forward='rbxassetid://111357002729843',
+wave3ForwardCircle='rbxassetid://80066074333627',wave3ForwardCircleFill=
+'rbxassetid://80719773619963',wave3Left='rbxassetid://117436129898300',
+wave3LeftCircle='rbxassetid://85305739132620',wave3LeftCircleFill=
+'rbxassetid://93517609770045',wave3Right='rbxassetid://92963290455418',
+wave3RightCircle='rbxassetid://91349038271768',wave3RightCircleFill=
+'rbxassetid://140061124860963',wave3Up='rbxassetid://128528619550054',
+wave3UpCircle='rbxassetid://133995083701260',wave3UpCircleFill=
+'rbxassetid://96665619623184',waveform='rbxassetid://136809466139252',
+waveformAndPersonFilled='rbxassetid://126270512457294',waveformBadgeCheckmark=
+'rbxassetid://128595421098352',waveformBadgeExclamationmark=
+'rbxassetid://120204943860124',waveformBadgeMagnifyingglass=
+'rbxassetid://121985661181170',waveformBadgeMic='rbxassetid://140630166066509',
+waveformBadgeMicrophone='rbxassetid://87232803530574',waveformBadgeMinus=
+'rbxassetid://102741667650470',waveformBadgePlus='rbxassetid://102403202693811',
+waveformBadgeXmark='rbxassetid://120155576829911',waveformCircle=
+'rbxassetid://84018574438696',waveformCircleFill='rbxassetid://98502737702633',
+waveformLow='rbxassetid://95721363422192',waveformMid=
+'rbxassetid://73459359791943',waveformPath='rbxassetid://72307154936317',
+waveformPathBadgeMinus='rbxassetid://136232811740839',waveformPathBadgePlus=
+'rbxassetid://127759512381534',waveformPathEcg='rbxassetid://128118780008401',
+waveformPathEcgMagnifyingglass='rbxassetid://79598417522204',
+waveformPathEcgRectangle='rbxassetid://70398715649395',
+waveformPathEcgRectangleFill='rbxassetid://90914728496991',waveformPathEcgText=
+'rbxassetid://116861166666873',waveformPathEcgTextClipboard=
+'rbxassetid://81460112831245',waveformPathEcgTextClipboardFill=
+'rbxassetid://130425262607160',waveformPathEcgTextPage=
+'rbxassetid://101998995563939',waveformPathEcgTextPageFill=
+'rbxassetid://85336259615594',waveformSlash='rbxassetid://101318589553195',
+webCamera='rbxassetid://85276511025498',webCameraFill=
+'rbxassetid://86988545799263',wheelchair='rbxassetid://130234014770883',
+widgetExtralarge='rbxassetid://87179649600036',widgetExtralargeBadgePlus=
+'rbxassetid://87961000171364',widgetLarge='rbxassetid://138302819665976',
+widgetLargeBadgePlus='rbxassetid://102309628278255',widgetMedium=
+'rbxassetid://123766243611909',widgetMediumBadgePlus=
+'rbxassetid://129502000388063',widgetSmall='rbxassetid://133222809195444',
+widgetSmallBadgePlus='rbxassetid://106813307987533',wifi=
+'rbxassetid://127365451355653',wifiBadgeLock='rbxassetid://105865344224961',
+wifiCircle='rbxassetid://131659272048007',wifiCircleFill=
+'rbxassetid://123823896793006',wifiExclamationmark=
+'rbxassetid://117799256745502',wifiExclamationmarkCircle=
+'rbxassetid://133542793616716',wifiExclamationmarkCircleFill=
+'rbxassetid://103666079404717',wifiRouter='rbxassetid://107283421485159',
+wifiRouterFill='rbxassetid://127625180753277',wifiSlash=
+'rbxassetid://105782001663907',wifiSquare='rbxassetid://101097897107565',
+wifiSquareFill='rbxassetid://135210787558367',wind='rbxassetid://80700050884353'
+,windCircle='rbxassetid://129546295733216',windCircleFill=
+'rbxassetid://96079739586089',windSnow='rbxassetid://92339772641709',
+windSnowCircle='rbxassetid://111653489867204',windSnowCircleFill=
+'rbxassetid://132514124832058',windowAwning='rbxassetid://136043702603149',
+windowAwningClosed='rbxassetid://75144791958276',windowCasement=
+'rbxassetid://75282400690778',windowCasementClosed=
+'rbxassetid://118468264534240',windowCeiling='rbxassetid://120918397527890',
+windowCeilingClosed='rbxassetid://72533185677487',windowHorizontal=
+'rbxassetid://92196780376848',windowHorizontalClosed=
+'rbxassetid://77912685751805',windowShadeClosed='rbxassetid://99464758323012',
+windowShadeOpen='rbxassetid://74340846109012',windowVerticalClosed=
+'rbxassetid://77549144479343',windowVerticalOpen='rbxassetid://116989707350034',
+windshieldFrontAndFluidAndSpray='rbxassetid://104140821821775',
+windshieldFrontAndHeatWaves='rbxassetid://139231996805155',
+windshieldFrontAndSpray='rbxassetid://118383554311432',windshieldFrontAndWiper=
+'rbxassetid://90221744279393',windshieldFrontAndWiperAndDrop=
+'rbxassetid://84550752400798',windshieldFrontAndWiperAndSpray=
+'rbxassetid://127696811498029',windshieldFrontAndWiperExclamationmark=
+'rbxassetid://113077812388437',windshieldFrontAndWiperIntermittent=
+'rbxassetid://130126356387267',windshieldRearAndFluidAndSpray=
+'rbxassetid://71902151124766',windshieldRearAndHeatWaves=
+'rbxassetid://85175322908644',windshieldRearAndSpray=
+'rbxassetid://74325024162387',windshieldRearAndWiper=
+'rbxassetid://132496191383598',windshieldRearAndWiperAndDrop=
+'rbxassetid://91997491758687',windshieldRearAndWiperAndSpray=
+'rbxassetid://70577185858512',windshieldRearAndWiperExclamationmark=
+'rbxassetid://103508258069471',windshieldRearAndWiperIntermittent=
+'rbxassetid://112006728415524',wineglass='rbxassetid://101074630979300',
+wineglassFill='rbxassetid://114802765580227',wonsign=
+'rbxassetid://138881045027066',wonsignArrowTriangleheadCounterclockwiseRotate90=
+'rbxassetid://127138253634243',wonsignBankBuilding=
+'rbxassetid://111293124675993',wonsignBankBuildingFill=
+'rbxassetid://84415197244225',wonsignCircle='rbxassetid://88823142706925',
+wonsignCircleFill='rbxassetid://137966197891409',
+wonsignGaugeChartLefthalfRighthalf='rbxassetid://111492435126131',
+wonsignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://121709795250122',
+wonsignRing='rbxassetid://76574048523234',wonsignRingDashed=
+'rbxassetid://133779937082970',wonsignSquare='rbxassetid://132391856360168',
+wonsignSquareFill='rbxassetid://90329995457020',wrenchAdjustable=
+'rbxassetid://136627575678034',wrenchAdjustableFill=
+'rbxassetid://113988495428000',wrenchAndScrewdriver=
+'rbxassetid://103452076936452',wrenchAndScrewdriverFill=
+'rbxassetid://105571024016922',wrongwaysign='rbxassetid://76431850074308',
+wrongwaysignFill='rbxassetid://83735880477861',xCircle=
+'rbxassetid://91981193078729',xCircleFill='rbxassetid://94299891039084',xSquare=
+'rbxassetid://114578513610753',xSquareFill='rbxassetid://111170360358521',
+xSquareroot='rbxassetid://78470545377271',xboxLogo='rbxassetid://89705591865004'
+,xmark='rbxassetid://80129517509086',xmarkApp='rbxassetid://77614287062581',
+xmarkAppFill='rbxassetid://70913517985061',xmarkBin=
+'rbxassetid://115092753402225',xmarkBinCircle='rbxassetid://100527660496479',
+xmarkBinCircleFill='rbxassetid://72818314748638',xmarkBinFill=
+'rbxassetid://93339862156011',xmarkCircle='rbxassetid://74086380322275',
+xmarkCircleBadgeAirplane='rbxassetid://107048545652410',
+xmarkCircleBadgeAirplaneFill='rbxassetid://107260850906533',xmarkCircleFill=
+'rbxassetid://76720364341917',xmarkDiamond='rbxassetid://123566993050169',
+xmarkDiamondFill='rbxassetid://93992936564694',xmarkIcloud=
+'rbxassetid://94493472046695',xmarkIcloudFill='rbxassetid://76302466621348',
+xmarkOctagon='rbxassetid://91338686100699',xmarkOctagonFill=
+'rbxassetid://90341839195452',xmarkRectangle='rbxassetid://121990685238111',
+xmarkRectangleFill='rbxassetid://74076416348699',xmarkRectanglePortrait=
+'rbxassetid://76998319704304',xmarkRectanglePortraitFill=
+'rbxassetid://108883994990659',xmarkSeal='rbxassetid://135175848462028',
+xmarkSealFill='rbxassetid://138857703888143',xmarkShield=
+'rbxassetid://112602820350263',xmarkShieldFill='rbxassetid://129190191318804',
+xmarkSquare='rbxassetid://94780384109918',xmarkSquareFill=
+'rbxassetid://113379805795943',xmarkTriangleCircleSquare=
+'rbxassetid://93482352448078',xmarkTriangleCircleSquareFill=
+'rbxassetid://92930583604823',xserve='rbxassetid://100936689010686',xserveRaid=
+'rbxassetid://96204733517915',yCircle='rbxassetid://104458771421352',yCircleFill
+='rbxassetid://82033787913749',ySquare='rbxassetid://103183886841769',
+ySquareFill='rbxassetid://72405810989202',yensign='rbxassetid://99734954362670',
+yensignArrowTriangleheadCounterclockwiseRotate90='rbxassetid://80201233274715',
+yensignBankBuilding='rbxassetid://72141299288880',yensignBankBuildingFill=
+'rbxassetid://110179200008310',yensignCircle='rbxassetid://108854048682589',
+yensignCircleFill='rbxassetid://112746170982965',
+yensignGaugeChartLefthalfRighthalf='rbxassetid://115445828866168',
+yensignGaugeChartLeftthirdTopthirdRightthird='rbxassetid://90119523470045',
+yensignRing='rbxassetid://80789867463387',yensignRingDashed=
+'rbxassetid://78763231940715',yensignSquare='rbxassetid://124557047246185',
+yensignSquareFill='rbxassetid://96601254376112',yieldsign=
+'rbxassetid://80696636377723',yieldsignFill='rbxassetid://99571675480041',
+zCircle='rbxassetid://122572624815216',zCircleFill='rbxassetid://79133738654460'
+,zSquare='rbxassetid://96274174435903',zSquareFill='rbxassetid://91137135507817'
+,zipperPage='rbxassetid://74105406352571',zlButtonRoundedtopHorizontal=
+'rbxassetid://92649509158613',zlButtonRoundedtopHorizontalFill=
+'rbxassetid://88379112766255',zrButtonRoundedtopHorizontal=
+'rbxassetid://126371346858487',zrButtonRoundedtopHorizontalFill=
+'rbxassetid://95978592996094',zzz='rbxassetid://81661835392914'})end function a.
+aD()local ab=a.cache.aD if not ab then ab={c=aa()}a.cache.aD=ab end return ab.c
+end end do local aa=function()local aa,ab,ac=a.aD(),a.ao(),{}ac.Icons=aa ac.
+Default=aa[ab.Defaults.CommandIcon]or''function ac.get(ad)local ae=tostring(ad)
+if string.match(ae,'^%d+$')then return`rbxassetid://{ae}`end if string.find(ae,
+'://',1,true)then return ae end return aa[ae]or ac.Default end return table.
+freeze(ac)end function a.aE()local ab=a.cache.aE if not ab then ab={c=aa()}a.
+cache.aE=ab end return ab.c end end do local aa=function()local aa,ab,ac,ad=a.
+am(),a.aE(),a.aB(),a.ao()return function(ae,af)local ag=ac.now()local ah=af.
+color or ae:Computed(function(ah)local ai=(af.style and{(ah(af.style))}or{
+'Primary'})[1]return(ai=='Secondary'and{(ah(ag.Text.Secondary.Color))}or{(ah(ag.
+Icon.Color))})[1]end)return ae:New'ImageLabel'{Name='Icon',
+BackgroundTransparency=1,Size=UDim2.fromOffset(af.size or ad.IconSize,af.size or
+ad.IconSize),AnchorPoint=af.anchorPoint,Position=af.position,LayoutOrder=af.
+layoutOrder,Image=ae:Computed(function(ai)return ab.get(ai(af.icon))end),
+ImageColor3=ah,ImageTransparency=af.transparency}end end function a.aF()local ab
+=a.cache.aF if not ab then ab={c=aa()}a.cache.aF=ab end return ab.c end end do
+local aa=function()local aa,ab,ac=Enum.Font.Gotham,Enum.Font.GothamMedium,
+function(aa,ab,ac)return table.freeze{Font=aa,Size=ab,Transparency=ac}end return
+table.freeze{Input=ac(ab,17),Title=ac(ab,16),Body=ac(aa,14),Muted=ac(aa,14,0.22)
+,Caption=ac(aa,12)}end function a.aG()local ab=a.cache.aG if not ab then ab={c=
+aa()}a.cache.aG=ab end return ab.c end end do local aa=function()local aa,ab,ac=
+a.am(),a.aB(),a.aG()return function(ad,ae)local af=(ae.Style)or'Body'local ag,ah
+,ai,aj=ac[af],(ae.As)or'TextLabel',ab.now(),(table.clone(ae))aj.Style=nil aj.As=
+nil aj.Font=ag.Font aj.TextSize=ag.Size if ag.Transparency~=nil and aj.
+TextTransparency==nil then aj.TextTransparency=ag.Transparency end if aj.
+TextColor3==nil then aj.TextColor3=ai.Text.Primary.Color end if aj.
+BackgroundTransparency==nil then aj.BackgroundTransparency=1 end return ad:New(
+ah)(aj)end end function a.aH()local ab=a.cache.aH if not ab then ab={c=aa()}a.
+cache.aH=ab end return ab.c end end do local aa=function()local aa,ab,ac,ad,ae=a
+.aF(),a.aH(),a.am(),a.aB(),a.ao()return function(af,ag)assert(ag.key~=nil or ag.
+icon~=nil,'KeyCap needs a key or an icon')local ah,ai=ad.now(),{af:New'UICorner'
+{CornerRadius=UDim.new(0,ae.KeyCapCorner)}}if ag.key~=nil then table.insert(ai,
+af:New'UIPadding'{PaddingLeft=UDim.new(0,ae.KeyCapPadding),PaddingRight=UDim.
+new(0,ae.KeyCapPadding)})table.insert(ai,af:New'UISizeConstraint'{MinSize=
+Vector2.new(ae.KeyCapMinWidth,0)})table.insert(ai,ab(af,{Name='Key',
+AutomaticSize=Enum.AutomaticSize.X,Size=UDim2.fromOffset(0,ae.KeyCapHeight),
+TextXAlignment=Enum.TextXAlignment.Center,Text=ag.key,TextColor3=ah.Text.
+Secondary.Color}))elseif ag.icon~=nil then table.insert(ai,aa(af,{icon=ag.icon,
+style='Secondary',size=ae.KeyCapIconSize,anchorPoint=Vector2.new(0.5,0.5),
+position=UDim2.fromScale(0.5,0.5)}))end return af:New'Frame'{Name='Cap',
+LayoutOrder=ag.layoutOrder,AutomaticSize=(ag.key~=nil and{Enum.AutomaticSize.X}
+or{Enum.AutomaticSize.None})[1],Size=(ag.key~=nil and{(UDim2.fromOffset(0,ae.
+KeyCapHeight))}or{(UDim2.fromOffset(ae.KeyCapMinWidth,ae.KeyCapHeight))})[1],
+BackgroundColor3=ah.Surface.Color,BackgroundTransparency=ah.Surface.Alpha,
+Visible=ag.visible==nil and true or ag.visible,[ac.Children]=ai}end end function
+a.aI()local ab=a.cache.aI if not ab then ab={c=aa()}a.cache.aI=ab end return ab.
+c end end do local aa=function()local aa,ab,ac,ad=a.aF(),a.am(),a.aB(),a.ao()
+return function(ae,af)local ag,ah,ai=ac.now(),af.size or ad.IconTileSize,{ae:New
+'UICorner'{CornerRadius=UDim.new(0,af.corner or ad.IconTileCorner)}}if af.scale
+~=nil then table.insert(ai,ae:New'UIScale'{Scale=af.scale})end if af.swatch~=nil
+then table.insert(ai,ae:New'UIStroke'{ApplyStrokeMode=Enum.ApplyStrokeMode.
+Border,Thickness=ad.StrokeThickness,Color=af.swatchRingColor or ag.Border.Color,
+Transparency=af.swatchRingTransparency or ad.SwatchRingRest})end if af.swatch==
+nil and af.icon~=nil then table.insert(ai,aa(ae,{icon=af.icon,color=af.iconColor
+,transparency=af.iconTransparency,size=af.iconSize or ad.IconSize,anchorPoint=
+Vector2.new(0.5,0.5),position=UDim2.fromScale(0.5,0.5)}))end return ae:New
+'Frame'{Name=af.name or(af.swatch and'Swatch'or'Tile'),AnchorPoint=af.
+anchorPoint,Position=af.position,LayoutOrder=af.layoutOrder,Size=UDim2.
+fromOffset(ah,ah),BorderSizePixel=0,BackgroundColor3=af.swatch or ag.Surface.
+Color,BackgroundTransparency=af.swatch and 0 or(af.surfaceTransparency or ag.
+Surface.Alpha),[ab.Children]=ai}end end function a.aJ()local ab=a.cache.aJ if
+not ab then ab={c=aa()}a.cache.aJ=ab end return ab.c end end do local aa=
+function()local aa={}function aa.escape(ab)return(ab:gsub('&','&amp;'):gsub('<',
+'&lt;'):gsub('>','&gt;'))end return table.freeze(aa)end function a.aK()local ab=
+a.cache.aK if not ab then ab={c=aa()}a.cache.aK=ab end return ab.c end end do
+local aa=function()local aa,ab,ac,ad,ae,af,ag=a.aC(),a.aF(),a.aI(),a.aH(),a.aJ()
+,a.aK(),a.aB()return table.freeze{theme=ag.context,useTheme=ag.now,rich=af,Text=
+ad,Icon=ab,Tile=ae,KeyCap=ac,Hairline=aa}end function a.aL()local ab=a.cache.aL
+if not ab then ab={c=aa()}a.cache.aL=ab end return ab.c end end do local aa=
+function()local aa,ab,ac=a.ap(),function(aa,ab)return table.freeze{Hex=aa,Alpha=
+ab}end,function(aa,ab,ac)return table.freeze{_id=aa,Dark=table.freeze{Selection=
+Color3.fromHex(ab)},Light=table.freeze{Selection=Color3.fromHex(ac)}}end local
+ad,ae,af=table.freeze{_id='Dark',Background=ab('1C1C1E',100),Border=ab('FFFFFF',
+8),Separator=ab('FFFFFF',14),Surface=ab('FFFFFF',16),Selection=ab('0A84FF',85),
+SelectionText=ab('FFFFFF',100),Icon=ab('FFFFFF',88),IconSelected=ab('FFFFFF',100
+),Valid=ab('3FB950',100),Invalid=ab('F0665C',100),Text=table.freeze{Primary=ab(
+'FFFFFF',92),Secondary=ab('FFFFFF',58),Tertiary=ab('FFFFFF',42),Placeholder=ab(
+'FFFFFF',40)}},table.freeze{_id='Light',Background=ab('F2F2F4',100),Border=ab(
+'000000',12),Separator=ab('000000',14),Surface=ab('000000',7),Selection=ab(
+'007AFF',85),SelectionText=ab('FFFFFF',100),Icon=ab('000000',78),IconSelected=
+ab('FFFFFF',100),Valid=ab('34A853',100),Invalid=ab('E5534B',100),Text=table.
+freeze{Primary=ab('000000',92),Secondary=ab('000000',58),Tertiary=ab('000000',45
+),Placeholder=ab('000000',45)}},table.freeze{Blue=ac('Blue','0A84FF','007AFF'),
+Purple=ac('Purple','BF5AF2','AF52DE'),Pink=ac('Pink','FF375F','FF2D55'),Red=ac(
+'Red','FF453A','FF3B30'),Orange=ac('Orange','FF9F0A','FF9500'),Yellow=ac(
+'Yellow','FFD60A','FFCC00'),Green=ac('Green','32D74B','28CD41'),Graphite=ac(
+'Graphite','98989D','8E8E93')}return table.freeze{Dark=ad,Light=ae,Accents=af}
+end function a.aM()local ab=a.cache.aM if not ab then ab={c=aa()}a.cache.aM=ab
+end return ab.c end end do local aa=function()local aa,ab=a.aw(),(getfenv())
+local ac,ad,ae,af,ag,ah=ab.cloneref,ab.gethui,ab.protect_gui or ab.protectgui,ab
+.setthreadidentity or ab.setidentity,{},function(ac,...)if typeof(ac)==
+'function'then pcall(ac,...)end end function ag.take(ai)ah(af,8)ah(ae,ai)local
+aj if typeof(ad)=='function'then local ak,al=pcall(ad)if ak and typeof(al)==
+'Instance'then aj=al end end if aj==nil then local ak,al=pcall(function()return
+game:GetService'CoreGui'end)if ak then aj=(typeof(ac)=='function'and{(ac(al))}or
+{al})[1]end end if aj==nil then local ak=aa.Players.LocalPlayer aj=ak and ak:
+FindFirstChildOfClass'PlayerGui'end ai.Parent=aj end return table.freeze(ag)end
+function a.aN()local ab=a.cache.aN if not ab then ab={c=aa()}a.cache.aN=ab end
+return ab.c end end do local aa=function()local aa,ab,ac,ad,ae=a.ax(),a.am(),a.
+aL(),a.av(),a.ao()local af,ag=ab.Children,ab.OnEvent return function(ah,ai)local
+aj,ak=ac.useTheme(),ah:Value''ah:Observer(ai.entry):onChange(function()local al=
+ab.peek(ai.entry)if al~=nil then ak:set(al.command)end end)local al,am,an=ah:
+Spring(ah:Computed(function(al)return al(ai.entry)~=nil and 0 or 1 end),ad.
+FadeSpeed,ad.FadeDamping),ae.IconTileSize+ae.IconGap,ah:Value(false)local ao=ah:
+Computed(function(ao)return(ao(an)and{(ao(aj.Text.Primary.Color))}or{(ao(aj.Text
+.Secondary.Color))})[1]end)return ah:New'TextButton'({Name='EntryHeader',
+LayoutOrder=ai.layoutOrder,Size=ah:Computed(function(ap)local aq=ap(ai.reveal)
+return UDim2.new(1,0,0,aq*ae.EntryHeaderHeight)end),BackgroundTransparency=1,
+AutoButtonColor=false,Text='',ClipsDescendants=true,[ag'Activated']=function()ai
+.onBack()end,[af]={ah:New'Frame'{Name='Content',Size=UDim2.fromScale(1,1),
+BackgroundTransparency=1,[af]={ah:New'UIPadding'{PaddingLeft=UDim.new(0,ae.
+FieldPadding),PaddingRight=UDim.new(0,ae.FieldPadding)},ah:New'Frame'({Name=
+'Back',AnchorPoint=Vector2.new(0,0.5),Position=UDim2.fromScale(0,0.5),Size=UDim2
+.fromOffset(ae.IconTileSize,ae.IconTileSize),BackgroundTransparency=1,[ag
+'MouseEnter']=function()an:set(true)end,[ag'MouseLeave']=function()an:set(false)
+end,[af]=ac.Icon(ah,{icon='chevronLeft',color=ao,transparency=al,size=ae.
+ClearSize,anchorPoint=Vector2.new(0.5,0.5),position=UDim2.fromScale(0.5,0.5)})})
+,ac.Text(ah,{Style='Title',Name='Label',AnchorPoint=Vector2.new(0,0.5),Position=
+UDim2.new(0,am,0.5,0),Size=UDim2.new(1,-am,1,0),TextXAlignment=Enum.
+TextXAlignment.Left,TextTruncate=Enum.TextTruncate.AtEnd,TextTransparency=al,
+Text=ak,TextColor3=aj.Text.Primary.Color})}},ac.Hairline(ah,{name='Rule',
+anchorPoint=Vector2.new(0,1),position=UDim2.fromScale(0,1)})}})end end function
+a.aO()local ab=a.cache.aO if not ab then ab={c=aa()}a.cache.aO=ab end return ab.
+c end end do local aa=function()local aa,ab,ac=a.am(),a.aL(),a.ao()local ad=aa.
+Children return function(ae,af)local ag=ab.useTheme()local ah,ai=function(ah,ai,
+aj)return ab.Text(ae,{Name='Label',LayoutOrder=ah,AutomaticSize=Enum.
+AutomaticSize.X,Size=UDim2.fromOffset(0,ac.KeyCapHeight),Visible=aj==nil and
+true or aj,Text=ai,TextColor3=ag.Text.Tertiary.Color})end,function(ah,ai,aj)
+return ae:New'Frame'{Name='Cue',LayoutOrder=ah,Size=UDim2.fromOffset(ac.
+KeyCapIconSize,ac.KeyCapHeight),BackgroundTransparency=1,Visible=aj,[ad]=ab.
+Icon(ae,{icon=ai,style='Secondary',size=ac.KeyCapIconSize,anchorPoint=Vector2.
+new(0.5,0.5),position=UDim2.fromScale(0.5,0.5)})}end return ae:New'Frame'{Name=
+'Footer',Size=UDim2.new(1,0,0,ac.FooterHeight),LayoutOrder=af.layoutOrder,
+BackgroundTransparency=1,[ad]={ab.Hairline(ae,{name='Divider'}),ae:New
+'UIPadding'{PaddingLeft=UDim.new(0,ac.FooterPadding),PaddingRight=UDim.new(0,ac.
+FooterPadding)},ae:New'Frame'{Name='Hints',AnchorPoint=Vector2.new(0,0.5),
+Position=UDim2.fromScale(0,0.5),AutomaticSize=Enum.AutomaticSize.X,Size=UDim2.
+fromOffset(0,ac.KeyCapHeight),BackgroundTransparency=1,Visible=ae:Computed(
+function(aj)return aj(af.flash)==''end),[ad]={ae:New'UIListLayout'{FillDirection
+=Enum.FillDirection.Horizontal,VerticalAlignment=Enum.VerticalAlignment.Center,
+SortOrder=Enum.SortOrder.LayoutOrder,Padding=UDim.new(0,ac.KeyCapGap)},ab.
+KeyCap(ae,{key='Enter',layoutOrder=1}),ah(2,af.runLabel),ab.KeyCap(ae,{icon=
+'arrowUp',layoutOrder=3,visible=af.listVisible}),ab.KeyCap(ae,{icon='arrowDown',
+layoutOrder=4,visible=af.listVisible}),ah(5,af.navLabel,af.listVisible),ab.
+KeyCap(ae,{key='Esc',layoutOrder=6}),ah(7,af.closeLabel)}},ae:New'Frame'{Name=
+'Flash',AnchorPoint=Vector2.new(0,0.5),Position=UDim2.fromScale(0,0.5),Size=
+UDim2.new(1,-ac.FooterCountReserve,0,ac.KeyCapHeight),BackgroundTransparency=1,
+Visible=ae:Computed(function(aj)return aj(af.flash)~=''end),[ad]={ab.Icon(ae,{
+icon=ae:Computed(function(aj)return aj(af.flashValid)and'checkmark'or'xmark'end)
+,color=ae:Computed(function(aj)return(aj(af.flashValid)and{(aj(ag.Valid.Color))}
+or{(aj(ag.Invalid.Color))})[1]end),size=ac.KeyCapIconSize,anchorPoint=Vector2.
+new(0,0.5),position=UDim2.fromScale(0,0.5)}),ab.Text(ae,{Name='Label',
+AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,ac.KeyCapIconSize+ac.Spacing
+.XS,0.5,0),Size=UDim2.new(1,-(ac.KeyCapIconSize+ac.Spacing.XS),0,ac.KeyCapHeight
+),TextXAlignment=Enum.TextXAlignment.Left,TextTruncate=Enum.TextTruncate.AtEnd,
+Text=ae:Computed(function(aj)local ak=aj(af.flash)if ak==''then return''end
+return(aj(af.flashValid)and{`Ran {ak}`}or{`{ak} failed`})[1]end),TextColor3=ae:
+Computed(function(aj)return(aj(af.flashValid)and{(aj(ag.Valid.Color))}or{(aj(ag.
+Invalid.Color))})[1]end)})}},ae:New'Frame'{Name='Position',AnchorPoint=Vector2.
+new(1,0.5),Position=UDim2.fromScale(1,0.5),AutomaticSize=Enum.AutomaticSize.X,
+Size=UDim2.fromOffset(0,ac.KeyCapHeight),BackgroundTransparency=1,[ad]={ae:New
+'UIListLayout'{FillDirection=Enum.FillDirection.Horizontal,VerticalAlignment=
+Enum.VerticalAlignment.Center,SortOrder=Enum.SortOrder.LayoutOrder,Padding=UDim.
+new(0,ac.Spacing.XS)},ab.Text(ae,{Name='Count',LayoutOrder=1,AutomaticSize=Enum.
+AutomaticSize.X,Size=UDim2.fromOffset(0,ac.KeyCapHeight),TextXAlignment=Enum.
+TextXAlignment.Right,Text=af.count,TextColor3=ag.Text.Tertiary.Color}),ai(2,
+'chevronUp',af.canScrollUp),ai(3,'chevronDown',af.canScrollDown)}}}}end end
+function a.aP()local ab=a.cache.aP if not ab then ab={c=aa()}a.cache.aP=ab end
+return ab.c end end do local aa=function()local aa,ab,ac=a.am(),a.aL(),a.ao()
+local ad,ae=aa.Children,aa.OnEvent return function(af,ag)local ah,ai,aj,ak=ab.
+useTheme(),ag.header,ag.field,ag.content ai.LayoutOrder=1 aj.LayoutOrder=2 ak.
+LayoutOrder=4 local al=function(al)return af:Computed(function(am)local an,ao=
+am(al),am(ag.transparency)return an+ao*(1-an)end)end return af:New'Frame'({Name=
+'Vanta',Active=true,[ae'InputChanged']=function(am)if ag.onWheel~=nil and am.
+UserInputType==Enum.UserInputType.MouseWheel then ag.onWheel(-am.Position.Z)end
+end,AnchorPoint=ag.anchorPoint,Position=af:Computed(function(am)return ag.
+position+UDim2.fromOffset(0,am(ag.offsetY))end),Size=af:Computed(function(am)
+return UDim2.fromOffset(am(ag.width),am(ag.height))end),BackgroundTransparency=1
+,[ad]={af:New'UIScale'{Scale=ag.scale},af:New'UICorner'{CornerRadius=UDim.new(0,
+ac.PanelCorner)},af:New'UIStroke'{ApplyStrokeMode=Enum.ApplyStrokeMode.Border,
+Thickness=ac.StrokeThickness,Color=ah.Border.Color,Transparency=al(ah.Border.
+Alpha)},af:New'CanvasGroup'{Name='Surface',Size=UDim2.fromScale(1,1),ZIndex=1,
+GroupTransparency=ag.transparency,BackgroundColor3=ah.Background.Color,
+BackgroundTransparency=ah.Background.Alpha,BorderSizePixel=0,[ad]={af:New
+'UICorner'{CornerRadius=UDim.new(0,ac.PanelCorner)},af:New'UIListLayout'{
+FillDirection=Enum.FillDirection.Vertical,HorizontalAlignment=Enum.
+HorizontalAlignment.Center,SortOrder=Enum.SortOrder.LayoutOrder},ai,aj,ab.
+Hairline(af,{name='Separator',layoutOrder=3}),ak}}}})end end function a.aQ()
+local ab=a.cache.aQ if not ab then ab={c=aa()}a.cache.aQ=ab end return ab.c end
+end do local aa=function()local aa,ab,ac,ad,ae,af=a.ax(),a.as(),a.am(),a.aL(),a.
+ao(),a.aG()local ag,ah=ac.Children,af.Muted.Transparency or 0 return function(ai
+,aj)local ak,al,am,an,ao=ad.useTheme(),ai:Computed(function(ak)local al=ak(aj.
+entry)return(al~=nil and{al.icon}or{ae.Defaults.CommandIcon})[1]end),ai:
+Computed(function(ak)local al=ak(aj.entry)return(al~=nil and{(ab.displayName(al.
+arg.Name))}or{''})[1]end),ai:Computed(function(ak)local al=ak(aj.entry)if al==
+nil then return''end local am,an={},ab.hint(al.arg)if an~=''then table.insert(am
+,an)end if al.arg.Optional then table.insert(am,(al.arg.Default~=nil and{`Enter for {
+al.arg.Default}`}or{'Enter skips'})[1])end local ao=ak(aj.validity)if ao.valid
+and ao.resolved~=nil then table.insert(am,`becomes {ao.resolved}`)end if#am>0
+then return table.concat(am,' \u{b7} ')end return ao.message end),ai:Computed(
+function(ak)local al=ak(aj.entry)if al==nil then return false end local am=ab.
+hint(al.arg)~=''or al.arg.Optional==true return not am and ak(aj.validity).
+message~=''end)local ap,aq,ar,as,at,au,av=ai:Computed(function(ap)return(ap(ao)
+and{(ap(ak.Invalid.Color))}or{(ap(ak.Text.Secondary.Color))})[1]end),ai:
+Computed(function(ap)return ap(ao)and 0 or ah end),ai:Computed(function(ap)
+return ap(an)~=''end),ai:Computed(function(ap)return ap(aj.query)~=''end),ai:
+Computed(function(ap)return ap(aj.validity).valid and'checkmark'or'xmark'end),ai
+:Computed(function(ap)return(ap(aj.validity).valid and{(ap(ak.Valid.Color))}or{(
+ap(ak.Invalid.Color))})[1]end),ae.IconTileSize+ae.IconGap return ai:New'Frame'{
+Name='ParameterArea',Size=ai:Computed(function(aw)return UDim2.new(1,0,0,aw(aj.
+height))end),LayoutOrder=aj.layoutOrder,BackgroundTransparency=1,
+ClipsDescendants=true,Visible=aj.visible,[ag]={ai:New'UIPadding'{PaddingTop=UDim
+.new(0,ae.ListPadding),PaddingBottom=UDim.new(0,ae.ListPadding),PaddingLeft=UDim
+.new(0,ae.ListInset),PaddingRight=UDim.new(0,ae.ListInset)},ai:New'Frame'{Name=
+'Parameter',Size=UDim2.new(1,0,0,ae.RowHeight),BackgroundTransparency=1,[ag]={ai
+:New'UIPadding'{PaddingLeft=UDim.new(0,ae.RowPadding),PaddingRight=UDim.new(0,ae
+.RowPadding)},ad.Tile(ai,{icon=al,anchorPoint=Vector2.new(0,0.5),position=UDim2.
+fromScale(0,0.5)}),ai:New'Frame'{Name='Text',AnchorPoint=Vector2.new(0,0.5),
+Position=UDim2.new(0,av,0.5,0),Size=UDim2.new(1,-av*2,0,0),AutomaticSize=Enum.
+AutomaticSize.Y,BackgroundTransparency=1,[ag]={ai:New'UIListLayout'{
+FillDirection=Enum.FillDirection.Vertical,SortOrder=Enum.SortOrder.LayoutOrder,
+Padding=UDim.new(0,ae.RowTextGap)},ad.Text(ai,{Style='Title',Name='Title',
+LayoutOrder=1,Size=UDim2.new(1,0,0,ae.RowTitleHeight),TextXAlignment=Enum.
+TextXAlignment.Left,TextTruncate=Enum.TextTruncate.AtEnd,Text=am,TextColor3=ak.
+Text.Primary.Color}),ad.Text(ai,{Name='Description',LayoutOrder=2,Size=ai:
+Computed(function(aw)return(aw(ar)and{(UDim2.new(1,0,0,ae.RowDescriptionHeight))
+}or{(UDim2.new(1,0,0,0))})[1]end),Visible=ar,TextXAlignment=Enum.TextXAlignment.
+Left,TextTruncate=Enum.TextTruncate.AtEnd,TextTransparency=aq,Text=an,TextColor3
+=ap})}},ai:New'Frame'{Name='Trailing',AnchorPoint=Vector2.new(1,0.5),Position=
+UDim2.fromScale(1,0.5),Size=UDim2.fromOffset(ae.IconTileSize,ae.IconTileSize),
+BackgroundTransparency=1,[ag]=ad.Icon(ai,{icon=at,color=au,transparency=ai:
+Computed(function(aw)return aw(as)and 0 or 1 end),size=ae.ClearSize,anchorPoint=
+Vector2.new(0.5,0.5),position=UDim2.fromScale(0.5,0.5)})}}}}}end end function a.
+aR()local ab=a.cache.aR if not ab then ab={c=aa()}a.cache.aR=ab end return ab.c
+end end do local aa=function()local aa,ab,ac=a.am(),a.aL(),a.ao()local ad=aa.
+Children return function(ae,af)local ag=ab.useTheme()return ae:New'Frame'{Name=
+'SectionBand',LayoutOrder=af.layoutOrder,Size=ae:Computed(function(ah)local ai=
+ah(af.reveal)return UDim2.new(1,0,0,ai*ac.SectionBandHeight)end),
+BackgroundTransparency=1,ClipsDescendants=true,[ad]={ae:New'UIPadding'{
+PaddingLeft=UDim.new(0,ac.FieldPadding),PaddingRight=UDim.new(0,ac.FieldPadding)
+},ab.Text(ae,{Style='Caption',Name='Label',Size=UDim2.new(1,0,0,ac.
+SectionBandHeight),TextXAlignment=Enum.TextXAlignment.Left,Text=ae:Computed(
+function(ah)return ah(af.label):upper()end),TextColor3=ag.Text.Tertiary.Color})}
+}end end function a.aS()local ab=a.cache.aS if not ab then ab={c=aa()}a.cache.aS
+=ab end return ab.c end end do local aa=function()local aa,ab,ac,ad,ae,af=a.ax()
+,a.as(),a.am(),a.aL(),a.av(),a.ao()local ag,ah,ai=ac.Children,ac.OnChange,ac.
+OnEvent return function(aj,ak)local al,am,an,ao=ad.useTheme(),aj:Computed(
+function(al)local am=al(ak.entry)return am~=nil and am.arg.Type~='enum'and am.
+arg.Type~='boolean'end),aj:Computed(function(al)local am=al(ak.entry)if am then
+if am.arg.Placeholder then return am.arg.Placeholder end return((am.arg.Type==
+'enum'or am.arg.Type=='boolean')and{`{ab.displayName(am.arg.Name)}\226\128\166`}
+or{'Type a value\u{2026}'})[1]end return ak.searchPlaceholder end),af.
+IconTileSize+af.IconGap local ap,aq=aj:Spring(aj:Computed(function(ap)return ap(
+am)and 0 or 1 end),ae.FadeSpeed,ae.FadeDamping),aj:Value(false)local ar,as=aj:
+Computed(function(ar)return(ar(aq)and{(ar(al.Text.Primary.Color))}or{(ar(al.Text
+.Secondary.Color))})[1]end),aj:Computed(function(ar)return ar(ak.text)~=''and
+not ar(am)end)local at=aj:Computed(function(at)return(at(as)and{(af.ClearSize+af
+.IconGap)}or{0})[1]end)local au=(ad.Text(aj,{Style='Input',As='TextBox',Name=
+'Input',AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,ao,0.5,0),Size=aj:
+Computed(function(au)return UDim2.new(1,-(ao+au(at)),1,0)end),ClearTextOnFocus=
+false,Text='',PlaceholderText=an,TextXAlignment=Enum.TextXAlignment.Left,
+TextColor3=al.Text.Primary.Color,PlaceholderColor3=al.Text.Placeholder.Color,[ah
+'Text']=function(au)ak.text:set(au)end}))ak.onReady(au)return aj:New'Frame'{Name
+='Field',Size=UDim2.new(1,0,0,af.FieldHeight),BackgroundTransparency=1,[ag]={aj:
+New'UIPadding'{PaddingLeft=UDim.new(0,af.FieldPadding),PaddingRight=UDim.new(0,
+af.FieldPadding)},aj:New'Frame'{Name='Leading',AnchorPoint=Vector2.new(0,0.5),
+Position=UDim2.fromScale(0,0.5),Size=UDim2.new(0,af.IconTileSize,1,0),
+BackgroundTransparency=1,[ag]={ad.Icon(aj,{icon='magnifyingglass',style=
+'Primary',transparency=aj:Computed(function(av)local aw=av(ap)return 1-aw end),
+size=af.IconSize,anchorPoint=Vector2.new(0.5,0.5),position=UDim2.new(0,af.
+IconTileSize/2,0.5,0)}),ad.Icon(aj,{icon='pencil',style='Primary',transparency=
+ap,size=af.IconSize,anchorPoint=Vector2.new(0.5,0.5),position=UDim2.new(0,af.
+IconTileSize/2,0.5,0)})}},au,aj:New'ImageButton'({Name='Clear',AnchorPoint=
+Vector2.new(1,0.5),Position=UDim2.fromScale(1,0.5),Size=UDim2.fromOffset(af.
+ClearSize,af.ClearSize),BackgroundTransparency=1,Image='',Visible=as,[ai
+'Activated']=function()ak.text:set''au.Text=''au:CaptureFocus()end,[ai
+'MouseEnter']=function()aq:set(true)end,[ai'MouseLeave']=function()aq:set(false)
+end,[ag]=ad.Icon(aj,{icon='xmark',color=ar,size=af.ClearSize})})}}end end
+function a.aT()local ab=a.cache.aT if not ab then ab={c=aa()}a.cache.aT=ab end
+return ab.c end end do local aa=function()local aa,ab,ac=a.am(),a.aL(),a.ao()
+local ad=aa.Children return function(ae,af)local ag=ab.useTheme()return ae:New
+'Frame'{Name='Empty',Size=UDim2.fromScale(1,1),BackgroundTransparency=1,Visible=
+af.visible,[ad]={ae:New'UIListLayout'{FillDirection=Enum.FillDirection.Vertical,
+HorizontalAlignment=Enum.HorizontalAlignment.Center,VerticalAlignment=Enum.
+VerticalAlignment.Center,SortOrder=Enum.SortOrder.LayoutOrder,Padding=UDim.new(0
+,ac.Spacing.SM)},ab.Icon(ae,{icon='magnifyingglass',color=ag.Text.Tertiary.Color
+,size=ac.IconSize,layoutOrder=1}),ab.Text(ae,{Name='Text',LayoutOrder=2,
+AutomaticSize=Enum.AutomaticSize.XY,Text=af.text,TextColor3=ag.Text.Tertiary.
+Color})}}end end function a.aU()local ab=a.cache.aU if not ab then ab={c=aa()}a.
+cache.aU=ab end return ab.c end end do local aa=function()local aa,ab,ac,ad,ae,
+af=a.ax(),a.am(),a.aL(),a.av(),a.ao(),a.aG()local ag,ah,ai=ab.Children,ab.
+OnEvent,af.Muted.Transparency or 0 return function(aj,ak)local al,am=ac.
+useTheme(),ak.model local an=aj:Computed(function(an)return an(ak.evaluation).
+order[am]or 0 end)local ao,ap,aq,ar,as=aj:Computed(function(ao)return ao(an)==
+ao(ak.selectedIndex)end),aj:Computed(function(ao)return ao(am.description)~=''
+end),am.drillIn and'chevronRight'or(am.checked and'checkmark'or nil),aj:Value(
+false),aj:Value(false)local at,au,av,aw,ax,b,c,d,e,f,g,h=aj:Spring(aj:Computed(
+function(at)if at(ao)then return 1 end local au=at(al.Surface.Alpha)return(at(ar
+)and{(math.max(0,au-ae.SurfaceHoverLift))}or{au})[1]end),ad.SelectionSpeed),aj:
+Spring(aj:Computed(function(at)return(at(as)and{ad.PressScale}or{1})[1]end),ad.
+PressSpeed,ad.PressDamping),aj:Spring(aj:Computed(function(at)return(at(ao)and{
+ae.SwatchRingActive}or{ae.SwatchRingRest})[1]end),ad.SelectionSpeed),aj:
+Computed(function(at)return(at(ao)and{(at(al.SelectionText.Color))}or{(at(al.
+Border.Color))})[1]end),aj:Computed(function(at)return(at(ao)and{(at(al.
+SelectionText.Color))}or{(at(al.Text.Primary.Color))})[1]end),aj:Computed(
+function(at)return(at(ao)and{(at(al.SelectionText.Color))}or{(at(al.Text.
+Secondary.Color))})[1]end),aj:Computed(function(at)return(at(ao)and{(at(al.
+IconSelected.Color))}or{(at(al.Icon.Color))})[1]end),aj:Computed(function(at)
+return(at(ao)and{(at(al.SelectionText.Color))}or{(at(al.Text.Tertiary.Color))})[
+1]end),aj:Computed(function(at)return(at(ao)and{(at(al.SelectionText.Color))}or{
+(at(al.Text.Tertiary.Color))})[1]end),aj:Computed(function(at)return at(ao)and 0
+or ai end),aj:Computed(function(at)local au,av=at(am.title),at(ak.evaluation).
+positions[am]if av==nil or#av==0 then return ac.rich.escape(au)end local aw,ax,b
+,c,d=at(ao),at(al.Selection.Color):ToHex(),{},1,1 while d<=#av do local e=av[d]
+local f=e while d+1<=#av and av[d+1]==f+1 do d+=1 f=av[d]end if e>c then table.
+insert(b,ac.rich.escape(au:sub(c,e-1)))end local g=ac.rich.escape(au:sub(e,f))if
+aw then table.insert(b,`<b>{g}</b>`)else table.insert(b,`<font color="#{ax}">{g}</font>`
+)end c=f+1 d+=1 end if c<=#au then table.insert(b,ac.rich.escape(au:sub(c)))end
+return table.concat(b)end),ae.IconTileSize+ae.IconGap local i=h*2 local j=aj:New
+'Frame'{Name='Text',AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,h,0.5,0)
+,Size=UDim2.new(1,-i,0,0),AutomaticSize=Enum.AutomaticSize.Y,
+BackgroundTransparency=1,[ag]={aj:New'UIListLayout'{FillDirection=Enum.
+FillDirection.Vertical,SortOrder=Enum.SortOrder.LayoutOrder,Padding=UDim.new(0,
+ae.RowTextGap)},aj:New'Frame'{Name='TopLine',LayoutOrder=1,Size=UDim2.new(1,0,0,
+ae.RowTitleHeight),BackgroundTransparency=1,[ag]=ac.Text(aj,{Style='Title',Name=
+'Title',AnchorPoint=Vector2.new(0,0.5),Position=UDim2.fromScale(0,0.5),Size=
+UDim2.fromScale(1,1),RichText=true,TextXAlignment=Enum.TextXAlignment.Left,
+TextTruncate=Enum.TextTruncate.AtEnd,Text=g,TextColor3=ax})},ac.Text(aj,{Name=
+'Description',LayoutOrder=2,Size=aj:Computed(function(j)return(j(ap)and{(UDim2.
+new(1,0,0,ae.RowDescriptionHeight))}or{(UDim2.new(1,0,0,0))})[1]end),Visible=ap,
+TextXAlignment=Enum.TextXAlignment.Left,TextTruncate=Enum.TextTruncate.AtEnd,
+TextTransparency=f,Text=am.description,TextColor3=b})}}local k={aj:New
+'UIPadding'{PaddingLeft=UDim.new(0,ae.RowPadding),PaddingRight=UDim.new(0,ae.
+RowPadding)},ac.Tile(aj,{swatch=am.swatch,icon=am.icon,iconColor=(am.bullet and{
+d}or{c})[1],iconSize=(am.bullet and{ae.ClearSize}or{nil})[1],surfaceTransparency
+=at,swatchRingColor=aw,swatchRingTransparency=av,scale=au,anchorPoint=Vector2.
+new(0,0.5),position=UDim2.fromScale(0,0.5)}),j}if aq~=nil then table.insert(k,aj
+:New'Frame'{Name='Trailing',AnchorPoint=Vector2.new(1,0.5),Position=UDim2.
+fromScale(1,0.5),Size=UDim2.fromOffset(ae.IconTileSize,ae.IconTileSize),
+BackgroundTransparency=1,[ag]=ac.Icon(aj,{icon=aq,color=e,size=ae.ClearSize,
+anchorPoint=Vector2.new(0.5,0.5),position=UDim2.fromScale(0.5,0.5)})})end return
+aj:New'TextButton'({Name='Row',Size=UDim2.new(1,0,0,ae.RowHeight),LayoutOrder=an
+,BackgroundTransparency=1,AutoButtonColor=false,Text='',[ah'Activated']=function
+()am.activate()end,[ah'MouseMoved']=function()ak.onHover(ab.peek(an))end,[ah
+'MouseEnter']=function()ar:set(true)end,[ah'MouseLeave']=function()ar:set(false)
+as:set(false)end,[ah'MouseButton1Down']=function()as:set(true)end,[ah
+'MouseButton1Up']=function()as:set(false)end,[ag]={aj:New'Frame'{Name='Content',
+Size=UDim2.fromScale(1,1),BackgroundTransparency=1,[ag]=k}}})end end function a.
+aV()local ab=a.cache.aV if not ab then ab={c=aa()}a.cache.aV=ab end return ab.c
+end end do local aa=function()local aa,ab,ac,ad,ae,af,ag,ah=a.aU(),a.aV(),a.ax()
+,a.am(),a.aL(),a.av(),a.aw(),a.ao()local ai,aj=ad.Children,function(ai)return(ai
+-1)*ah.RowPitch end return function(ak,al)local am,an=ae.useTheme(),ak:Computed(
+function(am)return am(al.evaluation).rows end)local ao,ap=ak:Computed(function(
+ao)return#ao(an)==0 end),ak:Spring(ak:Computed(function(ao)return aj(ao(al.
+selectedIndex))+ah.SelectionPadY end),af.SelectionSlideSpeed,af.
+SelectionSlideDamping)local aq,ar=function()local aq=aj(ad.peek(al.selectedIndex
+))+ah.SelectionPadY ap:setPosition(aq)ap:setVelocity(0)end,false local as,at=
+function(as)if ar then return end if ad.peek(al.selectedIndex)==as then return
+end al.selectedIndex:set(as)aq()end,ak:New'Frame'{Name='Selection',AnchorPoint=
+Vector2.new(0.5,0),Position=ak:Computed(function(as)return UDim2.new(0.5,0,0,as(
+ap))end),Size=UDim2.new(1,-ah.SelectionPadX*2,0,ah.RowHeight-ah.SelectionPadY*2)
+,ZIndex=1,BorderSizePixel=0,BackgroundColor3=am.Selection.Color,
+BackgroundTransparency=am.Selection.Alpha,Visible=ak:Computed(function(as)return
+not as(ao)end),[ai]=ak:New'UICorner'{CornerRadius=UDim.new(0,ah.RowCorner)}}
+local au,av,aw,ax,b,c,d=ak:New'Frame'{Name='Rows',Size=UDim2.new(1,0,0,0),
+AutomaticSize=Enum.AutomaticSize.Y,ZIndex=2,BackgroundTransparency=1,[ai]={ak:
+New'UIListLayout'{FillDirection=Enum.FillDirection.Vertical,SortOrder=Enum.
+SortOrder.LayoutOrder,Padding=UDim.new(0,ah.RowGap)},ak:ForValues(an,function(au
+,av,aw)return ae.theme:is(am):during(function()return ab(av,{model=aw,evaluation
+=al.evaluation,selectedIndex=al.selectedIndex,onHover=as})end)end)}},ak:Value(0)
+,ak:Value(0),ak:Value(0),ak:Value(false),0,false table.insert(ak,function()d=
+true end)local e,f local g,h=function(g)if f then f:Cancel()end local h=ag.
+TweenService:Create(e,TweenInfo.new(af.ScrollTweenTime,Enum.EasingStyle.Quad,
+Enum.EasingDirection.Out),{CanvasPosition=Vector2.new(0,math.max(0,g))})f=h ar=
+true h.Completed:Once(function()if f==h then ar=false end end)h:Play()b:set(true
+)c+=1 local i=c task.delay(af.ScrollTweenTime+af.IndicatorLinger,function()if d
+then return end if i==c then b:set(false)end end)end,function()local g=e.
+AbsoluteWindowSize.Y return math.max(1,math.floor((g+ah.RowGap+0.5)/ah.RowPitch)
+)end local i=function(i)local j=#ad.peek(al.evaluation).rows local k=math.max(0,
+j-h())local l=math.clamp(i,0,k)*ah.RowPitch if math.abs(l-e.CanvasPosition.Y)>
+0.5 then g(l)end end local j=function(j)local k=math.round(e.CanvasPosition.Y/ah
+.RowPitch)i(k+j)end e=(ak:New'ScrollingFrame'{Name='Scroller',Size=UDim2.
+fromScale(1,1),BackgroundTransparency=1,BorderSizePixel=0,CanvasSize=UDim2.
+fromOffset(0,0),AutomaticCanvasSize=Enum.AutomaticSize.Y,ScrollingEnabled=false,
+ScrollBarThickness=0,ScrollingDirection=Enum.ScrollingDirection.Y,[ai]={ak:New
+'UIPadding'{PaddingLeft=UDim.new(0,ah.ListInset),PaddingRight=UDim.new(0,ah.
+ListInset)},at,au}})local k=function()local k=ad.peek(al.selectedIndex)local l=
+aj(k)local m,o,q=l+ah.RowHeight,e.CanvasPosition.Y,e.AbsoluteWindowSize.Y if l<o
+then i(k-1)elseif m>o+q then i(math.round((m-q)/ah.RowPitch))end end ak:
+Observer(al.evaluation):onChange(function()if f then f:Cancel()f=nil end ar=
+false e.CanvasPosition=Vector2.zero task.defer(function()if d then return end
+aq()end)end)ak:Observer(al.viewKey):onChange(function()if f then f:Cancel()f=nil
+end ar=false aq()end)local l=function()local l=e.AbsoluteWindowSize.Y local m,o=
+math.max(0,e.AbsoluteCanvasSize.Y-l),e.CanvasPosition.Y al.canScrollUp:set(o>1)
+al.canScrollDown:set(o<m-1)av:set(o)aw:set(m)ax:set(l)end table.insert(ak,e:
+GetPropertyChangedSignal'CanvasPosition':Connect(l))table.insert(ak,e:
+GetPropertyChangedSignal'AbsoluteCanvasSize':Connect(l))table.insert(ak,e:
+GetPropertyChangedSignal'AbsoluteWindowSize':Connect(l))l()al.onStepperReady(j)
+al.onFollowReady(k)local m=ak:Spring(ak:Computed(function(m)return m(b)and m(aw)
+>1 and 0 or 1 end),af.FadeSpeed,af.FadeDamping)local o=ak:New'Frame'{Name=
+'ScrollIndicator',AnchorPoint=Vector2.new(1,0),Position=ak:Computed(function(o)
+local q,r=o(aw),o(ax)local s,u=math.max(ah.ScrollIndicatorMinHeight,(r+q>0 and{(
+r*r/(r+q))}or{0})[1]),(q>0 and{(math.clamp(o(av)/q,0,1))}or{0})[1]local v=u*(r-s
+)return UDim2.new(1,-ah.ScrollIndicatorInset,0,v)end),Size=ak:Computed(function(
+o)local q,r=o(aw),o(ax)local s=math.max(ah.ScrollIndicatorMinHeight,(r+q>0 and{(
+r*r/(r+q))}or{0})[1])return UDim2.fromOffset(ah.ScrollIndicatorThickness,s)end),
+ZIndex=3,BorderSizePixel=0,BackgroundColor3=am.Text.Tertiary.Color,
+BackgroundTransparency=m,Visible=ak:Computed(function(o)return o(aw)>1 end),[ai]
+=ak:New'UICorner'{CornerRadius=UDim.new(1,0)}}return ak:New'Frame'{Name='List',
+Size=ak:Computed(function(q)return UDim2.new(1,0,0,q(al.listHeight))end),
+LayoutOrder=al.layoutOrder,BackgroundTransparency=1,Visible=al.visible,[ai]={ak:
+New'UIPadding'{PaddingTop=UDim.new(0,ah.ListPadding),PaddingBottom=UDim.new(0,ah
+.ListPadding)},e,o,aa(ak,{text=al.emptyText,visible=ao})}}end end function a.aW(
+)local ab=a.cache.aW if not ab then ab={c=aa()}a.cache.aW=ab end return ab.c end
+end do local aa=function()local aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak=a.aO(),a.aP(),a
+.aQ(),a.aR(),a.aS(),a.ax(),a.aT(),a.am(),a.aW(),a.aw(),a.ao()local al,am=ah.
+Children,ah.OnEvent return function(an,ao)local ap=ao.store local aq,ar,as=aa(an
+,{entry=ap.entry,reveal=ap.headerReveal,onBack=function()ap:stepBack()end,
+layoutOrder=1}),(ag(an,{text=ap.query,entry=ap.entry,searchPlaceholder=ao.
+placeholder,onReady=function(aq)ap:bindField(aq)end}))local at=an:New'Frame'{
+Name='Content',Size=an:Computed(function(at)return UDim2.new(1,0,0,at(ap.
+contentHeight))end),BackgroundTransparency=1,[al]={an:New'UIListLayout'{
+FillDirection=Enum.FillDirection.Vertical,SortOrder=Enum.SortOrder.LayoutOrder},
+ae(an,{label=ap.sectionLabel,reveal=ap.bandReveal,layoutOrder=1}),ai(an,{
+evaluation=ap.evaluation,selectedIndex=ap.selectedIndex,viewKey=ap.viewKey,
+listHeight=ap.listHeight,layoutOrder=2,emptyText=ap.emptyText,visible=ap.
+showList,canScrollUp=ap.canScrollUp,canScrollDown=ap.canScrollDown,
+onStepperReady=function(at)as=at end,onFollowReady=function(at)ap:bindFollower(
+at)end}),ad(an,{entry=ap.entry,validity=ap.validity,query=ap.query,height=ap.
+listHeight,visible=ap.showParameter,layoutOrder=3}),ab(an,{runLabel=ap.footerRun
+,navLabel='navigate',closeLabel=ap.footerClose,count=ap.footerCount,canScrollUp=
+ap.footerScrollUp,canScrollDown=ap.footerScrollDown,flash=ap.flash,flashValid=ap
+.flashValid,listVisible=ap.showList,layoutOrder=4})}}local au=(ac(an,{position=
+ao.position,anchorPoint=ao.anchorPoint,transparency=ap.transparency,offsetY=ap.
+offsetY,scale=ap.scale,onWheel=function(au)if as~=nil and ah.peek(ap.showList)
+then as(au)end end,width=ap.panelWidth,height=ap.panelHeight,header=aq,field=ar,
+content=at}))an:New'BlurEffect'{Size=ap.blurSize,Parent=aj.Lighting}local av=an:
+New'TextButton'{Name='Scrim',Size=UDim2.fromScale(1,1),BackgroundTransparency=1,
+AutoButtonColor=false,Text='',ZIndex=0,Visible=ap.shown,[am'Activated']=function
+()ap:onDismiss()end}return(an:New'ScreenGui'{Name='VantaUI',ResetOnSpawn=false,
+IgnoreGuiInset=true,DisplayOrder=ak.Defaults.DisplayOrder,ZIndexBehavior=Enum.
+ZIndexBehavior.Sibling,[al]={av,au}})end end function a.aX()local ab=a.cache.aX
+if not ab then ab={c=aa()}a.cache.aX=ab end return ab.c end end do local aa=
+function()local aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an=a.ay(),a.aq(),a.ax(),a
+.az(),a.am(),a.aA(),a.aL(),a.aM(),a.aN(),a.an(),a.aX(),a.ao(),a.ap(),{}function
+an.new(ao)local ap=ae.scoped(ae.constructors,ag)local aq,ar,as=ad.new(ap,ao.
+Theme or ah.Dark,ao.Accent or ah.Accents.Blue),ab.new(ap),ae.innerScope(ap,ae.
+constructors,ag)local at=ac.new(as,ar,ao)local au=aa.new(at)at:attachFlow((au))
+local av=ag.theme:is(aq.tree):during(function()return ak(as,{store=at,position=
+ao.Position or al.Defaults.Position,anchorPoint=ao.AnchorPoint or al.Defaults.
+AnchorPoint,placeholder=ao.Placeholder or al.Defaults.Placeholder})end)ai.take(
+av)af.attach(as,{shortcut=ao.Shortcut or al.Defaults.Shortcut,isOpen=function()
+return ae.peek(at.shown)end,onToggle=function()at:toggle()end,onNavigate=
+function(aw)at:moveSelection(aw)end,onJump=function(aw)at:jumpSelection(aw)end,
+onConfirm=function()at:onConfirm()end,onDismiss=function()at:onDismiss()end})
+return aj.new('VantaUI palette',{Register={get=function()return function(aw)
+return ar:register(aw)end end},Show={get=function()return function()at:show()end
+end},Hide={get=function()return function()at:hide()end end},Toggle={get=function
+()return function()at:toggle()end end},Destroy={get=function()return function()
+at:releaseFocus()ae.doCleanup(ap)end end},IsOpen={get=function()return ae.peek(
+at.shown)end},Theme={get=function()return aq:palette()end,set=function(aw)aq:
+setPalette(aw)end},Accent={get=function()return aq:accent()end,set=function(aw)
+aq:setAccent(aw)end},Blur={get=function()return ae.peek(at.blurEnabled)end,set=
+function(aw)at.blurEnabled:set(aw)end}})end return table.freeze(an)end function
+a.aY()local ab=a.cache.aY if not ab then ab={c=aa()}a.cache.aY=ab end return ab.
+c end end end local aa,ab,ac,ad,ae=a.aY(),a.aq(),a.aE(),a.aM(),a.ap()local af={
+Themes=table.freeze{Dark=ad.Dark,Light=ad.Light},Accents=ad.Accents,Icons=ac.
+Icons}function af.new(ag)return aa.new(ag or{})end return table.freeze(af)

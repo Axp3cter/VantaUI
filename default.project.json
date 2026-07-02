@@ -1,0 +1,14 @@
+{
+  "name": "VantaUI",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "VantaUI": {
+        "$path": "src"
+      },
+      "Packages": {
+        "$path": "packages"
+      }
+    }
+  }
+}

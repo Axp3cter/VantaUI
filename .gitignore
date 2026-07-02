@@ -1,5 +1,14 @@
-# Compiler config, has sensitive information
-build/.pcmp.json
+# Rokit / Wally tool + package caches. packages/ itself is vendored and
+# tracked on purpose — the project must build without a wally install.
+/.rokit
+/DevPackages
 
-# Distribution files, use github releases instead.
-dist
+# ProCMP personal config
+pipeline/.pcmp.local.json
+
+# luau-lsp / rojo scratch
+sourcemap.json
+
+# OS cruft
+.DS_Store
+Thumbs.db

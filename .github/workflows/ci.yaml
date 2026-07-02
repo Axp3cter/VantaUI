@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rokit
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/rojo-rbx/rokit/main/scripts/install.sh | bash
+          echo "$HOME/.rokit/bin" >> "$GITHUB_PATH"
+
+      - name: Install tools
+        run: rokit install --no-trust-check
+
+      - name: Format (stylua)
+        run: stylua --check src pipeline/tools
+
+      - name: Typecheck (luau-lsp)
+        run: |
+          luau-lsp analyze \
+            --definitions=.globals/environment.d.luau \
+            --definitions=.globals/pcmp.d.luau \
+            --definitions=.globals/marionette.d.luau \
+            --base-luaurc=.luaurc \
+            src
+
+      - name: Build bundles (pcmp)
+        run: |
+          pcmp build -n Library -i src/init.luau -o dist/vanta.luau \
+            -f pipeline/frames/stable.luau -c pipeline/darklua/stable.json
+          pcmp build -n Example -i src/example.luau -o dist/example.luau \
+            -f pipeline/frames/stable.luau -c pipeline/darklua/stable.json
+
+      - name: Bundle report (size + self-containment gate)
+        run: lune run pipeline/tools/report-size.luau
+
+      - name: Upload bundles
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundles
+          path: dist/*.luau

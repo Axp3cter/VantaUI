@@ -1,0 +1,12 @@
+# Toolchain pins, managed by Rokit (https://github.com/rojo-rbx/rokit).
+# Run `rokit install` to fetch these into your environment.
+
+[tools]
+pcmp = "Proton-Utilities/ProCMP@3.1.0"
+darklua = "seaofvoices/darklua@0.19.0"
+lune = "lune-org/lune@0.10.4"
+rojo = "rojo-rbx/rojo@7.6.1"
+stylua = "JohnnyMorganz/StyLua@2.5.2"
+selene = "Kampfkarren/selene@0.28.0"
+luau-lsp = "JohnnyMorganz/luau-lsp@1.66.1"
+wally = "UpliftGames/wally@0.3.2"
